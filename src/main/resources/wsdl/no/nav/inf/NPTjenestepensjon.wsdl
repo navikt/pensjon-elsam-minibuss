@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/asbo/tjenestepensjon" xmlns:bons2="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/fault" xmlns:tns="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NPTjenestepensjon" targetNamespace="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon" xmlns:bons1="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/asbo/tjenestepensjon" xmlns:bons2="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/fault" xmlns:tns="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/fault" schemaLocation="../lib/elsam/np/fault/FaultNpPersonIkkeFunnet.xsd"/>
+      <xsd:import namespace="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/asbo/tjenestepensjon" schemaLocation="../lib/elsam/np/asbo/tjenestepensjon/ASBONpHarTjenestepensjonsforholdResponse.xsd"/>
+      <xsd:import namespace="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/asbo/tjenestepensjon" schemaLocation="../lib/elsam/np/asbo/tjenestepensjon/ASBONpHarTjenestepensjonsforholdRequest.xsd"/>
+      <xsd:element name="harTjenestepensjonsforhold">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="harTjenestepensjonsRequest" nillable="true" type="bons1:ASBONpHarTjenestepensjonsforholdRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="harTjenestepensjonsforholdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="harTjenestepensjonsResponse" nillable="true" type="bons1:ASBONpHarTjenestepensjonsforholdResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FaultNpPersonIkkeFunnet_element" nillable="true" type="bons2:FaultNpPersonIkkeFunnet"/>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="harTjenestepensjonsforholdRequestMsg">
+    <wsdl:part element="tns:harTjenestepensjonsforhold" name="harTjenestepensjonsforholdParameters"/>
+  </wsdl:message>
+    <wsdl:message name="harTjenestepensjonsforholdResponseMsg">
+    <wsdl:part element="tns:harTjenestepensjonsforholdResponse" name="harTjenestepensjonsforholdResult"/>
+  </wsdl:message>
+    <wsdl:message name="harTjenestepensjonsforhold_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:FaultNpPersonIkkeFunnet_element" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="NPTjenestepensjon">
+    <wsdl:operation name="harTjenestepensjonsforhold">
+      <wsdl:input message="tns:harTjenestepensjonsforholdRequestMsg" name="harTjenestepensjonsforholdRequest"/>
+      <wsdl:output message="tns:harTjenestepensjonsforholdResponseMsg" name="harTjenestepensjonsforholdResponse"/>
+      <wsdl:fault message="tns:harTjenestepensjonsforhold_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

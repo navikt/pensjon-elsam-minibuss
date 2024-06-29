@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="NPTjenestepensjonWSEXP_NPTjenestepensjonHttp_Service" targetNamespace="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon/Binding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:Port_0="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon" xmlns:this="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon/Binding" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://nav-cons-elsam-np-tjenestepensjon/no/nav/inf/NPTjenestepensjon" location="no/nav/inf/NPTjenestepensjon.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="NPTjenestepensjonWSEXP_NPTjenestepensjonHttpBinding" type="Port_0:NPTjenestepensjon">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="harTjenestepensjonsforhold">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="harTjenestepensjonsforholdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="harTjenestepensjonsforholdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultPersonIkkeFunnet">
+        <soap:fault name="faultPersonIkkeFunnet" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NPTjenestepensjonWSEXP_NPTjenestepensjonHttpService">
+    <wsdl:port name="NPTjenestepensjonWSEXP_NPTjenestepensjonHttpPort" binding="this:NPTjenestepensjonWSEXP_NPTjenestepensjonHttpBinding">
+      <soap:address location="http://localhost:9080/nav-cons-elsam-np-tjenestepensjonWeb/sca/NPTjenestepensjonWSEXP"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

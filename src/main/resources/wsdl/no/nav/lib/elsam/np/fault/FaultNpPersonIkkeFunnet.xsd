@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/fault" targetNamespace="http://nav-lib-cons-elsam-np/no/nav/lib/elsam/np/fault">
+    <xsd:include schemaLocation="FaultNpBase.xsd"/>
+    <xsd:complexType name="FaultNpPersonIkkeFunnet">
+    <xsd:complexContent>
+      <xsd:extension base="bons0:FaultNpBase">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>
