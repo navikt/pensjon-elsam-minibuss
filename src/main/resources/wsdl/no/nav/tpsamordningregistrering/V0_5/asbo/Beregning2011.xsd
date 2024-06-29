@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons1="http://nav.no/elsam/tpsamordningregistrering/V0_5"
+	targetNamespace="http://nav.no/elsam/tpsamordningregistrering/V0_5">
+	<xsd:include schemaLocation="Sluttpoengtall.xsd" />
+	<xsd:complexType name="Beregning2011">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="virkningFom" type="xsd:date"></xsd:element>
+			<xsd:element minOccurs="0" name="virkningTom" type="xsd:date"></xsd:element>
+			<xsd:element minOccurs="0" name="uttaksgrad" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="basisgp" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="basistp" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="basispt" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="forholdstall_uttak" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="forholdstall_67" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="grunnpensjon" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="gpRestpensjon" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="tilleggspensjon" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="tpRestpensjon" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="pensjonstillegg" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="ptRestpensjon" type="xsd:double"></xsd:element>
+			<xsd:element minOccurs="0" name="totalBelop" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="resultatKode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="AP"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mndGrunnpensjon" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="mndTilleggspensjon" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="mndPensjonstillegg" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="spt" type="bons1:Sluttpoengtall"></xsd:element>
+			<xsd:element minOccurs="0" name="opt" type="bons1:Sluttpoengtall"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav.no/elsam/tpsamordningregistrering/V0_5" targetNamespace="http://nav-cons-elsam-tptilb-tpsamordningregistrering/no/nav/asbo">
+    <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="../tpsamordningregistrering/V0_5/asbo/OpprettRefusjonskravReq.xsd"/>
+    <xsd:complexType name="OpprettRefusjonskravReqInt">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="extRequest" type="bons0:OpprettRefusjonskravReq"/>
+      <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

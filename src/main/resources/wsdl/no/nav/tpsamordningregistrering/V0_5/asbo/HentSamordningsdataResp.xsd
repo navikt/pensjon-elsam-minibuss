@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://nav.no/elsam/tpsamordningregistrering/V0_5" targetNamespace="http://nav.no/elsam/tpsamordningregistrering/V0_5">
+    <xsd:include schemaLocation="ArbeidOgAktivitetsvedtak.xsd"/>
+	<xsd:include schemaLocation="Person.xsd"/>
+	<xsd:include schemaLocation="TPYtelse.xsd"/>
+	<xsd:include schemaLocation="Vedtak.xsd"/>
+	<xsd:complexType name="HentSamordningsdataResp">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="tpnr">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element minOccurs="1" name="person" type="tns:Person"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="pensjonVedtakListe" type="tns:Vedtak"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="arbeidVedtakListe" type="tns:ArbeidOgAktivitetsvedtak">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="tjenestepensjonYtelseListe" type="tns:TPYtelse"/>
+			<xsd:element minOccurs="1" name="ufullstendigeData" type="xsd:boolean"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

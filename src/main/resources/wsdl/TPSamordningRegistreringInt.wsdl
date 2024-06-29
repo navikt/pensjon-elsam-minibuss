@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="TPSamordningRegistrering" targetNamespace="http://nav-cons-elsam-tptilb-tpsamordningregistrering/no/nav/asbo" xmlns:bons0="http://nav.no/elsam/tpsamordningregistrering/V0_5" xmlns:bons1="http://nav.no/elsam/tpsamordningregistrering/V1_0" xmlns:tns="http://nav-cons-elsam-tptilb-tpsamordningregistrering/no/nav/asbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-cons-elsam-tptilb-tpsamordningregistrering/no/nav/asbo">
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V1_0" schemaLocation="no/nav/tpsamordningregistrering/V1_0/asbo/LagreTPYtelseResp.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V1_0" schemaLocation="no/nav/tpsamordningregistrering/V1_0/asbo/HentSamordningsdataResp.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/asbo/HentSamordningsdataResp.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultAlleredeMottattRefusjonskrav.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultSamordningsIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultTPYtelseIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultGenerisk.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultRefusjonskravUtenforSamordningspliktigPeriode.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultSamordningsIdOgPersonKorrelererIkke.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultTPForholdIkkeIverksatt.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultRefusjonskravUtenforTidsfrist.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/tpsamordningregistrering/V0_5" schemaLocation="no/nav/tpsamordningregistrering/V0_5/fault/FaultTPYtelseAlleredeRegistrert.xsd"/>
+            <xsd:include schemaLocation="no/nav/asbo/OpprettRefusjonskravReqInt.xsd"/>
+            <xsd:include schemaLocation="no/nav/asbo/SlettTPYtelseReqInt.xsd"/>
+            <xsd:include schemaLocation="no/nav/asbo/HentSamordningsdataReqInt.xsd"/>
+            <xsd:include schemaLocation="no/nav/asbo/LagreTPYtelseReqInt.xsd"/>
+            <xsd:element name="lagreTPYtelseInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreTPYtelseReqInt" nillable="true" type="tns:LagreTPYtelseReqInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="lagreTPYtelseIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreTPYtelseRespInt" nillable="true" type="bons1:LagreTPYtelseResp"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPYtelseInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettTPYtelseReqInt" nillable="true" type="tns:SlettTPYtelseReqInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPYtelseIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdataInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataReqInt" nillable="true" type="tns:HentSamordningsdataReqInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdataIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataRespInt" nillable="true" type="bons1:HentSamordningsdataResp"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettRefusjonskravInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettRefusjonskravReqInt" nillable="true" type="tns:OpprettRefusjonskravReqInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettRefusjonskravIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="lagreTPYtelse_faultGenerisk" type="bons0:FaultGenerisk"/>
+      <xsd:element name="lagreTPYtelse_faultYtelseAlleredeRegistrert" type="bons0:FaultTPYtelseAlleredeRegistrert"/>
+      <xsd:element name="slettTPYtelse_faultGenerisk" type="bons0:FaultGenerisk"/>
+      <xsd:element name="slettTPYtelse_faultTPYtelseIkkeFunnet" type="bons0:FaultTPYtelseIkkeFunnet"/>
+      <xsd:element name="hentSamordningsdata_faultGenerisk" type="bons0:FaultGenerisk"/>
+      <xsd:element name="hentSamordningsdata_faultTPForholdIkkeIverksatt" type="bons0:FaultTPForholdIkkeIverksatt"/>
+      <xsd:element name="opprettRefusjonskrav_faultGenerisk" type="bons0:FaultGenerisk"/>
+      <xsd:element name="opprettRefusjonskrav_faultSamordningsIdOgPersonKorrelererIkke" type="bons0:FaultSamordningsIdOgPersonKorrelererIkke"/>
+      <xsd:element name="opprettRefusjonskrav_faultSamordningsIdIkkeFunnet" type="bons0:FaultSamordningsIdIkkeFunnet"/>
+      <xsd:element name="opprettRefusjonskrav_faultAlleredeMottattRefusjonskrav" type="bons0:FaultAlleredeMottattRefusjonskrav"/>
+      <xsd:element name="opprettRefusjonskrav_faultRefusjonskravUtenforTidsfrist" type="bons0:FaultRefusjonskravUtenforTidsfrist"/>
+      <xsd:element name="opprettRefusjonskrav_faultRefusjonskravUtenforSamordningspliktigPeriode" type="bons0:FaultRefusjonskravUtenforSamordningspliktigPeriode"/>
+            <xsd:element name="lagreTPYtelseInt_faultGeneriskElement" nillable="true" type="bons0:FaultGenerisk"/>
+            <xsd:element name="lagreTPYtelseInt_faultTPYtelseAlleredeRegistrertElement" nillable="true" type="bons0:FaultTPYtelseAlleredeRegistrert"/>
+            <xsd:element name="slettTPYtelseInt_faultGeneriskElement" nillable="true" type="bons0:FaultGenerisk"/>
+            <xsd:element name="slettTPYtelseInt_faultTPYtelseIkkeFunnetElement" nillable="true" type="bons0:FaultTPYtelseIkkeFunnet"/>
+            <xsd:element name="hentSamordningsdataInt_faultGeneriskElement" nillable="true" type="bons0:FaultGenerisk"/>
+            <xsd:element name="hentSamordningsdataInt_faultTPForholdIkkeIverksattElement" nillable="true" type="bons0:FaultTPForholdIkkeIverksatt"/>
+            <xsd:element name="opprettRefusjonskravInt_faultGeneriskElement" nillable="true" type="bons0:FaultGenerisk"/>
+            <xsd:element name="opprettRefusjonskravInt_faultSamordningsIdOgPersonKorrelererIkkeElement" nillable="true" type="bons0:FaultSamordningsIdOgPersonKorrelererIkke"/>
+            <xsd:element name="opprettRefusjonskravInt_faultSamordningsIdIkkeFunnetElement" nillable="true" type="bons0:FaultSamordningsIdIkkeFunnet"/>
+            <xsd:element name="opprettRefusjonskravInt_faultAlleredeMottattRefusjonskravElement" nillable="true" type="bons0:FaultAlleredeMottattRefusjonskrav"/>
+            <xsd:element name="opprettRefusjonskravInt_faultRefusjonskravUtenforTidsfristElement" nillable="true" type="bons0:FaultRefusjonskravUtenforTidsfrist"/>
+            <xsd:element name="opprettRefusjonskravInt_faultRefusjonskravUtenforSamordningspliktigPeriodeElement" nillable="true" type="bons0:FaultRefusjonskravUtenforSamordningspliktigPeriode"/>
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="lagreTPYtelseIntRequestMsg">
+    <wsdl:part element="tns:lagreTPYtelseInt" name="lagreTPYtelseIntParameters"/>
+  </wsdl:message>
+  <wsdl:message name="lagreTPYtelseIntResponseMsg">
+    <wsdl:part element="tns:lagreTPYtelseIntResponse" name="lagreTPYtelseIntResult"/>
+  </wsdl:message>
+  <wsdl:message name="slettTPYtelseIntRequestMsg">
+    <wsdl:part element="tns:slettTPYtelseInt" name="slettTPYtelseIntParameters"/>
+  </wsdl:message>
+  <wsdl:message name="slettTPYtelseIntResponseMsg">
+    <wsdl:part element="tns:slettTPYtelseIntResponse" name="slettTPYtelseIntResult"/>
+  </wsdl:message>
+  <wsdl:message name="hentSamordningsdataIntRequestMsg">
+    <wsdl:part element="tns:hentSamordningsdataInt" name="hentSamordningsdataIntParameters"/>
+  </wsdl:message>
+  <wsdl:message name="hentSamordningsdataIntResponseMsg">
+    <wsdl:part element="tns:hentSamordningsdataIntResponse" name="hentSamordningsdataIntResult"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravIntRequestMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt" name="opprettRefusjonskravIntParameters"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravIntResponseMsg">
+    <wsdl:part element="tns:opprettRefusjonskravIntResponse" name="opprettRefusjonskravIntResult"/>
+  </wsdl:message>
+  <wsdl:message name="lagreTPYtelseInt_faultGeneriskMsg">
+    <wsdl:part element="tns:lagreTPYtelseInt_faultGeneriskElement" name="faultGenerisk"/>
+  </wsdl:message>
+  <wsdl:message name="lagreTPYtelseInt_faultTPYtelseAlleredeRegistrertMsg">
+    <wsdl:part element="tns:lagreTPYtelseInt_faultTPYtelseAlleredeRegistrertElement" name="faultTPYtelseAlleredeRegistrert"/>
+  </wsdl:message>
+  <wsdl:message name="slettTPYtelseInt_faultGeneriskMsg">
+    <wsdl:part element="tns:slettTPYtelseInt_faultGeneriskElement" name="faultGenerisk"/>
+  </wsdl:message>
+  <wsdl:message name="slettTPYtelseInt_faultTPYtelseIkkeFunnetMsg">
+    <wsdl:part element="tns:slettTPYtelseInt_faultTPYtelseIkkeFunnetElement" name="faultTPYtelseIkkeFunnet"/>
+  </wsdl:message>
+  <wsdl:message name="hentSamordningsdataInt_faultGeneriskMsg">
+    <wsdl:part element="tns:hentSamordningsdataInt_faultGeneriskElement" name="faultGenerisk"/>
+  </wsdl:message>
+  <wsdl:message name="hentSamordningsdataInt_faultTPForholdIkkeIverksattMsg">
+    <wsdl:part element="tns:hentSamordningsdataInt_faultTPForholdIkkeIverksattElement" name="faultTPForholdIkkeIverksatt"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultGeneriskMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultGeneriskElement" name="faultGenerisk"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultSamordningsIdOgPersonKorrelererIkkeMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultSamordningsIdOgPersonKorrelererIkkeElement" name="faultSamordningsIdOgPersonKorrelererIkke"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultSamordningsIdIkkeFunnetMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultSamordningsIdIkkeFunnetElement" name="faultSamordningsIdIkkeFunnet"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultAlleredeMottattRefusjonskravMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultAlleredeMottattRefusjonskravElement" name="faultAlleredeMottattRefusjonskrav"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultRefusjonskravUtenforTidsfristMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultRefusjonskravUtenforTidsfristElement" name="faultRefusjonskravUtenforTidsfrist"/>
+  </wsdl:message>
+  <wsdl:message name="opprettRefusjonskravInt_faultRefusjonskravUtenforSamordningspliktigPeriodeMsg">
+    <wsdl:part element="tns:opprettRefusjonskravInt_faultRefusjonskravUtenforSamordningspliktigPeriodeElement" name="faultRefusjonskravUtenforSamordningspliktigPeriode"/>
+  </wsdl:message>
+  <wsdl:portType name="TPSamordningRegistreringInt">
+    <wsdl:operation name="lagreTPYtelseInt">
+      <wsdl:input message="tns:lagreTPYtelseIntRequestMsg" name="lagreTPYtelseIntRequest"/>
+      <wsdl:output message="tns:lagreTPYtelseIntResponseMsg" name="lagreTPYtelseIntResponse"/>
+      <wsdl:fault message="tns:lagreTPYtelseInt_faultGeneriskMsg" name="faultGenerisk"/>
+      <wsdl:fault message="tns:lagreTPYtelseInt_faultTPYtelseAlleredeRegistrertMsg" name="faultTPYtelseAlleredeRegistrert"/>
+    </wsdl:operation>
+    <wsdl:operation name="slettTPYtelseInt">
+      <wsdl:input message="tns:slettTPYtelseIntRequestMsg" name="slettTPYtelseIntRequest"/>
+      <wsdl:output message="tns:slettTPYtelseIntResponseMsg" name="slettTPYtelseIntResponse"/>
+      <wsdl:fault message="tns:slettTPYtelseInt_faultGeneriskMsg" name="faultGenerisk"/>
+      <wsdl:fault message="tns:slettTPYtelseInt_faultTPYtelseIkkeFunnetMsg" name="faultTPYtelseIkkeFunnet"/>
+    </wsdl:operation>
+    <wsdl:operation name="hentSamordningsdataInt">
+      <wsdl:input message="tns:hentSamordningsdataIntRequestMsg" name="hentSamordningsdataIntRequest"/>
+      <wsdl:output message="tns:hentSamordningsdataIntResponseMsg" name="hentSamordningsdataIntResponse"/>
+      <wsdl:fault message="tns:hentSamordningsdataInt_faultGeneriskMsg" name="faultGenerisk"/>
+      <wsdl:fault message="tns:hentSamordningsdataInt_faultTPForholdIkkeIverksattMsg" name="faultTPForholdIkkeIverksatt"/>
+    </wsdl:operation>
+    <wsdl:operation name="opprettRefusjonskravInt">
+      <wsdl:input message="tns:opprettRefusjonskravIntRequestMsg" name="opprettRefusjonskravIntRequest"/>
+      <wsdl:output message="tns:opprettRefusjonskravIntResponseMsg" name="opprettRefusjonskravIntResponse"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultGeneriskMsg" name="faultGenerisk"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultSamordningsIdOgPersonKorrelererIkkeMsg" name="faultSamordningsIdOgPersonKorrelererIkke"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultSamordningsIdIkkeFunnetMsg" name="faultSamordningsIdIkkeFunnet"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultAlleredeMottattRefusjonskravMsg" name="faultAlleredeMottattRefusjonskrav"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultRefusjonskravUtenforTidsfristMsg" name="faultRefusjonskravUtenforTidsfrist"/>
+      <wsdl:fault message="tns:opprettRefusjonskravInt_faultRefusjonskravUtenforSamordningspliktigPeriodeMsg" name="faultRefusjonskravUtenforSamordningspliktigPeriode"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
