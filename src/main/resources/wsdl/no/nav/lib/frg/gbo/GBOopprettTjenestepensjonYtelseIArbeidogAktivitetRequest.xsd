@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+	<xsd:complexType
+		name="GBOopprettTjenestepensjonYtelseIArbeidogAktivitetRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="tpnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="iverksattFom"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

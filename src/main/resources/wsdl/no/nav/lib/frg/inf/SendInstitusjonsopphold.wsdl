@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/SendInstitusjonsopphold" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SendInstitusjonsopphold" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/SendInstitusjonsopphold">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/SendInstitusjonsopphold" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/SendInstitusjonsopphold" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="sendinstitusjonsopphold">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendinstitusjonsoppholdRequest" nillable="true" type="xsd:date"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="sendinstitusjonsoppholdRequestMsg">
+    <wsdl:part element="tns:sendinstitusjonsopphold" name="sendinstitusjonsoppholdParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="SendInstitusjonsopphold">
+    <wsdl:operation name="sendinstitusjonsopphold">
+      <wsdl:input message="tns:sendinstitusjonsoppholdRequestMsg" name="sendinstitusjonsoppholdRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

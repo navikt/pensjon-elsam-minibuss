@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:complexType name="GBOTjenestepensjonSimulering">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="simuleringId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukePensjoneringFom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukeLivsvarigTom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="simuleringFom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="simuleringTom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="alderUtbetalingStart" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="alderUtbetalingStopp" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="belop" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

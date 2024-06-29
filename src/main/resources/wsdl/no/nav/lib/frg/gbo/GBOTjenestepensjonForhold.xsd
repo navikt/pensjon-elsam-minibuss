@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOEnkeltbehov.xsd"/>
+    <xsd:include schemaLocation="GBOTjenestepensjonSimulering.xsd"/>
+    <xsd:include schemaLocation="GBOTjenestepensjonYtelse.xsd"/>
+    <xsd:complexType name="GBOTjenestepensjonForhold">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="forholdId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="navn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tpnr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="harUtlandPensjon" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="samtykkeSimuleringKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="samtykkeDato" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="harSimulering" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="tjenestepensjonYtelseListe" type="bons0:GBOTjenestepensjonYtelse"/>
+            <xsd:element minOccurs="0" name="tjenestepensjonSimulering" type="bons0:GBOTjenestepensjonSimulering"/>
+            <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+            <xsd:element minOccurs="0" name="avdelingType" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

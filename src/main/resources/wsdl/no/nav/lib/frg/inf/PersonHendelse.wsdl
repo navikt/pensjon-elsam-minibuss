@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/PersonHendelse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PersonHendelse" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/PersonHendelse">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/PersonHendelse" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/PersonHendelse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOPersonOppdatert.xsd"/>
+            <xsd:element name="adresseOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="adresseOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="dodsdatoOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="dodsdatoOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="familierelasjonOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="familierelasjonOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="fodselsnummerOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fodselsnummerOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>     
+            <xsd:element name="fodselsnummerOpprettet">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fodselsnummerOpprettetRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="personUtlandOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="personUtlandOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="sivilstandOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sivilstandOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="umyndiggjoringOppdatert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="umyndiggjoringOppdatertRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FodselsnummerSlettet">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fodselsnummerSlettetRequest" nillable="true" type="bons1:GBOPersonOppdatert"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="adresseOppdatertRequestMsg">
+    <wsdl:part element="tns:adresseOppdatert" name="adresseOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="dodsdatoOppdatertRequestMsg">
+    <wsdl:part element="tns:dodsdatoOppdatert" name="dodsdatoOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="familierelasjonOppdatertRequestMsg">
+    <wsdl:part element="tns:familierelasjonOppdatert" name="familierelasjonOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="fodselsnummerOppdatertRequestMsg">
+    <wsdl:part element="tns:fodselsnummerOppdatert" name="fodselsnummerOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="fodselsnummerOpprettetRequestMsg">
+    <wsdl:part element="tns:fodselsnummerOpprettet" name="fodselsnummerOpprettetParameters"/>
+  </wsdl:message>
+    <wsdl:message name="personUtlandOppdatertRequestMsg">
+    <wsdl:part element="tns:personUtlandOppdatert" name="personUtlandOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="sivilstandOppdatertRequestMsg">
+    <wsdl:part element="tns:sivilstandOppdatert" name="sivilstandOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="umyndiggjoringOppdatertRequestMsg">
+    <wsdl:part element="tns:umyndiggjoringOppdatert" name="umyndiggjoringOppdatertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="FodselsnummerSlettetRequestMsg">
+    <wsdl:part element="tns:FodselsnummerSlettet" name="FodselsnummerSlettetParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="PersonHendelse">
+        <wsdl:operation name="adresseOppdatert">
+      <wsdl:input message="tns:adresseOppdatertRequestMsg" name="adresseOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="dodsdatoOppdatert">
+      <wsdl:input message="tns:dodsdatoOppdatertRequestMsg" name="dodsdatoOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="familierelasjonOppdatert">
+      <wsdl:input message="tns:familierelasjonOppdatertRequestMsg" name="familierelasjonOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="fodselsnummerOppdatert">
+      <wsdl:input message="tns:fodselsnummerOppdatertRequestMsg" name="fodselsnummerOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="fodselsnummerOpprettet">
+      <wsdl:input message="tns:fodselsnummerOpprettetRequestMsg" name="fodselsnummerOpprettetRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="personUtlandOppdatert">
+      <wsdl:input message="tns:personUtlandOppdatertRequestMsg" name="personUtlandOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="sivilstandOppdatert">
+      <wsdl:input message="tns:sivilstandOppdatertRequestMsg" name="sivilstandOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="umyndiggjoringOppdatert">
+      <wsdl:input message="tns:umyndiggjoringOppdatertRequestMsg" name="umyndiggjoringOppdatertRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="FodselsnummerSlettet">
+      <wsdl:input message="tns:FodselsnummerSlettetRequestMsg" name="FodselsnummerSlettetRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="GBOLand">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="kode" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="dekode"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

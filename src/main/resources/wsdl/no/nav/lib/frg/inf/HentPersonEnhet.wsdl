@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/HentPersonEnhet" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HentPersonEnhet" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/HentPersonEnhet">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/HentPersonEnhet" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/HentPersonEnhet" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultPersonManglerEnhet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOHentForvaltningsenhetTilPersonListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOHentSpesialenhetTilPersonRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBONAVEnhetListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultNAVEnhetIkkeFunnet.xsd"/>
+            <xsd:element name="hentSpesialenhetTilPerson">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSpesialenhetTilPersonRequest" nillable="true" type="bons1:GBOHentSpesialenhetTilPersonRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSpesialenhetTilPersonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSpesialenhetTilPersonResponse" nillable="true" type="bons1:GBONAVEnhetListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentPersonEnhet_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+            <xsd:element name="hentPersonEnhet_faultNAVEnhetIkkeFunnet" type="bons2:FaultNAVEnhetIkkeFunnet"/>
+            <xsd:element name="hentForvaltningsenhetTilPersonListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentForvaltningsenhetTilPersonListeRequest" nillable="true" type="bons1:GBOHentForvaltningsenhetTilPersonListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentForvaltningsenhetTilPersonListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentForvaltningsenhetTilPersonListeResponse" nillable="true" type="bons1:GBONAVEnhetListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultPersonManglerEnhet_element" nillable="true" type="bons2:FaultPersonManglerEnhet"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentSpesialenhetTilPersonRequestMsg">
+    <wsdl:part element="tns:hentSpesialenhetTilPerson" name="hentSpesialenhetTilPersonParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSpesialenhetTilPersonResponseMsg">
+    <wsdl:part element="tns:hentSpesialenhetTilPersonResponse" name="hentSpesialenhetTilPersonResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSpesialenhetTilPerson_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentPersonEnhet_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentSpesialenhetTilPerson_faultNAVEnhetIkkeFunnetMsg">
+    <wsdl:part element="tns:hentPersonEnhet_faultNAVEnhetIkkeFunnet" name="faultNAVEnhetIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentForvaltningsenhetTilPersonListeRequestMsg">
+    <wsdl:part element="tns:hentForvaltningsenhetTilPersonListe" name="hentForvaltningsenhetTilPersonListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentForvaltningsenhetTilPersonListeResponseMsg">
+    <wsdl:part element="tns:hentForvaltningsenhetTilPersonListeResponse" name="hentForvaltningsenhetTilPersonListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentForvaltningsenhetTilPersonListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentPersonEnhet_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentForvaltningsenhetTilPersonListe_faultNAVEnhetIkkeFunnetMsg">
+    <wsdl:part element="tns:hentPersonEnhet_faultNAVEnhetIkkeFunnet" name="faultNAVEnhetIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentForvaltningsenhetTilPersonListe_faultPersonManglerEnhetMsg">
+    <wsdl:part element="tns:FaultPersonManglerEnhet_element" name="faultPersonManglerEnhet"/>
+  </wsdl:message>
+    <wsdl:portType name="HentPersonEnhet">
+    <wsdl:operation name="hentSpesialenhetTilPerson">
+      <wsdl:input message="tns:hentSpesialenhetTilPersonRequestMsg" name="hentSpesialenhetTilPersonRequest"/>
+      <wsdl:output message="tns:hentSpesialenhetTilPersonResponseMsg" name="hentSpesialenhetTilPersonResponse"/>
+      <wsdl:fault message="tns:hentSpesialenhetTilPerson_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:hentSpesialenhetTilPerson_faultNAVEnhetIkkeFunnetMsg" name="faultNAVEnhetIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentForvaltningsenhetTilPersonListe">
+      <wsdl:input message="tns:hentForvaltningsenhetTilPersonListeRequestMsg" name="hentForvaltningsenhetTilPersonListeRequest"/>
+      <wsdl:output message="tns:hentForvaltningsenhetTilPersonListeResponseMsg" name="hentForvaltningsenhetTilPersonListeResponse"/>
+            <wsdl:fault message="tns:hentForvaltningsenhetTilPersonListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:hentForvaltningsenhetTilPersonListe_faultNAVEnhetIkkeFunnetMsg" name="faultNAVEnhetIkkeFunnet"/>
+            <wsdl:fault message="tns:hentForvaltningsenhetTilPersonListe_faultPersonManglerEnhetMsg" name="faultPersonManglerEnhet"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

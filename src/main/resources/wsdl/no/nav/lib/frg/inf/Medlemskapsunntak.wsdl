@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="Medlemskapsunntak" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons4="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf">
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOSlettUtenlandsIdRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultUtlandIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOUtlandId.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOHentMedlemskapsInfoListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOPersonListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultFnrForUtenlandskIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOMedlemskapsunntak.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultMedlemskapsunntakIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultMedlemskapsperiodeIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOSlettMedlemskapsperiodeRequest.xsd"/>
+            <xsd:element name="lagreMedlemskapsInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreMedlemskapsInfoRequest" nillable="true" type="bons2:GBOMedlemskapsunntak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentMedlemskapsInfoListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentMedlemskapsInfoListeRequest" nillable="true" type="bons2:GBOHentMedlemskapsInfoListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="lagreMedlemskapsInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreMedlemskapsInfoResponse" nillable="true" type="bons2:GBOMedlemskapsunntak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentMedlemskapsInfoListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentMedlemskapsInfoListeResponse" nillable="true" type="bons2:GBOMedlemskapsunntak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettMedlemskapsInfo">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettMedlemskapsInfoRequest" nillable="true" type="bons2:GBOMedlemskapsunntak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettMedlemskapsInfoResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettMedlemskapsInfoResponse" nillable="true" type="bons2:GBOMedlemskapsunntak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentFnrListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentFnrListeRequest" nillable="true" type="bons2:GBOUtlandId"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentFnrListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentFnrListeResponse" nillable="true" type="bons2:GBOPersonListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreMedlemskapsInfo_faultMedlemskapsunntakIkkeFunnet" type="bons4:FaultMedlemskapsunntakIkkeFunnet"/>
+            <xsd:element name="hentMedlemskapsInfoListe_faultPersonIkkeFunnet" type="bons4:FaultPersonIkkeFunnet"/>
+            <xsd:element name="hentFnrListe_faultFnrForUtenlandskIdIkkeFunnet" type="bons4:FaultFnrForUtenlandskIdIkkeFunnet"/>
+            <xsd:element name="slettMedlemskapsperiode">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettMedlemskapsperiodeRequest" nillable="true" type="bons2:GBOSlettMedlemskapsperiodeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettMedlemskapsperiodeResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultMedlemskapsperiodeIdIkkeFunnet_element" nillable="true" type="bons4:FaultMedlemskapsperiodeIdIkkeFunnet"/>
+            <xsd:element name="slettUtenlandsId">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettUtenlandsIdRequest" nillable="true" type="bons2:GBOSlettUtenlandsIdRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettUtenlandsIdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultUtlandIdIkkeFunnet_element" nillable="true" type="bons4:FaultUtlandIdIkkeFunnet"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="lagreMedlemskapsInfoRequestMsg">
+    <wsdl:part element="tns:lagreMedlemskapsInfo" name="lagreMedlemskapsInfoParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreMedlemskapsInfoResponseMsg">
+    <wsdl:part element="tns:lagreMedlemskapsInfoResponse" name="lagreMedlemskapsInfoResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentMedlemskapsInfoListeRequestMsg">
+    <wsdl:part element="tns:hentMedlemskapsInfoListe" name="hentMedlemskapsInfoListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentMedlemskapsInfoListeResponseMsg">
+    <wsdl:part element="tns:hentMedlemskapsInfoListeResponse" name="hentMedlemskapsInfoListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettMedlemskapsInfoRequestMsg">
+    <wsdl:part element="tns:opprettMedlemskapsInfo" name="opprettMedlemskapsInfoParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettMedlemskapsInfoResponseMsg">
+    <wsdl:part element="tns:opprettMedlemskapsInfoResponse" name="opprettMedlemskapsInfoResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentFnrListeRequestMsg">
+    <wsdl:part element="tns:hentFnrListe" name="hentFnrListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentFnrListeResponseMsg">
+    <wsdl:part element="tns:hentFnrListeResponse" name="hentFnrListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreMedlemskapsInfo_faultMedlemskapsunntakIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreMedlemskapsInfo_faultMedlemskapsunntakIkkeFunnet" name="faultMedlemskapsunntakIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentMedlemskapsInfoListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentMedlemskapsInfoListe_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentFnrListe_faultFnrForUtenlandskIdIkkeFunnetMsg">
+    <wsdl:part element="tns:hentFnrListe_faultFnrForUtenlandskIdIkkeFunnet" name="faultFnrForUtenlandskIdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettMedlemskapsperiodeRequestMsg">
+    <wsdl:part element="tns:slettMedlemskapsperiode" name="slettMedlemskapsperiodeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettMedlemskapsperiodeResponseMsg">
+    <wsdl:part element="tns:slettMedlemskapsperiodeResponse" name="slettMedlemskapsperiodeResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettMedlemskapsperiode_faultMedlemskapsperiodeIdIkkeFunnetMsg">
+    <wsdl:part element="tns:FaultMedlemskapsperiodeIdIkkeFunnet_element" name="faultMedlemskapsperiodeIdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettUtenlandsIdRequestMsg">
+    <wsdl:part element="tns:slettUtenlandsId" name="slettUtenlandsIdParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettUtenlandsIdResponseMsg">
+    <wsdl:part element="tns:slettUtenlandsIdResponse" name="slettUtenlandsIdResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettUtenlandsId_faultUtlandIdIkkeFunnetMsg">
+    <wsdl:part element="tns:FaultUtlandIdIkkeFunnet_element" name="faultUtlandIdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="Medlemskapsunntak">
+    <wsdl:operation name="lagreMedlemskapsInfo">
+      <wsdl:input message="tns:lagreMedlemskapsInfoRequestMsg" name="lagreMedlemskapsInfoRequest"/>
+      <wsdl:output message="tns:lagreMedlemskapsInfoResponseMsg" name="lagreMedlemskapsInfoResponse"/>
+            <wsdl:fault message="tns:lagreMedlemskapsInfo_faultMedlemskapsunntakIkkeFunnetMsg" name="faultMedlemskapsunntakIkkeFunnet"/>
+        </wsdl:operation>
+    <wsdl:operation name="hentMedlemskapsInfoListe">
+      <wsdl:input message="tns:hentMedlemskapsInfoListeRequestMsg" name="hentMedlemskapsInfoListeRequest"/>
+      <wsdl:output message="tns:hentMedlemskapsInfoListeResponseMsg" name="hentMedlemskapsInfoListeResponse"/>
+            <wsdl:fault message="tns:hentMedlemskapsInfoListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="opprettMedlemskapsInfo">
+      <wsdl:input message="tns:opprettMedlemskapsInfoRequestMsg" name="opprettMedlemskapsInfoRequest"/>
+      <wsdl:output message="tns:opprettMedlemskapsInfoResponseMsg" name="opprettMedlemskapsInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentFnrListe">
+      <wsdl:input message="tns:hentFnrListeRequestMsg" name="hentFnrListeRequest"/>
+      <wsdl:output message="tns:hentFnrListeResponseMsg" name="hentFnrListeResponse"/>
+            <wsdl:fault message="tns:hentFnrListe_faultFnrForUtenlandskIdIkkeFunnetMsg" name="faultFnrForUtenlandskIdIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="slettMedlemskapsperiode">
+      <wsdl:input message="tns:slettMedlemskapsperiodeRequestMsg" name="slettMedlemskapsperiodeRequest"/>
+      <wsdl:output message="tns:slettMedlemskapsperiodeResponseMsg" name="slettMedlemskapsperiodeResponse"/>
+      <wsdl:fault message="tns:slettMedlemskapsperiode_faultMedlemskapsperiodeIdIkkeFunnetMsg" name="faultMedlemskapsperiodeIdIkkeFunnet"/>
+    </wsdl:operation>
+        <wsdl:operation name="slettUtenlandsId">
+      <wsdl:input message="tns:slettUtenlandsIdRequestMsg" name="slettUtenlandsIdRequest"/>
+      <wsdl:output message="tns:slettUtenlandsIdResponseMsg" name="slettUtenlandsIdResponse"/>
+            <wsdl:fault message="tns:slettUtenlandsId_faultUtlandIdIkkeFunnetMsg" name="faultUtlandIdIkkeFunnet"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

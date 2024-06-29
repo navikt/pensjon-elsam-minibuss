@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/FinnTjenestepensjonsforhold" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FinnTjenestepensjonsForhold" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/FinnTjenestepensjonsforhold">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/FinnTjenestepensjonsforhold" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/FinnTjenestepensjonsforhold" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOTjenestepensjon.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOFinnTjenestepensjonsforholdRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultTomDatoForanFomDato.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="../fault/FaultElementetFinnesIkke.xsd"/>
+            <xsd:element name="finnTjenestepensjonsforhold">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="finnTjenestepensjonsforholdRequest" nillable="true" type="bons1:GBOFinnTjenestepensjonsforholdRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="finnTjenestepensjonsforholdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="finnTjenestepensjonsforholdResponse" nillable="true" type="bons1:GBOTjenestepensjon"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="finnTjenestepensjonsforhold_faultElementetFinnesIkke" type="bons2:FaultElementetFinnesIkke"/>
+            <xsd:element name="finnTjenestepensjonsforhold_faultTomDatoForanFomDato" type="bons2:FaultTomDatoForanFomDato"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="finnTjenestepensjonsforholdRequestMsg">
+    <wsdl:part element="tns:finnTjenestepensjonsforhold" name="finnTjenestepensjonsforholdParameters"/>
+  </wsdl:message>
+    <wsdl:message name="finnTjenestepensjonsforholdResponseMsg">
+    <wsdl:part element="tns:finnTjenestepensjonsforholdResponse" name="finnTjenestepensjonsforholdResult"/>
+  </wsdl:message>
+    <wsdl:message name="finnTjenestepensjonsforhold_faultElementetFinnesIkkeMsg">
+    <wsdl:part element="tns:finnTjenestepensjonsforhold_faultElementetFinnesIkke" name="faultElementetFinnesIkke"/>
+  </wsdl:message>
+    <wsdl:message name="finnTjenestepensjonsforhold_faultTomDatoForanFomDatoMsg">
+    <wsdl:part element="tns:finnTjenestepensjonsforhold_faultTomDatoForanFomDato" name="faultTomDatoForanFomDato"/>
+  </wsdl:message>
+    <wsdl:portType name="FinnTjenestepensjonsforhold">
+    <wsdl:operation name="finnTjenestepensjonsforhold">
+      <wsdl:input message="tns:finnTjenestepensjonsforholdRequestMsg" name="finnTjenestepensjonsforholdRequest"/>
+      <wsdl:output message="tns:finnTjenestepensjonsforholdResponseMsg" name="finnTjenestepensjonsforholdResponse"/>
+      <wsdl:fault message="tns:finnTjenestepensjonsforhold_faultElementetFinnesIkkeMsg" name="faultElementetFinnesIkke"/>
+            <wsdl:fault message="tns:finnTjenestepensjonsforhold_faultTomDatoForanFomDatoMsg" name="faultTomDatoForanFomDato"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

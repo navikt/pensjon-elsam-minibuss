@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+  <xsd:complexType name="GBOArbeidsgiverInfo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="orgnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="navn" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="postAdresse1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="postAdresse2" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="postnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="poststed" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="telefonnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="telefax" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="harElektroniskInnrapportering" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="enhetstypeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="landKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ansattKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="erIABedrift" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="opphorsDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="opphorsGrunn" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="antallBedrifter" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="bankgironr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="arskontrollKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="stiftetDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="juridiskOrgnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="organisasjonsledd" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

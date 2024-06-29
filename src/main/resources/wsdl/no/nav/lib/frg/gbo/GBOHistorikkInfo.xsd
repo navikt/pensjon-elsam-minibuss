@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd">
+	</xsd:import>
+	<xsd:complexType name="GBOHistorikkInfo">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="kode" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="beskrivelse" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fom" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="tom" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="endringsInfo" type="bons0:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

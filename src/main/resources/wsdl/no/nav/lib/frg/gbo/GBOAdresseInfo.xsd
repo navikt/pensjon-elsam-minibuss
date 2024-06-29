@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo"
+	xmlns:bons0="http://nav-lib-frg/no/nav/lib/frg/gbo">
+	<xsd:include schemaLocation="GBOPerson.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOTPSSvarStatus.xsd"></xsd:include>
+	<xsd:complexType name="GBOAdresseInfo">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="forespurtFnr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="adresseKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="svarStatus"
+				type="bons0:GBOTPSSvarStatus">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="person"
+				type="bons0:GBOPerson">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

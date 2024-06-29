@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-frg/no/nav/lib/frg/gbo">
+	<xsd:complexType name="GBOLagreHistoriskSamboerforholdRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="fnrSamboer"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fom" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="tom" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="nyttFnr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="nyttFnrSamboer"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="nyFom" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="nyTom" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

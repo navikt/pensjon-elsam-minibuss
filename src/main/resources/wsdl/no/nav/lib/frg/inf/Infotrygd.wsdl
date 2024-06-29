@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons2="http://nav-lib-sak/no/nav/lib/sak/inf/Infotrygd" xmlns:tns="http://nav-lib-frg/no/nav/lib/frg/inf/Infotrygd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="InfotrygdFacade" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/Infotrygd">
+  <wsdl:types>
+    <xsd:schema xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/inf/Infotrygd" xmlns:tns="http://nav-lib-sak-infot/no/nav/lib/infot/inf" targetNamespace="http://nav-lib-frg/no/nav/lib/frg/inf/Infotrygd" xmlns:bons1="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="../gbo/GBOInstitusjonsopphold.xsd"/>
+            <xsd:element name="lagreInstitusjonsoppholdBatch">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreInstitusjonsoppholdBatchRequest" nillable="true" type="bons1:GBOInstitusjonsopphold"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="lagreInstitusjonsoppholdBatchRequestMsg">
+    <wsdl:part element="tns:lagreInstitusjonsoppholdBatch" name="lagreInstitusjonsoppholdBatchParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="Infotrygd">
+        <wsdl:operation name="lagreInstitusjonsoppholdBatch">
+      <wsdl:input message="tns:lagreInstitusjonsoppholdBatchRequestMsg" name="lagreInstitusjonsoppholdBatchRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
