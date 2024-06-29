@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="RegistrereTPForholdWSEXP_RegistrereTPForholdHttp_Service" targetNamespace="http://nav.no/elsam/registreretpforhold/V0_1/Binding" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:Port_0="http://nav.no/elsam/registreretpforhold/V0_1" xmlns:this="http://nav.no/elsam/registreretpforhold/V0_1/Binding" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <import namespace="http://nav.no/elsam/registreretpforhold/V0_1" location="no/nav/registreretpforhold/V0_1/inf/RegistrereTPForhold.wsdl">
+    </import>
+  <binding name="RegistrereTPForholdWSEXP_RegistrereTPForholdHttpBinding" type="Port_0:RegistrereTPForhold">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="hentTPForholdListe">
+      <soap:operation soapAction=""/>
+      <input name="hentTPForholdListeRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="hentTPForholdListeResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultGenerisk">
+        <soap:fault name="faultGenerisk" use="literal"/>
+      </fault>
+      <fault name="faultTjenestepensjonForholdIkkeFunnet">
+        <soap:fault name="faultTjenestepensjonForholdIkkeFunnet" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="opprettTPForhold">
+      <soap:operation soapAction=""/>
+      <input name="opprettTPForholdRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="opprettTPForholdResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultGenerisk">
+        <soap:fault name="faultGenerisk" use="literal"/>
+      </fault>
+      <fault name="faultPersonIkkeFunnet">
+        <soap:fault name="faultPersonIkkeFunnet" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="slettTPForhold">
+      <soap:operation soapAction=""/>
+      <input name="slettTPForholdRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="slettTPForholdResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultGenerisk">
+        <soap:fault name="faultGenerisk" use="literal"/>
+      </fault>
+      <fault name="faultTjenestepensjonForholdIkkeFunnet">
+        <soap:fault name="faultTjenestepensjonForholdIkkeFunnet" use="literal"/>
+      </fault>
+      <fault name="faultKanIkkeSlettes">
+        <soap:fault name="faultKanIkkeSlettes" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="RegistrereTPForholdWSEXP_RegistrereTPForholdHttpService">
+    <port name="RegistrereTPForholdWSEXP_RegistrereTPForholdHttpPort" binding="this:RegistrereTPForholdWSEXP_RegistrereTPForholdHttpBinding">
+      <soap:address location="http://localhost:9080/nav-cons-elsam-tptilb-registreretpforholdV0_1Web/sca/RegistrereTPForholdWSEXP"/>
+    </port>
+  </service>
+</definitions>
