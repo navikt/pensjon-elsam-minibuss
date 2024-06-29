@@ -17,12 +17,12 @@ import org.springframework.core.NestedExceptionUtils;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
-public class authorizeAndOrchestrateImpl {
+public class NavConsElsamTptilbRegisrereTpForhold {
     private final RegistrereTPForholdInt registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold;
     private final Samhandler SamhandlerPartner;
     private final RegistrereTPForholdInt registrereTPForholdV0_1IntPartner_Tjenestepensjon;
 
-    public authorizeAndOrchestrateImpl(RegistrereTPForholdInt registrereTPForholdV01IntPartnerFinnTjenestepensjonsforhold, Samhandler samhandlerPartner, RegistrereTPForholdInt registrereTPForholdV01IntPartnerTjenestepensjon) {
+    public NavConsElsamTptilbRegisrereTpForhold(RegistrereTPForholdInt registrereTPForholdV01IntPartnerFinnTjenestepensjonsforhold, Samhandler samhandlerPartner, RegistrereTPForholdInt registrereTPForholdV01IntPartnerTjenestepensjon) {
         registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold = registrereTPForholdV01IntPartnerFinnTjenestepensjonsforhold;
         SamhandlerPartner = samhandlerPartner;
         registrereTPForholdV0_1IntPartner_Tjenestepensjon = registrereTPForholdV01IntPartnerTjenestepensjon;
