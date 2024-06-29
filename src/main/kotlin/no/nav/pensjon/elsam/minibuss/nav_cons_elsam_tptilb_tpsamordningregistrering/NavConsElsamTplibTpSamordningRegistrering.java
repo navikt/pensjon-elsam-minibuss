@@ -11,10 +11,12 @@ import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp;
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp;
 import no.nav.pensjon.elsam.minibuss.ServiceBusinessException;
 import org.springframework.core.NestedExceptionUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.Iterator;
 import java.util.List;
 
+@Component
 public class NavConsElsamTplibTpSamordningRegistrering {
 	private final static String INTERNALERROR = "InternalError";
 

@@ -7,6 +7,7 @@ import jakarta.jws.WebService
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.ws.RequestWrapper
 import jakarta.xml.ws.ResponseWrapper
+import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import no.nav.elsam.tpsamordningregistrering.v0_5.HentSamordningsdataReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
@@ -31,7 +32,9 @@ import org.springframework.stereotype.Component
     no.nav.elsam.tpsamordningregistrering.v1_0.ObjectFactory::class
 )
 @Suppress("HttpUrlsUsage")
-class TPSamordningRegistreringWSEndpointImpl : TPSamordningRegistrering {
+class TPSamordningRegistreringWSEndpointImpl(
+    val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering
+) : TPSamordningRegistrering {
     @WebMethod
     @RequestWrapper(
         localName = "slettTPYtelse",
@@ -50,7 +53,15 @@ class TPSamordningRegistreringWSEndpointImpl : TPSamordningRegistrering {
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq?
     ) {
-        TODO("Not yet implemented")
+        try {
+            navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
+        } catch (e: Exception) {
+            throw when (e) {
+                is SlettTPYtelseIntFaultGeneriskMsg -> SlettTPYtelseFaultGeneriskMsg(e.message, e.faultInfo)
+                is SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg -> SlettTPYtelseFaultTPYtelseIkkeFunnetMsg(e.message, e.faultInfo)
+                else -> e
+            }
+        }
     }
 
     @WebMethod
@@ -72,7 +83,15 @@ class TPSamordningRegistreringWSEndpointImpl : TPSamordningRegistrering {
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq?
     ): HentSamordningsdataResp? {
-        TODO("Not yet implemented")
+        try {
+            return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        } catch (e: Exception) {
+            throw when (e) {
+                is HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg -> HentSamordningsdataFaultTPForholdIkkeIverksattMsg(e.message, e.faultInfo)
+                is HentSamordningsdataIntFaultGeneriskMsg -> HentSamordningsdataFaultGeneriskMsg(e.message, e.faultInfo)
+                else -> throw e
+            }
+        }
     }
 
     @WebMethod
@@ -100,7 +119,19 @@ class TPSamordningRegistreringWSEndpointImpl : TPSamordningRegistrering {
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq?
     ) {
-        TODO("Not yet implemented")
+        try {
+            return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
+        } catch (e: Exception) {
+            throw when (e) {
+                is OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg -> OpprettRefusjonskravFaultSamordningsIdOgPersonKorrelererIkkeMsg(e.message, e.faultInfo)
+                is OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg -> OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg(e.message, e.faultInfo)
+                is OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg -> OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(e.message, e.faultInfo)
+                is OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg -> OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(e.message, e.faultInfo)
+                is OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg -> OpprettRefusjonskravFaultRefusjonskravUtenforTidsfristMsg(e.message, e.faultInfo)
+                is OpprettRefusjonskravIntFaultGeneriskMsg -> OpprettRefusjonskravFaultGeneriskMsg(e.message, e.faultInfo)
+                else -> e
+            }
+        }
     }
 
     @WebMethod
@@ -122,6 +153,14 @@ class TPSamordningRegistreringWSEndpointImpl : TPSamordningRegistrering {
     override fun lagreTPYtelse(
         @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq?
     ): LagreTPYtelseResp? {
-        TODO("Not yet implemented")
+        try {
+            return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
+        } catch (e: Exception) {
+            throw when (e) {
+                is LagreTPYtelseIntFaultGeneriskMsg -> LagreTPYtelseFaultGeneriskMsg(e.message, e.faultInfo)
+                is LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg -> LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg(e.message, e.faultInfo)
+                else -> e
+            }
+        }
     }
 }
