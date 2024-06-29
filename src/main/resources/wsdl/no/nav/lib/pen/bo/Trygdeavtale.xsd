@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="Trygdeavtale">
+		<sequence>
+			<element name="omfattesavAvtalensPersonkrets"
+				nillable="true" type="xsd:boolean" />
+			<element name="kravDatoIAvtaleland" nillable="true"
+				type="xsd:dateTime" />
+			<element name="avtaleKriterie" nillable="true"
+				type="string" />
+			<element name="avtaleType" nillable="true" type="string" />
+			<element name="avtaledato" nillable="true" type="string" />
+			<element name="trygdeavtaleId" nillable="true"
+				type="xsd:long" />
+			<element name="bostedsland" nillable="true" type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

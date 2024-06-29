@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleFleksibelAPSak" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BehandleFleksibelAPSak" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleFleksibelAPSak">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleFleksibelAPSak" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleFleksibelAPSak" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="behandleFleksibelAPSak">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kravId" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="behandleKompletteringAvGrunnlag">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kravId" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="grunnlagKomplettert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kravId" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="behandleFleksibelAPSakRequestMsg">
+    <wsdl:part element="tns:behandleFleksibelAPSak" name="behandleFleksibelAPSakParameters"/>
+  </wsdl:message>
+    <wsdl:message name="behandleKompletteringAvGrunnlagRequestMsg">
+    <wsdl:part element="tns:behandleKompletteringAvGrunnlag" name="behandleKompletteringAvGrunnlagParameters"/>
+  </wsdl:message>
+    <wsdl:message name="grunnlagKomplettertRequestMsg">
+    <wsdl:part element="tns:grunnlagKomplettert" name="grunnlagKomplettertParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="BehandleFleksibelAPSak">
+    <wsdl:operation name="behandleFleksibelAPSak">
+      <wsdl:input message="tns:behandleFleksibelAPSakRequestMsg" name="behandleFleksibelAPSakRequest"/>
+    </wsdl:operation>
+    <wsdl:operation name="behandleKompletteringAvGrunnlag">
+      <wsdl:input message="tns:behandleKompletteringAvGrunnlagRequestMsg" name="behandleKompletteringAvGrunnlagRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="grunnlagKomplettert">
+      <wsdl:input message="tns:grunnlagKomplettertRequestMsg" name="grunnlagKomplettertRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

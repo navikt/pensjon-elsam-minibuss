@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="TrygdetidEOS.xsd"></include>
+	<include schemaLocation="TrygdetidKonvensjon.xsd"></include>
+	<include schemaLocation="TtUtlandTrygdeavtaleListe.xsd" />	<include schemaLocation="MerknadListe.xsd" />	<complexType name="Trygdetid">
+		<sequence>
+			<element name="tt_overfort" nillable="true" type="xsd:int" />
+			<element name="trygdetidId" nillable="true" type="xsd:long" />
+			<element name="tt_garanti" nillable="true" type="xsd:int" />
+			<element name="tt_67_70" nillable="true" type="xsd:int" />
+			<element name="tt_etter_UFT" nillable="true" type="xsd:int" />
+			<element name="tt_fa_mdn" nillable="true" type="xsd:int" />
+			<element name="ftt_redusert" nillable="true"
+				type="xsd:boolean" />
+			<element name="trygdetidKonvensjon" nillable="true"
+				type="bons0:TrygdetidKonvensjon" />
+			<element name="tt_etter_dod" nillable="true" type="xsd:int" />
+			<element name="tt_f67" nillable="true" type="xsd:int" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="trygdetidEOS" nillable="true"
+				type="bons0:TrygdetidEOS" />
+			<element name="ftt" nillable="true" type="xsd:int" />
+			<element name="tt_e66" nillable="true" type="xsd:int" />
+			<element name="opptjeningsperiode" nillable="true"
+				type="xsd:int" />
+			<element name="tt" nillable="true" type="xsd:int" />
+			<element name="ttUtlandTrygdeavtaler" nillable="true"
+				type="bons0:TtUtlandTrygdeavtaleListe" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

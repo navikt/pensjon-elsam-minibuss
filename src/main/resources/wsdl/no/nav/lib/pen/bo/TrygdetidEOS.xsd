@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="MerknadListe.xsd"></include>
+	<complexType name="TrygdetidEOS">
+		<sequence>
+			<element name="tt_eos_teoretisk_mnd" nillable="true"
+				type="xsd:int" />
+			<element name="tt_eos_anv_ar" nillable="true"
+				type="xsd:int" />
+			<element name="tt_eos_anv_mnd" nillable="true"
+				type="xsd:int" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="tt_eos_pro_rata_mnd" nillable="true"
+				type="xsd:int" />
+			<element name="ftt_eos_redusert" nillable="true"
+				type="xsd:boolean" />
+			<element name="tt_konvensjon_ar" nillable="true"
+				type="xsd:int" />
+			<element name="tt_eos_teller" nillable="true"
+				type="xsd:int" />
+			<element name="trygdetidEOSId" nillable="true"
+				type="xsd:long" />
+			<element name="tt_eos_nevner" nillable="true"
+				type="xsd:int" />
+			<element name="tt_lil_pa" nillable="true"
+				type="xsd:boolean" />
+			<element name="ftt_eos" nillable="true" type="xsd:int" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

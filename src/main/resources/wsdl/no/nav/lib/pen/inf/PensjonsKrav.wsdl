@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="PensjonsKrav" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsKrav" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsKrav" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsKrav">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/OverforKravTilManuellBehandlingRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HenleggKravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentKravForRelatertPersonResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentKravForRelatertPersonRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravAFPPrivatHarStatusTilAtt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAfpPrivatResultatFKErAlleredeSatt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravetErIkkeAFPPrivat.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/LagreAfpPrivatResultatFkRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentKravListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentKravListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentKravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/Kravhode.xsd"/>
+            <xsd:element name="lagreAFPPrivatResultatFK">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreAFPPrivatResultatFKRequest" nillable="true" type="bons1:LagreAfpPrivatResultatFkRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreAFPPrivatResultatFKResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+                    </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultKravetIkkeAFPPrivat_element" nillable="true" type="bons2:FaultKravetErIkkeAFPPrivat"/>
+            <xsd:element name="FaultAfpPrivatResultatFKErAlleredeSatt_element" nillable="true" type="bons2:FaultAfpPrivatResultatFKErAlleredeSatt"/>
+            <xsd:element name="FaultKravAFPPrivatHarStatusTilAtt_element" nillable="true" type="bons2:FaultKravAFPPrivatHarStatusTilAtt"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="lagreAFPPrivatResultatFKRequestMsg">
+    <wsdl:part element="tns:lagreAFPPrivatResultatFK" name="lagreAFPPrivatResultatFKParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreAFPPrivatResultatFKResponseMsg">
+    <wsdl:part element="tns:lagreAFPPrivatResultatFKResponse" name="lagreAFPPrivatResultatFKResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreAFPPrivatResultatFK_FaultKravetErIkkeAFPPrivatMsg">
+    <wsdl:part element="tns:FaultKravetIkkeAFPPrivat_element" name="FaultKravetErIkkeAFPPrivat"/>
+  </wsdl:message>
+    <wsdl:message name="lagreAFPPrivatResultatFK_faultAfpPrivatResultatFkErAlleredeSattMsg">
+    <wsdl:part element="tns:FaultAfpPrivatResultatFKErAlleredeSatt_element" name="faultAfpPrivatResultatFkErAlleredeSatt"/>
+  </wsdl:message>
+    <wsdl:message name="lagreAFPPrivatResultatFK_faultKravAFPPrivatHarStatusTilAttMsg">
+    <wsdl:part element="tns:FaultKravAFPPrivatHarStatusTilAtt_element" name="faultKravAFPPrivatHarStatusTilAtt"/>
+  </wsdl:message>
+    <wsdl:portType name="PensjonsKrav">
+        <wsdl:operation name="lagreAFPPrivatResultatFK">
+      <wsdl:input message="tns:lagreAFPPrivatResultatFKRequestMsg" name="lagreAFPPrivatResultatFKRequest"/>
+            <wsdl:output message="tns:lagreAFPPrivatResultatFKResponseMsg" name="lagreAFPPrivatResultatFKResponse"/>
+            <wsdl:fault message="tns:lagreAFPPrivatResultatFK_FaultKravetErIkkeAFPPrivatMsg" name="FaultKravetErIkkeAFPPrivat"/>
+            <wsdl:fault message="tns:lagreAFPPrivatResultatFK_faultAfpPrivatResultatFkErAlleredeSattMsg" name="faultAfpPrivatResultatFkErAlleredeSatt"/>
+            <wsdl:fault message="tns:lagreAFPPrivatResultatFK_faultKravAFPPrivatHarStatusTilAttMsg" name="faultKravAFPPrivatHarStatusTilAtt"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

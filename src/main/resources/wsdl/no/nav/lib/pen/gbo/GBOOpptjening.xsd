@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+  <xsd:complexType name="GBOOpptjening">
+    <xsd:sequence>
+            <xsd:element minOccurs="0" name="opptjeningID" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="opptjeningType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="opptjeningAr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="kilde" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="poeng" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="datoOpprettet" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="opprettetAv" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="datoEndret" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="endretAv" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="fnrOmsorgFor" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="anvendtPi" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="inntektID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="fnrTil" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="maksUforegrad" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

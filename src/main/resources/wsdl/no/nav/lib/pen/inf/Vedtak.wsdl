@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Vedtak" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Vedtak" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Vedtak" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Vedtak">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultGenerisk.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOForetaFolketrygdBeregnetAfpResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultYtelseIkkeRegistrertITP.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultEpsInfoOmYtelserSamsvarerIkkeMedNav.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultSivilstatusSamsvarerIkkeMedNav.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAvslagForLavtTidligUttak.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAvslagForKortTrygdetid.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOFolketrygdberegnetAfp.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOForetaFolketrygdberegnetAfpRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOFinnVedtakListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOSjekkOmBrukerHarLopendeAfpVedtakResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOSjekkOmBrukerHarLopendeAfpVedtakRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultOppdragErUtilgjengelig.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultOppdragFeilet.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOVilkarsprovYtelse2011Response.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOVilkarsprovYtelse2011Request.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultRegistrertMerEnnEnPengemottaker.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravIkkeTillattOpprett.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultPersonIkkeFunnetIPopp.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBehandleBerorteSakerRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOFinnPengemottakerOgLagreAutobrevResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOFinnPengemottakerOgLagreAutobrevRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOpphorYtelseResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOpphorYtelseRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOValiderVilkarsprovingResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOValiderVilkarsprovingRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKlargjorForIverksettingResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKlargjorForIverksettingRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOVedtak.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultUgyldigVerdiIResultatfelt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAFPPrivatErIkkeInnvilget.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOTilbakekrevingTotal.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentTilbakekrevingTotalRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultToFolketrygdPensjonerKanIkkeLopeSamtidig.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultIverksattVedtakIKonflikt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreVedtakStatusRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentPensjonssaksInfoListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreVilkarsvedtakListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOVurderVilkarRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentUttrekkTilOppdragstransaksjonResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentVedtakRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultVedtakIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentUttrekkTilOppdragstransaksjonRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultForskjelligResultatPaaVilkarsvedtak.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOVedtakListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentVedtakListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOSaksInfoListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:element name="hentVedtakListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakListeRequest" nillable="true" type="bons1:GBOHentVedtakListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentVedtakListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakListeResponse" nillable="true" type="bons1:GBOVedtakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentVedtak">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakRequest" nillable="true" type="bons1:GBOHentVedtakRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentVedtakResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakResponse" nillable="true" type="bons1:GBOVedtak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentVedtak_faultVedtakIkkeFunnetF" type="bons2:FaultVedtakIkkeFunnet"/>
+            <xsd:element name="lagreVilkarsvedtakListe_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+            <xsd:element name="hentPensjonssaksInfoListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentPensjonssaksInfoListeRequest" nillable="true" type="bons1:GBOHentPensjonssaksInfoListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentPensjonssaksInfoListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentPensjonssaksInfoListeResponse" nillable="true" type="bons1:GBOSaksInfoListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentPensjonssaksInfoListe_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+            <xsd:element name="hentUttrekkTilOppdragstransaksjon">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentUttrekkTilOppdragstransaksjonRequest" nillable="true" type="bons1:GBOHentUttrekkTilOppdragstransaksjonRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentUttrekkTilOppdragstransaksjonResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentUttrekkTilOppdragstransaksjonResponse" nillable="true" type="bons1:GBOHentUttrekkTilOppdragstransaksjonResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentTilbakekrevingTotal">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentTilbakekrevingTotalRequest" nillable="true" type="bons1:GBOHentTilbakekrevingTotalRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentTilbakekrevingTotalResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentTilbakekrevingTotalResponse" nillable="true" type="bons1:GBOTilbakekrevingTotal"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="finnVedtakListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="finnVedtakListeRequest" nillable="true" type="bons1:GBOFinnVedtakListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="finnVedtakListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="finnVedtakListeResponse" nillable="true" type="bons1:GBOVedtakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="foretaFolketrygdBeregnetAfp">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="foretaFolketrygdBeregnetAfpRequest" nillable="true" type="bons1:GBOForetaFolketrygdberegnetAfpRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="foretaFolketrygdBeregnetAfpResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="foretaFolketrygdBeregnetAfpResponse" nillable="true" type="bons1:GBOForetaFolketrygdBeregnetAfpResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault1_faultGenerisk" nillable="true" type="bons2:FaultGenerisk"/>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault2_faultSivilstatusSamsvarerIkkeMedNav" nillable="true" type="bons2:FaultSivilstatusSamsvarerIkkeMedNav"/>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault3_faultEpsInfoOmYtelserSamsvarerIkkeMedNav" nillable="true" type="bons2:FaultEpsInfoOmYtelserSamsvarerIkkeMedNav"/>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault4_faultAvslagKortTrygdetid" nillable="true" type="bons2:FaultAvslagForKortTrygdetid"/>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault5_faultAvslagLavtTidligUttak" nillable="true" type="bons2:FaultAvslagForLavtTidligUttak"/>
+            <xsd:element name="foretaFolketrygdBeregnetAfpFault6_faultYtelseIkkeRegistrertITP" nillable="true" type="bons2:FaultYtelseIkkeRegistrertITP"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentVedtakListeRequestMsg">
+    <wsdl:part element="tns:hentVedtakListe" name="hentVedtakListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakListeResponseMsg">
+    <wsdl:part element="tns:hentVedtakListeResponse" name="hentVedtakListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakRequestMsg">
+    <wsdl:part element="tns:hentVedtak" name="hentVedtakParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakResponseMsg">
+    <wsdl:part element="tns:hentVedtakResponse" name="hentVedtakResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentPensjonssaksInfoListeRequestMsg">
+    <wsdl:part element="tns:hentPensjonssaksInfoListe" name="hentPensjonssaksInfoListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentPensjonssaksInfoListeResponseMsg">
+    <wsdl:part element="tns:hentPensjonssaksInfoListeResponse" name="hentPensjonssaksInfoListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentPensjonssaksInfoListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentPensjonssaksInfoListe_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentUttrekkTilOppdragstransaksjonRequestMsg">
+    <wsdl:part element="tns:hentUttrekkTilOppdragstransaksjon" name="hentUttrekkTilOppdragstransaksjonParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentUttrekkTilOppdragstransaksjonResponseMsg">
+    <wsdl:part element="tns:hentUttrekkTilOppdragstransaksjonResponse" name="hentUttrekkTilOppdragstransaksjonResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentTilbakekrevingTotalRequestMsg">
+    <wsdl:part element="tns:hentTilbakekrevingTotal" name="hentTilbakekrevingTotalParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentTilbakekrevingTotalResponseMsg">
+    <wsdl:part element="tns:hentTilbakekrevingTotalResponse" name="hentTilbakekrevingTotalResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreVilkarsvedtakListe_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="finnVedtakListeRequestMsg">
+    <wsdl:part element="tns:finnVedtakListe" name="finnVedtakListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="finnVedtakListeResponseMsg">
+    <wsdl:part element="tns:finnVedtakListeResponse" name="finnVedtakListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfpRequestMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfp" name="foretaFolketrygdBeregnetAfpParameters"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfpResponseMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpResponse" name="foretaFolketrygdBeregnetAfpResult"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultGeneriskMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault1_faultGenerisk" name="faultGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultSivilstatusSamsvarerIkkeMedNavMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault2_faultSivilstatusSamsvarerIkkeMedNav" name="faultSivilstatusSamsvarerIkkeMedNav"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultEpsInfoOmYtelserSamsvarerIkkeMedNavMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault3_faultEpsInfoOmYtelserSamsvarerIkkeMedNav" name="faultEpsInfoOmYtelserSamsvarerIkkeMedNav"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultAvslagKortTrygdetidMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault4_faultAvslagKortTrygdetid" name="faultAvslagKortTrygdetid"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultAvslagLavtTidligUttakMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault5_faultAvslagLavtTidligUttak" name="faultAvslagLavtTidligUttak"/>
+  </wsdl:message>
+    <wsdl:message name="foretaFolketrygdBeregnetAfp_faultYtelseIkkeRegistrertITPMsg">
+    <wsdl:part element="tns:foretaFolketrygdBeregnetAfpFault6_faultYtelseIkkeRegistrertITP" name="faultYtelseIkkeRegistrertITP"/>
+  </wsdl:message>
+    <wsdl:portType name="Vedtak">
+    <wsdl:operation name="hentVedtakListe">
+      <wsdl:input message="tns:hentVedtakListeRequestMsg" name="hentVedtakListeRequest"/>
+      <wsdl:output message="tns:hentVedtakListeResponseMsg" name="hentVedtakListeResponse"/>
+            <wsdl:fault message="tns:hentVedtakListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentVedtak">
+      <wsdl:input message="tns:hentVedtakRequestMsg" name="hentVedtakRequest"/>
+      <wsdl:output message="tns:hentVedtakResponseMsg" name="hentVedtakResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentPensjonssaksInfoListe">
+      <wsdl:input message="tns:hentPensjonssaksInfoListeRequestMsg" name="hentPensjonssaksInfoListeRequest"/>
+      <wsdl:output message="tns:hentPensjonssaksInfoListeResponseMsg" name="hentPensjonssaksInfoListeResponse"/>
+      <wsdl:fault message="tns:hentPensjonssaksInfoListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentUttrekkTilOppdragstransaksjon">
+      <wsdl:input message="tns:hentUttrekkTilOppdragstransaksjonRequestMsg" name="hentUttrekkTilOppdragstransaksjonRequest"/>
+      <wsdl:output message="tns:hentUttrekkTilOppdragstransaksjonResponseMsg" name="hentUttrekkTilOppdragstransaksjonResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentTilbakekrevingTotal">
+      <wsdl:input message="tns:hentTilbakekrevingTotalRequestMsg" name="hentTilbakekrevingTotalRequest"/>
+      <wsdl:output message="tns:hentTilbakekrevingTotalResponseMsg" name="hentTilbakekrevingTotalResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="finnVedtakListe">
+      <wsdl:input message="tns:finnVedtakListeRequestMsg" name="finnVedtakListeRequest"/>
+      <wsdl:output message="tns:finnVedtakListeResponseMsg" name="finnVedtakListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="foretaFolketrygdBeregnetAfp">
+      <wsdl:input message="tns:foretaFolketrygdBeregnetAfpRequestMsg" name="foretaFolketrygdBeregnetAfpRequest"/>
+      <wsdl:output message="tns:foretaFolketrygdBeregnetAfpResponseMsg" name="foretaFolketrygdBeregnetAfpResponse"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultGeneriskMsg" name="faultGenerisk"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultSivilstatusSamsvarerIkkeMedNavMsg" name="faultSivilstatusSamsvarerIkkeMedNav"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultEpsInfoOmYtelserSamsvarerIkkeMedNavMsg" name="faultEpsInfoOmYtelserSamsvarerIkkeMedNav"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultAvslagKortTrygdetidMsg" name="faultAvslagKortTrygdetid"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultAvslagLavtTidligUttakMsg" name="faultAvslagLavtTidligUttak"/>
+      <wsdl:fault message="tns:foretaFolketrygdBeregnetAfp_faultYtelseIkkeRegistrertITPMsg" name="faultYtelseIkkeRegistrertITP"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

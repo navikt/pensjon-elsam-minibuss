@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:complexType name="GBOUforegrunnlag">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="uforegrunnlagId" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="kravDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="virkningsdato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="inntektForUforhet" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="inntektForUforhetDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="uforegrad" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="uforetidspunkt" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="forhoyelseUtenNyttUft" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="sistMedlemFolketrygden" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ungUfor" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="frysHvilendePensjStart" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="frysHvilendePensjSlutt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="forlengelseFrysStart" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="forlengelseFrysSlutt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="reaktiviseringStart" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="reaktiviseringSlutt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="lonnstilskuddStart" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="lonnstilskuddSlutt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="arligInntektMinst1G" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="fodselarYngsteBarn" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="friinntektFomDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="unntakVentetid12_12" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="utdanningKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="yrke" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="garantertTPUngUfor" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="uforhetSkyldesYrkesskade" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="altUftUngUfor" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="iVentetidOvergTidsbegrUfore" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="bruk" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="grunnlagKildeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons0:GBOEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

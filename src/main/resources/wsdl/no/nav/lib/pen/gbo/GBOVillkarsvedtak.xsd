@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOKravlinje.xsd"></xsd:include>
+	<xsd:include
+		schemaLocation="GBOVilkarsprovAlderspensjonResultat.xsd">
+	</xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOMerknad.xsd" />	<xsd:complexType name="GBOVilkarsvedtak">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vilkarsvedtakId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="anbefaltResultatKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="vilkarsvedtakResultatKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="anvendtVurderingKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0"
+				name="vilkarsvedtakResultatSpesKode" type="xsd:string" />			<xsd:element minOccurs="0" name="innstillingKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="virkningFom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="virkningTom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="forsteVirkningsDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="gjelderFnr"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="merknadPenListe"
+				type="bons1:GBOMerknad" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="merknadPregListe"
+				type="bons1:GBOMerknad" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="begrunnelseKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vilkarsprovResultat"
+				type="bons1:GBOVilkarsprovAlderspensjonResultat">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="overstyrtAv"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kravlinje"
+				type="bons1:GBOKravlinje">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kravlinjeKode"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="SkjemaAFPPrivat.xsd"/>
+
+	<complexType name="HentSkjemaAfpPrivatResponse">
+		<sequence>
+			<element name="skjemaAFPPrivat" nillable="true" type="bons0:SkjemaAFPPrivat"/>
+		</sequence>
+	</complexType>
+</schema>

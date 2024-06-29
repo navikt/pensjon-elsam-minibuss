@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+  <xsd:complexType name="GBOBatchBrevdata">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="internBatchbrevkode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brevkode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brevGruppe" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="redigerbart" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="fagsystem" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="dokumentType" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="innhold" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kategori" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sensitivt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="elektroniskDistribusjon" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="KravlinjeStatus">
+		<sequence>
+			<element name="kravlinjeStatusId" nillable="true"
+				type="xsd:long" />
+			<element name="kravlinjeStatus" nillable="true"
+				type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

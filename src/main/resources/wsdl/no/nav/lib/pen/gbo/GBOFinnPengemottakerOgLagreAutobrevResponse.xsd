@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOAutobrev.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOVedtak.xsd"></xsd:include>
+	<xsd:complexType
+		name="GBOFinnPengemottakerOgLagreAutobrevResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vedtak"
+				type="bons0:GBOVedtak">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="autobrevListe"
+				type="bons0:GBOAutobrev" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

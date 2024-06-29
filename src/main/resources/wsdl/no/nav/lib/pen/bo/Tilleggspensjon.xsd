@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+    <include schemaLocation="Sluttpoengtall.xsd"/>
+	<include schemaLocation="Ytelseskomponent.xsd"/>
+	<complexType name="Tilleggspensjon">
+		<complexContent>
+			<extension base="bons0:Ytelseskomponent">
+				<sequence>
+					<element name="ypt" nillable="true" type="bons0:Sluttpoengtall"/>
+					<element name="spt" nillable="true" type="bons0:Sluttpoengtall"/>
+					<element name="opt" nillable="true" type="bons0:Sluttpoengtall"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

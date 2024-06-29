@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="GBOFolketrygdberegnetAfp">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="totalbelopAfp"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkningFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tidligereArbeidsinntekt"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnbelop"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sluttpoengtall"
+				type="xsd:double">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdetid"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pongar" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="poengarFor92"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="poengarEtter91"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnpensjon"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tilleggspensjon"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpTillegg"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fremtidigPensjonspoeng"
+				type="xsd:double">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

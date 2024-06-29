@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo">	<include schemaLocation="GBOAntallArOgMnd.xsd"></include>
+	<include schemaLocation="GBOPoengarListe.xsd"></include>
+	<import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</import>	<complexType name="GBOTrygdeavtaledetaljer">
+		<sequence>			<element name="arbeidsinntektMinst1G" nillable="true"
+				type="boolean" />
+			<element name="barnepensjonForordning1408_71Kode"
+				nillable="true" type="string" />
+			<element name="erArt10BruktGP" nillable="true"
+				type="boolean" />
+			<element name="erArt10BruktTP" nillable="true"
+				type="boolean" />
+			<element name="fpa_nordisk" nillable="true" type="string" />
+			<element name="ftt_andreEOSLand" nillable="true"
+				type="bons1:GBOAntallArOgMnd" />
+			<element name="ftt_annetNordiskLand" nillable="true"
+				type="bons1:GBOAntallArOgMnd" />
+			<element name="ftt_garanti" nillable="true"
+				type="bons1:GBOAntallArOgMnd" />
+			<element name="inntektsprovetPensjonAvtaleland"
+				nillable="true" type="boolean" />
+			<element name="norge_primaerland" nillable="true"
+				type="boolean" />
+			<element name="poengarListe" nillable="true"
+				type="bons1:GBOPoengarListe" />
+			<element name="sumPensjonAndreAvtaleland" nillable="true"
+				type="xsd:int" />			<element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

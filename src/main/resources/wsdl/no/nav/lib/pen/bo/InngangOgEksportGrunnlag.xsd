@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Unntak.xsd"></include>
+	<include schemaLocation="OppfyltVedSammenlegging.xsd"></include>
+	<include schemaLocation="Eksportrett.xsd"></include>
+	<include schemaLocation="Eksportforbud.xsd"></include>	<complexType name="InngangOgEksportGrunnlag">		<sequence>
+			<element name="foreldreMinstTyveArBotidNorge"
+				nillable="true" type="xsd:boolean" />
+			<element name="minstTreArsFMNorgeVirkdato" nillable="true"
+				type="xsd:boolean" />
+			<element name="inngangOgEksportGrunnlagId" nillable="true"
+				type="xsd:long" />
+			<element name="minstTreArsFMNorge" nillable="true"
+				type="xsd:boolean" />
+			<element name="eksportforbud" nillable="true"
+				type="bons0:Eksportforbud" />
+			<element name="oppfyltVedGjenlevendesMedlemskap"
+				nillable="true" type="xsd:boolean" />
+			<element name="gjenlevendeMedlemFT" nillable="true"
+				type="xsd:boolean" />
+			<element name="eksportrettEtterAndreTrygdeavtaler"
+				nillable="true" type="bons0:Eksportrett" />
+			<element name="eksportrettEtterTrygdeavtalerEOS"
+				nillable="true" type="bons0:Eksportrett" />
+			<element name="unntakFraForutgaendeMedlemskap"
+				nillable="true" type="bons0:Unntak" />
+			<element name="fortsattMedlemFT" nillable="true"
+				type="xsd:boolean" />
+			<element name="innvilgetGarantertTP" nillable="true"
+				type="xsd:boolean" />
+			<element name="oppfyltEtterGamleRegler" nillable="true"
+				type="xsd:boolean" />
+			<element name="oppfyltVedSammenlegging" nillable="true"
+				type="bons0:OppfyltVedSammenlegging" />
+			<element name="friEksportDodsfall" nillable="true"
+				type="xsd:boolean" />
+			<element name="opptjentRettTilTPEtterFT" nillable="true"
+				type="xsd:boolean" />
+			<element name="minstEttArFMNorge" nillable="true"
+				type="xsd:boolean" />
+			<element name="treArTrygdetidNorge" nillable="true"
+				type="xsd:boolean" />
+			<element name="minstTyveArBotidNorge" nillable="true"
+				type="xsd:boolean" />
+			<element name="eksportrettEtterEOSForordning"
+				nillable="true" type="bons0:Eksportrett" />
+			<element name="friEksportPgaYrkesskade" nillable="true"
+				type="xsd:boolean" />
+			<element name="unntakFraForutgaendeTT" nillable="true"
+				type="bons0:Unntak" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

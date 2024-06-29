@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOGarantitillegg.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOGarantipensjon.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOInntektspensjon.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOSkjermingstillegg.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOMinstenivatilleggIndividuelt.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOUforetilleggTilAlderspensjon.xsd"></xsd:include>
+	<xsd:include
+		schemaLocation="GBOGjenlevendetilleggTilAlderspensjon.xsd">
+	</xsd:include>
+	<xsd:include schemaLocation="GBOAfpLivsvarig.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOAfpKronetillegg.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOAfpKompensasjonstillegg.xsd"></xsd:include>
+	<xsd:include
+		schemaLocation="GBOMinstenivatilleggPensjonistpar.xsd">
+	</xsd:include>
+	<xsd:include schemaLocation="GBOPensjonstillegg.xsd" />
+	<xsd:include schemaLocation="GBOHjelpeloshetsbidrag.xsd" />
+	<xsd:include schemaLocation="GBOTilleggTilHjelpIHuset.xsd" />
+	<xsd:include schemaLocation="GBOKrigOgGammelYrkesskade.xsd" />
+	<xsd:include schemaLocation="GBOMendel.xsd" />
+	<xsd:include schemaLocation="GBOGarantitillegg_Art_50.xsd" />
+	<xsd:include schemaLocation="GBOGarantitillegg_Art_27.xsd" />
+	<xsd:include schemaLocation="GBOParagraf851Tillegg.xsd" />
+	<xsd:include schemaLocation="GBOFasteUtgifterTillegg.xsd" />
+	<xsd:include schemaLocation="GBOFamilietillegg.xsd" />
+	<xsd:include schemaLocation="GBOVentetillegg.xsd" />
+	<xsd:include schemaLocation="GBOBarnetillegg.xsd" />
+	<xsd:include schemaLocation="GBOEktefelletillegg.xsd" />
+	<xsd:include schemaLocation="GBOAfpTillegg.xsd" />
+	<xsd:include schemaLocation="GBOSertillegg.xsd" />
+	<xsd:include schemaLocation="GBOTilleggspensjon.xsd" />
+	<xsd:include schemaLocation="GBOGrunnpensjon.xsd" />
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd">
+	</xsd:import>
+	<xsd:complexType name="GBOPensjonUnderUtbetaling">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="pensjonUnderUtbetalingId"
+				type="xsd:string">
+			</xsd:element>
+
+
+
+			<xsd:element minOccurs="0" name="grunnpensjon"
+				type="bons1:GBOGrunnpensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tilleggspensjon"
+				type="bons1:GBOTilleggspensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sertillegg"
+				type="bons1:GBOSertillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpTillegg"
+				type="bons1:GBOAfpTillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ektefelletillegg"
+				type="bons1:GBOEktefelletillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="barnetilleggFellesbarn"
+				type="bons1:GBOBarnetillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="barnetilleggSerkullsbarn"
+				type="bons1:GBOBarnetillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ventetillegg"
+				type="bons1:GBOVentetillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="familietillegg"
+				type="bons1:GBOFamilietillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fasteUtgifterTillegg"
+				type="bons1:GBOFasteUtgifterTillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="paragraf851Tillegg"
+				type="bons1:GBOParagraf851Tillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="garantitillegg_Art_27"
+				type="bons1:GBOGarantitillegg_Art_27">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="garantitillegg_Art_50"
+				type="bons1:GBOGarantitillegg_Art_50">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mendel"
+				type="bons1:GBOMendel">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="minstenivatilleggIndividuelt"
+				type="bons1:GBOMinstenivatilleggIndividuelt">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="krigOgGammelYrkesskade"
+				type="bons1:GBOKrigOgGammelYrkesskade">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tilleggTilHjelpIHuset"
+				type="bons1:GBOTilleggTilHjelpIHuset">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="hjelpeloshetsbidrag"
+				type="bons1:GBOHjelpeloshetsbidrag">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pensjonstillegg"
+				type="bons1:GBOPensjonstillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="minstenivatilleggPensjonistpar"
+				type="bons1:GBOMinstenivatilleggPensjonistpar">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="totalBelopAr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="totalBelop"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpKompensasjonstillegg"
+				type="bons1:GBOAfpKompensasjonstillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpKronetillegg"
+				type="bons1:GBOAfpKronetillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpLivsvarig"
+				type="bons1:GBOAfpLivsvarig">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="gjenlevendetilleggTilAlderspensjon"
+				type="bons1:GBOGjenlevendetilleggTilAlderspensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="uforetilleggTilAlderspensjon"
+				type="bons1:GBOUforetilleggTilAlderspensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="skjermingstillegg"
+				type="bons1:GBOSkjermingstillegg">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="inntektspensjon"
+				type="bons1:GBOInntektspensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="garantipensjon"
+				type="bons1:GBOGarantipensjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="garantitillegg"
+				type="bons1:GBOGarantitillegg">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

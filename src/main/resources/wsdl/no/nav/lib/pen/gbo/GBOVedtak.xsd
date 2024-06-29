@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:include schemaLocation="GBOBeregningsResultat2025.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOBeregningsResultat2016.xsd" />
+	<xsd:include schemaLocation="GBOBeregningsResultatUforetrygd.xsd" />
+	<xsd:include schemaLocation="GBOSammenstotstilfelle.xsd" />
+	<xsd:include schemaLocation="GBOAutobrev.xsd" />
+	<xsd:include schemaLocation="GBOBehandlingsperiode.xsd" />
+	<xsd:include schemaLocation="GBOBeregningsResultat.xsd" />
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOAFPEO.xsd" />
+
+	<xsd:include schemaLocation="GBOBeregning.xsd" />
+	<xsd:include schemaLocation="GBOVillkarsvedtak.xsd" />
+	<xsd:include schemaLocation="GBOKravhode.xsd" />
+	<xsd:complexType name="GBOVedtak">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vedtakId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="gjelderFnr"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="virkningFom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="lopendeFom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="lopendeTom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="virkningTom"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="vedtaksKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="vedtakstatusKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="saksId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="saksKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ansvarligSaksbehandler"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="kravHode"
+				type="bons0:GBOKravhode" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="vilkarsvedtakListe" type="bons0:GBOVilkarsvedtak" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="beregningListe" type="bons0:GBOBeregning" />
+			<xsd:element minOccurs="0" name="attesterer"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="attestertDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="vedtaksdato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="tilIverksettelseDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="sendtSamordningDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="samordnetDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="iverksattDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="etterbetaling"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="utvidetSamordningsfrist"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="vedtakLast"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="behandlingKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="annenPengeMottaker"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo" />
+			<xsd:element maxOccurs="1" minOccurs="0" name="AFPEO"
+				type="bons0:GBOAFPEO" />
+			<xsd:element minOccurs="0" name="virkGammelVedtak"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="innstillingsverdi"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="klageAnkeResultat"
+				type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="hovedkravlinjeResultat"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sendtNavi"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="simulertFeilutbetalingTom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="beregningsResultatListe" type="bons0:GBOBeregningsResultat">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="beregningsResultat2016Liste"
+				type="bons0:GBOBeregningsResultat2016">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="behandlingsperiodeListe" type="bons0:GBOBehandlingsperiode">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="autoBrevListe" type="bons0:GBOAutobrev">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="originalBeregningsresultatListe"
+				type="bons0:GBOBeregningsResultat">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="relatertAfpPrivatVedtak"
+				type="bons0:GBOVedtak">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="relatertAlderVedtak"
+				type="bons0:GBOVedtak">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sammenstotstilfelle"
+				type="bons0:GBOSammenstotstilfelle">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="harEndretUtbetaling"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="beregningsresultatUforetrygdListe"
+				type="bons0:GBOBeregningsResultatUforetrygd"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="beregningsResultat2025Liste"
+				type="bons0:GBOBeregningsResultat2025" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

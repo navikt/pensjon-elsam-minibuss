@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Krav" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Krav" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Krav">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Krav" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Krav" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerKravOgKompletterGrunnlagResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerKravOgKompletterGrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentEPSListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentEPSListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentKravListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentKravListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKanIkkeKontrollereUtlandsopphold.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerUtlandsoppholdResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerUtlandsoppholdRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreKravlinjeListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreKravlinjeListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKanIkkeKontrollereInstOpphold.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerInstitusjonsoppholdResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKontrollerInstitusjonsoppholdRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentKravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKravhode.xsd"/>
+            <xsd:element name="hentKrav">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentKravRequest" nillable="true" type="bons2:GBOHentKravRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentKravResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentKravResponse" nillable="true" type="bons2:GBOKravhode"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerInstitusjonsopphold">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerInstitusjonsoppholdRequest" nillable="true" type="bons2:GBOKontrollerInstitusjonsoppholdRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerInstitusjonsoppholdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerInstitusjonsoppholdResponse" nillable="true" type="bons2:GBOKontrollerInstitusjonsoppholdResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultKanIkkeKontrollereInstOpphold_element" nillable="true" type="bons1:FaultKanIkkeKontrollereInstOpphold"/>
+            <xsd:element name="lagreKravlinjeListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreKravlinjeListeRequest" nillable="true" type="bons2:GBOLagreKravlinjeListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreKravlinjeListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreKravlinjeListeResponse" nillable="true" type="bons2:GBOLagreKravlinjeListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreKravhode">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreKravhodeRequest" nillable="true" type="bons2:GBOKravhode"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreKravhodeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagrekravhodeResponse" nillable="true" type="bons2:GBOKravhode"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerUtlandsopphold">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerUtlandsoppholdRequest" nillable="true" type="bons2:GBOKontrollerUtlandsoppholdRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerUtlandsoppholdResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerUtlandsoppholdResponse" nillable="true" type="bons2:GBOKontrollerUtlandsoppholdResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultKanIkkeKontrollereUtlandsopphold_element" nillable="true" type="bons1:FaultKanIkkeKontrollereUtlandsopphold"/>
+            <xsd:element name="hentKravListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentKravListeRequest" nillable="true" type="bons2:GBOHentKravListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentKravListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentKravListeResponse" nillable="true" type="bons2:GBOHentKravListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentEPSListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentEPSListeRequest" nillable="true" type="bons2:GBOHentEPSListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentEPSListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentEPSListeResponse" nillable="true" type="bons2:GBOHentEPSListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerKravOgKompletterGrunnlag">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerKravOgKompletterGrunnlagRequest" nillable="true" type="bons2:GBOKontrollerKravOgKompletterGrunnlagRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="kontrollerKravOgKompletterGrunnlagResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="kontrollerKravOgKompletterGrunnlagResponse" nillable="true" type="bons2:GBOKontrollerKravOgKompletterGrunnlagResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentKravRequestMsg">
+    <wsdl:part element="tns:hentKrav" name="hentKravParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentKravResponseMsg">
+    <wsdl:part element="tns:hentKravResponse" name="hentKravResult"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerInstitusjonsoppholdRequestMsg">
+    <wsdl:part element="tns:kontrollerInstitusjonsopphold" name="kontrollerInstitusjonsoppholdParameters"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerInstitusjonsoppholdResponseMsg">
+    <wsdl:part element="tns:kontrollerInstitusjonsoppholdResponse" name="kontrollerInstitusjonsoppholdResult"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerInstitusjonsopphold_faultKanIkkeKontrollereInstOppholdMsg">
+    <wsdl:part element="tns:FaultKanIkkeKontrollereInstOpphold_element" name="faultKanIkkeKontrollereInstOpphold"/>
+  </wsdl:message>
+    <wsdl:message name="lagreKravlinjeListeRequestMsg">
+    <wsdl:part element="tns:lagreKravlinjeListe" name="lagreKravlinjeListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreKravlinjeListeResponseMsg">
+    <wsdl:part element="tns:lagreKravlinjeListeResponse" name="lagreKravlinjeListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreKravhodeRequestMsg">
+    <wsdl:part element="tns:lagreKravhode" name="lagreKravhodeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreKravhodeResponseMsg">
+    <wsdl:part element="tns:lagreKravhodeResponse" name="lagreKravhodeResult"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerUtlandsoppholdRequestMsg">
+    <wsdl:part element="tns:kontrollerUtlandsopphold" name="kontrollerUtlandsoppholdParameters"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerUtlandsoppholdResponseMsg">
+    <wsdl:part element="tns:kontrollerUtlandsoppholdResponse" name="kontrollerUtlandsoppholdResult"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerUtlandsopphold_faultKanIkkeKontrollereUtlandsoppholdMsg">
+    <wsdl:part element="tns:FaultKanIkkeKontrollereUtlandsopphold_element" name="faultKanIkkeKontrollereUtlandsopphold"/>
+  </wsdl:message>
+    <wsdl:message name="hentKravListeRequestMsg">
+    <wsdl:part element="tns:hentKravListe" name="hentKravListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentKravListeResponseMsg">
+    <wsdl:part element="tns:hentKravListeResponse" name="hentKravListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentEPSListeRequestMsg">
+    <wsdl:part element="tns:hentEPSListe" name="hentEPSListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentEPSListeResponseMsg">
+    <wsdl:part element="tns:hentEPSListeResponse" name="hentEPSListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerKravOgKompletterGrunnlagRequestMsg">
+    <wsdl:part element="tns:kontrollerKravOgKompletterGrunnlag" name="kontrollerKravOgKompletterGrunnlagParameters"/>
+  </wsdl:message>
+    <wsdl:message name="kontrollerKravOgKompletterGrunnlagResponseMsg">
+    <wsdl:part element="tns:kontrollerKravOgKompletterGrunnlagResponse" name="kontrollerKravOgKompletterGrunnlagResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Krav">
+        <wsdl:operation name="hentKrav">
+      <wsdl:input message="tns:hentKravRequestMsg" name="hentKravRequest"/>
+      <wsdl:output message="tns:hentKravResponseMsg" name="hentKravResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="kontrollerInstitusjonsopphold">
+      <wsdl:input message="tns:kontrollerInstitusjonsoppholdRequestMsg" name="kontrollerInstitusjonsoppholdRequest"/>
+      <wsdl:output message="tns:kontrollerInstitusjonsoppholdResponseMsg" name="kontrollerInstitusjonsoppholdResponse"/>
+            <wsdl:fault message="tns:kontrollerInstitusjonsopphold_faultKanIkkeKontrollereInstOppholdMsg" name="faultKanIkkeKontrollereInstOpphold"/>
+        </wsdl:operation>
+        <wsdl:operation name="lagreKravlinjeListe">
+      <wsdl:input message="tns:lagreKravlinjeListeRequestMsg" name="lagreKravlinjeListeRequest"/>
+      <wsdl:output message="tns:lagreKravlinjeListeResponseMsg" name="lagreKravlinjeListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="lagreKravhode">
+      <wsdl:input message="tns:lagreKravhodeRequestMsg" name="lagreKravhodeRequest"/>
+      <wsdl:output message="tns:lagreKravhodeResponseMsg" name="lagreKravhodeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="kontrollerUtlandsopphold">
+      <wsdl:input message="tns:kontrollerUtlandsoppholdRequestMsg" name="kontrollerUtlandsoppholdRequest"/>
+      <wsdl:output message="tns:kontrollerUtlandsoppholdResponseMsg" name="kontrollerUtlandsoppholdResponse"/>
+      <wsdl:fault message="tns:kontrollerUtlandsopphold_faultKanIkkeKontrollereUtlandsoppholdMsg" name="faultKanIkkeKontrollereUtlandsopphold"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentKravListe">
+      <wsdl:input message="tns:hentKravListeRequestMsg" name="hentKravListeRequest"/>
+      <wsdl:output message="tns:hentKravListeResponseMsg" name="hentKravListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentEPSListe">
+      <wsdl:input message="tns:hentEPSListeRequestMsg" name="hentEPSListeRequest"/>
+      <wsdl:output message="tns:hentEPSListeResponseMsg" name="hentEPSListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="kontrollerKravOgKompletterGrunnlag">
+      <wsdl:input message="tns:kontrollerKravOgKompletterGrunnlagRequestMsg" name="kontrollerKravOgKompletterGrunnlagRequest"/>
+      <wsdl:output message="tns:kontrollerKravOgKompletterGrunnlagResponseMsg" name="kontrollerKravOgKompletterGrunnlagResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

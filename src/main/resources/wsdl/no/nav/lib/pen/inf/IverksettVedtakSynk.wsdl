@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/IverksettVedtakSynk" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IverksettVedtakSynk" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/IverksettVedtakSynk">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/IverksettVedtakSynk" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/IverksettVedtakSynk" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultInstansFinnesFraFor.xsd"/>
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOIverksettVedtakSynkResponse.xsd"/>
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOIverksettVedtakRequest.xsd"/>
+      <xsd:element name="invokeIverksettVedtakSynk">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="iverksettVedtakSynkRequest" nillable="true" type="bons1:GBOIverksettVedtakRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="invokeIverksettVedtakSynkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="iverksettVedtakSynkResponse" nillable="true" type="bons1:GBOIverksettVedtakSynkResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FaultInstansFinnesFraFor_element" nillable="true" type="bons2:FaultInstansFinnesFraFor"/>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="invokeIverksettVedtakSynkRequestMsg">
+    <wsdl:part element="tns:invokeIverksettVedtakSynk" name="invokeIverksettVedtakSynkParameters"/>
+  </wsdl:message>
+    <wsdl:message name="invokeIverksettVedtakSynkResponseMsg">
+    <wsdl:part element="tns:invokeIverksettVedtakSynkResponse" name="invokeIverksettVedtakSynkResult"/>
+  </wsdl:message>
+    <wsdl:message name="invokeIverksettVedtakSynk_faultInstansFinnesFraForMsg">
+    <wsdl:part element="tns:FaultInstansFinnesFraFor_element" name="faultInstansFinnesFraFor"/>
+  </wsdl:message>
+    <wsdl:portType name="IverksettVedtakSynk">
+    <wsdl:operation name="invokeIverksettVedtakSynk">
+      <wsdl:input message="tns:invokeIverksettVedtakSynkRequestMsg" name="invokeIverksettVedtakSynkRequest"/>
+      <wsdl:output message="tns:invokeIverksettVedtakSynkResponseMsg" name="invokeIverksettVedtakSynkResponse"/>
+      <wsdl:fault message="tns:invokeIverksettVedtakSynk_faultInstansFinnesFraForMsg" name="faultInstansFinnesFraFor"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+  <xsd:complexType name="GBOBeregningSammendragAvdod">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="avdodFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="avdodDodsDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="avdodTt" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodBoddIUtland" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodDodsfallSkyldesYrkesskade" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodAntallPoengAar" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodPaF92" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodPaE91" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodSluttPoengYpt" type="xsd:double"/>
+      <xsd:element minOccurs="0" name="avdodUforegradForDod" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodSkadetidspunktYrkesskade" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="avdodAntattInntektVedSkadetidspunkt" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodFremtidigPoengAar" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodSpt" type="xsd:double"/>
+      <xsd:element minOccurs="0" name="avdodOpt" type="xsd:double"/>
+      <xsd:element minOccurs="0" name="avdodFlykting" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodInntektVedDod" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodInntektSisteArForDod" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodUngUforEllerDodFodtEtter1940" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodUngUforEllerDodFodtFor1941" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodUforegradVedYrkesskade" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodFaktisktePoengAar" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="avdodSluttPoengtallSum" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="avdodFremtidigPensjonspoeng" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

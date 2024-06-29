@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="GBOForetaFolketrygdberegnetAfpRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="virkningFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="afpOrdningKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tpNummer" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="inntektMndForUttak"
+				type="xsd:long">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="inntektArForUttak"
+				type="xsd:long">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallArUtland"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sivilstandKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="epsMottarYtelse"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="epsOver2G"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="epsOver1G"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="epsOver60ar"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tidligereGiftEllerBarn"
+				type="xsd:boolean">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOKravlinjeStatus.xsd"/>
+    <xsd:complexType name="GBOKravlinje">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="kravlinjeId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravlinjeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="relatertFnr" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="kravlinjeStatus" type="bons0:GBOKravlinjeStatus"/>
+      <xsd:element minOccurs="0" name="landKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

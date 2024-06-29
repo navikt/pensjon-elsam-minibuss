@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="Uforegrunnlag">
+		<sequence>
+			<element name="arligInntektMinst1G" nillable="true"
+				type="xsd:boolean" />
+			<element name="ifu" nillable="true" type="xsd:int" />
+			<element name="ufg" nillable="true" type="xsd:int" />
+			<element name="friinntektFomDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="reaktiviseringSlutt" nillable="true"
+				type="xsd:boolean" />
+			<element name="IVentetidOvergTidsbegrUfore" nillable="true"
+				type="xsd:boolean" />
+			<element name="kravDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="yrke" nillable="true" type="string" />
+			<element name="fodselsarYngsteBarn" nillable="true"
+				type="xsd:int" />
+			<element name="garantertTPUngUfor" nillable="true"
+				type="xsd:boolean" />
+			<element name="uforhetSkyldesYrkesskade" nillable="true"
+				type="xsd:boolean" />
+			<element name="frysHvilendePensjSlutt" nillable="true"
+				type="xsd:boolean" />
+			<element name="virk" nillable="true" type="xsd:dateTime" />
+			<element name="bruk" nillable="true" type="xsd:boolean" />
+			<element name="lonnstilskuddSlutt" nillable="true"
+				type="xsd:boolean" />
+			<element name="forlengelseFrysSlutt" nillable="true"
+				type="xsd:boolean" />
+			<element name="reaktiviseringStart" nillable="true"
+				type="xsd:boolean" />
+			<element name="unntakVentetid12_12" nillable="true"
+				type="xsd:boolean" />
+			<element name="uforegrunnlagId" nillable="true"
+				type="xsd:long" />
+			<element name="frysHvilendePensjStart" nillable="true"
+				type="xsd:boolean" />
+			<element name="forhoyelseUtenNyttUft" nillable="true"
+				type="xsd:boolean" />
+			<element name="lonnstilskuddStart" nillable="true"
+				type="xsd:boolean" />
+			<element name="forlengelseFrysStart" nillable="true"
+				type="xsd:boolean" />
+			<element name="altUftUngUfor" nillable="true"
+				type="xsd:dateTime" />
+			<element name="grunnlagKilde" nillable="true" type="string" />
+			<element name="utdanning" nillable="true" type="string" />
+			<element name="uft" nillable="true" type="xsd:dateTime" />
+			<element name="ungUfor" nillable="true" type="xsd:boolean" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

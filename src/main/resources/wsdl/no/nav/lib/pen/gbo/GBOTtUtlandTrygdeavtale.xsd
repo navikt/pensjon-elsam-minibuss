@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOMerknad.xsd"></xsd:include>
+	<xsd:complexType name="GBOTtUtlandTrygdeavtale">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="ttUtlandTrygdeavtaleId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="avtalelandKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="framtidigTrygdetid"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="framtidigTrygdetidRedusert"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="merknadListe"
+				type="bons0:GBOMerknad" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="proRataNevner"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="proRataTeller"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdetidAnvendtAr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdetidAnvendtMnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdetidFaktiskMnd"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

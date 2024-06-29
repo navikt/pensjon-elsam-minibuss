@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="MerknadListe.xsd"></include>
+	<complexType name="TtUtlandTrygdeavtale">
+		<sequence>
+			<element name="avtaleland" nillable="true" type="string" />
+			<element name="ftt" nillable="true" type="xsd:int" />
+			<element name="ftt_redusert" nillable="true"
+				type="xsd:boolean" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="pro_rata_nevner" nillable="true"
+				type="xsd:int" />
+			<element name="pro_rata_teller" nillable="true"
+				type="xsd:int" />
+			<element name="tt_anv_ar" nillable="true" type="xsd:int" />
+			<element name="tt_anv_mnd" nillable="true" type="xsd:int" />
+			<element name="tt_fa_mnd" nillable="true" type="xsd:int" />
+			<element name="ttUtlandTrygdeavtaleId" nillable="true"
+				type="xsd:long" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

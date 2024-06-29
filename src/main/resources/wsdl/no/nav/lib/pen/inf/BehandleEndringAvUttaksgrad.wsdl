@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="BehandleEndringAvUttaksgrad" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleEndringAvUttaksgrad" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleEndringAvUttaksgrad" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleEndringAvUttaksgrad">
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBehandleEndringAvUttaksgradRequest.xsd"/>
+      <xsd:element name="behandleEndringAvUttaksgrad">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="behandleEndringAvUttaksgradRequest" nillable="true" type="bons1:GBOBehandleEndringAvUttaksgradRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="behandleEndringAvUttaksgradRequestMsg">
+    <wsdl:part element="tns:behandleEndringAvUttaksgrad" name="behandleEndringAvUttaksgradParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="BehandleEndringAvUttaksgrad">
+    <wsdl:operation name="behandleEndringAvUttaksgrad">
+      <wsdl:input message="tns:behandleEndringAvUttaksgradRequestMsg" name="behandleEndringAvUttaksgradRequest"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOAutobrev">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="autobrevId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="internBatchbrevKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="brevMottaker"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="brevMottakerTypeKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

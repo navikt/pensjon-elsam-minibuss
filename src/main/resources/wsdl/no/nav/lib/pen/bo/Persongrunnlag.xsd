@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Trygdetid.xsd" />
+	<include schemaLocation="Barnekull.xsd" />
+	<include schemaLocation="AFPEOGrunnlag.xsd" />
+	<include schemaLocation="GenerellHistorikk.xsd" />
+	<include schemaLocation="OpptjeningsgrunnlagListe.xsd" />
+	<include schemaLocation="Trygdeavtaledetaljer.xsd" />
+	<include schemaLocation="InngangOgEksportGrunnlag.xsd" />
+	<include schemaLocation="InstOpphFasteUtgifterperiodeListe.xsd" />
+	<include schemaLocation="TrygdetidsgrunnlagListe.xsd" />
+	<include schemaLocation="PenPerson.xsd" />
+	<include schemaLocation="Yrkesskadegrunnlag.xsd" />
+	<include schemaLocation="Uforehistorikk.xsd" />
+	<include schemaLocation="UtenlandsoppholdListe.xsd" />
+	<include schemaLocation="Uforegrunnlag.xsd" />
+	<include schemaLocation="PersonDetaljListe.xsd" />
+	<include schemaLocation="InstOpphReferanseListe.xsd" />
+	<include schemaLocation="Trygdeavtale.xsd" />
+	<include schemaLocation="Pid.xsd" />
+	<include schemaLocation="OmsorgOverfGrunnlagListe.xsd" />
+	<include schemaLocation="InntektsgrunnlagListe.xsd" />
+	<include schemaLocation="OmsorgGodskrGrunnlagListe.xsd" />
+	<include schemaLocation="InstOpphReduksjonsperiodeListe.xsd" />
+	<include schemaLocation="Afphistorikk.xsd" />
+	<include schemaLocation="VernepliktsarListe.xsd" />
+	
+	<complexType name="Persongrunnlag">
+		<sequence>
+			<element name="vernepliktsarListe" nillable="true"
+				type="bons0:VernepliktsarListe" />
+			<element name="hentetInnt" nillable="true"
+				type="xsd:boolean" />
+			<element name="medlemIFolketrygdenSiste3Ar" nillable="true"
+				type="xsd:boolean" />
+			<element name="afpHistorikk" nillable="true"
+				type="bons0:Afphistorikk" />
+			<element name="persongrunnlagId" nillable="true"
+				type="xsd:long" />
+			<element name="vedtaksdatoUDI" nillable="true"
+				type="xsd:dateTime" />
+			<element name="instOpphReduksjonsperiodeListe"
+				nillable="true" type="bons0:InstOpphReduksjonsperiodeListe" />
+			<element name="skiltesDelAvAvdodesTP" nillable="true"
+				type="xsd:int" />
+			<element name="omsorgGodskrGrunnlagListe" nillable="true"
+				type="bons0:OmsorgGodskrGrunnlagListe" />
+			<element name="barnekull" nillable="true"
+				type="bons0:Barnekull" />
+			<element name="hentetTT" nillable="true" type="xsd:boolean" />
+			<element name="over60ArKanIkkeForsorgesSelv" nillable="true"
+				type="xsd:boolean" />
+			<element name="inntektsgrunnlagListe" nillable="true"
+				type="bons0:InntektsgrunnlagListe" />
+			<element name="omsorgOverfGrunnlagListe" nillable="true"
+				type="bons0:OmsorgOverfGrunnlagListe" />
+			<element name="fodselsnummer" nillable="true"
+				type="bons0:Pid" />
+			<element name="trygdeavtale" nillable="true"
+				type="bons0:Trygdeavtale" />
+			<element name="instOpphReferanseListe" nillable="true"
+				type="bons0:InstOpphReferanseListe" />
+			<element name="personDetaljListe" nillable="true"
+				type="bons0:PersonDetaljListe" />
+			<element name="trygdetid" nillable="true"
+				type="bons0:Trygdetid" />
+			<element name="hentetArbeid" nillable="true"
+				type="xsd:boolean" />
+			<element name="uforegrunnlag" nillable="true"
+				type="bons0:Uforegrunnlag" />
+			<element name="utenlandsoppholdListe" nillable="true"
+				type="bons0:UtenlandsoppholdListe" />
+			<element name="dodAvYrkesskade" nillable="true"
+				type="xsd:boolean" />
+			<element name="fastsattTrygdetid" nillable="true"
+				type="xsd:boolean" />
+			<element name="hentetInst" nillable="true"
+				type="xsd:boolean" />
+			<element name="antallArUtland" nillable="true"
+				type="xsd:int" />
+			<element name="statsborgerskap" nillable="true"
+				type="string" />
+			<element name="uforehistorikk" nillable="true"
+				type="bons0:Uforehistorikk" />
+			<element name="yrkesskadegrunnlag" nillable="true"
+				type="bons0:Yrkesskadegrunnlag" />
+			<element name="dodsdato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="overkompUtl" nillable="true"
+				type="xsd:boolean" />
+			<element name="hentetPopp" nillable="true"
+				type="xsd:boolean" />
+			<element name="arligPGIMinst1G" nillable="true"
+				type="xsd:boolean" />
+			<element name="flyktning" nillable="true"
+				type="xsd:boolean" />
+			<element name="penPerson" nillable="true"
+				type="bons0:PenPerson" />
+			<element name="trygdetidsgrunnlagListe" nillable="true"
+				type="bons0:TrygdetidsgrunnlagListe" />
+			<element name="artikkel10" nillable="true"
+				type="xsd:boolean" />
+			<element name="fodselsdato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="instOpphFasteUtgifterperiodeListe"
+				nillable="true" type="bons0:InstOpphFasteUtgifterperiodeListe" />
+			<element name="inngangOgEksportGrunnlag" nillable="true"
+				type="bons0:InngangOgEksportGrunnlag" />
+			<element name="trygdeavtaledetaljer" nillable="true"
+				type="bons0:Trygdeavtaledetaljer" />
+			<element name="opptjeningsgrunnlagListe" nillable="true"
+				type="bons0:OpptjeningsgrunnlagListe" />
+			<element name="sistMedlITrygden" nillable="true"
+				type="xsd:dateTime" />
+			<element name="generellHistorikk" nillable="true"
+				type="bons0:GenerellHistorikk" />
+			<element name="bostedsland" nillable="true" type="string" />
+			<element minOccurs="0" name="bostedslandBeskrivelse"
+				type="string">
+			</element>
+			<element name="afpeoGrunnlag" nillable="true"
+				type="bons0:AFPEOGrunnlag" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

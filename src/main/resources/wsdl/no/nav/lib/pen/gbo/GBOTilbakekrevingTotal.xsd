@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOTilbakekrevingPerAr.xsd" />	<xsd:complexType name="GBOTilbakekrevingTotal">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="tilbakekrevingTotalId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="beregnetFeilutbetaling"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="oppgittFeilutbetaling"
+				type="xsd:int" />			<xsd:element minOccurs="0" name="beregnetSkattOgTrekk"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="oppgittSkattOgTrekk"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="beregnetMotregning"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="oppgittMotregning"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="beregnetSkyldigNetto"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="oppgittSkyldigNetto"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="oppgittSkyldigRenter"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="oppgittSkyldigNettoUtenRenter" type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="renteEtter2217"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="resultatKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="hjemmelKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="tilbakekrevingPerArListe"
+				type="bons1:GBOTilbakekrevingPerAr" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

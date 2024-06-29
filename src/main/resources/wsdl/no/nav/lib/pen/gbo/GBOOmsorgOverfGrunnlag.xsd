@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+  <xsd:complexType name="GBOOmsorgOverfGrunnlag">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="omsorgOverfGrunnlagId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ar" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="overforesTilFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="omsorgspoengKode" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="ServiceDirectiveTPEN104.xsd"/>
+	<include schemaLocation="Pid.xsd"/>
+
+
+
+
+
+	<complexType name="HentKravListeRequest">
+		<sequence>
+			<element name="serviceDirectiveTPEN104" nillable="true" type="bons0:ServiceDirectiveTPEN104"/>
+			<element name="enhetId" nillable="true" type="xsd:string"/>
+			<element name="kravGjelder" nillable="true" type="string"/>
+			<element name="pid" nillable="true" type="bons0:Pid"/>
+			<element name="sakType" nillable="true" type="string"/>
+			<element maxOccurs="unbounded" name="statusListe" nillable="true" type="string"/>
+			<element name="opprettetFom" nillable="true" type="xsd:dateTime"/>
+			<element name="opprettetTom" nillable="true" type="xsd:dateTime"/>
+			<element name="behandlendeEnhetStringId" nillable="true" type="xsd:string"/>
+		</sequence>
+	</complexType>
+</schema>

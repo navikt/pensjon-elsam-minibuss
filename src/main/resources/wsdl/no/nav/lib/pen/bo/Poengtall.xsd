@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="MerknadListe.xsd" />
+	<complexType name="Poengtall">
+		<sequence>
+			<element name="pa_fa_norge" nillable="true" type="xsd:int" />
+			<element name="gv" nillable="true" type="xsd:int" />
+			<element name="bruktIBeregning" nillable="true"
+				type="xsd:boolean" />
+			<element name="pi" nillable="true" type="xsd:int" />
+			<element name="pia" nillable="true" type="xsd:int" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="poengtallType" nillable="true" type="string" />
+			<element name="maksUforegrad" nillable="true"
+				type="xsd:int" />
+			<element name="ar" nillable="true" type="xsd:int" />
+			<element name="pp" nillable="true" type="xsd:double" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

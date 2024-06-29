@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsSkjema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PensjonsSkjema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsSkjema">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsSkjema" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/PensjonsSkjema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravetErIkkeAFPPrivat.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentSkjemaAfpPrivatResponse.xsd"/>
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/bo" schemaLocation="../bo/HentSkjemaAfpPrivatRequest.xsd"/>
+      <xsd:element name="hentSkjemaAfpPrivat">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSkjemaAfpPrivatRequest" nillable="true" type="bons1:HentSkjemaAfpPrivatRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSkjemaAfpPrivatResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSkjemaAfpPrivatResponse" nillable="true" type="bons1:HentSkjemaAfpPrivatResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultKravetErIkkeAFPPrivat_element" nillable="true" type="bons2:FaultKravetErIkkeAFPPrivat"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentSkjemaAfpPrivatRequestMsg">
+    <wsdl:part element="tns:hentSkjemaAfpPrivat" name="hentSkjemaAfpPrivatParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSkjemaAfpPrivatResponseMsg">
+    <wsdl:part element="tns:hentSkjemaAfpPrivatResponse" name="hentSkjemaAfpPrivatResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSkjemaAfpPrivat_faultKravetErIkkeAFPPrivatMsg">
+    <wsdl:part element="tns:FaultKravetErIkkeAFPPrivat_element" name="faultKravetErIkkeAFPPrivat"/>
+  </wsdl:message>
+    <wsdl:portType name="PensjonsSkjema">
+    <wsdl:operation name="hentSkjemaAfpPrivat">
+      <wsdl:input message="tns:hentSkjemaAfpPrivatRequestMsg" name="hentSkjemaAfpPrivatRequest"/>
+      <wsdl:output message="tns:hentSkjemaAfpPrivatResponseMsg" name="hentSkjemaAfpPrivatResponse"/>
+            <wsdl:fault message="tns:hentSkjemaAfpPrivat_faultKravetErIkkeAFPPrivatMsg" name="faultKravetErIkkeAFPPrivat"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

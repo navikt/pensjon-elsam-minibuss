@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOMerknad.xsd"></xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOTtUtlandTrygdeavtale.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOTrygdetidKonvensjon.xsd" />
+	<xsd:include schemaLocation="GBOTrygdetidEOS.xsd" />	<xsd:complexType name="GBOTrygdetid">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="trygdetidId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidKonvensjon"
+				type="bons1:GBOTrygdetidKonvensjon" />
+			<xsd:element minOccurs="0" name="trygdetidEOS"
+				type="bons1:GBOTrygdetidEOS" />
+			<xsd:element minOccurs="0" name="framtidigTrygdetid"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="framtidigTrygdetidRedusert"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="trygdetidEtterUFT"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidEtterDod"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidOverfort"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidGaranti"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetid"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidFaktiskeMnd"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetid67til70"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidEtter66"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="trygdetidFor67"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="opptjeningsperiode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="ttUtlandTrygdeavtaleListe"
+				type="bons1:GBOTtUtlandTrygdeavtale" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="merknadListe"
+				type="bons1:GBOMerknad" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

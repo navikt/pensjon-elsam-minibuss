@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="FramtidigPensjonspoengtall.xsd" />
+	<include schemaLocation="MerknadListe.xsd" />
+	<include schemaLocation="PoengtallListe.xsd" />
+	<complexType name="Poengrekke">
+		<sequence>
+			<element name="poengtallListe" nillable="true"
+				type="bons0:PoengtallListe" />
+			<element name="pa_eos_f92" nillable="true" type="xsd:int" />
+			<element name="pa_eos_e91" nillable="true" type="xsd:int" />
+			<element name="pa_nordisk_framt_netto" nillable="true"
+				type="xsd:int" />
+			<element name="tpiFaktor" nillable="true" type="xsd:double" />
+			<element name="siste_fpp_aar_norden" nillable="true"
+				type="xsd:int" />
+			<element name="siste_fpp_aar_eos" nillable="true"
+				type="xsd:int" />
+			<element name="pa_f92" nillable="true" type="xsd:int" />
+			<element name="pa" nillable="true" type="xsd:int" />
+			<element name="paa" nillable="true" type="xsd:double" />
+			<element name="pa_e91" nillable="true" type="xsd:int" />
+			<element name="pa_no" nillable="true" type="xsd:int" />
+			<element name="poengrekkeId" nillable="true"
+				type="xsd:long" />
+			<element name="tpi" nillable="true" type="xsd:int" />
+			<element name="pa_nordisk_framt_brutto" nillable="true"
+				type="xsd:int" />
+			<element name="pa_fa_norge" nillable="true" type="xsd:int" />
+			<element name="siste_fpp_aar" nillable="true"
+				type="xsd:int" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="fpp" nillable="true"
+				type="bons0:FramtidigPensjonspoengtall" />
+			<element name="fppOmregnet" nillable="true"
+				type="bons0:FramtidigPensjonspoengtall" />
+			<element name="fpp_eos_snitt" nillable="true"
+				type="xsd:double" />
+			<element name="pa_eos_pro_rata" nillable="true"
+				type="xsd:int" />
+			<element name="pa_eos_teoretisk" nillable="true"
+				type="xsd:int" />
+			<element name="pa_fa_norden" nillable="true" type="xsd:int" />
+			<element name="pa_pro_rata_nevner" nillable="true"
+				type="xsd:int" />
+			<element name="pa_pro_rata_teller" nillable="true"
+				type="xsd:int" />
+			<element name="fpa" nillable="true" type="xsd:int" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

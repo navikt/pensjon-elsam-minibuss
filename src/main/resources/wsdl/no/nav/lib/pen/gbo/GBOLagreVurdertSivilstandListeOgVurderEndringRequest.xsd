@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOPersongrunnlagListe.xsd"></xsd:include>
+	<xsd:complexType
+		name="GBOLagreVurdertSivilstandListeOgVurderEndringRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="penPersonId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="relevantDato"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kravId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="persongrunnlagListe"
+				type="bons0:GBOPersongrunnlagListe">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

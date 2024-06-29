@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOTilbakekrevingPerMnd.xsd"/>
+    <xsd:complexType name="GBOTilbakekrevingPerAr">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="tilbakekrevingPerArId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ar" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="utbetaltBrutto" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="beregnetBrutto" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="potensiellFeilutbetaling" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="potensiellTilbakekreving" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="beregnetMotregning" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="resultatKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="bruk" type="xsd:boolean"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="tilbakekrevingPerMndListe" type="bons1:GBOTilbakekrevingPerMnd"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons0:GBOEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

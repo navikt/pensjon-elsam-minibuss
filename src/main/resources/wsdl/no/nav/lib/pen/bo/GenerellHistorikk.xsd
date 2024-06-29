@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="VentetilleggGrunnlag.xsd" />
+	<complexType name="GenerellHistorikk">
+		<sequence>
+			<element name="fpp_eos" nillable="true" type="xsd:double" />
+			<element name="fravik_19_3" nillable="true" type="string" />
+			<element name="generellHistorikkId" nillable="true"
+				type="xsd:long" />
+			<element name="ventetilleggGrunnlag" nillable="true"
+				type="bons0:VentetilleggGrunnlag" />
+			<element name="poengtillegg" nillable="true" type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

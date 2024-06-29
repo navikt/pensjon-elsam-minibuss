@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Pid.xsd" />
+	<complexType name="BeregningSammendragAvdod">
+		<sequence>
+			<element name="avdodFaktiskePoengAar" nillable="true"
+				type="xsd:int" />
+			<element name="avdodFremtidigPoengAr" nillable="true"
+				type="xsd:int" />
+			<element name="avdodUngUforEllerDodFodtEtter1940"
+				nillable="true" type="xsd:boolean" />
+			<element name="avdodDodsfallSkyldesYrkesskade"
+				nillable="true" type="xsd:boolean" />
+			<element name="avdodDodsDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="avdodSluttPoengYpt" nillable="true"
+				type="xsd:double" />
+			<element name="avdodAntattInntektVedSkadetidspunkt"
+				nillable="true" type="xsd:int" />
+			<element name="avdodSpt" nillable="true" type="xsd:double" />
+			<element name="avdodSkadetidspunktYrkesskade"
+				nillable="true" type="xsd:dateTime" />
+			<element name="avdodAntallPoengAar" nillable="true"
+				type="xsd:int" />
+			<element name="avdodInntektSisteArForDod" nillable="true"
+				type="xsd:int" />
+			<element name="avdodUngUforEllerDodFodtFor1941"
+				nillable="true" type="xsd:boolean" />
+			<element name="avdodOpt" nillable="true" type="xsd:double" />
+			<element name="avdodFlyktning" nillable="true"
+				type="xsd:boolean" />
+			<element name="avdodUforegradForDod" nillable="true"
+				type="xsd:int" />
+			<element name="avdodPaF92" nillable="true" type="xsd:int" />
+			<element name="avdodPaE91" nillable="true" type="xsd:int" />
+			<element name="avdodFremtidigPensjonspoeng" nillable="true"
+				type="xsd:double" />
+			<element name="avdodFnr" nillable="true" type="bons0:Pid" />
+			<element name="avdodUforegradVedYrkesskade" nillable="true"
+				type="xsd:int" />
+			<element name="avdodTt" nillable="true" type="xsd:int" />
+			<element name="avdodInntektVedDod" nillable="true"
+				type="xsd:boolean" />
+			<element name="avdodBoddIUtland" nillable="true"
+				type="xsd:boolean" />
+			<element name="avdodAntallBarnOppdrasSammen" nillable="true"
+				type="xsd:int" />
+			<element name="avdodGrunnbelop" nillable="true"
+				type="xsd:int" />
+			<element name="avdodVirkningsdato" nillable="true"
+				type="xsd:dateTime" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

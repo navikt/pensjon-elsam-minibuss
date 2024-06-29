@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOTapendeberegningsmetode.xsd" />
+	<xsd:include schemaLocation="GBOBelopsendring.xsd" />
+	<xsd:include schemaLocation="GBOSluttpoengtall.xsd" />
+	<xsd:include schemaLocation="GBOMerknad.xsd" />
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd">
+	</xsd:import>
+	<xsd:complexType name="GBOBeregningsinformasjon">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="beregningsinformasjonId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="resultatType"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="flyktning"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnpensjonAvkortet"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdetid"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tpInnvilget"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="uttaksgrad"
+				type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="sivilstand"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="epsOver2G"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="epsMottarPensjon"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnbelop"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="basisgp"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="basistp"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="basispt"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="forholdstall_uttak"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="forholdstall_67"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="forholdstallMPNUttak"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="forholdstallMPN67"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mpnUttakFullTrygdetid"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mpnUttakAnvTrygdetid"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="gpRestpensjon"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="gp" type="xsd:string" />
+			<xsd:element minOccurs="0" name="tpRestpensjon"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="tp" type="xsd:string" />
+			<xsd:element minOccurs="0" name="ptRestpensjon"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="pt" type="xsd:string" />
+
+			<xsd:element minOccurs="0" name="mpn" type="xsd:boolean" />
+			<xsd:element minOccurs="0"
+				name="minstenivatilleggPensjonistpar" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkFOM"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkTOM"
+				type="xsd:string">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="beregningsMetode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="gpAvkortingsArsakListe" type="bons1:GBOMerknad">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnlagsrolle"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mottarMinstePensjonsniva"
+				type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="tt_anv"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="spt"
+				type="bons1:GBOSluttpoengtall">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="opt"
+				type="bons1:GBOSluttpoengtall">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallBarnSoktBarnetillegg"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallFellesbarn"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallSerkullsbarn"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="basisGpForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="basispensjon"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="belopRedusert"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="belopOkt"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="hjemmelsendring"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="belopsendringListe" type="bons1:GBOBelopsendring">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="trygdetidAnvendt"
+				type="xsd:boolean">
+			</xsd:element>
+
+			<xsd:element minOccurs="0" name="ensligPensjonInstOpph"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fremskrivningsfaktor"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="gjennomsnittligAfpUttaksgrad" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="gpForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="instOpphAnvendt"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="paE91" type="xsd:string" />
+			<xsd:element minOccurs="0" name="paF92" type="xsd:string" />
+			<xsd:element minOccurs="0" name="prorata_nevner_mnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="prorata_teller_mnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="restpensjon"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="restpensjonForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="restpensjonGpForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="restpensjonPtForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="restpensjonTpForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="rettPaGjenlevenderett"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ypt"
+				type="bons1:GBOSluttpoengtall">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="gjenlevenderettAnvendt"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="tapendeBeregningsmetodeListe"
+				type="bons1:GBOTapendeberegningsmetode">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tpForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tt_eos_anv_ar"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tt_eos_pro_rata_mnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tt_fa_mdn"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="ttBeregnetForGrunnlagsrolle" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ungUfor"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ungUforAnvendt"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="utbetaltForrige"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="yrkesskadeAnvendt"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="yrkesskadegrad"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="yrkesskadeRegistrert"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="avdodesTilleggspensjonBrukt" type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="forholdstall"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd" />
+	<complexType name="Utenlandsopphold">
+		<sequence>
+			<element name="arbeidet" nillable="true" type="xsd:boolean" />
+			<element name="bodd" nillable="true" type="xsd:boolean" />
+			<element name="landkode" nillable="true" type="string" />
+			<element minOccurs="0" name="landBeskrivelse"
+				type="string">
+			</element>
+			<element name="utenlandsoppholdId" nillable="true"
+				type="xsd:long" />
+			<element name="fom" nillable="true" type="xsd:dateTime" />
+			<element name="tom" nillable="true" type="xsd:dateTime" />
+			<element name="pensjonsordning" nillable="true"
+				type="xsd:string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

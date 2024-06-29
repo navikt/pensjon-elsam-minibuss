@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Sluttpoengtall.xsd" />
+	<include schemaLocation="PenPerson.xsd" />
+	<complexType name="BeregningNokkelinfo">
+		<sequence>
+			<element name="beregningsMetode" nillable="true"
+				type="string" />
+			<element name="penPerson" nillable="true"
+				type="bons0:PenPerson" />
+			<element name="ypt" nillable="true"
+				type="bons0:Sluttpoengtall" />
+			<element name="grunnlagsrolle" nillable="true"
+				type="string" />
+			<element name="tt_anv" nillable="true" type="xsd:int" />
+			<element name="anvendtIBeregningen" nillable="true"
+				type="xsd:boolean" />
+			<element name="spt" nillable="true"
+				type="bons0:Sluttpoengtall" />
+			<element name="beregningNokkelinfoId" nillable="true"
+				type="xsd:long" />
+			<element name="opt" nillable="true"
+				type="bons0:Sluttpoengtall" />
+			<element name="beregningId" nillable="true" type="xsd:long" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

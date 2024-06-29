@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOPeriodeArsak.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOBeregningsInformasjon.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOPensjonUnderUtbetaling.xsd" />	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOMerknad.xsd" />
+	<xsd:complexType name="GBOBeregningsResultat">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="beregningsResultatId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="benyttetSivilstand"
+				type="xsd:string">
+			</xsd:element>			<xsd:element minOccurs="0" name="beregningsinformasjonAvdod"
+				type="bons0:GBOBeregningsinformasjon">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="beregningInformasjonKapittel19"
+				type="bons0:GBOBeregningsinformasjon">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="brukersSivilstand"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="gjennomsnittligUttaksgradSisteAr" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kravId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pensjonUnderUtbetaling"
+				type="bons0:GBOPensjonUnderUtbetaling">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sakId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="uttaksgrad"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkTom"
+				type="xsd:string">
+			</xsd:element>			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="merknadListe" type="bons0:GBOMerknad">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="periodeArsakListe"
+				type="bons0:GBOPeriodeArsak" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

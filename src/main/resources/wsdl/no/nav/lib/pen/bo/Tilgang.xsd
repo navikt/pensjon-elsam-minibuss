@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:Q1="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="PenOrgEnhet.xsd" />
+	<complexType name="Tilgang">
+		<sequence>
+			<element name="tilgangGittTil" nillable="true"
+				type="Q1:PenOrgEnhet" />
+			<element name="tilgangId" nillable="true" type="xsd:long" />
+			<element name="gyldigFomDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="tilgangType" nillable="true" type="string" />
+			<element name="gyldigTomDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="tilgangArsak" nillable="true" type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="Q1:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

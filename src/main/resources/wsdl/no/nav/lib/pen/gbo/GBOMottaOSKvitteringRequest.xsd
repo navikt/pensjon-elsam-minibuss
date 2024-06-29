@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-oko/no/nav/lib/oko/gbo">
+	<xsd:import schemaLocation="../../oko/gbo/GBOOppdragsmelding.xsd"
+		namespace="http://nav-lib-oko/no/nav/lib/oko/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOMottaOSKvitteringRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vedtaksId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="osKvittering"
+				type="bons0:GBOOppdragsmelding">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:complexType name="GBOBeregningSammendragBruker">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="brukerTt" type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerPaF92"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerPaE91"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerOpt"
+				type="xsd:double" />
+			<xsd:element minOccurs="0" name="brukerSpt"
+				type="xsd:double" />
+			<xsd:element minOccurs="0" name="brukerPoengtillegg"
+				type="xsd:double" />
+			<xsd:element minOccurs="0" name="brukerVentetilleggPst"
+				type="xsd:double" />
+			<xsd:element minOccurs="0" name="brukerFlyktning"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerSivilstandKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="brukerBorMedEPSKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0"
+				name="brukerEktefelleMottarPensjon" type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerFpi" type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerFribelop"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerGrunnbelop"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerUngUforFodtEtter1940"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerUngUforFodtFor1941"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerVirkningsdato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0"
+				name="brukerFremtidigPensjonspoeng" type="xsd:double" />
+			<xsd:element minOccurs="0" name="brukerAfpOrdningKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="brukerTpi" type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerTpiFaktor"
+				type="xsd:double" />
+			<xsd:element minOccurs="0"
+				name="brukerAntallBarnOppdrasSammen" type="xsd:int" />
+			<xsd:element minOccurs="0"
+				name="brukerBarnEllerForelderFlykting" type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerEgenUforepensjon"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerFremtidigPoengAr"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerUforegrad"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerInntektForUfore"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerInntektsGrense"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerFriInntekt"
+				type="xsd:int" />
+			<xsd:element minOccurs="0"
+				name="brukerForventetInntektPrAar" type="xsd:int" />
+			<xsd:element minOccurs="0"
+				name="brukerUforegradVedYrkesskade" type="xsd:int" />
+			<xsd:element minOccurs="0"
+				name="brukerAntattInntektVedSkadetidspunkt" type="xsd:int" />
+			<xsd:element minOccurs="0"
+				name="brukerSkadetidspunktYrkesskade" type="xsd:string" />
+			<xsd:element minOccurs="0" name="brukerOmsorgForAvdodesBarn"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="brukerAntallPoengAr"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="brukerSluttPoengYpt"
+				type="xsd:double" />
+			<xsd:element minOccurs="0"
+				name="brukerEktefelleInntektOver2g" type="xsd:boolean" />
+			<xsd:element minOccurs="0"
+				name="brukerInntektsGrenseForFriinntektsdato" type="xsd:int">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

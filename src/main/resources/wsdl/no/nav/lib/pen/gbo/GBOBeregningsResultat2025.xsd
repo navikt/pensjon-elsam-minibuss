@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOPensjonUnderUtbetaling.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOBeregningsinformasjon2025.xsd" />
+	<xsd:complexType name="GBOBeregningsResultat2025">
+		<xsd:sequence>
+			<xsd:element minOccurs="0"
+				name="beregningsinformasjonKapittel20"
+				type="bons0:GBOBeregningsinformasjon2025">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkTom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pensjonUnderUtbetaling"
+				type="bons0:GBOPensjonUnderUtbetaling">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="benyttetSivilstand"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

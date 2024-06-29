@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+    <include schemaLocation="Garantitillegg_Art_27.xsd"/>
+	<complexType name="Garantitillegg_Art_27Liste">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="Garantitillegg_Art_27" nillable="true" type="bons0:Garantitillegg_Art_27"/>
+		</sequence>
+	</complexType>
+</schema>

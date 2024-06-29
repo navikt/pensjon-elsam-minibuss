@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOVilkarsprovInformasjon2025.xsd"></xsd:include>
+	<xsd:complexType name="GBOVilkarsprovInformasjon2016">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vilkarsprovInformasjon2025"
+				type="bons0:GBOVilkarsprovInformasjon2025">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vektetPensjonsniva"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

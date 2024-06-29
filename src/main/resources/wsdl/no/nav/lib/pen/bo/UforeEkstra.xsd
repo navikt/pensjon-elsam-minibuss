@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="BeregningUforeperiode.xsd" />
+	<complexType name="UforeEkstra">
+		<sequence>
+			<element name="tak" nillable="true" type="xsd:int" />
+			<element name="inntektKode2" nillable="true" type="string" />
+			<element name="inntektKode1" nillable="true" type="string" />
+			<element name="fppGarantiKode" nillable="true"
+				type="string" />
+			<element name="redusertAntFppAr" nillable="true"
+				type="xsd:int" />
+			<element name="fpp" nillable="true" type="xsd:double" />
+			<element name="fppGaranti" nillable="true"
+				type="xsd:double" />
+			<element name="uforeEkstraId" nillable="true"
+				type="xsd:long" />
+			<element name="berUforeper" nillable="true"
+				type="bons0:BeregningUforeperiode" />
+			<element name="berUforeperYSK" nillable="true"
+				type="bons0:BeregningUforeperiode" />
+			<element name="inntektsgrenseForFriinnteksdato"
+				nillable="true" type="xsd:int" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

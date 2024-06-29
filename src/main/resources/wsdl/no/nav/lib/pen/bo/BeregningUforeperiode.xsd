@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="BeregningUforeperiode">
+		<sequence>
+			<element name="uforegrad" nillable="true" type="xsd:int" />
+			<element name="uforeperiodeId" nillable="true"
+				type="xsd:long" />
+			<element name="uforetidspunkt" nillable="true"
+				type="xsd:dateTime" />
+			<element name="virk" nillable="true" type="xsd:dateTime" />
+			<element name="uforetype" nillable="true" type="string" />
+			<element name="fppGarantiKode" nillable="true"
+				type="string" />
+			<element name="redusertAntFppAr" nillable="true"
+				type="xsd:int" />
+			<element name="fpp" nillable="true" type="xsd:double" />
+			<element name="uforetidspunktTom" nillable="true"
+				type="xsd:dateTime" />
+			<element name="fppGaranti" nillable="true"
+				type="xsd:double" />
+			<element name="fpp_omregnet" nillable="true"
+				type="xsd:double" />
+			<element name="opt" nillable="true" type="xsd:double" />
+			<element name="opt_pa_e91" nillable="true" type="xsd:int" />
+			<element name="opt_pa_f92" nillable="true" type="xsd:int" />
+			<element name="paa" nillable="true" type="xsd:double" />
+			<element name="spt" nillable="true" type="xsd:double" />
+			<element name="spt_pa_e91" nillable="true" type="xsd:int" />
+			<element name="spt_pa_f92" nillable="true" type="xsd:int" />
+			<element name="ufgFom" nillable="true" type="xsd:dateTime" />
+			<element name="ufgTom" nillable="true" type="xsd:dateTime" />
+			<element name="ypt" nillable="true" type="xsd:double" />
+			<element name="ypt_pa_e91" nillable="true" type="xsd:int" />
+			<element name="ypt_pa_f92" nillable="true" type="xsd:int" />
+			<element name="spt_eos" nillable="true" type="xsd:double" />
+			<element name="spt_pa_e91_eos" nillable="true"
+				type="xsd:int" />
+			<element name="spt_pa_f92_eos" nillable="true"
+				type="xsd:int" />
+			<element name="fodselsArYngsteBarn" nillable="true"
+				type="xsd:int" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

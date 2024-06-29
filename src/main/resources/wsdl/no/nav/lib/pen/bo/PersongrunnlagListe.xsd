@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+    <include schemaLocation="Persongrunnlag.xsd"/>
+	<complexType name="PersongrunnlagListe">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="Persongrunnlag" nillable="true" type="bons0:Persongrunnlag"/>
+		</sequence>
+	</complexType>
+</schema>

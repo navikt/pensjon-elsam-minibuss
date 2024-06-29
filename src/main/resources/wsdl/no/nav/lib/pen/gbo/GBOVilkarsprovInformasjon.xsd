@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:include schemaLocation="GBOJustertMinstePensjonsniva.xsd"></xsd:include>
+	<xsd:include
+		schemaLocation="GBOFremskrevetPensjonUnderUtbetaling.xsd">
+	</xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOPensjonUnderUtbetaling.xsd"></xsd:include>
+	<xsd:complexType name="GBOVilkarsprovInformasjon">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vilkarsprovInformasjonId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ektefelleInntektOver2g"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ektefelleMottarPensjon"
+				type="xsd:boolean">
+			</xsd:element>			<xsd:element minOccurs="0" name="flyktning"
+				type="xsd:boolean">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fullPensjonVed67"
+				type="bons0:GBOFremskrevetPensjonUnderUtbetaling">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mpn67"
+				type="bons0:GBOJustertMinstePensjonsniva">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pensjonVedUttak"
+				type="bons0:GBOPensjonUnderUtbetaling">
+			</xsd:element>			<xsd:element minOccurs="0" name="samletPensjonVed67PerAr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

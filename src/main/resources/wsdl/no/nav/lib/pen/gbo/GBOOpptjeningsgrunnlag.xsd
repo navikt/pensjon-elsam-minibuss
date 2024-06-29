@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:complexType name="GBOOpptjeningsgrunnlag">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="opptjeningsgrunnlagId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="opptjeningType" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ar" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="pi" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="pia" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="maksUforegrad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="bruk" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="grunnlagKilde" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="registerKilde" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="registerOpprettetAv" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="registerEndretAv" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons0:GBOEndringsInfo"/>
+      <xsd:element minOccurs="0" name="pp" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

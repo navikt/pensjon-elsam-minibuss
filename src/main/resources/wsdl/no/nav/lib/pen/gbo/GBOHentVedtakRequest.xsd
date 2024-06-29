@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOTjenestedirektiv.xsd"></xsd:include>
+	<xsd:complexType name="GBOHentVedtakRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vedtakId"
+				type="xsd:string" />			<xsd:element minOccurs="0" name="tjenestedirektiv"
+				type="bons0:GBOTjenestedirektiv">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

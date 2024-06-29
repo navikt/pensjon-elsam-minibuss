@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/fault"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOStelvioFault.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:complexType name="FaultKanIkkeKontrollereInstOpphold">
+		<xsd:complexContent>
+			<xsd:extension base="bons0:GBOStelvioFault">
+				<xsd:sequence>				</xsd:sequence>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

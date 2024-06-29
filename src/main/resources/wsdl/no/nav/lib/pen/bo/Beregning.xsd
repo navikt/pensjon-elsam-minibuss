@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Trygdetid.xsd" />
+	<include schemaLocation="Mendel.xsd" />
+	<include schemaLocation="Garantitillegg_Art_50Liste.xsd" />
+	<include schemaLocation="Garantitillegg_Art_27Liste.xsd" />
+	<include schemaLocation="UforeEkstra.xsd" />
+	<include schemaLocation="VentetilleggListe.xsd" />
+	<include schemaLocation="SertilleggListe.xsd" />
+	<include schemaLocation="FasteUtgifterTilleggListe.xsd" />
+	<include schemaLocation="Paragraf_8_5_1TilleggListe.xsd" />
+	<include schemaLocation="PenPerson.xsd" />
+	<include schemaLocation="AfpTilleggListe.xsd" />
+	<include schemaLocation="EktefelletilleggListe.xsd" />
+	<include schemaLocation="MerknadListe.xsd" />
+	<include schemaLocation="KrigOgGammelYrkesskade.xsd" />
+	<include schemaLocation="FamilietilleggListe.xsd" />
+	<include schemaLocation="TilleggTilHjelpIHuset.xsd" />
+	<include schemaLocation="BeregningNokkelinfoListe.xsd" />
+	<include schemaLocation="BeregningRelasjonListe.xsd" />
+	<include schemaLocation="GrunnpensjonListe.xsd" />
+	<include schemaLocation="Hjelpeloshetsbidrag.xsd" />
+	<include schemaLocation="BarnetilleggFellesbarnListe.xsd" />
+	<include schemaLocation="TilleggspensjonListe.xsd" />
+	<include schemaLocation="BarnetilleggSerkullsbarnListe.xsd" />
+	<complexType name="Beregning">
+		<sequence>
+			<element name="beregningType" nillable="true" type="string" />
+			<element name="barnetilleggSerkullsbarnListe"
+				nillable="true" type="bons0:BarnetilleggSerkullsbarnListe" />
+			<element name="tilleggspensjonListe" nillable="true"
+				type="bons0:TilleggspensjonListe" />
+			<element name="barnetilleggFellesbarnListe" nillable="true"
+				type="bons0:BarnetilleggFellesbarnListe" />
+			<element name="beregnetFremtidigInntekt" nillable="true"
+				type="xsd:int" />
+			<element name="ufg" nillable="true" type="xsd:int" />
+			<element name="brukOpptjeningFra65I66Aret" nillable="true"
+				type="xsd:boolean" />
+			<element name="ektefelleMottarPensjon" nillable="true"
+				type="xsd:boolean" />
+			<element name="resultatType" nillable="true" type="string" />
+			<element name="hjelpeloshetsbidrag" nillable="true"
+				type="bons0:Hjelpeloshetsbidrag" />
+			<element name="beregningArsak" nillable="true"
+				type="string" />
+			<element name="g" nillable="true" type="xsd:int" />
+			<element name="grunnpensjonListe" nillable="true"
+				type="bons0:GrunnpensjonListe" />
+			<element name="trygdetid" nillable="true"
+				type="bons0:Trygdetid" />
+			<element name="beregningsMetode" nillable="true"
+				type="string" />
+			<element name="ektefelleInntektOver2g" nillable="true"
+				type="xsd:boolean" />
+			<element name="inngarIBeregningListe" nillable="true"
+				type="bons0:BeregningRelasjonListe" />
+			<element name="gradert" nillable="true" type="xsd:boolean" />
+			<element name="netto" nillable="true" type="xsd:int" />
+			<element name="sakId" nillable="true" type="xsd:long" />
+			<element name="redusertPgaInstOpphold" nillable="true"
+				type="xsd:boolean" />
+			<element name="beregningNokkelinfoListe" nillable="true"
+				type="bons0:BeregningNokkelinfoListe" />
+			<element name="tilleggTilHjelpIHuset" nillable="true"
+				type="bons0:TilleggTilHjelpIHuset" />
+			<element name="yug" nillable="true" type="xsd:int" />
+			<element name="familietilleggListe" nillable="true"
+				type="bons0:FamilietilleggListe" />
+			<element name="krigOgGammelYrkesskade" nillable="true"
+				type="bons0:KrigOgGammelYrkesskade" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="ektefelletilleggListe" nillable="true"
+				type="bons0:EktefelletilleggListe" />
+			<element name="friinntekt" nillable="true" type="xsd:int" />
+			<element name="afpTilleggListe" nillable="true"
+				type="bons0:AfpTilleggListe" />
+			<element name="endringArsak" nillable="true" type="string" />
+			<element name="gjelderPerson" nillable="true"
+				type="bons0:PenPerson" />
+			<element name="virkDatoTom" nillable="true"
+				type="xsd:dateTime" />
+			<element name="fribelop" nillable="true" type="xsd:int" />
+			<element name="delberegningListe" nillable="true"
+				type="bons0:BeregningRelasjonListe" />
+			<element name="brutto" nillable="true" type="xsd:int" />
+			<element name="tt_anv" nillable="true" type="xsd:int" />
+			<element name="inntektBruktIAvkorting" nillable="true"
+				type="xsd:double" />
+			<element name="paragraf_8_5_1TilleggListe" nillable="true"
+				type="bons0:Paragraf_8_5_1TilleggListe" />
+			<element name="beregningId" nillable="true" type="xsd:long" />
+			<element name="virkDatoFom" nillable="true"
+				type="xsd:dateTime" />
+			<element name="resultatKilde" nillable="true" type="string" />
+			<element name="afpPensjonsgrad" nillable="true"
+				type="xsd:int" />
+			<element name="fasteutgifterTilleggListe" nillable="true"
+				type="bons0:FasteUtgifterTilleggListe" />
+			<element name="sertilleggListe" nillable="true"
+				type="bons0:SertilleggListe" />
+			<element name="kravId" nillable="true" type="xsd:long" />
+			<element name="minstepensjonType" nillable="true"
+				type="string" />
+			<element name="p67beregning" nillable="true"
+				type="xsd:boolean" />
+			<element name="brukersSivilstand" nillable="true"
+				type="string" />
+			<element name="benyttetSivilstand" nillable="true"
+				type="string" />
+			<element name="ventetilleggListe" nillable="true"
+				type="bons0:VentetilleggListe" />
+			<element name="uforeEkstra" nillable="true"
+				type="bons0:UforeEkstra" />
+			<element name="totalVinner" nillable="true"
+				type="xsd:boolean" />
+			<element name="harKontrollpunkter" nillable="true"
+				type="xsd:boolean" />
+			<element name="garantitillegg_Art_27Liste" nillable="true"
+				type="bons0:Garantitillegg_Art_27Liste" />
+			<element name="garantitillegg_Art_50Liste" nillable="true"
+				type="bons0:Garantitillegg_Art_50Liste" />
+			<element name="mendel" nillable="true" type="bons0:Mendel" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

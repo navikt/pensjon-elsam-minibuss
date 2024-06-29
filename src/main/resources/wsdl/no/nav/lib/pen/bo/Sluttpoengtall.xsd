@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Poengrekke.xsd" />
+	<include schemaLocation="MerknadListe.xsd" />
+	<complexType name="Sluttpoengtall">
+		<sequence>
+			<element name="pt_eos" nillable="true" type="xsd:double" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="pt_a10" nillable="true" type="xsd:double" />
+			<element name="pt" nillable="true" type="xsd:double" />
+			<element name="poengrekke" nillable="true"
+				type="bons0:Poengrekke" />
+			<element name="fpp_grad_eos" nillable="true"
+				type="xsd:double" />
+			<element name="poengtillegg" nillable="true"
+				type="xsd:double" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

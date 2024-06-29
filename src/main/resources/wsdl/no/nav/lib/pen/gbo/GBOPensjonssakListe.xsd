@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:include schemaLocation="GBOPensjonssak.xsd"/>
+    <xsd:complexType name="GBOPensjonssakListe">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="pensjonssakListe" type="bons0:GBOPensjonssak" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

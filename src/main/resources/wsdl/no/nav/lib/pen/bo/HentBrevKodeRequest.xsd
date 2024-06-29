@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="HentBrevKodeRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="kravArsakKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="brevMottakerKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vilkarsvedtakResultatKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sakTypeKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="regelverkKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="utland"
+				type="xsd:boolean">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

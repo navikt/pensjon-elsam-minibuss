@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+
+	<include schemaLocation="Ytelseskomponent.xsd"/>
+	<complexType name="KrigOgGammelYrkesskade">
+		<complexContent>
+			<extension base="bons0:Ytelseskomponent">
+				<sequence>
+					<element name="yg" nillable="true" type="xsd:double"/>
+					<element name="grunnlagForUtbetaling" nillable="true" type="xsd:int"/>
+					<element name="kapitalUtlosning" nillable="true" type="xsd:int"/>
+					<element name="ps" nillable="true" type="xsd:double"/>
+					<element name="pensjonsgrad" nillable="true" type="xsd:int"/>
+					<element name="belopTilUtbet" nillable="true" type="xsd:int"/>
+					<element name="mendelFordeling" nillable="true" type="xsd:int"/>
+				</sequence>
+
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOOmsorgGodskrGrunnlag.xsd"></xsd:include>
+	<xsd:complexType name="GBOOmsorgGodskrGrunnlagListe">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="omsorgGodskrGrunnlagListe"
+				type="bons0:GBOOmsorgGodskrGrunnlag" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

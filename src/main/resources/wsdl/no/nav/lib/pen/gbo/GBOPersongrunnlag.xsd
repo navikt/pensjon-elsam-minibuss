@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOTrygdeavtaledetaljer.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOTrygdetidsgrunnlag.xsd"></xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOInngangOgEksportGrunnlag.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOTrygdeavtale.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOTrygdetid.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOAFPEOGrunnlag.xsd" />
+	<xsd:include schemaLocation="GBOYrkesskadegrunnlag.xsd" />
+	<xsd:include schemaLocation="GBOUforegrunnlag.xsd" />
+	<xsd:include schemaLocation="GBOInntektsgrunnlag.xsd" />
+	<xsd:include schemaLocation="GBOOpptjeningsgrunnlag.xsd" />
+	<xsd:include schemaLocation="GBOBarnekull.xsd" />
+	<xsd:include schemaLocation="GBOVernepliktsAr.xsd" />
+	<xsd:include schemaLocation="GBOPersondetalj.xsd" />
+	<xsd:complexType name="GBOPersongrunnlag">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="persongrunnlagId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="penPersonFnr"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="fodselsdato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="dodsdato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="statsborgerskapKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="flyktning"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="vedtaksdatoUDI"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="persondetaljListe"
+				type="bons0:GBOPersondetalj" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="hentetPopp"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="hentetInnt"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="hentetInst"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="hentetTT"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="hentetArbeid"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="fastsattTrygdetid"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="overkompUtl"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="antallArUtland"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="dodAvYrkesskade"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="artikkel10"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="medlemFolketrygdenSiste3Ar"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="over60KanIkkeForsorgesSelv"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="arligPGIMinst1G"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="skiltesDelAvAvdodesTP"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="vernepliktsArListe"
+				type="bons0:GBOVernepliktsAr" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="barnekull"
+				type="bons0:GBOBarnekull" />
+			<xsd:element minOccurs="0" name="opptjeningsgrunnlagListe"
+				type="bons0:GBOOpptjeningsgrunnlag" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="inntektsgrunnlagListe"
+				type="bons0:GBOInntektsgrunnlag" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="yrekesskadegrunnlag"
+				type="bons0:GBOYrkesskadegrunnlag" />
+			<xsd:element minOccurs="0" name="uforegrunnlag"
+				type="bons0:GBOUforegrunnlag" />
+			<xsd:element minOccurs="0" name="AFPEOGrunnlag"
+				type="bons0:GBOAFPEOGrunnlag" />
+			<xsd:element minOccurs="0" name="trygdetid"
+				type="bons0:GBOTrygdetid" />
+			<xsd:element minOccurs="0" name="trygdeavtaledetaljer"
+				type="bons0:GBOTrygdeavtaledetaljer">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="trygdeavtale"
+				type="bons0:GBOTrygdeavtale" />
+			<xsd:element minOccurs="0" name="inngangOgEksportGrunnlag"
+				type="bons0:GBOInngangOgEksportGrunnlag" />
+			<xsd:element minOccurs="0" name="trygdetidsgrunnlagListe"
+				type="bons0:GBOTrygdetidsgrunnlag" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="bostedsland"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="bostedslandBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="trygdetidsgrunnlagKap20Liste"
+				type="bons0:GBOTrygdetidsgrunnlag" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

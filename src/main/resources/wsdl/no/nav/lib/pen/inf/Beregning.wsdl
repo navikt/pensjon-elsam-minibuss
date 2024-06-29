@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Beregning" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Beregning" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Beregning" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Beregning">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAvslagForLavtTidligUttak.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAvslagForKortTrygdetid.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeregnSammenstotstilfellerResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeregnSammenstotstilfellerRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultGrunnlagLast.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultBeregningsmotorKanIkkeValidereInput.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOForberedBeregningResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOForberedBeregningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeregningsInformasjon.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKanIkkeBeregnes.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravLast.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentBeregningSammendragBrukerRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultForrigeBeregningManueltOverstyrt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultBeregningsmotorValidere.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeregningSammendragBruker.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultIkkeVilkarsprovingMedEntydigeResultater.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultToDodeUkjenteForeldre.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultUtlandOgTrygdetidIkkeFastsatt.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultTrygdetidsgrunnlagForPersonOgKravIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKonsistensenIGrunnlagetErFeil.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultAutomatiskBeregning.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKravUnderBehandling.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentBeregningSammendragAvdodRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeregningSammendragAvdod.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOPersonOpptjeningsgrunnlagListe.xsd"/>
+      <xsd:element name="beregnYtelse_faultAutomatiskBeregning" type="bons2:FaultAutomatiskBeregning"/>
+      <xsd:element name="beregnYtelse_faultBeregningsmotorValidere" type="bons2:FaultBeregningsmotorValidere"/>
+      <xsd:element name="beregnYtelse_faultForrigeBeregningManueltOverstyrt" type="bons2:FaultForrigeBeregningManueltOverstyrt"/>
+      <xsd:element name="hentBeregningSammendragBruker">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeregningSammendragBrukerRequest" nillable="true" type="bons1:GBOHentBeregningSammendragBrukerRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentBeregningSammendragBrukerResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeregningSammendragBrukerResponse" nillable="true" type="bons1:GBOBeregningSammendragBruker"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="beregnYtelse_faultKravLast" type="bons2:FaultKravLast"/>
+      <xsd:element name="beregnYtelse_faultKravUnderBehandling" type="bons2:FaultKravUnderBehandling"/>
+      <xsd:element name="beregnYtelse_faultToDodeUkjenteForeldre" type="bons2:FaultToDodeUkjenteForeldre"/>
+      <xsd:element name="beregnYtelse_faultTrygdetidsgrunnlagForPersonOgKravIdIkkeFunnet" type="bons2:FaultTrygdetidsgrunnlagForPersonOgKravIdIkkeFunnet"/>
+      <xsd:element name="beregnYtelse_faultUtlandOgTrygdetidIkkeFastsatt" type="bons2:FaultUtlandOgTrygdetidIkkeFastsatt"/>
+      <xsd:element name="hentBeregningSammendragAvdod">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeregningSammendragAvdodRequest" nillable="true" type="bons1:GBOHentBeregningSammendragAvdodRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentBeregningSammendragAvdodResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeregningSammendragAvdodResponse" nillable="true" type="bons1:GBOBeregningSammendragAvdod"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentBeregningSammendragBrukerRequestMsg">
+    <wsdl:part element="tns:hentBeregningSammendragBruker" name="hentBeregningSammendragBrukerParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeregningSammendragBrukerResponseMsg">
+    <wsdl:part element="tns:hentBeregningSammendragBrukerResponse" name="hentBeregningSammendragBrukerResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeregningSammendragAvdodRequestMsg">
+    <wsdl:part element="tns:hentBeregningSammendragAvdod" name="hentBeregningSammendragAvdodParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeregningSammendragAvdodResponseMsg">
+    <wsdl:part element="tns:hentBeregningSammendragAvdodResponse" name="hentBeregningSammendragAvdodResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Beregning">
+    <wsdl:operation name="hentBeregningSammendragBruker">
+      <wsdl:input message="tns:hentBeregningSammendragBrukerRequestMsg" name="hentBeregningSammendragBrukerRequest"/>
+      <wsdl:output message="tns:hentBeregningSammendragBrukerResponseMsg" name="hentBeregningSammendragBrukerResponse"/>
+        </wsdl:operation>
+    <wsdl:operation name="hentBeregningSammendragAvdod">
+      <wsdl:input message="tns:hentBeregningSammendragAvdodRequestMsg" name="hentBeregningSammendragAvdodRequest"/>
+      <wsdl:output message="tns:hentBeregningSammendragAvdodResponseMsg" name="hentBeregningSammendragAvdodResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

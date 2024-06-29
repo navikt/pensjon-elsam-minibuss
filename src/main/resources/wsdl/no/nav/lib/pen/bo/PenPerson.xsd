@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="VurdertSivilstandListe.xsd"></include>
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="BeregningListe.xsd"></include>
+	<include schemaLocation="LeveattestHistorikkListe.xsd"></include>
+	<include schemaLocation="Afphistorikk.xsd" />
+	<include schemaLocation="GenerellHistorikk.xsd" />
+	<include schemaLocation="Uforehistorikk.xsd" />
+	<include schemaLocation="Pid.xsd" />
+
+
+
+	<complexType name="PenPerson">
+		<sequence>
+			<element name="fodselsDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="fnr" nillable="true" type="bons0:Pid" />
+			<element name="afpHistorikk" nillable="true"
+				type="bons0:Afphistorikk" />
+			<element name="utvandretDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="penPersonId" nillable="true" type="xsd:long" />
+			<element name="uforehistorikk" nillable="true"
+				type="bons0:Uforehistorikk" />
+			<element name="dodsDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="generellHistorikk" nillable="true"
+				type="bons0:GenerellHistorikk" />
+			<element name="leveattestHistorikkListe" nillable="true"
+				type="bons0:LeveattestHistorikkListe" />
+			<element name="beregningListe" nillable="true"
+				type="bons0:BeregningListe" />
+			<element name="bostedsland" nillable="true" type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+			<element minOccurs="0" name="vurdertSivilstandListe"
+				type="bons0:VurdertSivilstandListe" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

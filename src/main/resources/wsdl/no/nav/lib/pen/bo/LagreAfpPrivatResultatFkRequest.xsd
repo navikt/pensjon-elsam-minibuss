@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+	<complexType name="LagreAfpPrivatResultatFkRequest">
+		<sequence>
+			<element name="kravId" nillable="true" type="xsd:long"/>
+			<element name="innvilgetFraDato" nillable="true" type="xsd:dateTime"/>
+			<element name="resultat" nillable="true" type="string"/>
+			<element name="vedtaksDato" nillable="true" type="xsd:dateTime"/>
+		</sequence>
+	</complexType>
+</schema>

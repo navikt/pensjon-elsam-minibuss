@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd" />
+	<xsd:include schemaLocation="GBOPoengtall.xsd" />
+	<xsd:include schemaLocation="GBOFremtidigPensjonspoengtall.xsd" />
+	<xsd:complexType name="GBOPoengrekke">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="poengAr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="poengArFor92"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="poengArEtter91"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="poengArFaktisk"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="tidligerePenInntekt"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="tidligerePenInntektFaktor"
+				type="xsd:string" />
+			<xsd:element minOccurs="0"
+				name="poengtallAnntattArligInntekt" type="xsd:string" />
+			<xsd:element minOccurs="0" name="paNo" type="xsd:string" />
+			<xsd:element minOccurs="0" name="sisteFppAr"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="sisteFppArNorden"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="sisteFppArEos"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paEosFor92"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paEosEtter91"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paNordiskFramtBrutto"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paNordiskFramtNetto"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="fppEosSnittt"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paFaNorden"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paEosTeoretisk"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paEosProRata"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paProRataTeller"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="paProRataNevner"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="fremtidigPensjonspoengtall"
+				type="bons1:GBOFremtidigPensjonspoengtall" />
+			<xsd:element minOccurs="0"
+				name="framtidigPenpoengtallOmregnet"
+				type="bons1:GBOFremtidigPensjonspoengtall" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="poengtallListe" type="bons1:GBOPoengtall" />
+			<xsd:element minOccurs="0" name="fpa" type="xsd:string"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

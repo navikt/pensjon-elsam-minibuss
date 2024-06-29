@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOTilbakekrevingPerMnd">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="tilbakekrevingPerMndId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="mndKode" type="xsd:string" />
+			<xsd:element minOccurs="0" name="konteringKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="utbetaltBrutto"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="beregnetBrutto"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="potensiellFeilutbetaling"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="resultatKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="potensiellTilbakekreving"
+				type="xsd:int" />
+			<xsd:element minOccurs="0" name="arsakKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="skyldKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="bruk" type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="mndBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="konteringBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="konteringKonto"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

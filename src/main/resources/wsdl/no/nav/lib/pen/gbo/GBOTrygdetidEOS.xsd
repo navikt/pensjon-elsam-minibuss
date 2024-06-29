@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:complexType name="GBOTrygdetidEOS">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="trygdetidEOSId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fremtidigTrygdetidEOS" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fremtidigTrygdetidEOSRedusert" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSAnvendtAr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSAnvendtMnd" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSNevner" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSProRataMnd" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSTeller" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEOSTeoretiskMnd" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidLilPa" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="trygdetidKonvensjonAr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

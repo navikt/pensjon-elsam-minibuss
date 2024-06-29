@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOSammenstotstilfelle.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOKontrollpunkt.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOKravhode.xsd"></xsd:include>
+	<xsd:complexType name="GBOForberedBeregningResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="brukersKrav"
+				type="bons0:GBOKravhode">
+			</xsd:element>			<xsd:element minOccurs="0" name="kontrollpunktListe"
+				type="bons0:GBOKontrollpunkt" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="potensielleSammenstotKravListe" type="bons0:GBOKravhode"
+				maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sammenstotstilfelle"
+				type="bons0:GBOSammenstotstilfelle">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

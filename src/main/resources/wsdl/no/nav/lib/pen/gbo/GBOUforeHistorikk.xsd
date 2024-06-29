@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOUforeperiode.xsd"/>
+    <xsd:complexType name="GBOUforeHistorikk">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="uforehistorikkId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ungUfor" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="uforePeriodeListe" type="bons0:GBOUforeperiode"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

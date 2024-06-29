@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="Opptjeningsgrunnlag.xsd" />
+	<include schemaLocation="Pid.xsd" />
+	<complexType name="PersonOpptjeningsgrunnlag">
+		<sequence>
+			<element name="fnr" nillable="true" type="bons0:Pid" />
+			<element name="fodselsdato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="opptjeningsgrunnlag" nillable="true"
+				type="bons0:Opptjeningsgrunnlag" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

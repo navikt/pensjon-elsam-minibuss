@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+
+	<include schemaLocation="Ytelseskomponent.xsd"/>
+	<complexType name="Familietillegg">
+		<complexContent>
+			<extension base="bons0:Ytelseskomponent">
+				<sequence/>
+
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

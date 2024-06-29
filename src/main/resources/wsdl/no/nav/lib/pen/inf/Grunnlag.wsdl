@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Grunnlag" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Grunnlag" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:bons2="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Grunnlag" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Grunnlag">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKopierBeholdningerMedGrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreVurdertSivilstandListeOgVurderEndringResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagreVurdertSivilstandListeOgVurderEndringRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOmsorgOverfGrunnlagListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOmsorgGodskrGrunnlagListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKopierGrunnlagForKravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentPersongrunnlagListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKopierFamilieforholdRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOUforegrunnlag.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentOmsorgOverfGrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultIkkeGodskrevetOmsorgsPoeng.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOGrunnbelopListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLagrePersongrunnlagListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultFodselsnummerIPersongrunnlagAlleredeBruktIAnnetPersongrunnlag.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentMinstepensjonsSatsResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOKopierInntektsgrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentOmsorgGodskrGrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentUforegrunnlagRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentMinstepensjonsSatsRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOPersongrunnlagListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentGrunnbelopListeRequest.xsd"/>
+            <xsd:element name="hentPersongrunnlagListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentPersongrunnlagListeRequest" nillable="true" type="bons2:GBOHentPersongrunnlagListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentPersongrunnlagListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentPersongrunnlagListeResponse" nillable="true" type="bons2:GBOPersongrunnlagListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentMinstepensjonSats">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentMinstepensjonsSatsRequest" nillable="true" type="bons2:GBOHentMinstepensjonsSatsRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentMinstepensjonSatsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentMinstepensjonsSatsResponse" nillable="true" type="bons2:GBOHentMinstepensjonsSatsResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentGrunnbelopListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentGrunnbelopListeRequest" nillable="true" type="bons2:GBOHentGrunnbelopListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentGrunnbelopListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentGrunnbelopListeResponse" nillable="true" type="bons2:GBOGrunnbelopListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentOmsorgOverfGrunnlag">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentOmsorgOverfGrunnlagRequest" nillable="true" type="bons2:GBOHentOmsorgOverfGrunnlagRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentOmsorgOverfGrunnlagResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentOmsorgOverfGrunnlagResponse" nillable="true" type="bons2:GBOOmsorgOverfGrunnlagListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentOmsorgGodskrGrunnlag">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentOmsorgGodskrGrunnlagRequest" nillable="true" type="bons2:GBOHentOmsorgGodskrGrunnlagRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentOmsorgGodskrGrunnlagResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentOmsorgGodskrGrunnlagResponse" nillable="true" type="bons2:GBOOmsorgGodskrGrunnlagListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentOmsorgGodskrGrunnlag_faultIkkeGodskrevetOmsorgsPoeng" type="bons1:FaultIkkeGodskrevetOmsorgsPoeng"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentPersongrunnlagListeRequestMsg">
+    <wsdl:part element="tns:hentPersongrunnlagListe" name="hentPersongrunnlagListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentPersongrunnlagListeResponseMsg">
+    <wsdl:part element="tns:hentPersongrunnlagListeResponse" name="hentPersongrunnlagListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentMinstepensjonSatsRequestMsg">
+    <wsdl:part element="tns:hentMinstepensjonSats" name="hentMinstepensjonSatsParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentMinstepensjonSatsResponseMsg">
+    <wsdl:part element="tns:hentMinstepensjonSatsResponse" name="hentMinstepensjonSatsResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentGrunnbelopListeRequestMsg">
+    <wsdl:part element="tns:hentGrunnbelopListe" name="hentGrunnbelopListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentGrunnbelopListeResponseMsg">
+    <wsdl:part element="tns:hentGrunnbelopListeResponse" name="hentGrunnbelopListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentOmsorgOverfGrunnlagRequestMsg">
+    <wsdl:part element="tns:hentOmsorgOverfGrunnlag" name="hentOmsorgOverfGrunnlagParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentOmsorgOverfGrunnlagResponseMsg">
+    <wsdl:part element="tns:hentOmsorgOverfGrunnlagResponse" name="hentOmsorgOverfGrunnlagResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentOmsorgGodskrGrunnlagRequestMsg">
+    <wsdl:part element="tns:hentOmsorgGodskrGrunnlag" name="hentOmsorgGodskrGrunnlagParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentOmsorgGodskrGrunnlagResponseMsg">
+    <wsdl:part element="tns:hentOmsorgGodskrGrunnlagResponse" name="hentOmsorgGodskrGrunnlagResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentOmsorgGodskrGrunnlag_faultIkkeGodskrevetOmsorgsPoengMsg">
+    <wsdl:part element="tns:hentOmsorgGodskrGrunnlag_faultIkkeGodskrevetOmsorgsPoeng" name="faultIkkeGodskrevetOmsorgsPoeng"/>
+  </wsdl:message>
+    <wsdl:portType name="Grunnlag">
+        <wsdl:operation name="hentPersongrunnlagListe">
+      <wsdl:input message="tns:hentPersongrunnlagListeRequestMsg" name="hentPersongrunnlagListeRequest"/>
+      <wsdl:output message="tns:hentPersongrunnlagListeResponseMsg" name="hentPersongrunnlagListeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentMinstepensjonSats">
+      <wsdl:input message="tns:hentMinstepensjonSatsRequestMsg" name="hentMinstepensjonSatsRequest"/>
+      <wsdl:output message="tns:hentMinstepensjonSatsResponseMsg" name="hentMinstepensjonSatsResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentGrunnbelopListe">
+      <wsdl:input message="tns:hentGrunnbelopListeRequestMsg" name="hentGrunnbelopListeRequest"/>
+      <wsdl:output message="tns:hentGrunnbelopListeResponseMsg" name="hentGrunnbelopListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentOmsorgOverfGrunnlag">
+      <wsdl:input message="tns:hentOmsorgOverfGrunnlagRequestMsg" name="hentOmsorgOverfGrunnlagRequest"/>
+      <wsdl:output message="tns:hentOmsorgOverfGrunnlagResponseMsg" name="hentOmsorgOverfGrunnlagResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentOmsorgGodskrGrunnlag">
+      <wsdl:input message="tns:hentOmsorgGodskrGrunnlagRequestMsg" name="hentOmsorgGodskrGrunnlagRequest"/>
+      <wsdl:output message="tns:hentOmsorgGodskrGrunnlagResponseMsg" name="hentOmsorgGodskrGrunnlagResponse"/>
+      <wsdl:fault message="tns:hentOmsorgGodskrGrunnlag_faultIkkeGodskrevetOmsorgsPoengMsg" name="faultIkkeGodskrevetOmsorgsPoeng"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

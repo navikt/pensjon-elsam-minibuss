@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="Opptjening" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons3="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOverforOmsorgsopptjeningListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOverforOmsorgsopptjeningListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentBeholdningListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentBeholdningListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBeholdning.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentBeholdningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultKommunenrSamsvarerIkke.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOpptjeningGrunnlag.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultInntektIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultOpptjeningIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultInntektFinnesAllerede.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:element name="lagreInntekt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreInntektRequest" nillable="true" type="bons1:GBOOpptjeningGrunnlag"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreInntektResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreInntektResponse" nillable="true" type="bons1:GBOOpptjeningGrunnlag"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettInntekt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettInntektRequest" nillable="true" type="bons1:GBOOpptjeningGrunnlag"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettInntektResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreInntekt_faultInntektIkkeFunnet" type="bons3:FaultInntektIkkeFunnet"/>
+            <xsd:element name="opprettInntekt_faultPersonIkkeFunnet" type="bons3:FaultPersonIkkeFunnet"/>
+            <xsd:element name="slettInntekt_faultInntektIkkeFunnet" type="bons3:FaultInntektIkkeFunnet"/>
+            <xsd:element name="lagreInntekt_faultPersonIkkeFunnet" type="bons3:FaultPersonIkkeFunnet"/>
+            <xsd:element name="lagreInntekt_faultOpptjeningIkkeFunnet" type="bons3:FaultOpptjeningIkkeFunnet"/>
+            <xsd:element name="lagreInntekt_faultInntektFinnesAllerede" type="bons3:FaultInntektFinnesAllerede"/>
+            <xsd:element name="slettInntekt_faultPersonIkkeFunnet" type="bons3:FaultPersonIkkeFunnet"/>
+            <xsd:element name="lagreInntekt_faultKommunenrSamsvarerIkke" type="bons3:FaultKommunenrSamsvarerIkke"/>
+            <xsd:element name="hentBeholdning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeholdningRequest" nillable="true" type="bons1:GBOHentBeholdningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentBeholdningResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeholdningResponse" nillable="true" type="bons1:GBOBeholdning"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentBeholdningListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeholdningListeRequest" nillable="true" type="bons1:GBOHentBeholdningListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentBeholdningListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBeholdningListeResponse" nillable="true" type="bons1:GBOHentBeholdningListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="overforOmsorgsopptjeningListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="overforOmsorgsopptjeningListeRequest" nillable="true" type="bons1:GBOOverforOmsorgsopptjeningListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="overforOmsorgsopptjeningListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="overforOmsorgsopptjeningListeResponse" nillable="true" type="bons1:GBOOverforOmsorgsopptjeningListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="lagreInntektRequestMsg">
+    <wsdl:part element="tns:lagreInntekt" name="lagreInntektParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntektResponseMsg">
+    <wsdl:part element="tns:lagreInntektResponse" name="lagreInntektResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettInntektRequestMsg">
+    <wsdl:part element="tns:slettInntekt" name="slettInntektParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettInntektResponseMsg">
+    <wsdl:part element="tns:slettInntektResponse" name="slettInntektResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntekt_faultInntektIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreInntekt_faultInntektIkkeFunnet" name="faultInntektIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettInntekt_faultInntektIkkeFunnetMsg">
+    <wsdl:part element="tns:slettInntekt_faultInntektIkkeFunnet" name="faultInntektIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntekt_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreInntekt_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntekt_faultOpptjeningIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreInntekt_faultOpptjeningIkkeFunnet" name="faultOpptjeningIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntekt_faultInntektFinnesAlleredeMsg">
+    <wsdl:part element="tns:lagreInntekt_faultInntektFinnesAllerede" name="faultInntektFinnesAllerede"/>
+  </wsdl:message>
+    <wsdl:message name="slettInntekt_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:slettInntekt_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreInntekt_faultKommunenrSamsvarerIkkeMsg">
+    <wsdl:part element="tns:lagreInntekt_faultKommunenrSamsvarerIkke" name="faultKommunenrSamsvarerIkke"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeholdningRequestMsg">
+    <wsdl:part element="tns:hentBeholdning" name="hentBeholdningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeholdningResponseMsg">
+    <wsdl:part element="tns:hentBeholdningResponse" name="hentBeholdningResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeholdningListeRequestMsg">
+    <wsdl:part element="tns:hentBeholdningListe" name="hentBeholdningListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentBeholdningListeResponseMsg">
+    <wsdl:part element="tns:hentBeholdningListeResponse" name="hentBeholdningListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="overforOmsorgsopptjeningListeRequestMsg">
+    <wsdl:part element="tns:overforOmsorgsopptjeningListe" name="overforOmsorgsopptjeningListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="overforOmsorgsopptjeningListeResponseMsg">
+    <wsdl:part element="tns:overforOmsorgsopptjeningListeResponse" name="overforOmsorgsopptjeningListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="overforOmsorgsopptjeningListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:opprettInntekt_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="Opptjening">
+        <wsdl:operation name="lagreInntekt">
+      <wsdl:input message="tns:lagreInntektRequestMsg" name="lagreInntektRequest"/>
+      <wsdl:output message="tns:lagreInntektResponseMsg" name="lagreInntektResponse"/>
+            <wsdl:fault message="tns:lagreInntekt_faultInntektIkkeFunnetMsg" name="faultInntektIkkeFunnet"/>
+            <wsdl:fault message="tns:lagreInntekt_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:lagreInntekt_faultOpptjeningIkkeFunnetMsg" name="faultOpptjeningIkkeFunnet"/>
+            <wsdl:fault message="tns:lagreInntekt_faultInntektFinnesAlleredeMsg" name="faultInntektFinnesAllerede"/>
+            <wsdl:fault message="tns:lagreInntekt_faultKommunenrSamsvarerIkkeMsg" name="faultKommunenrSamsvarerIkke"/>
+        </wsdl:operation>
+        <wsdl:operation name="slettInntekt">
+      <wsdl:input message="tns:slettInntektRequestMsg" name="slettInntektRequest"/>
+      <wsdl:output message="tns:slettInntektResponseMsg" name="slettInntektResponse"/>
+            <wsdl:fault message="tns:slettInntekt_faultInntektIkkeFunnetMsg" name="faultInntektIkkeFunnet"/>
+            <wsdl:fault message="tns:slettInntekt_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentBeholdning">
+      <wsdl:input message="tns:hentBeholdningRequestMsg" name="hentBeholdningRequest"/>
+      <wsdl:output message="tns:hentBeholdningResponseMsg" name="hentBeholdningResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentBeholdningListe">
+      <wsdl:input message="tns:hentBeholdningListeRequestMsg" name="hentBeholdningListeRequest"/>
+      <wsdl:output message="tns:hentBeholdningListeResponseMsg" name="hentBeholdningListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="overforOmsorgsopptjeningListe">
+      <wsdl:input message="tns:overforOmsorgsopptjeningListeRequestMsg" name="overforOmsorgsopptjeningListeRequest"/>
+      <wsdl:output message="tns:overforOmsorgsopptjeningListeResponseMsg" name="overforOmsorgsopptjeningListeResponse"/>
+      <wsdl:fault message="tns:overforOmsorgsopptjeningListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

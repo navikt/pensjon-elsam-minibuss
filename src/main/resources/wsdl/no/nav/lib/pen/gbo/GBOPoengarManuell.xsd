@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo">	<import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</import>
+	<complexType name="GBOPoengarManuell">
+		<sequence>
+			<element name="poengarId" nillable="true" type="string" />
+			<element name="avtalelandKode" nillable="true"
+				type="string" />
+			<element name="fomDato" nillable="true" type="string" />
+			<element name="tomDato" nillable="true" type="string" />
+			<element name="ikkeAlternativProrata" nillable="true"
+				type="boolean" />
+			<element name="ikkeProrata" nillable="true"
+				type="xsd:boolean" />			<element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

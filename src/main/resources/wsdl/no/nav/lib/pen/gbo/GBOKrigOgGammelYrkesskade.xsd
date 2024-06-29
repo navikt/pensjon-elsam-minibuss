@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:include schemaLocation="GBOYtelsesekomponent.xsd"/>
+    <xsd:include schemaLocation="GBOHentMinstepensjonsSatsRequest.xsd"/>
+    <xsd:include schemaLocation="GBOHentKravRequest.xsd"/>
+    <xsd:include schemaLocation="GBOHentInformasjonsgrunnlagRequest.xsd"/>
+    <xsd:include schemaLocation="GBOHentGrunnbelopListeRequest.xsd"/>
+    <xsd:include schemaLocation="GBOGrunnpensjon.xsd"/>
+    <xsd:include schemaLocation="GBOGrunnlagsrolle.xsd"/>
+    <xsd:include schemaLocation="GBOGrunnbelopListe.xsd"/>
+    <xsd:include schemaLocation="GBOGrunnbelop.xsd"/>
+    <xsd:include schemaLocation="GBOFremtidigPensjonspoengtall.xsd"/>
+    <xsd:include schemaLocation="GBOEktefelletillegg.xsd"/>
+    <xsd:include schemaLocation="GBOBeregningNokkelinfo.xsd"/>
+    <xsd:include schemaLocation="GBOBeregning.xsd"/>
+    <xsd:include schemaLocation="GBOBarnetillegg.xsd"/>
+    <xsd:include schemaLocation="GBOBarnekull.xsd"/>
+    <xsd:include schemaLocation="GBOBarnDetalj.xsd"/>
+    <xsd:complexType name="GBOKrigOgGammelYrkesskade">
+    <xsd:complexContent>
+      <xsd:extension base="bons0:GBOYtelsesekomponent">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="pensjonsgrad" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="grunnlagForUtbetaling" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="forholdstallYG" type="xsd:double"/>
+                    <xsd:element minOccurs="0" name="kapitalutlosning" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="mendel" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="poengtall" type="xsd:string"/>
+                </xsd:sequence>
+                  
+            </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

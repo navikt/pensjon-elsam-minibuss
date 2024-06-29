@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:Q1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOKravhode.xsd"/>
+    <xsd:include schemaLocation="GBOPensjonssak.xsd"/>
+    <xsd:complexType name="GBOKontrollpunkt">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="kontrollpunktId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kontrollpunktTypeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kontrollpunktStatusKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kritisk" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="pensjonssak" type="Q1:GBOPensjonssak"/>
+      <xsd:element minOccurs="0" name="kravhode" type="Q1:GBOKravhode"/>
+            <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

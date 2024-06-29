@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo" schemaLocation="../../../gbo/GBOEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="GBOSoskenDetalj.xsd"/>
+    <xsd:include schemaLocation="GBOBarnDetalj.xsd"/>
+    <xsd:complexType name="GBOPersondetalj">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="personDetaljId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="grunnlagsrolleKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rolleFom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rolleTom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sivilstandKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sivilstandRelatertFnr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="borMedKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="barnDetalj" type="bons0:GBOBarnDetalj"/>
+            <xsd:element minOccurs="0" name="soskenDetalj" type="bons0:GBOSoskenDetalj"/>
+            <xsd:element minOccurs="0" name="tillegg" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="bruk" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="grunnlagKilde" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="endringsInfoRegister" type="bons1:GBOEndringsInfo"/>
+            <xsd:element minOccurs="0" name="endringsInfo" type="bons1:GBOEndringsInfo"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

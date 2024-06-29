@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-oko/no/nav/lib/oko/gbo" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+    <xsd:import namespace="http://nav-lib-oko/no/nav/lib/oko/gbo" schemaLocation="../../oko/gbo/GBOOppdragsmelding.xsd"/>
+    <xsd:complexType name="GBOHentUttrekkTilOppdragstransaksjonResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="fagomradeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="oppdragsmelding" type="bons0:GBOOppdragsmelding"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

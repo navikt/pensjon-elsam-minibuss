@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="PenPerson.xsd" />
+	<include schemaLocation="BarnDetalj.xsd" />
+	<include schemaLocation="SoskenDetalj.xsd" />
+
+
+
+
+
+
+	<complexType name="PersonDetalj">
+		<sequence>
+			<element name="registerEndretAv" nillable="true"
+				type="xsd:string" />
+			<element name="grunnlagsrolle" nillable="true"
+				type="string" />
+			<element name="fomDato" nillable="true" type="xsd:dateTime" />
+			<element name="personDetaljId" nillable="true"
+				type="xsd:long" />
+			<element name="sivilstand" nillable="true" type="string" />
+			<element name="tillegg" nillable="true" type="xsd:boolean" />
+			<element name="registerKilde" nillable="true" type="string" />
+			<element name="tomDato" nillable="true" type="xsd:dateTime" />
+			<element name="soskenDetalj" nillable="true"
+				type="bons0:SoskenDetalj" />
+			<element name="borMed" nillable="true" type="string" />
+			<element name="barnDetalj" nillable="true"
+				type="bons0:BarnDetalj" />
+			<element name="grunnlagKilde" nillable="true" type="string" />
+			<element name="bruk" nillable="true" type="xsd:boolean" />
+			<element name="registerOpprettetAv" nillable="true"
+				type="xsd:string" />
+			<element name="sivilstandRelatertPerson" nillable="true"
+				type="bons0:PenPerson" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

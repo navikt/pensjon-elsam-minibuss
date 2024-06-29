@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/OverforeOmsorgspoeng" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OverforeOmsorgspoeng" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/OverforeOmsorgspoeng">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/OverforeOmsorgspoeng" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/OverforeOmsorgspoeng" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOOverforeOmsorgspoengRequest.xsd"/>
+            <xsd:element name="overforeOmsorgspoeng">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="overforeOmsorgspoengRequest" nillable="true" type="bons1:GBOOverforeOmsorgspoengRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="overforeOmsorgspoengRequestMsg">
+    <wsdl:part element="tns:overforeOmsorgspoeng" name="overforeOmsorgspoengParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="OverforeOmsorgspoeng">
+        <wsdl:operation name="overforeOmsorgspoeng">
+      <wsdl:input message="tns:overforeOmsorgspoengRequestMsg" name="overforeOmsorgspoengRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

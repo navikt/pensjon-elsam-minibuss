@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-oko/no/nav/lib/oko/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleAPSak" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BehandleAPSak" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleAPSak">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleAPSak" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:bons2="http://nav-lib-oko/no/nav/lib/oko/fault" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/BehandleAPSak" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOBehandleAPSakRequest.xsd"/>
+            <xsd:element name="invoke">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="behandleAPSakRequest" nillable="true" type="bons1:GBOBehandleAPSakRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="invokeRequestMsg">
+    <wsdl:part element="tns:invoke" name="invokeParameters"/>
+  </wsdl:message>
+    <wsdl:portType name="BehandleAPSak">
+    <wsdl:operation name="invoke">
+      <wsdl:input message="tns:invokeRequestMsg" name="invokeRequest"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

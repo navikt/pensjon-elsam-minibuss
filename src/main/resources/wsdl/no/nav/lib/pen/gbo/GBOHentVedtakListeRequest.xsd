@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOTjenestedirektiv.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOVedtakStatus.xsd" />
+	<xsd:complexType name="GBOHentVedtakListeRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="alleVedtak"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="saksId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="saksKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="fom" type="xsd:string" />
+			<xsd:element minOccurs="0" name="tom" type="xsd:string" />
+			<xsd:element minOccurs="0" name="kravId" type="xsd:string" />			<xsd:element minOccurs="0" name="vedtakStatusListe"
+				type="bons0:GBOVedtakStatus" maxOccurs="unbounded" />
+			<xsd:element minOccurs="0" name="tjenesteDirektiv"
+				type="bons0:GBOTjenestedirektiv">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

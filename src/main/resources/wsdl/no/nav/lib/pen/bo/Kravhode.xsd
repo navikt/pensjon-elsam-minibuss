@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="afpPrivatResultatFk.xsd"></include>
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="PersongrunnlagListe.xsd"></include>
+	<include schemaLocation="UttaksgradListe.xsd" />
+	<include schemaLocation="PenOrgEnhet.xsd" />
+	<include schemaLocation="KravArsak.xsd" />
+	<include schemaLocation="MerknadListe.xsd" />
+	<include schemaLocation="Sak.xsd" />
+	<include schemaLocation="PenPerson.xsd" />
+	<include schemaLocation="KravlinjeListe.xsd" />
+
+
+
+	<complexType name="Kravhode">
+		<sequence>
+			<element name="kravlinjeListe" nillable="true"
+				type="bons0:KravlinjeListe" />
+			<element name="kollektiveVilkar" nillable="true"
+				type="xsd:boolean" />
+			<element name="brukOpptjeningFra65I66Aret" nillable="true"
+				type="xsd:boolean" />
+			<element name="kravStatus" nillable="true" type="string" />
+			<element name="afpOrdning" nillable="true" type="string" />
+			<element name="basertPaKravhode" nillable="true"
+				type="string" />
+			<element name="boddArbeidUtland" nillable="true"
+				type="xsd:boolean" />
+			<element name="hentetTps" nillable="true"
+				type="xsd:boolean" />
+			<element name="onsketVirkningsDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="avdod" nillable="true"
+				type="bons0:PenPerson" />
+
+			<element name="boddArbeidUtlandAvdod" nillable="true"
+				type="xsd:boolean" />
+			<element name="grunnlagLast" nillable="true" type="boolean" />
+			<element name="sak" nillable="true" type="bons0:Sak" />
+			<element name="overfortOmsorgspoeng" nillable="true"
+				type="xsd:boolean" />
+			<element name="tilbakekreving" nillable="true"
+				type="xsd:boolean" />
+			<element name="erBeregnet" nillable="true"
+				type="xsd:boolean" />
+			<element name="komplettDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="mottattDato" nillable="true"
+				type="xsd:dateTime" />
+			<element name="kravId" nillable="true" type="xsd:long" />
+			<element name="far" nillable="true" type="bons0:PenPerson" />
+			<element name="vurdereTrygdeavtaleAvdod" nillable="true"
+				type="xsd:boolean" />
+			<element name="kravLast" nillable="true" type="xsd:boolean" />
+			<element name="gyldigVilkarsproving" nillable="true"
+				type="xsd:boolean" />
+			<element name="boddArbeidUtlandFar" nillable="true"
+				type="xsd:boolean" />
+			<element name="mor" nillable="true" type="bons0:PenPerson" />
+			<element name="flytKravlinje" nillable="true" type="string" />
+			<element name="vurdereTrygdeavtale" nillable="true"
+				type="xsd:boolean" />
+			<element name="kravGjelder" nillable="true" type="string" />
+			<element name="organisasjonsnummer" nillable="true"
+				type="xsd:string" />
+			<element name="persongrunnlagListe" nillable="true"
+				type="bons0:PersongrunnlagListe" />
+			<element name="boddArbeidUtlandMor" nillable="true"
+				type="xsd:boolean" />
+			<element name="vurdereTrygdeavtaleFar" nillable="true"
+				type="xsd:boolean" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="tssIdAfp" nillable="true" type="xsd:string" />
+			<element name="afpTillegg" nillable="true"
+				type="xsd:boolean" />
+			<element name="initiertAv" nillable="true" type="string" />
+			<element name="behandlingType" nillable="true"
+				type="string" />
+			<element name="vurdereTrygdeavtaleMor" nillable="true"
+				type="xsd:boolean" />
+			<element name="kravVelgType" nillable="true" type="string" />
+			<element name="norgeBehandlendeLand" nillable="true"
+				type="xsd:boolean" />
+			<element name="datoVersjonering" nillable="true"
+				type="xsd:dateTime" />
+			<element name="behandlendeEnhet" nillable="true"
+				type="bons0:PenOrgEnhet" />
+			<element name="regelverkType" nillable="true" type="string" />
+			<element name="soktAFPPaslag" nillable="true"
+				type="xsd:boolean" />
+			<element name="uttaksgradListe" nillable="true"
+				type="bons0:UttaksgradListe" />
+			<element name="arsak" nillable="true"
+				type="bons0:KravArsak" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+			<element minOccurs="0" name="afpPrivatResultatFk"
+				type="bons0:AfpPrivatResultatFk">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

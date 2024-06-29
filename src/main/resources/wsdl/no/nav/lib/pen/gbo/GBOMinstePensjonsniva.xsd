@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:include schemaLocation="GBOMerknad.xsd"></xsd:include>
+	<xsd:complexType name="GBOMinstePensjonsniva">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="minstePensjonsnivaId"
+				type="xsd:string">
+			</xsd:element>			<xsd:element minOccurs="0" name="belop" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="formelKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pro_rata_brok"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pro_rata_nevner_mnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="pro_rata_teller_mnd"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sats" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="satsType"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="merknadListe"
+				type="bons0:GBOMerknad" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

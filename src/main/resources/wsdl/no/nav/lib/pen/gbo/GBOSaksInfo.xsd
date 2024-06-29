@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+  <xsd:complexType name="GBOSaksInfo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="saksId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="beskrivelse" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="type" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="navSaksTypeListe" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sakskode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="utfall" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="grad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ansvarligEnhetId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="saksbehandlerId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="registrertDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vedtaksDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="iverksattDato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="betalingsform" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="belop" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nesteUtbetaling" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nesteBelop" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="utbetalingsvilkar" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="annenMottaker" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="frekvens" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

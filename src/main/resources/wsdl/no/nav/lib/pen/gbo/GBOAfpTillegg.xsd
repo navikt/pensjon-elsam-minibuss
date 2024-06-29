@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOYtelsesekomponent.xsd"></xsd:include>
+	<xsd:complexType name="GBOAfpTillegg">
+		<xsd:complexContent>
+			<xsd:extension base="bons0:GBOYtelsesekomponent">
+				<xsd:sequence>				</xsd:sequence>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

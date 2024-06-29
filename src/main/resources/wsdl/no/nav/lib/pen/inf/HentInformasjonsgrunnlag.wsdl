@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/HentInformasjonsgrunnlag" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HentInformasjonsgrunnlag" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/HentInformasjonsgrunnlag">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/HentInformasjonsgrunnlag" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/HentInformasjonsgrunnlag" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentInformasjonsgrunnlagRequest.xsd"/>
+            <xsd:element name="invoke">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentInformasjonsgrunnlagRequest" nillable="true" type="bons1:GBOHentInformasjonsgrunnlagRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="invokeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentInformasjonsgrunnlagResponse" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="invokeRequestMsg">
+    <wsdl:part element="tns:invoke" name="invokeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="invokeResponseMsg">
+    <wsdl:part element="tns:invokeResponse" name="invokeResult"/>
+  </wsdl:message>
+    <wsdl:portType name="HentInformasjonsgrunnlag">
+    <wsdl:operation name="invoke">
+            <wsdl:input message="tns:invokeRequestMsg" name="invokeRequest"/>
+      <wsdl:output message="tns:invokeResponseMsg" name="invokeResponse"/>    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

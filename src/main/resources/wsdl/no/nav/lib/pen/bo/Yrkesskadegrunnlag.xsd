@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="Yrkesskadegrunnlag">
+		<sequence>
+			<element name="yrkessykdom" nillable="true"
+				type="xsd:boolean" />
+			<element name="yrkesskadegrunnlagId" nillable="true"
+				type="xsd:long" />
+			<element name="yug" nillable="true" type="xsd:int" />
+			<element name="yst" nillable="true" type="xsd:dateTime" />
+			<element name="brukerForsorgetAvAvdod" nillable="true"
+				type="xsd:boolean" />
+			<element name="grunnlagKilde" nillable="true" type="string" />
+			<element name="bruk" nillable="true" type="xsd:boolean" />
+			<element name="antattArligInntekt" nillable="true"
+				type="xsd:int" />
+			<element name="yrke" nillable="true" type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

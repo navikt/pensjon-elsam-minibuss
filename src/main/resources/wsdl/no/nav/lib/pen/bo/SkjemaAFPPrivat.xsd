@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="UtenlandsoppholdListe.xsd"/>
+	<include schemaLocation="Kravhode.xsd"/>
+
+
+
+	<complexType name="SkjemaAFPPrivat">
+		<sequence>
+			<element name="annenInntekt" nillable="true" type="xsd:boolean"/>
+			<element name="annenInntektBelop" nillable="true" type="xsd:string"/>
+			<element name="arbgiverAdresse1" nillable="true" type="xsd:string"/>
+			<element name="arbgiverAdresse2" nillable="true" type="xsd:string"/>
+			<element name="arbgiverAdresse3" nillable="true" type="xsd:string"/>
+			<element name="arbgiverNavn" nillable="true" type="xsd:string"/>
+			<element name="arbgiverOrgnr" nillable="true" type="xsd:string"/>
+			<element name="arbgiverPostnr" nillable="true" type="xsd:string"/>
+			<element name="arbgiverPoststed" nillable="true" type="xsd:string"/>
+			<element name="inntektUtenArbPlikt" nillable="true" type="xsd:boolean"/>
+			<element name="naeringsvirkEierandel" nillable="true" type="xsd:boolean"/>
+			<element name="permisjonSiste3Ar" nillable="true" type="xsd:boolean"/>
+			<element name="redusertStillingSiste3Ar" nillable="true" type="xsd:boolean"/>
+			<element name="skjemaAFPPrivatId" nillable="true" type="xsd:long"/>
+			<element name="sykmeldtOver52UkerSiste3Ar" nillable="true" type="xsd:boolean"/>
+			<element name="utenlandsoppholdListe" nillable="true" type="bons0:UtenlandsoppholdListe"/>
+			<element name="kravhode" nillable="true" type="bons0:Kravhode"/>
+		</sequence>
+	</complexType>
+</schema>

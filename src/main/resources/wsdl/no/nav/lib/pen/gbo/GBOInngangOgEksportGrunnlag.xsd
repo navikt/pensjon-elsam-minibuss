@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo"
+	xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOOppfyltVedSammenlegging.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOEksportrett.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOEksportforbud.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOUnntak.xsd"></xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOInngangOgEksportGrunnlag">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="InngangOgEksportGrunnlagId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="treArTrygdetidNorge"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="unntakFraForutgaendeTT"
+				type="bons1:GBOUnntak">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="fortsattMedlemFT"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="minstTyveArBotidNorge"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="opptjentRettTilTPEtterFT"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="eksportforbud"
+				type="bons1:GBOEksportforbud">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="friEksportPgaYrkesskade"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="eksportrettEtterEOSForordning" type="bons1:GBOEksportrett">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="eksportrettEtterTrygdeavtalerEOS"
+				type="bons1:GBOEksportrett">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="eksportrettEtterAndreTrygdeavtaler"
+				type="bons1:GBOEksportrett">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="invilgetGarantertTP"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="minstTreArsFMNorge"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="minstTreArsFMNorgeVirkdato"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="unntakFraForutgaendeMedlemskap" type="bons1:GBOUnntak">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="oppfyltEtterGamleRegler"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="oppfyltVedSammenlegging"
+				type="bons1:GBOOppfyltVedSammenlegging">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="gjenlevendeMedlemFT"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="minstEttArFMNorge"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="foreldreMinstTyveArBotidNorge" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="friEksportDodsfall"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons0:GBOEndringsInfo">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

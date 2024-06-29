@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo">
+
+
+
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<complexType name="Opptjeningsgrunnlag">
+		<sequence>
+			<element name="registerEndretAv" nillable="true"
+				type="xsd:string" />
+			<element name="opptjeningType" nillable="true"
+				type="string" />
+			<element name="registerKilde" nillable="true" type="string" />
+			<element name="pi" nillable="true" type="xsd:int" />
+			<element name="pia" nillable="true" type="xsd:int" />
+			<element name="grunnlagKilde" nillable="true" type="string" />
+			<element name="bruk" nillable="true" type="xsd:boolean" />
+			<element name="registerOpprettetAv" nillable="true"
+				type="xsd:string" />
+			<element name="maksUforegrad" nillable="true"
+				type="xsd:int" />
+			<element name="opptjeningsgrunnlagId" nillable="true"
+				type="xsd:long" />
+			<element name="ar" nillable="true" type="xsd:int" />
+			<element name="pp" nillable="true" type="xsd:double" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

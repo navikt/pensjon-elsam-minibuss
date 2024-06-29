@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<xsd:complexType name="VurdertSivilstand">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fomDato"
+				type="xsd:dateTime">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tomDato"
+				type="xsd:dateTime">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnlagskilde"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grunnlagsrolle"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="registerEndretAv"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sivilstand"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vurdertSivilstand"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

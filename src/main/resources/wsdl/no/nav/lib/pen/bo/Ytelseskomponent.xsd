@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/bo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="unqualified"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/bo">
+	<include schemaLocation="EndringsInfo.xsd"></include>
+	<include schemaLocation="MerknadListe.xsd" />
+	<complexType name="Ytelseskomponent">
+		<sequence>
+			<element name="resultatKilde" nillable="true" type="string" />
+			<element name="brutto" nillable="true" type="xsd:int" />
+			<element name="fradrag" nillable="true" type="xsd:int" />
+			<element name="netto" nillable="true" type="xsd:int" />
+			<element name="erBrukt" nillable="true" type="xsd:boolean" />
+			<element name="ytelseskomponentId" nillable="true"
+				type="xsd:long" />
+			<element name="merknadListe" nillable="true"
+				type="bons0:MerknadListe" />
+			<element name="osLinjeIdFk" nillable="true" type="xsd:int" />
+			<element name="inntektBruktIAvkorting" nillable="true"
+				type="xsd:int" />
+			<element name="fradragsTransaksjon" nillable="true"
+				type="xsd:boolean" />
+			<element name="sakType" nillable="true" type="string" />
+			<element name="ytelseKomponentTypeCti" nillable="true"
+				type="string" />
+			<element minOccurs="0" name="endringsInfo"
+				type="bons0:EndringsInfo">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

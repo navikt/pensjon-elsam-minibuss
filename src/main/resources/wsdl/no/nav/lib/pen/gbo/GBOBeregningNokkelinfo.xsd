@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons1="http://stelvio-commons-lib/no/nav/gbo"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:import namespace="http://stelvio-commons-lib/no/nav/gbo"
+		schemaLocation="../../../gbo/GBOEndringsInfo.xsd" />
+	<xsd:include schemaLocation="GBOSluttpoengtall.xsd" />
+	<xsd:complexType name="GBOBeregningNokkelinfo">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="beregningNokkelinfoId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="grunnlagsrolleKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="beregningId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="spt"
+				type="bons0:GBOSluttpoengtall" />
+			<xsd:element minOccurs="0" name="ypt"
+				type="bons0:GBOSluttpoengtall" />
+			<xsd:element minOccurs="0" name="opt"
+				type="bons0:GBOSluttpoengtall" />
+			<xsd:element minOccurs="0" name="tt_anv" type="xsd:string" />
+			<xsd:element minOccurs="0"
+				name="ttBeregnetForGrunnlagsrolle" type="xsd:string" />
+			<xsd:element minOccurs="0" name="anvendtIBeregningen"
+				type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="yrkesskadegrad"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons1:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="beregningsMetodeKode"
+				type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

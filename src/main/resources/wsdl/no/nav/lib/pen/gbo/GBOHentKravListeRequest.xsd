@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	<xsd:include schemaLocation="GBOTjenestedirektiv.xsd"></xsd:include>
+	<xsd:complexType name="GBOHentKravListeRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="enhetId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kravGjelderKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="statusListe"
+				type="xsd:string" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sakTypeKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="behandlendeEnhetId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="opprettetFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="opprettetTom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="1" name="tjenesteDirektiv"
+				type="bons0:GBOTjenestedirektiv">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

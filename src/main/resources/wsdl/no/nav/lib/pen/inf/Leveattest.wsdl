@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Leveattest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Leveattest" targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Leveattest">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-pen/no/nav/lib/pen/inf/Leveattest" xmlns:bons1="http://nav-lib-pen/no/nav/lib/pen/gbo" xmlns:tns="http://nav-lib-pen/no/nav/lib/pen/inf/Leveattest" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOLeveattestHistorikkListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/gbo" schemaLocation="../gbo/GBOHentLeveattestHistorikkListeRequest.xsd"/>
+            <xsd:element name="hentLeveattestHistorikkListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentLeveattestHistorikkRequest" nillable="true" type="bons1:GBOHentLeveattestHistorikkListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentLeveattestHistorikkListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentLeveattestHistorikkResponse" nillable="true" type="bons1:GBOLeveattestHistorikkListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentLeveattestHistorikkListeRequestMsg">
+    <wsdl:part element="tns:hentLeveattestHistorikkListe" name="hentLeveattestHistorikkListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentLeveattestHistorikkListeResponseMsg">
+    <wsdl:part element="tns:hentLeveattestHistorikkListeResponse" name="hentLeveattestHistorikkListeResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Leveattest">
+    <wsdl:operation name="hentLeveattestHistorikkListe">
+      <wsdl:input message="tns:hentLeveattestHistorikkListeRequestMsg" name="hentLeveattestHistorikkListeRequest"/>
+      <wsdl:output message="tns:hentLeveattestHistorikkListeResponseMsg" name="hentLeveattestHistorikkListeResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
