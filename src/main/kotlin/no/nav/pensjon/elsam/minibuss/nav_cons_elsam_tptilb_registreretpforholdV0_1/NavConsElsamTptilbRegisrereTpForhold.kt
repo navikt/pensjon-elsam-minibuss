@@ -10,7 +10,7 @@ import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
 import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
 import no.nav.elsam.registreretpforhold.v0_1.*
-import org.springframework.core.NestedExceptionUtils
+import org.springframework.core.NestedExceptionUtils.*
 import java.time.LocalDateTime
 import javax.xml.datatype.DatatypeConfigurationException
 import javax.xml.datatype.DatatypeFactory
@@ -27,27 +27,20 @@ class NavConsElsamTptilbRegisrereTpForhold(
         HentTPForholdListeIntFaultGeneriskMsg::class
     )
     fun hentTPForholdListe(hentTPForholdListeRequest: HentTPForholdListeReq): HentTPForholdListeResp {
-        // Call entity service
         val response: HentTPForholdListeResp
         try {
-            val intRequest = HentTPForholdListeRequestInt()
-            intRequest.extRequest = hentTPForholdListeRequest
-            response = registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold.hentTPForholdListeInt(intRequest)
+            response = registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold.hentTPForholdListeInt(
+                HentTPForholdListeRequestInt().apply {
+                    extRequest = hentTPForholdListeRequest
+                })
         } catch (e: RuntimeException) {
             throw createTechnicalFault(
-                e.message, java.util.List.of(NestedExceptionUtils.getMostSpecificCause(e).toString())
+                e.message, getMostSpecificCause(e).toString()
             )
         }
 
         // Ensure that the caller has a TP-forhold to the subject
-        var ownTPnrExists = false
-        for (tpForhold in response.tjenestepensjonForholdene) {
-            if (tpForhold != null && tpForhold.tpnr != null && tpForhold.tpnr == hentTPForholdListeRequest.tpnr) {
-                ownTPnrExists = true
-                break
-            }
-        }
-        if (!ownTPnrExists) {
+        if (!response.tjenestepensjonForholdene.any { it?.tpnr == hentTPForholdListeRequest.tpnr }) {
             throw ServiceBusinessException(getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold"))
         }
 
@@ -56,19 +49,13 @@ class NavConsElsamTptilbRegisrereTpForhold(
 
     @Throws(ServiceBusinessException::class)
     fun opprettTPForhold(opprettTPForholdRequest: OpprettTPForholdReq) {
-        // Map TP-nummer to tssEksternId
-        val eksternTSSId = mapTPnrToTSSEksternId(opprettTPForholdRequest.tpnr)
-
-        // Copy external interface to internal and set externalTSSId
-        val intRequest = OpprettTPForholdRequestInt()
-        intRequest.extRequest = opprettTPForholdRequest
-        intRequest.eksternTSSId = eksternTSSId
-
-        // Call entity service
         try {
-            registrereTPForholdV0_1IntPartner_Tjenestepensjon.opprettTPForholdInt(intRequest)
+            registrereTPForholdV0_1IntPartner_Tjenestepensjon.opprettTPForholdInt(OpprettTPForholdRequestInt().apply {
+                extRequest = opprettTPForholdRequest
+                eksternTSSId = mapTPnrToTSSEksternId(opprettTPForholdRequest.tpnr)
+            })
         } catch (e: RuntimeException) {
-            throw createTechnicalFault(e.message, NestedExceptionUtils.getMostSpecificCause(e).toString())
+            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         } catch (e: OpprettTPForholdIntFaultElementetErDuplikatMsg) {
             // Do nothing - duplicate creates are not reported as a fault to external consumers
         }
@@ -82,53 +69,40 @@ class NavConsElsamTptilbRegisrereTpForhold(
         SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg::class
     )
     fun slettTPForhold(slettTPForholdRequest: SlettTPForholdReq) {
-        // Map TP-nummer to tssEksternId
-        val eksternTSSId = mapTPnrToTSSEksternId(slettTPForholdRequest.tpnr)
-
-        // Retrieve TP-forhold
         val response: GBOTjenestepensjon
         try {
-            // Copy external interface to internal and set externalTSSId
-            val intRequest = SlettTPForholdFinnTjenestepensjonsforholdRequestInt()
-            intRequest.extRequest = slettTPForholdRequest
-            intRequest.eksternTSSId = eksternTSSId
-
             response =
                 registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold.slettTPForholdFinnTjenestepensjonsforholdInt(
-                    intRequest
-                )
+                    SlettTPForholdFinnTjenestepensjonsforholdRequestInt().apply {
+                        extRequest = slettTPForholdRequest
+                        eksternTSSId = mapTPnrToTSSEksternId(slettTPForholdRequest.tpnr)
+                    })
         } catch (e: RuntimeException) {
-            throw createTechnicalFault(
-                e.message, java.util.List.of(NestedExceptionUtils.getMostSpecificCause(e).toString())
-            )
+            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }
         val tpForholdene = response.tjenestepensjonForholdene
-
-        // Validate result
         if (tpForholdene.isEmpty()) {
             throw ServiceBusinessException(getFaultTjenestepensjonForholdIkkeFunnet("TP-forholdet finnes ikke i registeret"))
         }
+
         if (tpForholdene.size > 1) {
             throw createTechnicalFault("Dublett funnet, inkonsistens i registeret", "Teknisk feil")
         }
+
         val tpForholdet = tpForholdene[0]
 
         // Disallow cascade delete
-        val tjenestepensjonYtelseListe = tpForholdet.tjenestepensjonYtelseListe
-        if (!tjenestepensjonYtelseListe.isEmpty()) {
+        if (tpForholdet.tjenestepensjonYtelseListe.isNotEmpty()) {
             throw ServiceBusinessException(getFaultKanIkkeSlettes("TP-forholdet kan ikke slettes fordi det er registrert en eller flere TP-ytelser på forholdet."))
         }
 
         try {
-            // Create new data object for delete service
-            val intRequest = SlettTPForholdTjenestepensjonRequestInt()
-            intRequest.forholdId = tpForholdet.forholdId
-            // Delete TP-forhold
-            registrereTPForholdV0_1IntPartner_Tjenestepensjon.slettTPForholdTjenestepensjonInt(intRequest)
+            registrereTPForholdV0_1IntPartner_Tjenestepensjon.slettTPForholdTjenestepensjonInt(
+                SlettTPForholdTjenestepensjonRequestInt().apply {
+                    forholdId = tpForholdet.forholdId
+                })
         } catch (e: RuntimeException) {
-            throw createTechnicalFault(
-                e.message, java.util.List.of(NestedExceptionUtils.getMostSpecificCause(e).toString())
-            )
+            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }
     }
 
@@ -144,25 +118,28 @@ class NavConsElsamTptilbRegisrereTpForhold(
     @Throws(ServiceBusinessException::class)
     private fun mapTPnrToTSSEksternId(tpNr: String): String {
         // Build request object for samhandler
-        val samhandlerRequest = GBOFinnSamhandlerRequest()
-        samhandlerRequest.offentligId = tpNr
-        samhandlerRequest.idType = "TPNR"
-        samhandlerRequest.samhandlerType = "TEPE"
 
         val samhandlerResponse: GBOSamhandlerListe?
         try {
-            samhandlerResponse = SamhandlerPartner.finnSamhandler(samhandlerRequest)
+            samhandlerResponse = SamhandlerPartner.finnSamhandler(GBOFinnSamhandlerRequest().also {
+                it.offentligId = tpNr
+                it.idType = "TPNR"
+                it.samhandlerType = "TEPE"
+            })
         } catch (e: RuntimeException) {
             throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID", "Feil ved oppslag av samhandler"
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Feil ved oppslag av samhandler"
             )
         }
 
         if (samhandlerResponse == null) {
             throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID", "Tomt svar ved oppslag av samhandler"
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Tomt svar ved oppslag av samhandler"
             )
         }
+
         val samhandlere = samhandlerResponse.samhandlere
         if (samhandlere.size > 1) {
             //Got more than 1 samhandler in the response. Should receive only 1.
@@ -195,21 +172,17 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
     }
 
-    private fun createTechnicalFault(errorDescription: String?, errorDetail: String): ServiceBusinessException {
-        val errorDetails: MutableList<String> = ArrayList()
-        errorDetails.add(errorDetail)
-        return createTechnicalFault(errorDescription, errorDetails)
-    }
-
-    private fun createTechnicalFault(errorDescription: String?, errorDetails: List<String>): ServiceBusinessException {
-        val faultBO = FaultGenerisk()
-        faultBO.errorCode = "InternalError"
-        faultBO.errorDescription = errorDescription
-        faultBO.errorDetails.addAll(errorDetails)
-        return ServiceBusinessException(faultBO)
-    }
-
     companion object {
+        private fun createTechnicalFault(errorDescription: String?, errorDetail: String) =
+            createTechnicalFault(errorDescription, listOf(errorDetail))
+
+        private fun createTechnicalFault(errorDescription: String?, errorDetails: List<String>) =
+            ServiceBusinessException(FaultGenerisk().apply {
+                errorCode = "InternalError"
+                this.errorDescription = errorDescription
+                this.errorDetails.addAll(errorDetails)
+            })
+
         @Throws(DatatypeConfigurationException::class)
         private fun getFaultTjenestepensjonForholdIkkeFunnet(errorMessage: String): FaultTjenestepensjonForholdIkkeFunnet {
             val faultBo = FaultTjenestepensjonForholdIkkeFunnet()
