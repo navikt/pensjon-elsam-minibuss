@@ -1,9 +1,11 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1;
 
+import jakarta.xml.bind.JAXBElement;
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.HentTPForholdListeRequestInt;
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt;
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt;
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt;
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold;
 import no.nav.elsam.registreretpforhold.v0_1.FaultGenerisk;
 import no.nav.elsam.registreretpforhold.v0_1.FaultTjenestepensjonForholdIkkeFunnet;
 import no.nav.elsam.registreretpforhold.v0_1.HentTPForholdListeResp;
@@ -39,7 +41,11 @@ public class Mapper {
     }
 
     public static void GBOTjenestepensjonTOHentTPForholdListeResp(nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon GBOTjenestepensjon, HentTPForholdListeResp HentTPForholdListeResponse) {
-        GBOTjenestepensjonForholdTOTPForhold(GBOTjenestepensjon.getTjenestepensjonForholdene(),HentTPForholdListeResponse.getTjenestepensjonForholdene()); // submap (executionOrder=1)
+        HentTPForholdListeResponse.getTjenestepensjonForholdene().addAll(GBOTjenestepensjon.getTjenestepensjonForholdene().stream().map(it -> {
+            TPForhold tpForhold = new TPForhold();
+            GBOTjenestepensjonForholdTOTPForhold(it, tpForhold);
+            return tpForhold;
+        }).toList()); // submap (executionOrder=1)
     }
 
     public static void HentTPForholdListeRequestIntTOGBOFinnTjenestepensjonsforholdRequest(HentTPForholdListeRequestInt HentTPForholdListeRequestInt, nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnTjenestepensjonsforholdRequest GBOFinnTjenestepensjonsforholdRequest) {
@@ -49,22 +55,16 @@ public class Mapper {
 
     public static void OpprettTPForholdRequestIntTOGBOTjenestepensjon(OpprettTPForholdRequestInt OpprettTPForholdRequestInt, nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon GBOTjenestepensjon) {
         GBOTjenestepensjon.setFnr(OpprettTPForholdRequestInt.getExtRequest().getFnr()); // move (executionOrder=1)
-        OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold(OpprettTPForholdRequestInt,GBOTjenestepensjon.getTjenestepensjonForholdene()); // submap (executionOrder=2)
+        GBOTjenestepensjonForhold gboTjenestepensjonForhold = new GBOTjenestepensjonForhold();
+        OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold(OpprettTPForholdRequestInt, gboTjenestepensjonForhold);
+        GBOTjenestepensjon.getTjenestepensjonForholdene().add(gboTjenestepensjonForhold); // submap (executionOrder=2)
     }
 
     public static void OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold(OpprettTPForholdRequestInt OpprettTPForholdRequestInt, nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold GBOTjenestepensjonForhold) {
         GBOTjenestepensjonForhold.setTssEksternId(OpprettTPForholdRequestInt.getEksternTSSId()); // move (executionOrder=1)
         GBOTjenestepensjonForhold.setHarUtlandPensjon("false"); // set (executionOrder=2)
-    {
-        String OpprettTPForholdRequestInt_extRequest_samtykke = OpprettTPForholdRequestInt.getExtRequest().getSamtykke(); // custom.input.forEach (executionOrder=3)
-        String GBOTjenestepensjonForhold_samtykkeSimuleringKode = null; // custom.output declaration (executionOrder=3)
-        // The specific type of variable OpprettTPForholdRequestInt_extRequest_samtykke_value is java.lang.Boolean
-        // The specific type of variable GBOTjenestepensjonForhold_samtykkeSimuleringKode is java.lang.String
-        GBOTjenestepensjonForhold_samtykkeSimuleringKode = (OpprettTPForholdRequestInt_extRequest_samtykke != null && ((Boolean) OpprettTPForholdRequestInt_extRequest_samtykke).booleanValue()) ? "J" : "N";
-        
-        GBOTjenestepensjonForhold.setSamtykkeSimuleringKode(GBOTjenestepensjonForhold_samtykkeSimuleringKode); // custom.output assignment (executionOrder=3)
-
-    }
+        JAXBElement<Boolean> OpprettTPForholdRequestInt_extRequest_samtykke = OpprettTPForholdRequestInt.getExtRequest().getSamtykke(); // custom.input.forEach (executionOrder=3)
+        GBOTjenestepensjonForhold.setSamtykkeSimuleringKode((OpprettTPForholdRequestInt_extRequest_samtykke != null && OpprettTPForholdRequestInt_extRequest_samtykke.getValue() != null && OpprettTPForholdRequestInt_extRequest_samtykke.getValue()) ? "J" : "N"); // custom.output assignment (executionOrder=3)
         GBOTjenestepensjonForhold.setHarSimulering("false"); // set (executionOrder=4)
     }
 
