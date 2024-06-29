@@ -10,6 +10,7 @@ import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
 import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
 import no.nav.elsam.registreretpforhold.v0_1.*
+import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.*
 import java.time.LocalDateTime
 import javax.xml.datatype.DatatypeConfigurationException
@@ -41,7 +42,9 @@ class NavConsElsamTptilbRegisrereTpForhold(
 
         // Ensure that the caller has a TP-forhold to the subject
         if (!response.tjenestepensjonForholdene.any { it?.tpnr == hentTPForholdListeRequest.tpnr }) {
-            throw ServiceBusinessException(getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold"))
+            throw ServiceBusinessException(
+                getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold")
+            )
         }
 
         return response
@@ -82,7 +85,9 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
         val tpForholdene = response.tjenestepensjonForholdene
         if (tpForholdene.isEmpty()) {
-            throw ServiceBusinessException(getFaultTjenestepensjonForholdIkkeFunnet("TP-forholdet finnes ikke i registeret"))
+            throw ServiceBusinessException(
+                getFaultTjenestepensjonForholdIkkeFunnet("TP-forholdet finnes ikke i registeret")
+            )
         }
 
         if (tpForholdene.size > 1) {
