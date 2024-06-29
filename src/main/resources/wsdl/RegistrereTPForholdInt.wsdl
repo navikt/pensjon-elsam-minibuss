@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav.no/elsam/registreretpforhold/V0_1" xmlns:bons2="http://nav-cons-elsam-tptilb-registreretpforholdV0_1/no/nav/registreretpforhold/V0_1/asbo" xmlns:bons3="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons4="http://a/no/nav/registreretpforhold/V0_1/asbo" xmlns:bons5="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" xmlns:bons6="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/inf" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RegistrereTPForholdV0_1Int" targetNamespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/inf">
+  <wsdl:types>
+    <xsd:schema xmlns:bons0="http://nav-cons-elsam-tptilb-registreretpforholdV0_1/no/nav/asbo" targetNamespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/inf" xmlns:bons1="http://nav.no/elsam/registreretpforhold/V0_1" xmlns:bons2="http://nav-cons-elsam-tptilb-registreretpforholdV0_1/no/nav/registreretpforhold/V0_1/asbo" xmlns:bons3="http://nav-lib-frg/no/nav/lib/frg/gbo" xmlns:bons5="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" xmlns:bons6="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:tns="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/inf" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav.no/elsam/registreretpforhold/V0_1" schemaLocation="no/nav/registreretpforhold/V0_1/asbo/HentTPForholdListeResp.xsd"/>
+            <xsd:import namespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" schemaLocation="no/nav/asbo/SlettTPForholdTjenestepensjonRequestInt.xsd"/>
+            <xsd:import namespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" schemaLocation="no/nav/asbo/SlettTPForholdFinnTjenestepensjonsforholdRequestInt.xsd"/>
+            <xsd:import namespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" schemaLocation="no/nav/asbo/OpprettTPForholdRequestInt.xsd"/>
+            <xsd:import namespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo" schemaLocation="no/nav/asbo/HentTPForholdListeRequestInt.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/registreretpforhold/V0_1" schemaLocation="no/nav/registreretpforhold/V0_1/fault/FaultTjenestepensjonForholdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav.no/elsam/registreretpforhold/V0_1" schemaLocation="no/nav/registreretpforhold/V0_1/fault/FaultGenerisk.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/gbo" schemaLocation="no/nav/lib/frg/gbo/GBOTjenestepensjon.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="no/nav/lib/frg/fault/FaultElementetErDuplikat.xsd"/>
+            <xsd:element name="opprettTPForholdInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettTPForholdRequestInt" nillable="true" type="bons5:OpprettTPForholdRequestInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettTPForholdIntResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPForholdFinnTjenestepensjonsforholdInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettTPForholdRequestInt" nillable="true" type="bons5:SlettTPForholdFinnTjenestepensjonsforholdRequestInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPForholdFinnTjenestepensjonsforholdIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+                        <xsd:element name="slettTPForholdResponseInt" nillable="true" type="bons3:GBOTjenestepensjon"/>
+                    </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettTPForholdFinnTjenestepensjonsforholdInt_faultTjenestepensjonForholdIkkeFunnetInt" type="bons1:FaultTjenestepensjonForholdIkkeFunnet"/>
+            <xsd:element name="slettTPForholdTjenestepensjonInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettTPForholdRequestInt" nillable="true" type="bons5:SlettTPForholdTjenestepensjonRequestInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="slettTPForholdTjenestepensjonIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentTPForholdListeInt">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentTPForholdListeRequestInt" nillable="true" type="bons5:HentTPForholdListeRequestInt"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentTPForholdListeIntResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentTPForholdListeResponseInt" nillable="true" type="bons1:HentTPForholdListeResp"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentTPForholdListeInt_faultTjenestepensjonForholdIkkeFunnet" type="bons1:FaultTjenestepensjonForholdIkkeFunnet"/>
+            <xsd:element name="slettTPForholdTjenestepensjonInt_faultTjenestepensjonForholdIkkeFunnetInt" type="bons1:FaultTjenestepensjonForholdIkkeFunnet"/>
+            <xsd:element name="opprettTPForholdInt_faultElementetErDuplikat" type="bons6:FaultElementetErDuplikat"/>
+            <xsd:element name="slettTPForholdFinnTjenestepensjonsforholdInt_faultGenerisk" type="bons1:FaultGenerisk"/>
+            <xsd:element name="hentTPForholdListeInt_faultGenerisk" type="bons1:FaultGenerisk"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettTPForholdIntRequestMsg">
+    <wsdl:part element="tns:opprettTPForholdInt" name="opprettTPForholdIntParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPForholdIntResponseMsg">
+    <wsdl:part element="tns:opprettTPForholdIntResponse" name="opprettTPForholdIntResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdFinnTjenestepensjonsforholdIntRequestMsg">
+    <wsdl:part element="tns:slettTPForholdFinnTjenestepensjonsforholdInt" name="slettTPForholdFinnTjenestepensjonsforholdIntParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdFinnTjenestepensjonsforholdIntResponseMsg">
+    <wsdl:part element="tns:slettTPForholdFinnTjenestepensjonsforholdIntResponse" name="slettTPForholdFinnTjenestepensjonsforholdIntResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdFinnTjenestepensjonsforholdInt_faultTjenestepensjonForholdIkkeFunnetIntMsg">
+    <wsdl:part element="tns:slettTPForholdFinnTjenestepensjonsforholdInt_faultTjenestepensjonForholdIkkeFunnetInt" name="faultTjenestepensjonForholdIkkeFunnetInt"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdTjenestepensjonIntRequestMsg">
+    <wsdl:part element="tns:slettTPForholdTjenestepensjonInt" name="slettTPForholdTjenestepensjonIntParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdTjenestepensjonIntResponseMsg">
+    <wsdl:part element="tns:slettTPForholdTjenestepensjonIntResponse" name="slettTPForholdTjenestepensjonIntResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentTPForholdListeIntRequestMsg">
+    <wsdl:part element="tns:hentTPForholdListeInt" name="hentTPForholdListeIntParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentTPForholdListeIntResponseMsg">
+    <wsdl:part element="tns:hentTPForholdListeIntResponse" name="hentTPForholdListeIntResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentTPForholdListeInt_faultTjenestepensjonForholdIkkeFunnetMsg">
+    <wsdl:part element="tns:hentTPForholdListeInt_faultTjenestepensjonForholdIkkeFunnet" name="faultTjenestepensjonForholdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdTjenestepensjonInt_faultTjenestepensjonForholdIkkeFunnetIntMsg">
+    <wsdl:part element="tns:slettTPForholdTjenestepensjonInt_faultTjenestepensjonForholdIkkeFunnetInt" name="faultTjenestepensjonForholdIkkeFunnetInt"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPForholdInt_faultElementetErDuplikatMsg">
+    <wsdl:part element="tns:opprettTPForholdInt_faultElementetErDuplikat" name="faultElementetErDuplikat"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPForholdFinnTjenestepensjonsforholdInt_faultGeneriskMsg">
+    <wsdl:part element="tns:slettTPForholdFinnTjenestepensjonsforholdInt_faultGenerisk" name="faultGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="hentTPForholdListeInt_faultGeneriskMsg">
+    <wsdl:part element="tns:hentTPForholdListeInt_faultGenerisk" name="faultGenerisk"/>
+  </wsdl:message>
+    <wsdl:portType name="RegistrereTPForholdInt">
+    <wsdl:operation name="opprettTPForholdInt">
+      <wsdl:input message="tns:opprettTPForholdIntRequestMsg" name="opprettTPForholdIntRequest"/>
+      <wsdl:output message="tns:opprettTPForholdIntResponseMsg" name="opprettTPForholdIntResponse"/>
+            <wsdl:fault message="tns:opprettTPForholdInt_faultElementetErDuplikatMsg" name="faultElementetErDuplikat"/>
+        </wsdl:operation>
+    <wsdl:operation name="slettTPForholdFinnTjenestepensjonsforholdInt">
+      <wsdl:input message="tns:slettTPForholdFinnTjenestepensjonsforholdIntRequestMsg" name="slettTPForholdFinnTjenestepensjonsforholdIntRequest"/>
+            <wsdl:output message="tns:slettTPForholdFinnTjenestepensjonsforholdIntResponseMsg" name="slettTPForholdFinnTjenestepensjonsforholdIntResponse"/>
+            <wsdl:fault message="tns:slettTPForholdFinnTjenestepensjonsforholdInt_faultTjenestepensjonForholdIkkeFunnetIntMsg" name="faultTjenestepensjonForholdIkkeFunnetInt"/>
+            <wsdl:fault message="tns:slettTPForholdFinnTjenestepensjonsforholdInt_faultGeneriskMsg" name="faultGenerisk"/>
+        </wsdl:operation>
+        <wsdl:operation name="slettTPForholdTjenestepensjonInt">
+            <wsdl:input message="tns:slettTPForholdTjenestepensjonIntRequestMsg" name="slettTPForholdTjenestepensjonIntRequest"/>
+      <wsdl:output message="tns:slettTPForholdTjenestepensjonIntResponseMsg" name="slettTPForholdTjenestepensjonIntResponse"/>
+            <wsdl:fault message="tns:slettTPForholdTjenestepensjonInt_faultTjenestepensjonForholdIkkeFunnetIntMsg" name="faultTjenestepensjonForholdIkkeFunnetInt"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentTPForholdListeInt">
+      <wsdl:input message="tns:hentTPForholdListeIntRequestMsg" name="hentTPForholdListeIntRequest"/>
+      <wsdl:output message="tns:hentTPForholdListeIntResponseMsg" name="hentTPForholdListeIntResponse"/>
+      <wsdl:fault message="tns:hentTPForholdListeInt_faultTjenestepensjonForholdIkkeFunnetMsg" name="faultTjenestepensjonForholdIkkeFunnet"/>
+            <wsdl:fault message="tns:hentTPForholdListeInt_faultGeneriskMsg" name="faultGenerisk"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

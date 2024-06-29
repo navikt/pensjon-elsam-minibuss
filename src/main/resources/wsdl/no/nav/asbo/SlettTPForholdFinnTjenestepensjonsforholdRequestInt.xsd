@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav.no/elsam/registreretpforhold/V0_1" targetNamespace="http://nav-cons-elsam-tptilb-registreretpforhold/no/nav/asbo">
+    <xsd:import namespace="http://nav.no/elsam/registreretpforhold/V0_1" schemaLocation="../registreretpforhold/V0_1/asbo/SlettTPForholdReq.xsd"/>
+    <xsd:complexType name="SlettTPForholdFinnTjenestepensjonsforholdRequestInt">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="extRequest" type="bons0:SlettTPForholdReq"/>
+      <xsd:element minOccurs="0" name="eksternTSSId" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
