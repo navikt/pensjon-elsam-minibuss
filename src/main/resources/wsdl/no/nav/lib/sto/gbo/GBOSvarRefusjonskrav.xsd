@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sto/no/nav/lib/sto/gbo" targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo">
+    <xsd:include schemaLocation="GBOPeriodisertBelop.xsd"/>
+    <xsd:complexType name="GBOSvarRefusjonskrav">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="fnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tpnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="samId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="refusjonskrav" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="periodisertBelopListe" type="bons0:GBOPeriodisertBelop" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

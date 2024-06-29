@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sto/no/nav/lib/sto/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:bons3="http://nav-lib-sto/no/nav/lib/sto/fault" xmlns:tns="http://nav-lib-sto/no/nav/lib/sto/inf/SamordneAAPVedtak" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SamordneAAPVedtak" targetNamespace="http://nav-lib-sto/no/nav/lib/sto/inf/SamordneAAPVedtak">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sto/no/nav/lib/sto/inf/SamordneAAPVedtak" xmlns:bons1="http://nav-lib-sto/no/nav/lib/sto/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:bons3="http://nav-lib-sto/no/nav/lib/sto/fault" xmlns:tns="http://nav-lib-sto/no/nav/lib/sto/inf/SamordneAAPVedtak" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultNAVHarIkkeWSGrensesnittMotTPOrdning.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="no/nav/lib/frg/fault/FaultTomDatoForanFomDato.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="no/nav/lib/frg/fault/FaultElementetFinnesIkke.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOSamordneAAPVedtakResponse.xsd"/>
+      <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOSamordneAAPVedtakRequest.xsd"/>
+      <xsd:element name="samordneAAPVedtak">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="samordneAAPVedtakRequest" nillable="true" type="bons1:GBOSamordneAAPVedtakRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="samordneAAPVedtakResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="samordneAAPVedtakResponse" nillable="true" type="bons1:GBOSamordneAAPVedtakResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="FaultElementetFinnesIkke_element" nillable="true" type="bons2:FaultElementetFinnesIkke"/>
+            <xsd:element name="FaultTomDatoForanFomDato_element" nillable="true" type="bons2:FaultTomDatoForanFomDato"/>
+            <xsd:element name="FaultNAVHarIkkeWSGrensesnittMotTPOrdning_element" nillable="true" type="bons3:FaultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="samordneAAPVedtakRequestMsg">
+    <wsdl:part element="tns:samordneAAPVedtak" name="samordneAAPVedtakParameters"/>
+  </wsdl:message>
+    <wsdl:message name="samordneAAPVedtakResponseMsg">
+    <wsdl:part element="tns:samordneAAPVedtakResponse" name="samordneAAPVedtakResult"/>
+  </wsdl:message>
+    <wsdl:message name="samordneAAPVedtak_faultElementetFinnesIkkeMsg">
+    <wsdl:part element="tns:FaultElementetFinnesIkke_element" name="faultElementetFinnesIkke"/>
+  </wsdl:message>
+    <wsdl:message name="samordneAAPVedtak_faultTomDatoForanFomDatoMsg">
+    <wsdl:part element="tns:FaultTomDatoForanFomDato_element" name="faultTomDatoForanFomDato"/>
+  </wsdl:message>
+    <wsdl:message name="samordneAAPVedtak_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg">
+    <wsdl:part element="tns:FaultNAVHarIkkeWSGrensesnittMotTPOrdning_element" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+  </wsdl:message>
+    <wsdl:portType name="SamordneAAPVedtak">
+    <wsdl:operation name="samordneAAPVedtak">
+      <wsdl:input message="tns:samordneAAPVedtakRequestMsg" name="samordneAAPVedtakRequest"/>
+      <wsdl:output message="tns:samordneAAPVedtakResponseMsg" name="samordneAAPVedtakResponse"/>
+            <wsdl:fault message="tns:samordneAAPVedtak_faultElementetFinnesIkkeMsg" name="faultElementetFinnesIkke"/>
+            <wsdl:fault message="tns:samordneAAPVedtak_faultTomDatoForanFomDatoMsg" name="faultTomDatoForanFomDato"/>
+            <wsdl:fault message="tns:samordneAAPVedtak_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

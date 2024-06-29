@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sto/no/nav/lib/sto/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:bons3="http://nav-lib-sto/no/nav/lib/sto/fault" xmlns:bons4="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-sto/no/nav/lib/sto/inf/Samordning" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Samordning" targetNamespace="http://nav-lib-sto/no/nav/lib/sto/inf/Samordning">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sto/no/nav/lib/sto/inf/Samordning" xmlns:bons1="http://nav-lib-sto/no/nav/lib/sto/gbo" xmlns:bons2="http://nav-lib-frg/no/nav/lib/frg/fault" xmlns:bons3="http://nav-lib-sto/no/nav/lib/sto/fault" xmlns:bons4="http://nav-lib-pen/no/nav/lib/pen/fault" xmlns:tns="http://nav-lib-sto/no/nav/lib/sto/inf/Samordning" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultSamordningFunksjonellFeil.xsd"/>
+            <xsd:import namespace="http://nav-lib-pen/no/nav/lib/pen/fault" schemaLocation="no/nav/lib/pen/fault/FaultVedtakIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOVarsleTPSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOVarsleEndringPersonaliaRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOHentSamordningsdataRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOSlettTPSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOOpprettTPSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultSamIdIkkeGyldig.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultTssEksternIdIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOOpprettRefusjonskravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOHentSamordningsVedtaksListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultKombinasjonInput.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultYtelseAlleredeRegistrert.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOLagreSamordningsMeldingRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultNAVHarIkkeWSGrensesnittMotTPOrdning.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultTPNummerIkkeGyldig.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultSvarUtenforPeriode.xsd"/>
+            <xsd:import namespace="http://nav-lib-frg/no/nav/lib/frg/fault" schemaLocation="no/nav/lib/frg/fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultYtelseIkkeIverksatt.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOSamordningsdata.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOSamordningPerson.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultSamordningVedtakId.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOVarsleVedtakSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultRefKravAlleredeRegElUtenforFrist.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOVarsleManglendeRefusjonskravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/fault" schemaLocation="no/nav/lib/sto/fault/FaultVedtakEksistererIkke.xsd"/>
+            <xsd:import namespace="http://nav-lib-sto/no/nav/lib/sto/gbo" schemaLocation="no/nav/lib/sto/gbo/GBOOpprettVedtakSamordningRequest.xsd"/>
+            <xsd:element name="opprettTPSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettTPSamordningRequest" nillable="true" type="bons1:GBOOpprettTPSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettTPSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettTPSamordningResponse" nillable="true" type="bons1:GBOSamordningsdata"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdata">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataRequest" nillable="true" type="bons1:GBOHentSamordningsdataRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataResponse" nillable="true" type="bons1:GBOSamordningsdata"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettTPSamordningRequest" nillable="true" type="bons1:GBOSlettTPSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettTPSamordning_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+      <xsd:element name="hentSamordningsdata_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+      <xsd:element name="hentSamordningsdata_faultYtelseIkkeIverksatt" type="bons3:FaultYtelseIkkeIverksatt"/>
+      <xsd:element name="slettTPSamordning_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+      <xsd:element name="slettTPSamordning_faultKombinasjonInput" type="bons3:FaultKombinasjonInput"/>
+            <xsd:element name="opprettTPSamordning_faultYtelseAlleredeRegistrert" type="bons3:FaultYtelseAlleredeRegistrert"/>
+            <xsd:element name="opprettRefusjonskrav">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettRefusjonskravRequest" nillable="true" type="bons1:GBOOpprettRefusjonskravRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettRefusjonskravResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettRefusjonskrav_faultSamIdIkkeGyldig" type="bons3:FaultSamIdIkkeGyldig"/>
+            <xsd:element name="hentSamordningsVedtaksListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsVedtaksListeRequest" nillable="true" type="bons1:GBOHentSamordningsVedtaksListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentSamordningsVedtaksListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsVedtaksListeResponse" nillable="true" type="bons1:GBOSamordningPerson"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+            <xsd:element name="lagreSamordningsMelding">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreSamordningsMeldingRequest" nillable="true" type="bons1:GBOLagreSamordningsMeldingRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreSamordningsMeldingResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreSamordningsMelding_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+            <xsd:element name="lagreSamordningsMelding_faultSamordningVedtakId" type="bons3:FaultSamordningVedtakId"/>
+            <xsd:element name="opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFrist1" type="bons3:FaultRefKravAlleredeRegElUtenforFrist"/>
+            <xsd:element name="opprettRefusjonskrav_FaultSvarUtenforPeriode" type="bons3:FaultSvarUtenforPeriode"/>
+            <xsd:element name="opprettVedtakSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettVedtakSamordningRequest" nillable="true" type="bons1:GBOOpprettVedtakSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettVedtakSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettVedtakSamordning_faultVedtakEksistererIkke" type="bons3:FaultVedtakEksistererIkke"/>
+            <xsd:element name="varsleEndringPersonalia">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="varsleEndringPersonaliaRequest" nillable="true" type="bons1:GBOVarsleEndringPersonaliaRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleManglendeRefusjonskrav">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="varsleManglendeRefusjonskravRequest" nillable="true" type="bons1:GBOVarsleManglendeRefusjonskravRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleManglendeRefusjonskravResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleTPSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="varsleTPSamordningRequest" nillable="true" type="bons1:GBOVarsleTPSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleTPSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleVedtakSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="varsleVedtakSamordningRequest" nillable="true" type="bons1:GBOVarsleVedtakSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleVedtakSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="varsleManglendeRefusjonskrav_faultTPNummerIkkeGyldig" type="bons3:FaultTPNummerIkkeGyldig"/>
+            <xsd:element name="varsleManglendeRefusjonskrav_faultNAVHarIkkeWSGrensesnittMotTPOrdning" type="bons3:FaultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+            <xsd:element name="varsleTPSamordning_faultTssEksternIdIkkeFunnet" type="bons3:FaultTssEksternIdIkkeFunnet"/>
+            <xsd:element name="varsleTPSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdning" type="bons3:FaultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+            <xsd:element name="varsleVedtakSamordning_faultTssEksternIdIkkeFunnet" type="bons3:FaultTssEksternIdIkkeFunnet"/>
+            <xsd:element name="varsleVedtakSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdning" type="bons3:FaultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+            <xsd:element name="FaultVedtakIkkeFunnet_element" nillable="true" type="bons4:FaultVedtakIkkeFunnet"/>
+            <xsd:element name="FaultSamordningFunksjonellFeil_element" nillable="true" type="bons3:FaultSamordningFunksjonellFeil"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettTPSamordningRequestMsg">
+    <wsdl:part element="tns:opprettTPSamordning" name="opprettTPSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordningResponseMsg">
+    <wsdl:part element="tns:opprettTPSamordningResponse" name="opprettTPSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdataRequestMsg">
+    <wsdl:part element="tns:hentSamordningsdata" name="hentSamordningsdataParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdataResponseMsg">
+    <wsdl:part element="tns:hentSamordningsdataResponse" name="hentSamordningsdataResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordningRequestMsg">
+    <wsdl:part element="tns:slettTPSamordning" name="slettTPSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordningResponseMsg">
+    <wsdl:part element="tns:slettTPSamordningResponse" name="slettTPSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordning_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:opprettTPSamordning_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdata_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentSamordningsdata_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdata_faultYtelseIkkeIverksattMsg">
+    <wsdl:part element="tns:hentSamordningsdata_faultYtelseIkkeIverksatt" name="faultYtelseIkkeIverksatt"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordning_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:slettTPSamordning_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordning_faultKombinasjonInputMsg">
+    <wsdl:part element="tns:slettTPSamordning_faultKombinasjonInput" name="faultKombinasjonInput"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordning_faultYtelseAlleredeRegistrertMsg">
+    <wsdl:part element="tns:opprettTPSamordning_faultYtelseAlleredeRegistrert" name="faultYtelseAlleredeRegistrert"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskravRequestMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav" name="opprettRefusjonskravParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskravResponseMsg">
+    <wsdl:part element="tns:opprettRefusjonskravResponse" name="opprettRefusjonskravResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultSamIdIkkeGyldigMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultSamIdIkkeGyldig" name="faultSamIdIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListeRequestMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe" name="hentSamordningsVedtaksListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListeResponseMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListeResponse" name="hentSamordningsVedtaksListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSamordningsMeldingRequestMsg">
+    <wsdl:part element="tns:lagreSamordningsMelding" name="lagreSamordningsMeldingParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSamordningsMeldingResponseMsg">
+    <wsdl:part element="tns:lagreSamordningsMeldingResponse" name="lagreSamordningsMeldingResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSamordningsMelding_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreSamordningsMelding_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSamordningsMelding_faultSamordningVedtakIdMsg">
+    <wsdl:part element="tns:lagreSamordningsMelding_faultSamordningVedtakId" name="faultSamordningVedtakId"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFrist1Msg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFrist1" name="faultRefKravAlleredeRegElUtenforFrist1"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_FaultSvarUtenforPeriodeMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_FaultSvarUtenforPeriode" name="FaultSvarUtenforPeriode"/>
+  </wsdl:message>
+    <wsdl:message name="opprettVedtakSamordningRequestMsg">
+    <wsdl:part element="tns:opprettVedtakSamordning" name="opprettVedtakSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettVedtakSamordningResponseMsg">
+    <wsdl:part element="tns:opprettVedtakSamordningResponse" name="opprettVedtakSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="varsleEndringPersonaliaRequestMsg">
+    <wsdl:part element="tns:varsleEndringPersonalia" name="varsleEndringPersonaliaParameters"/>
+  </wsdl:message>
+    <wsdl:message name="varsleManglendeRefusjonskravRequestMsg">
+    <wsdl:part element="tns:varsleManglendeRefusjonskrav" name="varsleManglendeRefusjonskravParameters"/>
+  </wsdl:message>
+    <wsdl:message name="varsleManglendeRefusjonskravResponseMsg">
+    <wsdl:part element="tns:varsleManglendeRefusjonskravResponse" name="varsleManglendeRefusjonskravResult"/>
+  </wsdl:message>
+    <wsdl:message name="varsleTPSamordningRequestMsg">
+    <wsdl:part element="tns:varsleTPSamordning" name="varsleTPSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="varsleTPSamordningResponseMsg">
+    <wsdl:part element="tns:varsleTPSamordningResponse" name="varsleTPSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="varsleVedtakSamordningRequestMsg">
+    <wsdl:part element="tns:varsleVedtakSamordning" name="varsleVedtakSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="varsleVedtakSamordningResponseMsg">
+    <wsdl:part element="tns:varsleVedtakSamordningResponse" name="varsleVedtakSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="varsleManglendeRefusjonskrav_faultTPNummerIkkeGyldigMsg">
+    <wsdl:part element="tns:varsleManglendeRefusjonskrav_faultTPNummerIkkeGyldig" name="faultTPNummerIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="varsleManglendeRefusjonskrav_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg">
+    <wsdl:part element="tns:varsleManglendeRefusjonskrav_faultNAVHarIkkeWSGrensesnittMotTPOrdning" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+  </wsdl:message>
+    <wsdl:message name="varsleTPSamordning_faultTssEksternIdIkkeFunnetMsg">
+    <wsdl:part element="tns:varsleTPSamordning_faultTssEksternIdIkkeFunnet" name="faultTssEksternIdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="varsleTPSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg">
+    <wsdl:part element="tns:varsleTPSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdning" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+  </wsdl:message>
+    <wsdl:message name="varsleVedtakSamordning_faultTssEksternIdIkkeFunnetMsg">
+    <wsdl:part element="tns:varsleVedtakSamordning_faultTssEksternIdIkkeFunnet" name="faultTssEksternIdIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="varsleVedtakSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg">
+    <wsdl:part element="tns:varsleVedtakSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdning" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+  </wsdl:message>
+    <wsdl:message name="opprettVedtakSamordning_faultVedtakIkkeFunnetMsg">
+    <wsdl:part element="tns:FaultVedtakIkkeFunnet_element" name="faultVedtakIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="opprettVedtakSamordning_faultSamordningFunksjonellFeilMsg">
+    <wsdl:part element="tns:FaultSamordningFunksjonellFeil_element" name="faultSamordningFunksjonellFeil"/>
+  </wsdl:message>
+    <wsdl:portType name="Samordning">
+    <wsdl:operation name="opprettTPSamordning">
+      <wsdl:input message="tns:opprettTPSamordningRequestMsg" name="opprettTPSamordningRequest"/>
+      <wsdl:output message="tns:opprettTPSamordningResponseMsg" name="opprettTPSamordningResponse"/>
+      <wsdl:fault message="tns:opprettTPSamordning_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:opprettTPSamordning_faultYtelseAlleredeRegistrertMsg" name="faultYtelseAlleredeRegistrert"/>
+        </wsdl:operation>
+    <wsdl:operation name="hentSamordningsdata">
+      <wsdl:input message="tns:hentSamordningsdataRequestMsg" name="hentSamordningsdataRequest"/>
+      <wsdl:output message="tns:hentSamordningsdataResponseMsg" name="hentSamordningsdataResponse"/>
+      <wsdl:fault message="tns:hentSamordningsdata_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+      <wsdl:fault message="tns:hentSamordningsdata_faultYtelseIkkeIverksattMsg" name="faultYtelseIkkeIverksatt"/>
+    </wsdl:operation>
+    <wsdl:operation name="slettTPSamordning">
+      <wsdl:input message="tns:slettTPSamordningRequestMsg" name="slettTPSamordningRequest"/>
+      <wsdl:output message="tns:slettTPSamordningResponseMsg" name="slettTPSamordningResponse"/>
+      <wsdl:fault message="tns:slettTPSamordning_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+      <wsdl:fault message="tns:slettTPSamordning_faultKombinasjonInputMsg" name="faultKombinasjonInput"/>
+    </wsdl:operation>
+        <wsdl:operation name="opprettRefusjonskrav">
+      <wsdl:input message="tns:opprettRefusjonskravRequestMsg" name="opprettRefusjonskravRequest"/>
+      <wsdl:output message="tns:opprettRefusjonskravResponseMsg" name="opprettRefusjonskravResponse"/>
+      <wsdl:fault message="tns:opprettRefusjonskrav_faultSamIdIkkeGyldigMsg" name="faultSamIdIkkeGyldig"/>
+            <wsdl:fault message="tns:opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFrist1Msg" name="faultRefKravAlleredeRegElUtenforFrist"/>
+            <wsdl:fault message="tns:opprettRefusjonskrav_FaultSvarUtenforPeriodeMsg" name="FaultSvarUtenforPeriode"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentSamordningsVedtaksListe">
+      <wsdl:input message="tns:hentSamordningsVedtaksListeRequestMsg" name="hentSamordningsVedtaksListeRequest"/>
+      <wsdl:output message="tns:hentSamordningsVedtaksListeResponseMsg" name="hentSamordningsVedtaksListeResponse"/>
+      <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+    </wsdl:operation>
+        <wsdl:operation name="lagreSamordningsMelding">
+      <wsdl:input message="tns:lagreSamordningsMeldingRequestMsg" name="lagreSamordningsMeldingRequest"/>
+      <wsdl:output message="tns:lagreSamordningsMeldingResponseMsg" name="lagreSamordningsMeldingResponse"/>
+      <wsdl:fault message="tns:lagreSamordningsMelding_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+      <wsdl:fault message="tns:lagreSamordningsMelding_faultSamordningVedtakIdMsg" name="faultSamordningVedtakId"/>
+    </wsdl:operation>
+        <wsdl:operation name="opprettVedtakSamordning">
+      <wsdl:input message="tns:opprettVedtakSamordningRequestMsg" name="opprettVedtakSamordningRequest"/>
+      <wsdl:output message="tns:opprettVedtakSamordningResponseMsg" name="opprettVedtakSamordningResponse"/>
+            <wsdl:fault message="tns:opprettVedtakSamordning_faultVedtakIkkeFunnetMsg" name="faultVedtakIkkeFunnet"/>
+            <wsdl:fault message="tns:opprettVedtakSamordning_faultSamordningFunksjonellFeilMsg" name="faultSamordningFunksjonellFeil"/>
+        </wsdl:operation>
+        <wsdl:operation name="varsleEndringPersonalia">
+      <wsdl:input message="tns:varsleEndringPersonaliaRequestMsg" name="varsleEndringPersonaliaRequest"/>
+    </wsdl:operation>
+        <wsdl:operation name="varsleManglendeRefusjonskrav">
+      <wsdl:input message="tns:varsleManglendeRefusjonskravRequestMsg" name="varsleManglendeRefusjonskravRequest"/>
+      <wsdl:output message="tns:varsleManglendeRefusjonskravResponseMsg" name="varsleManglendeRefusjonskravResponse"/>
+      <wsdl:fault message="tns:varsleManglendeRefusjonskrav_faultTPNummerIkkeGyldigMsg" name="faultTPNummerIkkeGyldig"/>
+      <wsdl:fault message="tns:varsleManglendeRefusjonskrav_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+    </wsdl:operation>
+        <wsdl:operation name="varsleTPSamordning">
+      <wsdl:input message="tns:varsleTPSamordningRequestMsg" name="varsleTPSamordningRequest"/>
+      <wsdl:output message="tns:varsleTPSamordningResponseMsg" name="varsleTPSamordningResponse"/>
+      <wsdl:fault message="tns:varsleTPSamordning_faultTssEksternIdIkkeFunnetMsg" name="faultTssEksternIdIkkeFunnet"/>
+      <wsdl:fault message="tns:varsleTPSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+    </wsdl:operation>
+        <wsdl:operation name="varsleVedtakSamordning">
+      <wsdl:input message="tns:varsleVedtakSamordningRequestMsg" name="varsleVedtakSamordningRequest"/>
+      <wsdl:output message="tns:varsleVedtakSamordningResponseMsg" name="varsleVedtakSamordningResponse"/>
+      <wsdl:fault message="tns:varsleVedtakSamordning_faultTssEksternIdIkkeFunnetMsg" name="faultTssEksternIdIkkeFunnet"/>
+      <wsdl:fault message="tns:varsleVedtakSamordning_faultNAVHarIkkeWSGrensesnittMotTPOrdningMsg" name="faultNAVHarIkkeWSGrensesnittMotTPOrdning"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

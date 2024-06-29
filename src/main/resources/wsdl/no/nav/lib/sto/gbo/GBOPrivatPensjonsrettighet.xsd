@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo"
+	xmlns:bons0="http://nav-lib-sto/no/nav/lib/sto/gbo">
+	<xsd:include schemaLocation="GBOUtilgjengeligSelskap.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOPrivatAlderRettighet.xsd"></xsd:include>
+	<xsd:complexType name="GBOPrivatPensjonsrettighet">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="privatAlderRettighetListe"
+				type="bons0:GBOPrivatAlderRettighet" maxOccurs="unbounded">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="utilgjengeligSelskapListe"
+				type="bons0:GBOUtilgjengeligSelskap" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

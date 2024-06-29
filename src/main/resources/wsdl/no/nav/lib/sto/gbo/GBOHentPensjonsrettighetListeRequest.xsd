@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo"
+	xmlns:bons0="http://nav-lib-sto/no/nav/lib/sto/gbo">
+	<xsd:include schemaLocation="GBOUttaksperiode.xsd"></xsd:include>
+	<xsd:complexType name="GBOHentPensjonsrettighetListeRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="arligInntektForUttak"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="anstallInntektsarEtterUttak" type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="uttaksperiodeListe"
+				type="bons0:GBOUttaksperiode" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

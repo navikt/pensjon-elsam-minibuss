@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-sto/no/nav/lib/sto/gbo"
+	targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo">
+
+	<xsd:include schemaLocation="GBOUtbetalingsperiode.xsd" />
+	<xsd:complexType name="GBOPrivatAlderRettighet">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="produktbetegnelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="kategoriKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="startAlder"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sluttAlder"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="merknad"
+				type="xsd:string">
+			</xsd:element>
+
+
+			<xsd:element minOccurs="0" name="arsakManglendeGradering"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0"
+				name="utbetalingperiodeListe" type="bons0:GBOUtbetalingsperiode">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

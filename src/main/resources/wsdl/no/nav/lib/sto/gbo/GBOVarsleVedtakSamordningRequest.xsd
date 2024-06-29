@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-pen/no/nav/lib/pen/gbo"
+	targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo"
+	xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:import schemaLocation="../../pen/gbo/GBOVedtak.xsd"
+		namespace="http://nav-lib-pen/no/nav/lib/pen/gbo">
+	</xsd:import>
+	<xsd:import
+		schemaLocation="../../sak/gbo/GBOArbeidOgAktivitetsvedtak.xsd"
+		namespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOVarsleVedtakSamordningRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="tpnr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="tssEksternId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="samId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="gjelderFnr"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="pensjonsvedtak"
+				type="bons0:GBOVedtak" />
+			<xsd:element minOccurs="0" name="arbeidOgAktivitetsvedtak"
+				type="bons1:GBOArbeidOgAktivitetsvedtak">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

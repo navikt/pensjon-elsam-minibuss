@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sto/no/nav/lib/sto/gbo" targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo">
+    <xsd:include schemaLocation="GBOSvarRefusjonskrav.xsd"/>
+    <xsd:complexType name="GBOOpprettRefusjonskravRequest">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="svarRefusjonskrav" type="bons0:GBOSvarRefusjonskrav"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://nav-lib-sto/no/nav/lib/sto/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="GBOUttaksperiode">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="startAlder"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="startManed"
+				type="xsd:int">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="grad" type="xsd:int"></xsd:element>
+			<xsd:element minOccurs="0" name="arligInntekt"
+				type="xsd:int">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
