@@ -15,13 +15,13 @@ import org.springframework.core.NestedExceptionUtils;
 import java.util.Iterator;
 import java.util.List;
 
-public class authorizeAndOrchestrateImpl {
+public class NavConsElsamTplibTpSamordningRegistrering {
 	private final static String INTERNALERROR = "InternalError";
 
 	private final Samhandler samhandlerPartner;
 	private final TPSamordningRegistreringInt tpSamordningRegistreringIntPartner;
 
-    public authorizeAndOrchestrateImpl(Samhandler samhandlerPartner, TPSamordningRegistreringInt tpSamordningRegistreringIntPartner) {
+    public NavConsElsamTplibTpSamordningRegistrering(Samhandler samhandlerPartner, TPSamordningRegistreringInt tpSamordningRegistreringIntPartner) {
         this.samhandlerPartner = samhandlerPartner;
         this.tpSamordningRegistreringIntPartner = tpSamordningRegistreringIntPartner;
     }
