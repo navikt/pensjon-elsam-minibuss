@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+    <xsd:include schemaLocation="GBOHenvendelse.xsd"/>
+    <xsd:complexType name="GBOHenvendelseListe">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="henvendelser" type="bons0:GBOHenvendelse"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

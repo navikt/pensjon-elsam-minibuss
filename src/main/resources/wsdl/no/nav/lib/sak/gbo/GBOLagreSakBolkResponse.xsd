@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOSak.xsd"/>
+	<xsd:complexType name="GBOLagreSakBolkResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="sakListe" type="bons0:GBOSak">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

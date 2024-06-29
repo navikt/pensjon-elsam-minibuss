@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons2="http://stelvio-commons-lib/no/nav/gbo" xmlns:bons4="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Opprettendagspassord" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OpprettEndagspassord" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Opprettendagspassord">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Opprettendagspassord" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons2="http://stelvio-commons-lib/no/nav/gbo" xmlns:bons4="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Opprettendagspassord" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOOpprettEndagspassordRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOEndagspassord.xsd"/>
+            <xsd:element name="opprettEndagspassordHenvendelse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEndagspassordHenvendelseRequest" nillable="true" type="bons1:GBOOpprettEndagspassordRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettEndagspassordHenvendelseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEndagspassordHenvendelseResponse" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettEndagspassordHenvendelseRequestMsg">
+    <wsdl:part element="tns:opprettEndagspassordHenvendelse" name="opprettEndagspassordHenvendelseParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettEndagspassordHenvendelseResponseMsg">
+    <wsdl:part element="tns:opprettEndagspassordHenvendelseResponse" name="opprettEndagspassordHenvendelseResult"/>
+  </wsdl:message>
+    <wsdl:portType name="OpprettEndagspassord">
+    <wsdl:operation name="opprettEndagspassordHenvendelse">
+      <wsdl:input message="tns:opprettEndagspassordHenvendelseRequestMsg" name="opprettEndagspassordHenvendelseRequest"/>
+      <wsdl:output message="tns:opprettEndagspassordHenvendelseResponseMsg" name="opprettEndagspassordHenvendelseResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

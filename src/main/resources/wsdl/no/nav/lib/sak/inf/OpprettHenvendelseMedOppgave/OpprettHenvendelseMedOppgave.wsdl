@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/OpprettHenvendelseMedOppgave/OpprettHenvendelseMedOppgave" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="OpprettHenvendelseMedOppgave" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/OpprettHenvendelseMedOppgave/OpprettHenvendelseMedOppgave">
+  <wsdl:types>
+    <xsd:schema xmlns:bons2="http://nav-lib-sak/no/nav/lib/sak/fault" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/OpprettHenvendelseMedOppgave/OpprettHenvendelseMedOppgave" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/OpprettHenvendelseMedOppgave/OpprettHenvendelseMedOppgave" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../../gbo/GBOHenvendelse.xsd"/>
+            <xsd:element name="opprettHenvendelseMedOppgave">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseMedOppgaveRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettHenvendelseMedOppgaveResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseMedOppgaveResponse" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettHenvendelseMedOppgave_faultPersonIkkeFunnet" type="bons2:FaultPersonIkkeFunnet"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettHenvendelseMedOppgaveRequestMsg">
+    <wsdl:part element="tns:opprettHenvendelseMedOppgave" name="opprettHenvendelseMedOppgaveParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettHenvendelseMedOppgaveResponseMsg">
+    <wsdl:part element="tns:opprettHenvendelseMedOppgaveResponse" name="opprettHenvendelseMedOppgaveResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettHenvendelseMedOppgave_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:opprettHenvendelseMedOppgave_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="OpprettHenvendelseMedOppgave">
+    <wsdl:operation name="opprettHenvendelseMedOppgave">
+      <wsdl:input message="tns:opprettHenvendelseMedOppgaveRequestMsg" name="opprettHenvendelseMedOppgaveRequest"/>
+      <wsdl:output message="tns:opprettHenvendelseMedOppgaveResponseMsg" name="opprettHenvendelseMedOppgaveResponse"/>
+            <wsdl:fault message="tns:opprettHenvendelseMedOppgave_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

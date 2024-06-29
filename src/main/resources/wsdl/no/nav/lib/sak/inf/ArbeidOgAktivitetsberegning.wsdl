@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/ArbeidOgAktivitetsberegning" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ArbeidOgAktivitetsberegning" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/ArbeidOgAktivitetsberegning">
+    <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/ArbeidOgAktivitetsberegning" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/ArbeidOgAktivitetsberegning" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentBruttoUtbetalingListeResponse.xsd"/>
+      <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentBruttoUtbetalingListeRequest.xsd"/>
+      <xsd:element name="hentBruttoUtbetalingListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBruttoUtbetalingListeRequest" nillable="true" type="bons1:GBOHentBruttoUtbetalingListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentBruttoUtbetalingListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentBruttoUtbetalingListeResponse" nillable="true" type="bons1:GBOHentBruttoUtbetalingListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentBruttoUtbetalingListeRequestMsg">
+    <wsdl:part element="tns:hentBruttoUtbetalingListe" name="hentBruttoUtbetalingListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentBruttoUtbetalingListeResponseMsg">
+    <wsdl:part element="tns:hentBruttoUtbetalingListeResponse" name="hentBruttoUtbetalingListeResult"/>
+  </wsdl:message>
+    <wsdl:portType name="ArbeidOgAktivitetsberegning">
+    <wsdl:operation name="hentBruttoUtbetalingListe">
+      <wsdl:input message="tns:hentBruttoUtbetalingListeRequestMsg" name="hentBruttoUtbetalingListeRequest"/>
+      <wsdl:output message="tns:hentBruttoUtbetalingListeResponseMsg" name="hentBruttoUtbetalingListeResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

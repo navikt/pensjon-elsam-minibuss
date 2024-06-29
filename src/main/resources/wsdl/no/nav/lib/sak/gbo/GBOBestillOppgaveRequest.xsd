@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOOppgave.xsd"/>
+	<xsd:complexType name="GBOBestillOppgaveRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="bestillingKode" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="saksIdKLAN" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="tvingNySak" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="oppgave" type="bons0:GBOOppgave">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+    <xsd:include schemaLocation="GBORettskilde.xsd"/>
+    <xsd:complexType name="GBORettskildeListe">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="rettskilder" type="bons0:GBORettskilde"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

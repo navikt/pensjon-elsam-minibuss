@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons2="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons3="Namespace&#9;http://nav-lib-sak/no/nav/lib/sak/inf/SakVedtak" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SakVedtak" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf">
+    <wsdl:types>
+    <xsd:schema xmlns:bons3="http://nav-lib-sak/no/nav/lib/sak/inf" xmlns:tns="http://nav-ent-sak-arbeidogaktivitetsvedtak/no/nav/inf/SakVedtak" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf" xmlns:bons2="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentVedtakListeResponse.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentVedtakRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentVedtakListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOArbeidOgAktivitetsvedtak.xsd"/>
+            <xsd:element name="hentVedtak">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakRequest" nillable="true" type="bons2:GBOHentVedtakRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentVedtakResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakResponse" nillable="true" type="bons2:GBOArbeidOgAktivitetsvedtak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentVedtakListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakListeRequest" nillable="true" type="bons2:GBOHentVedtakListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentVedtakListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentVedtakListeResponse" nillable="true" type="bons2:GBOHentVedtakListeResponse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentVedtakRequestMsg">
+    <wsdl:part element="tns:hentVedtak" name="hentVedtakParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakResponseMsg">
+    <wsdl:part element="tns:hentVedtakResponse" name="hentVedtakResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakListeRequestMsg">
+    <wsdl:part element="tns:hentVedtakListe" name="hentVedtakListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentVedtakListeResponseMsg">
+    <wsdl:part element="tns:hentVedtakListeResponse" name="hentVedtakListeResult"/>
+  </wsdl:message>
+    <wsdl:portType name="ArbeidOgAktivitetsvedtak">
+    <wsdl:operation name="hentVedtak">
+      <wsdl:input message="tns:hentVedtakRequestMsg" name="hentVedtakRequest"/>
+      <wsdl:output message="tns:hentVedtakResponseMsg" name="hentVedtakResponse"/>
+        </wsdl:operation>
+    <wsdl:operation name="hentVedtakListe">
+      <wsdl:input message="tns:hentVedtakListeRequestMsg" name="hentVedtakListeRequest"/>
+      <wsdl:output message="tns:hentVedtakListeResponseMsg" name="hentVedtakListeResponse"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

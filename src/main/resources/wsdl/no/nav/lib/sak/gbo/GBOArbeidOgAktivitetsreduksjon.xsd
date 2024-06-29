@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:complexType name="GBOArbeidOgAktivitetsreduksjon">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="antallSykedager"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallArbeidstimer"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0"
+				name="antallDagerSentLevertMeldekort" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="antallFravaersdager"
+				type="xsd:string">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

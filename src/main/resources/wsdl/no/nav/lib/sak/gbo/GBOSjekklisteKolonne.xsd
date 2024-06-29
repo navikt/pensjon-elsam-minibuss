@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:Q1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOSjekklistecelle.xsd"/>
+	<xsd:complexType name="GBOSjekklisteKolonne">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="sjekklistekolonneId" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="rekkefolge" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sjekklistekolonneKode" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="kolonneListe" type="Q1:GBOSjekklisteKolonne">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="celleListe" type="Q1:GBOSjekklistecelle">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

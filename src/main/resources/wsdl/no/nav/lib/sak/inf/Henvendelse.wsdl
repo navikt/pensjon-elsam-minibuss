@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons2="http://stelvio-commons-lib/no/nav/gbo" xmlns:bons3="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Henvendelse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Henvendelse" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Henvendelse">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Henvendelse" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons2="http://stelvio-commons-lib/no/nav/gbo" xmlns:bons3="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Henvendelse" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultHenvendelseIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOStatistikk.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHenvendelseListe.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentStatistikkRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHenvendelse.xsd"/>
+            <xsd:element name="opprettHenvendelse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettHenvendelseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseResponse" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettHenvendelseMedOppgave">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseMedOppgaveRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettHenvendelseMedOppgaveResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettHenvendelseMedOppgaveResponse" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreHenvendelse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreHenvendelseRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreHenvendelseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreHenvendelseResponse" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentHenvendelse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentHenvendelseRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentHenvendelseResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentHenvendelseResponse" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentHenvendelseListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentHenvendelseListeRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentHenvendelseListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentHenvendelseListeResponse" nillable="true" type="bons1:GBOHenvendelseListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkAntall">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkAntallRequest" nillable="true" type="bons1:GBOHentStatistikkRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkAntallResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkAntallResponse" nillable="true" type="bons1:GBOStatistikk"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkHenvendelseGjelder">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkHevendelseGjelderRequest" nillable="true" type="bons1:GBOHentStatistikkRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkHenvendelseGjelderResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkHevendelseGjelderResponse" nillable="true" type="bons1:GBOStatistikk"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkPrKanal">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkPrKanalRequest" nillable="true" type="bons1:GBOHentStatistikkRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkPrKanalResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkPrKanalResponse" nillable="true" type="bons1:GBOStatistikk"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkPrType">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkPrTypeRequest" nillable="true" type="bons1:GBOHentStatistikkRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentStatistikkPrTypeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentStatistikkPrTypeResponse" nillable="true" type="bons1:GBOStatistikk"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="erTidsbrukAktivert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="erTidsbrukAktivertRequest" nillable="true" type="bons1:GBOHenvendelse"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="erTidsbrukAktivertResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="erTidsbrukAktivertResponse" nillable="true" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentHenvendelse_faultHenvendelseIkkeFunnet" type="bons3:FaultHenvendelseIkkeFunnet"/>
+            <xsd:element name="lagreHenvendelse_faultHenvendelseIkkeFunnet" type="bons3:FaultHenvendelseIkkeFunnet"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettHenvendelseRequestMsg">
+    <wsdl:part element="tns:opprettHenvendelse" name="opprettHenvendelseParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettHenvendelseResponseMsg">
+    <wsdl:part element="tns:opprettHenvendelseResponse" name="opprettHenvendelseResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettHenvendelseMedOppgaveRequestMsg">
+    <wsdl:part element="tns:opprettHenvendelseMedOppgave" name="opprettHenvendelseMedOppgaveParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettHenvendelseMedOppgaveResponseMsg">
+    <wsdl:part element="tns:opprettHenvendelseMedOppgaveResponse" name="opprettHenvendelseMedOppgaveResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreHenvendelseRequestMsg">
+    <wsdl:part element="tns:lagreHenvendelse" name="lagreHenvendelseParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreHenvendelseResponseMsg">
+    <wsdl:part element="tns:lagreHenvendelseResponse" name="lagreHenvendelseResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentHenvendelseRequestMsg">
+    <wsdl:part element="tns:hentHenvendelse" name="hentHenvendelseParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentHenvendelseResponseMsg">
+    <wsdl:part element="tns:hentHenvendelseResponse" name="hentHenvendelseResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentHenvendelseListeRequestMsg">
+    <wsdl:part element="tns:hentHenvendelseListe" name="hentHenvendelseListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentHenvendelseListeResponseMsg">
+    <wsdl:part element="tns:hentHenvendelseListeResponse" name="hentHenvendelseListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkAntallRequestMsg">
+    <wsdl:part element="tns:hentStatistikkAntall" name="hentStatistikkAntallParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkAntallResponseMsg">
+    <wsdl:part element="tns:hentStatistikkAntallResponse" name="hentStatistikkAntallResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkHenvendelseGjelderRequestMsg">
+    <wsdl:part element="tns:hentStatistikkHenvendelseGjelder" name="hentStatistikkHenvendelseGjelderParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkHenvendelseGjelderResponseMsg">
+    <wsdl:part element="tns:hentStatistikkHenvendelseGjelderResponse" name="hentStatistikkHenvendelseGjelderResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkPrKanalRequestMsg">
+    <wsdl:part element="tns:hentStatistikkPrKanal" name="hentStatistikkPrKanalParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkPrKanalResponseMsg">
+    <wsdl:part element="tns:hentStatistikkPrKanalResponse" name="hentStatistikkPrKanalResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkPrTypeRequestMsg">
+    <wsdl:part element="tns:hentStatistikkPrType" name="hentStatistikkPrTypeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentStatistikkPrTypeResponseMsg">
+    <wsdl:part element="tns:hentStatistikkPrTypeResponse" name="hentStatistikkPrTypeResult"/>
+  </wsdl:message>
+    <wsdl:message name="erTidsbrukAktivertRequestMsg">
+    <wsdl:part element="tns:erTidsbrukAktivert" name="erTidsbrukAktivertParameters"/>
+  </wsdl:message>
+    <wsdl:message name="erTidsbrukAktivertResponseMsg">
+    <wsdl:part element="tns:erTidsbrukAktivertResponse" name="erTidsbrukAktivertResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentHenvendelse_faultHenvendelseIkkeFunnetMsg">
+    <wsdl:part element="tns:hentHenvendelse_faultHenvendelseIkkeFunnet" name="faultHenvendelseIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="lagreHenvendelse_faultHenvendelseIkkeFunnetMsg">
+    <wsdl:part element="tns:lagreHenvendelse_faultHenvendelseIkkeFunnet" name="faultHenvendelseIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="Henvendelse">
+    <wsdl:operation name="opprettHenvendelse">
+            <wsdl:input message="tns:opprettHenvendelseRequestMsg" name="opprettHenvendelseRequest"/>
+      <wsdl:output message="tns:opprettHenvendelseResponseMsg" name="opprettHenvendelseResponse"/>        </wsdl:operation>
+        <wsdl:operation name="opprettHenvendelseMedOppgave">
+      <wsdl:input message="tns:opprettHenvendelseMedOppgaveRequestMsg" name="opprettHenvendelseMedOppgaveRequest"/>
+      <wsdl:output message="tns:opprettHenvendelseMedOppgaveResponseMsg" name="opprettHenvendelseMedOppgaveResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="lagreHenvendelse">
+      <wsdl:input message="tns:lagreHenvendelseRequestMsg" name="lagreHenvendelseRequest"/>
+      <wsdl:output message="tns:lagreHenvendelseResponseMsg" name="lagreHenvendelseResponse"/>
+            <wsdl:fault message="tns:lagreHenvendelse_faultHenvendelseIkkeFunnetMsg" name="faultHenvendelseIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentHenvendelse">
+      <wsdl:input message="tns:hentHenvendelseRequestMsg" name="hentHenvendelseRequest"/>
+      <wsdl:output message="tns:hentHenvendelseResponseMsg" name="hentHenvendelseResponse"/>
+            <wsdl:fault message="tns:hentHenvendelse_faultHenvendelseIkkeFunnetMsg" name="faultHenvendelseIkkeFunnet"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentHenvendelseListe">
+      <wsdl:input message="tns:hentHenvendelseListeRequestMsg" name="hentHenvendelseListeRequest"/>
+      <wsdl:output message="tns:hentHenvendelseListeResponseMsg" name="hentHenvendelseListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="hentStatistikkAntall">
+      <wsdl:input message="tns:hentStatistikkAntallRequestMsg" name="hentStatistikkAntallRequest"/>
+      <wsdl:output message="tns:hentStatistikkAntallResponseMsg" name="hentStatistikkAntallResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentStatistikkHenvendelseGjelder">
+      <wsdl:input message="tns:hentStatistikkHenvendelseGjelderRequestMsg" name="hentStatistikkHenvendelseGjelderRequest"/>
+      <wsdl:output message="tns:hentStatistikkHenvendelseGjelderResponseMsg" name="hentStatistikkHenvendelseGjelderResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentStatistikkPrKanal">
+      <wsdl:input message="tns:hentStatistikkPrKanalRequestMsg" name="hentStatistikkPrKanalRequest"/>
+      <wsdl:output message="tns:hentStatistikkPrKanalResponseMsg" name="hentStatistikkPrKanalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentStatistikkPrType">
+      <wsdl:input message="tns:hentStatistikkPrTypeRequestMsg" name="hentStatistikkPrTypeRequest"/>
+      <wsdl:output message="tns:hentStatistikkPrTypeResponseMsg" name="hentStatistikkPrTypeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="erTidsbrukAktivert">
+      <wsdl:input message="tns:erTidsbrukAktivertRequestMsg" name="erTidsbrukAktivertRequest"/>
+      <wsdl:output message="tns:erTidsbrukAktivertResponseMsg" name="erTidsbrukAktivertResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+  <xsd:complexType name="GBOEndagspassord">
+    <xsd:sequence>
+            <xsd:element minOccurs="0" name="brukerId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="passord">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string"/>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="legitimasjonsKode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{4}-\d{2}-\d{2}[T]\d{2}:\d{2}"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="annenLegitimasjonsBeskrivelse">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:pattern value="\d{4}-\d{2}-\d{2}[T]\d{2}:\d{2}"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+            <xsd:element minOccurs="0" name="paloggingsNivaKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="antallFeilpalogginger" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="gyldig" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="gyldigFOM" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="gyldigTOM" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

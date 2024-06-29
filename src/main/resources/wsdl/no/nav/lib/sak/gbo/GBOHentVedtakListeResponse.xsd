@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOArbeidOgAktivitetsvedtak.xsd"/>
+	<xsd:complexType name="GBOHentVedtakListeResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="vedtakListe" type="bons0:GBOArbeidOgAktivitetsvedtak">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

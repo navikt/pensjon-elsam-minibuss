@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Brukerprofil" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Brukerprofil" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons2="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Brukerprofil" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Brukerprofil">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOEndagspassord.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultIkkeRegPassordForBruker.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultFeilPassordEllerBrukerId.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOEpostmelding.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultPassordUtlopt.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultPassordSperret.xsd"/>
+            <xsd:element name="verifiserEndagspassord">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="verifiserEndagspassordRequest" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="verifiserEndagspassordResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="verifiserEndagspassordResponse" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="verifiserEndagspassord_faultFeilPassordEllerBrukerId" type="bons2:FaultFeilPassordEllerBrukerId"/>
+      <xsd:element name="verifiserEndagspassord_faultPassordUtlopt" type="bons2:FaultPassordUtlopt"/>
+      <xsd:element name="verifiserEndagspassord_faultPassordSperret" type="bons2:FaultPassordSperret"/>
+      <xsd:element name="opprettEndagspassord">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEndagspassordRequest" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettEndagspassordResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEndagspassordResponse" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentEndagspassord">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentEndagspassordRequest" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentEndagspassordResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentEndagspassordResponse" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettEndagspassord">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettEndagspassordRequest" nillable="true" type="bons1:GBOEndagspassord"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettEndagspassordResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettEndagspassord_faultIkkeRegPassordForBrukerf" type="bons2:FaultIkkeRegPassordForBruker"/>
+      <xsd:element name="sendEpostmelding">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendEpostmeldingRequest" nillable="true" type="bons1:GBOEpostmelding"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="sendEpostmeldingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="sendEpostmeldingResponse" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="verifiserEndagspassordRequestMsg">
+    <wsdl:part element="tns:verifiserEndagspassord" name="verifiserEndagspassordParameters"/>
+  </wsdl:message>
+    <wsdl:message name="verifiserEndagspassordResponseMsg">
+    <wsdl:part element="tns:verifiserEndagspassordResponse" name="verifiserEndagspassordResult"/>
+  </wsdl:message>
+    <wsdl:message name="verifiserEndagspassord_faultFeilPassordEllerBrukerIdMsg">
+    <wsdl:part element="tns:verifiserEndagspassord_faultFeilPassordEllerBrukerId" name="faultFeilPassordEllerBrukerId"/>
+  </wsdl:message>
+    <wsdl:message name="verifiserEndagspassord_faultPassordUtloptMsg">
+    <wsdl:part element="tns:verifiserEndagspassord_faultPassordUtlopt" name="faultPassordUtlopt"/>
+  </wsdl:message>
+    <wsdl:message name="verifiserEndagspassord_faultPassordSperretMsg">
+    <wsdl:part element="tns:verifiserEndagspassord_faultPassordSperret" name="faultPassordSperret"/>
+  </wsdl:message>
+    <wsdl:message name="opprettEndagspassordRequestMsg">
+    <wsdl:part element="tns:opprettEndagspassord" name="opprettEndagspassordParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettEndagspassordResponseMsg">
+    <wsdl:part element="tns:opprettEndagspassordResponse" name="opprettEndagspassordResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentEndagspassordRequestMsg">
+    <wsdl:part element="tns:hentEndagspassord" name="hentEndagspassordParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentEndagspassordResponseMsg">
+    <wsdl:part element="tns:hentEndagspassordResponse" name="hentEndagspassordResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettEndagspassordRequestMsg">
+    <wsdl:part element="tns:slettEndagspassord" name="slettEndagspassordParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettEndagspassordResponseMsg">
+    <wsdl:part element="tns:slettEndagspassordResponse" name="slettEndagspassordResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettEndagspassord_faultIkkeRegPassordForBrukerfMsg">
+    <wsdl:part element="tns:slettEndagspassord_faultIkkeRegPassordForBrukerf" name="faultIkkeRegPassordForBrukerf"/>
+  </wsdl:message>
+    <wsdl:message name="sendEpostmeldingRequestMsg">
+    <wsdl:part element="tns:sendEpostmelding" name="sendEpostmeldingParameters"/>
+  </wsdl:message>
+    <wsdl:message name="sendEpostmeldingResponseMsg">
+    <wsdl:part element="tns:sendEpostmeldingResponse" name="sendEpostmeldingResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Brukerprofil">
+    <wsdl:operation name="verifiserEndagspassord">
+      <wsdl:input message="tns:verifiserEndagspassordRequestMsg" name="verifiserEndagspassordRequest"/>
+      <wsdl:output message="tns:verifiserEndagspassordResponseMsg" name="verifiserEndagspassordResponse"/>
+      <wsdl:fault message="tns:verifiserEndagspassord_faultFeilPassordEllerBrukerIdMsg" name="faultFeilPassordEllerBrukerId"/>
+      <wsdl:fault message="tns:verifiserEndagspassord_faultPassordUtloptMsg" name="faultPassordUtlopt"/>
+      <wsdl:fault message="tns:verifiserEndagspassord_faultPassordSperretMsg" name="faultPassordSperret"/>
+    </wsdl:operation>
+    <wsdl:operation name="opprettEndagspassord">
+      <wsdl:input message="tns:opprettEndagspassordRequestMsg" name="opprettEndagspassordRequest"/>
+      <wsdl:output message="tns:opprettEndagspassordResponseMsg" name="opprettEndagspassordResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="hentEndagspassord">
+      <wsdl:input message="tns:hentEndagspassordRequestMsg" name="hentEndagspassordRequest"/>
+      <wsdl:output message="tns:hentEndagspassordResponseMsg" name="hentEndagspassordResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="slettEndagspassord">
+      <wsdl:input message="tns:slettEndagspassordRequestMsg" name="slettEndagspassordRequest"/>
+            <wsdl:output message="tns:slettEndagspassordResponseMsg" name="slettEndagspassordResponse"/>
+            <wsdl:fault message="tns:slettEndagspassord_faultIkkeRegPassordForBrukerfMsg" name="faultIkkeRegPassordForBruker"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendEpostmelding">
+            <wsdl:input message="tns:sendEpostmeldingRequestMsg" name="sendEpostmeldingRequest"/>
+      <wsdl:output message="tns:sendEpostmeldingResponseMsg" name="sendEpostmeldingResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

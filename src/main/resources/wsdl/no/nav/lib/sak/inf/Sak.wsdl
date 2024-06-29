@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/inf/Sak" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Sak" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Sak">
+    <wsdl:types>
+    <xsd:schema xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Sak" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Sak" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOSakListe.xsd"/>
+      <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOHentSakListeRequest.xsd"/>
+      <xsd:element name="hentSakListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSakListeRequest" nillable="true" type="bons1:GBOHentSakListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSakListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSakListeResponse" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettSakBolk">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettSakBolkRequest" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettSakBolkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettSakBolkResponse" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreSakBolk">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreSakBolkRequest" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="lagreSakBolkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="lagreSakBolkResponse" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettEllerHentSakBolk">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEllerHentSakBolkRequest" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettEllerHentSakBolkResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettEllerHentSakBolkReponse" nillable="true" type="bons1:GBOSakListe"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentSakListeRequestMsg">
+    <wsdl:part element="bons0:hentSakListe" name="hentSakListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSakListeResponseMsg">
+    <wsdl:part element="bons0:hentSakListeResponse" name="hentSakListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettSakBolkRequestMsg">
+    <wsdl:part element="bons0:opprettSakBolk" name="opprettSakBolkParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettSakBolkResponseMsg">
+    <wsdl:part element="bons0:opprettSakBolkResponse" name="opprettSakBolkResult"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSakBolkRequestMsg">
+    <wsdl:part element="bons0:lagreSakBolk" name="lagreSakBolkParameters"/>
+  </wsdl:message>
+    <wsdl:message name="lagreSakBolkResponseMsg">
+    <wsdl:part element="bons0:lagreSakBolkResponse" name="lagreSakBolkResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettEllerHentSakBolkRequestMsg">
+    <wsdl:part element="bons0:opprettEllerHentSakBolk" name="opprettEllerHentSakBolkParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettEllerHentSakBolkResponseMsg">
+    <wsdl:part element="bons0:opprettEllerHentSakBolkResponse" name="opprettEllerHentSakBolkResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Sak">
+    <wsdl:operation name="hentSakListe">
+      <wsdl:input message="bons0:hentSakListeRequestMsg" name="hentSakListeRequest"/>
+      <wsdl:output message="bons0:hentSakListeResponseMsg" name="hentSakListeResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="opprettSakBolk">
+      <wsdl:input message="bons0:opprettSakBolkRequestMsg" name="opprettSakBolkRequest"/>
+      <wsdl:output message="bons0:opprettSakBolkResponseMsg" name="opprettSakBolkResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="lagreSakBolk">
+      <wsdl:input message="bons0:lagreSakBolkRequestMsg" name="lagreSakBolkRequest"/>
+      <wsdl:output message="bons0:lagreSakBolkResponseMsg" name="lagreSakBolkResponse"/>
+    </wsdl:operation>
+        <wsdl:operation name="opprettEllerHentSakBolk">
+      <wsdl:input message="bons0:opprettEllerHentSakBolkRequestMsg" name="opprettEllerHentSakBolkRequest"/>
+      <wsdl:output message="bons0:opprettEllerHentSakBolkResponseMsg" name="opprettEllerHentSakBolkResponse"/>
+    </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+    <xsd:include schemaLocation="GBOEpostadresse.xsd"/>
+    <xsd:complexType name="GBOEpostmelding">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="fra" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tilListe" type="bons0:GBOEpostadresse" maxOccurs="unbounded"/>
+            <xsd:element minOccurs="0" name="kopiListe" type="bons0:GBOEpostadresse" maxOccurs="unbounded"/>
+            <xsd:element minOccurs="0" name="blindkopiListe" type="bons0:GBOEpostadresse" maxOccurs="unbounded"/>
+            <xsd:element minOccurs="0" name="emne" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="melding" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

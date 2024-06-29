@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOMappe.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOBruker.xsd"></xsd:include>
+	<xsd:include schemaLocation="GBOHenvendelse.xsd" />
+	<xsd:complexType name="GBOOppgave">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="oppgaveId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="gjelder"
+				type="bons0:GBOBruker">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="aktivFra"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="aktivTil"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ansvarligId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ansvarligNavn"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ansvarligEnhetId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ansvarligEnhetNavn"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="opprettetEnhetId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="opprettetEnhetNavn"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endretEnhetId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endretEnhetNavn"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="fagomrade"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="underkategori"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="oppgaveType"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="oppgaveTypeBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="beskrivelse"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="oppfolging"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="prioritet"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="versjon" type="xsd:string" />
+			<xsd:element minOccurs="0" name="lest" type="xsd:boolean" />
+			<xsd:element minOccurs="0" name="opprettetAv"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="opprettetDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endretAv"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endretDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="henvendelse"
+				type="bons0:GBOHenvendelse" />
+			<xsd:element minOccurs="0" name="saksnummer"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="kravId" type="xsd:string" />
+			<xsd:element minOccurs="0" name="dokumentId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="soknadsId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="skannetDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="mottattDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="eierkomponentKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="normDato"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="hendelseId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="mappe"
+				type="bons0:GBOMappe" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOVedtaksfaktaAAP.xsd"></xsd:include>
+	<xsd:complexType name="GBOArbeidOgAktivitetsvedtak">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="vedtakId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="saksId"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="gjelderFnr"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkningFom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="virkningTom"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtakstypeKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtakstypeBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtakstatusKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtakstatusBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="sakstypeKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="navEnhet"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="utfallKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="utfallBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="rettighetKode"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="rettighetBeskrivelse"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="ansvarligSaksbehandler"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="registreringsDato"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtaksDato"
+				type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="vedtaksfaktaAAP"
+				type="bons0:GBOVedtaksfaktaAAP">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

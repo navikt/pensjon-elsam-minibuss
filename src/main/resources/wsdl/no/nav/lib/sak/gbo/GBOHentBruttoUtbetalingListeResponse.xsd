@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo">
+	<xsd:include schemaLocation="GBOArbeidOgAktivitetsutbetaling.xsd"></xsd:include>
+	<xsd:complexType name="GBOHentBruttoUtbetalingListeResponse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0"
+				name="arbeidOgAktivitetsutbetalingListe"
+				type="bons0:GBOArbeidOgAktivitetsutbetaling"
+				maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

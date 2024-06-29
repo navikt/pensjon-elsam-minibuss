@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	xmlns:bons0="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:import schemaLocation="../../../gbo/GBOEierKomponent.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>
+	<xsd:complexType name="GBOFinnOppgaveListeRequest">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="fnr" type="xsd:string"></xsd:element>
+			<xsd:element minOccurs="0" name="eierKomponentListe"
+				type="bons0:GBOEierKomponent" maxOccurs="unbounded">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

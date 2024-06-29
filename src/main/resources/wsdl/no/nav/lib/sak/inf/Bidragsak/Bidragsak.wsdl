@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Bidragsak" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Bidragsak" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Bidragsak">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/Bidragsak" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/Bidragsak" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../../gbo/GBOForskuddSak.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../../gbo/GBOHentForskuddRequest.xsd"/>
+      <xsd:element name="hentForskudd">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentForskuddRequest" nillable="true" type="bons1:GBOHentForskuddRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentForskuddResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentForskuddResponse" nillable="true" type="bons1:GBOForskuddSak"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="hentForskuddRequestMsg">
+    <wsdl:part element="tns:hentForskudd" name="hentForskuddParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentForskuddResponseMsg">
+    <wsdl:part element="tns:hentForskuddResponse" name="hentForskuddResult"/>
+  </wsdl:message>
+    <wsdl:portType name="Bidragsak">
+    <wsdl:operation name="hentForskudd">
+      <wsdl:input message="tns:hentForskuddRequestMsg" name="hentForskuddRequest"/>
+      <wsdl:output message="tns:hentForskuddResponseMsg" name="hentForskuddResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo"
+	xmlns:bons2="http://stelvio-commons-lib/no/nav/gbo">
+	<xsd:include schemaLocation="GBOBruker.xsd"></xsd:include>
+	<xsd:import schemaLocation="../../../gbo/GBOEndringsInfo.xsd"
+		namespace="http://stelvio-commons-lib/no/nav/gbo">
+	</xsd:import>	<xsd:include schemaLocation="GBOOppgave.xsd" />
+	<xsd:complexType name="GBOHenvendelse">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="henvendelsesId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="gjelder"
+				type="bons0:GBOBruker" />
+			<xsd:element minOccurs="0" name="saksNr" type="xsd:string" />
+			<xsd:element minOccurs="0" name="fagomradeKode"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="underkategori"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="henvendelsesType"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="kanal" type="xsd:string" />
+			<xsd:element minOccurs="0" name="beskrivelse"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="oppfolging"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="tidsbruk"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="versjon" type="xsd:string" />
+			<xsd:element minOccurs="0" name="regKundesenter"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="avslattKundesenter"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="notatBidrag"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="jpIdSendt"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="jpIdMottatt"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="jpIdNotat"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="simuleringsId"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ferdigstiltDato"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="ferdigstiltAv"
+				type="xsd:string" />
+			<xsd:element minOccurs="0" name="endringsInfo"
+				type="bons2:GBOEndringsInfo" />
+			<xsd:element minOccurs="0" name="oppgave"
+				type="bons0:GBOOppgave" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+    <xsd:include schemaLocation="GBOStatistikkElement.xsd"/>
+    <xsd:include schemaLocation="GBOData.xsd"/>
+    <xsd:complexType name="GBOStatistikk">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="overskrift" type="bons1:GBOStatistikkElement"/>
+      <xsd:element minOccurs="0" name="innhold" type="bons1:GBOStatistikkElement" maxOccurs="unbounded"/>
+            <xsd:element minOccurs="0" name="sum" type="bons1:GBOStatistikkElement"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

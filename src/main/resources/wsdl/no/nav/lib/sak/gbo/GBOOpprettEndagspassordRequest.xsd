@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/gbo">
+    <xsd:include schemaLocation="GBOHenvendelseListe.xsd"/>
+    <xsd:include schemaLocation="GBOEndagspassord.xsd"/>
+    <xsd:complexType name="GBOOpprettEndagspassordRequest">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="registrertEnhetId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="registrertEnhetNavn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="endagspassord" type="bons0:GBOEndagspassord"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

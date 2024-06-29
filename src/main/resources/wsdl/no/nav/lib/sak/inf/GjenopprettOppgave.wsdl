@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons3="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/GjenopprettOppgave" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GjenopprettOppgave" targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/GjenopprettOppgave">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-lib-sak/no/nav/lib/sak/inf/GjenopprettOppgave" xmlns:bons1="http://nav-lib-sak/no/nav/lib/sak/gbo" xmlns:bons3="http://nav-lib-sak/no/nav/lib/sak/fault" xmlns:tns="http://nav-lib-sak/no/nav/lib/sak/inf/GjenopprettOppgave" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/fault" schemaLocation="../fault/FaultPersonIkkeFunnet.xsd"/>
+            <xsd:import namespace="http://nav-lib-sak/no/nav/lib/sak/gbo" schemaLocation="../gbo/GBOOppgave.xsd"/>
+            <xsd:element name="gjenopprettOppgave">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="gjenopprettOppgaveRequest" nillable="true" type="bons1:GBOOppgave"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="gjenopprettOppgaveResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="gjenopprettOppgaveResponse" nillable="true" type="bons1:GBOOppgave"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="gjenopprettOppgave_faultPersonIkkeFunnet" type="bons3:FaultPersonIkkeFunnet"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="gjenopprettOppgaveRequestMsg">
+    <wsdl:part element="tns:gjenopprettOppgave" name="gjenopprettOppgaveParameters"/>
+  </wsdl:message>
+    <wsdl:message name="gjenopprettOppgaveResponseMsg">
+    <wsdl:part element="tns:gjenopprettOppgaveResponse" name="gjenopprettOppgaveResult"/>
+  </wsdl:message>
+    <wsdl:message name="gjenopprettOppgave_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:gjenopprettOppgave_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:portType name="GjenopprettOppgave">
+    <wsdl:operation name="gjenopprettOppgave">
+      <wsdl:input message="tns:gjenopprettOppgaveRequestMsg" name="gjenopprettOppgaveRequest"/>
+      <wsdl:output message="tns:gjenopprettOppgaveResponseMsg" name="gjenopprettOppgaveResponse"/>
+      <wsdl:fault message="tns:gjenopprettOppgave_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+        </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>
