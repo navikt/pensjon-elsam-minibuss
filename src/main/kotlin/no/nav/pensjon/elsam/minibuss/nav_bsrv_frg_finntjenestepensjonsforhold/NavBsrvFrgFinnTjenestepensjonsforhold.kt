@@ -7,7 +7,7 @@ import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.HentTjenestepensjonInfoFau
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.HentTjenestepensjonInfoFaultTomDatoForanFomDatoMsg
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.Tjenestepensjon
 
-class orchestrateFinnTjenestepensjonsforholdImpl(
+class NavBsrvFrgFinnTjenestepensjonsforhold(
     private val samhandlerPartner: Samhandler,
     private val tjenestepensjonPartner: Tjenestepensjon,
 ) {
