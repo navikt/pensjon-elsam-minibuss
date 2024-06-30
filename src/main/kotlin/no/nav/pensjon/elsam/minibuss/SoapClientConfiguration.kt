@@ -6,6 +6,7 @@ import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.SAMTjenestepensjon
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.Tjenestepensjon
 import nav_lib_sto.no.nav.lib.sto.inf.samordning.Samordning
+import no.nav.pensjon.elsam.minibuss.context.PenCallerIdHandler
 import no.nav.pensjon.elsam.minibuss.security.SAMLSoapHandler
 import no.nav.pensjon.elsam.minibuss.security.StsClient
 import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerOutbound
@@ -19,6 +20,7 @@ import javax.xml.namespace.QName
 class SoapClientConfiguration {
     @Bean
     fun handlers(stsClient: StsClient) = listOf(
+        PenCallerIdHandler(),
         StelvioContextHandlerOutbound(),
         SAMLSoapHandler(stsClient),
     )
