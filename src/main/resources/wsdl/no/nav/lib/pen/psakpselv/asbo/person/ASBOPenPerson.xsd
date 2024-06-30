@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person">
+    <xsd:include schemaLocation="ASBOPenSamboer.xsd"/>
+    <xsd:include schemaLocation="ASBOPenRelasjonListe.xsd"/>
+    <xsd:include schemaLocation="ASBOPenUtbetalingsinformasjon.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBrukerprofil.xsd"/>
+    <xsd:include schemaLocation="ASBOPenHistorikk.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBostedsAdresse.xsd"/>
+    <xsd:include schemaLocation="ASBOPenAnnenAdresse.xsd"/>
+    <xsd:include schemaLocation="ASBOPenPersonUtland.xsd"/>
+    <xsd:complexType name="ASBOPenPerson">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="fodselsnummer" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="kortnavn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="fornavn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="mellomnavn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="etternavn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="statusKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="diskresjonskode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="dodsdato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="umyndiggjortDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="sivilstand" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sivilstandDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="tlfPrivat" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tlfJobb" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tlfMobil" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="epost" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sprakKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sprakBeskrivelse" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sprakDatoFom" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="navEnhet" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="erEgenansatt" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="bostedsAdresse" type="bons1:ASBOPenBostedsAdresse"/>
+            <xsd:element minOccurs="0" name="postAdresse" type="bons1:ASBOPenAnnenAdresse"/>
+            <xsd:element minOccurs="0" name="tilleggsAdresse" type="bons1:ASBOPenAnnenAdresse"/>
+            <xsd:element minOccurs="0" name="utenlandsAdresse" type="bons1:ASBOPenAnnenAdresse"/>
+            <xsd:element minOccurs="0" name="utbetalingsinformasjon" type="bons1:ASBOPenUtbetalingsinformasjon"/>
+            <xsd:element minOccurs="0" name="personUtland" type="bons1:ASBOPenPersonUtland"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="relasjoner" type="bons1:ASBOPenRelasjonListe"/>
+            <xsd:element minOccurs="0" name="historikk" type="bons1:ASBOPenHistorikk"/>
+            <xsd:element minOccurs="0" name="brukerprofil" type="bons1:ASBOPenBrukerprofil"/>
+            <xsd:element minOccurs="0" name="samboer" type="bons1:ASBOPenSamboer"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

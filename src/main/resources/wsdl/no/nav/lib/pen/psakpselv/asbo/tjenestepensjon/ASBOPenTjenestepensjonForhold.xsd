@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/tjenestepensjon" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/tjenestepensjon">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTjenestepensjonSimulering.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTjenestepensjonsYtelse.xsd"/>
+    <xsd:complexType name="ASBOPenTjenestepensjonForhold">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="forholdId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="navn" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tpNr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="harUtlandPensjon" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="samtykkeSimuleringKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="samtykkeDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="harSimulering" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="tjenestepensjonYtelseListe" type="bons0:ASBOPenTjenestepensjonsYtelse"/>
+            <xsd:element minOccurs="0" name="tjenestepensjonSimulering" type="bons0:ASBOPenTjenestepensjonSimulering"/>
+            <xsd:element minOccurs="0" name="endringsInfo" type="bons2:ASBOPenEndringsInfo"/>
+            <xsd:element minOccurs="0" name="avdelingType" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

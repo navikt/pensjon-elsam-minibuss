@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning"
+	targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+	<xsd:include schemaLocation="ASBOPenYtelseskomponent.xsd" />
+	<xsd:complexType name="ASBOPenKrigOgGammelYrkesskade">
+		<xsd:complexContent>
+			<xsd:extension base="bons0:ASBOPenYtelseskomponent">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="pensjonsgrad"
+						type="xsd:int" />
+					<xsd:element minOccurs="0"
+						name="grunnlagForUtbetaling" type="xsd:int" />
+					<xsd:element minOccurs="0" name="forholdstallYG"
+						type="xsd:double" />
+					<xsd:element minOccurs="0" name="kapitalutlosning"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="mendel"
+						type="xsd:string" />
+					<xsd:element minOccurs="0" name="poengtall"
+						type="xsd:string" />
+				</xsd:sequence>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

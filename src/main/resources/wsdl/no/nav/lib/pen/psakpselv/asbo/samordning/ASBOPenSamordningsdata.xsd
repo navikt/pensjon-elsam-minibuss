@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/tjenestepensjon" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" schemaLocation="../person/ASBOPenPerson.xsd"/>
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/tjenestepensjon" schemaLocation="../tjenestepensjon/ASBOPenTjenestepensjonForhold.xsd"/>
+    <xsd:include schemaLocation="ASBOPenVedtakListe.xsd"/>
+    <xsd:include schemaLocation="ASBOPenVentetillegg.xsd"/>
+    <xsd:complexType name="ASBOPenSamordningsdata">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="tpnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vedtakListe" type="bons0:ASBOPenVedtakListe"/>
+            <xsd:element minOccurs="0" name="person" type="bons1:ASBOPenPerson"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="tjenestepensjonForholdListe" type="bons2:ASBOPenTjenestepensjonForhold"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

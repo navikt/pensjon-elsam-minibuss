@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person">
+    <xsd:include schemaLocation="ASBOPenUtlandskonto.xsd"/>
+    <xsd:include schemaLocation="ASBOPenNorskKonto.xsd"/>
+    <xsd:complexType name="ASBOPenUtbetalingsinformasjon">
+    <xsd:sequence>
+            <xsd:element minOccurs="0" name="utbetalingsType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="norskKonto" type="bons0:ASBOPenNorskKonto"/>
+            <xsd:element minOccurs="0" name="utlandsKonto" type="bons0:ASBOPenUtlandskonto"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

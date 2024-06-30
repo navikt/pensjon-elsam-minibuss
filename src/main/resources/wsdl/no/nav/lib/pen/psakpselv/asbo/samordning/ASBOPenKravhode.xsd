@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenPersongrunnlag.xsd"/>
+    <xsd:include schemaLocation="ASBOPenKravlinje.xsd"/>
+    <xsd:complexType name="ASBOPenKravhode">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="kravId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravGjelderKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravStatusKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="motattDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="onsketVirkningsDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="komplettDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="boddArbeidUtland" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="vurdereTrygdeavtale" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="norgeBehandlendeLand" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="kravVelgKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="intitertAv" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tilbakekreving" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="avdodFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="afpOrdningKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="afpTillegg" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="organisasjonsnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="farFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="morFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="boddArbeidUtlandFar" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="kollektiveVillkar" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="boddArbeidUtlandMor" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="boddArbeidUtlandAvdod" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="behandlingKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="basertPaKravId" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="kravlinjeListe" type="bons2:ASBOPenKravlinje"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="persongrunnlagListe" type="bons2:ASBOPenPersongrunnlag"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+      <xsd:element minOccurs="0" name="brukOpptjeningFra65I66Aret" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="erBeregnet" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="grunnlagLast" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="gyldigVillkarsproving" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="kravLast" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="overforOmsorgspoeng" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="hentetTps" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

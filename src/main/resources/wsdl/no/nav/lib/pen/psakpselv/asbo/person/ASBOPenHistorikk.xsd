@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person">
+    <xsd:include schemaLocation="ASBOPenAnnenAdresseListe.xsd"/>
+    <xsd:include schemaLocation="ASBOPenNavnEndringListe.xsd"/>
+    <xsd:include schemaLocation="ASBOPenHistoriskFnrListe.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBostedsAdresseListe.xsd"/>
+    <xsd:complexType name="ASBOPenHistorikk">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="bostedsadresser" type="bons2:ASBOPenBostedsAdresseListe"/>
+      <xsd:element minOccurs="0" name="adresseLinjer" type="bons2:ASBOPenAnnenAdresseListe"/>
+      <xsd:element minOccurs="0" name="historiskeFnr" type="bons2:ASBOPenHistoriskFnrListe"/>
+      <xsd:element minOccurs="0" name="navnEndringer" type="bons2:ASBOPenNavnEndringListe"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

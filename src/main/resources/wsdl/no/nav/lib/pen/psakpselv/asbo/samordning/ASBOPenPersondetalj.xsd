@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenSoskenDetalj.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBarnDetalj.xsd"/>
+    <xsd:complexType name="ASBOPenPersondetalj">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="personDetaljId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="grunnlagsrolleKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rolleFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="rolleTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="sivilstandKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sivilstandRelatertFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="borMedKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="barnDetalj" type="bons2:ASBOPenBarnDetalj"/>
+      <xsd:element minOccurs="0" name="soskenDetalj" type="bons2:ASBOPenSoskenDetalj"/>
+      <xsd:element minOccurs="0" name="tillegg" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="bruk" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="grunnlagKilde" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfoRegister" type="bons3:ASBOPenEndringsInfo"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

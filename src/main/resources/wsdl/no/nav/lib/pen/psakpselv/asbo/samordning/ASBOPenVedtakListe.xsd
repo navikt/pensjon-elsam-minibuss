@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:include schemaLocation="ASBOPenVedtak.xsd"/>
+    <xsd:complexType name="ASBOPenVedtakListe">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="vedtakListe" type="bons0:ASBOPenVedtak"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBeregningNokkelInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTrygdetid.xsd"/>
+    <xsd:include schemaLocation="ASBOPenUforeEkstra.xsd"/>
+    <xsd:include schemaLocation="ASBOPenHjelpeloshetsbidrag.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTilleggTilHjelpIHuset.xsd"/>
+    <xsd:include schemaLocation="ASBOPenKrigOgGammelYrkesskade.xsd"/>
+    <xsd:include schemaLocation="ASBOPenVentetillegg.xsd"/>
+    <xsd:include schemaLocation="ASBOPenYtelseskomponent.xsd"/>
+    <xsd:include schemaLocation="ASBOPenSertillegg.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTilleggspensjon.xsd"/>
+    <xsd:include schemaLocation="ASBOPenGrunnpensjon.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBarnetillegg.xsd"/>
+    <xsd:include schemaLocation="ASBOPenEktefelletillegg.xsd"/>
+    <xsd:complexType name="ASBOPenBeregning">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="beregningId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="virkDatoFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="virkDatoTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="gjelderFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brutto" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="netto" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="grunnbelop" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="beregningKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="resultatKilde" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="resultatKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="beregningArsakKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p67beregning" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="gradert" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="friinntekt" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fribelop" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="afpPensjonsgrad" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="totalVinner" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="kravId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sakId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ektefelleInntektOver2g" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="ektefelleMottarPensjon" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="benyttetSivilstandKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukersSivilstandKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="beregnetFremtidigInntekt" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="minstepensjonKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidAnvendt" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="redusertPgaInstOpphold" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="inntektBruktIAvkortning" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="beregningsMetodeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="uforegrad" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="yrkesskadegrad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukOpptjeningFra65I66Aret" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="ektefelleTillegg" type="bons2:ASBOPenEktefelletillegg"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="beregningNokkelinfoListe" type="bons2:ASBOPenBeregningNokkelInfo"/>
+      <xsd:element minOccurs="0" name="barnetilleggFellesBarn" type="bons2:ASBOPenBarnetillegg"/>
+      <xsd:element minOccurs="0" name="barnetilleggSerkullsbarn" type="bons2:ASBOPenBarnetillegg"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+      <xsd:element minOccurs="0" name="grunnpensjon" type="bons2:ASBOPenGrunnpensjon"/>
+      <xsd:element minOccurs="0" name="tilleggspensjon" type="bons2:ASBOPenTilleggspensjon"/>
+      <xsd:element minOccurs="0" name="sertillegg" type="bons2:ASBOPenSertillegg"/>
+      <xsd:element minOccurs="0" name="afpTillegg" type="bons2:ASBOPenYtelseskomponent"/>
+      <xsd:element minOccurs="0" name="paragraf851Tillegg" type="bons2:ASBOPenYtelseskomponent"/>
+      <xsd:element minOccurs="0" name="ventetillegg" type="bons2:ASBOPenVentetillegg"/>
+      <xsd:element minOccurs="0" name="krigOgGammelYrkesskade" type="bons2:ASBOPenKrigOgGammelYrkesskade"/>
+      <xsd:element minOccurs="0" name="familietillegg" type="bons2:ASBOPenYtelseskomponent"/>
+      <xsd:element minOccurs="0" name="fasteutgiftertillegg" type="bons2:ASBOPenYtelseskomponent"/>
+      <xsd:element minOccurs="0" name="tilleggTilHjelpIHuset" type="bons2:ASBOPenTilleggTilHjelpIHuset"/>
+      <xsd:element minOccurs="0" name="hjelpeloshetsbidrag" type="bons2:ASBOPenHjelpeloshetsbidrag"/>
+      <xsd:element minOccurs="0" name="uforeEkstra" type="bons2:ASBOPenUforeEkstra"/>
+      <xsd:element minOccurs="0" name="trygdetid" type="bons2:ASBOPenTrygdetid"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenKravlinjeStatus.xsd"/>
+    <xsd:complexType name="ASBOPenKravlinje">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="kravlinjeId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravlinjeKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="relatertFnr" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="kravlinjeStatus" type="bons2:ASBOPenKravlinjeStatus"/>
+      <xsd:element minOccurs="0" name="landKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

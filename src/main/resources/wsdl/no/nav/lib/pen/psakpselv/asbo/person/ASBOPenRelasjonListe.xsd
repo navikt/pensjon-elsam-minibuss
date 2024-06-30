@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons1="http://nav-lib-cons-pen/no/nav/lib/frg/asbo" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person">
+    <xsd:include schemaLocation="ASBOPenRelasjon.xsd"/>
+    <xsd:complexType name="ASBOPenRelasjonListe">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="relasjoner" type="bons2:ASBOPenRelasjon"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

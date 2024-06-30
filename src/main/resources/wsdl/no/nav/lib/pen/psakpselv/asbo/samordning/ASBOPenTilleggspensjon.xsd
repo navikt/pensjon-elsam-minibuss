@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:include schemaLocation="ASBOPenSoskenDetalj.xsd"/>
+    <xsd:include schemaLocation="ASBOPenSluttpoengtall.xsd"/>
+    <xsd:include schemaLocation="ASBOPenYtelseskomponent.xsd"/>
+  <xsd:complexType name="ASBOPenTilleggspensjon">
+    <xsd:complexContent>
+      <xsd:extension base="bons0:ASBOPenYtelseskomponent">
+                <xsd:sequence>
+          <xsd:element minOccurs="0" name="spt" type="bons0:ASBOPenSluttpoengtall"/>
+          <xsd:element minOccurs="0" name="ypt" type="bons0:ASBOPenSluttpoengtall"/>
+          <xsd:element minOccurs="0" name="opt" type="bons0:ASBOPenSluttpoengtall"/>
+        </xsd:sequence>
+            </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

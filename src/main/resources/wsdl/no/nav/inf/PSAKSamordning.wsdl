@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="PSAKsamordning" targetNamespace="http://nav-cons-pen-psak-samordning/no/nav/inf" xmlns:bons1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" xmlns:tns="http://nav-cons-pen-psak-samordning/no/nav/inf" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nav-cons-pen-psak-samordning/no/nav/inf">
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultRefKravAlleredeRegElUtenforFrist.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenHentSamordningsdataRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenHentSamordningsVedtaksListeRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenOpprettRefusjonskravRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenOpprettTPSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenSamordningPerson.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenSamordningsdata.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" schemaLocation="../lib/pen/psakpselv/asbo/samordning/ASBOPenSlettTPSamordningRequest.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenKoblingTpnrTssEksternId.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenKombinasjonFnrSamId.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenKombinasjonInput.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenSakIdIkkeGyldig.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenSamIdIkkeGyldig.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenVedtakIkkeGyldig.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenYtelseAlleredeRegistrert.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" schemaLocation="../lib/pen/psakpselv/fault/samordning/FaultPenYtelseIkkeIverksatt.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault" schemaLocation="../lib/pen/psakpselv/fault/FaultPenGenerisk.xsd"/>
+            <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault" schemaLocation="../lib/pen/psakpselv/fault/FaultPenPersonIkkeFunnet.xsd"/>
+            <xsd:element name="opprettTPSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettTPSamordningRequest" nillable="true" type="bons1:ASBOPenOpprettTPSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="opprettTPSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettTPSamordningResponse" nillable="true" type="bons1:ASBOPenSamordningsdata"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdata">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataRequest" nillable="true" type="bons1:ASBOPenHentSamordningsdataRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="hentSamordningsdataResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsdataResponse" nillable="true" type="bons1:ASBOPenSamordningsdata"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPSamordning">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="slettTPSamordningRequest" nillable="true" type="bons1:ASBOPenSlettTPSamordningRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="slettTPSamordningResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettTPSamordning_faultPenPersonIkkeFunnet" type="bons2:FaultPenPersonIkkeFunnet"/>
+            <xsd:element name="hentSamordningsdata_faultPersonIkkeFunnet" type="bons2:FaultPenPersonIkkeFunnet"/>
+            <xsd:element name="hentSamordningsdata_faultPenYtelseIkkeIverksatt" type="bons3:FaultPenYtelseIkkeIverksatt"/>
+            <xsd:element name="slettTPSamordning_faultPersonIkkeFunnet" type="bons2:FaultPenPersonIkkeFunnet"/>
+            <xsd:element name="slettTPSamordning_faultPenKombinasjonInput" type="bons3:FaultPenKombinasjonInput"/>
+            <xsd:element name="opprettTPSamordning_fautPenGenerisk" type="bons2:FaultPenGenerisk"/>
+            <xsd:element name="hentSamordningsdata_faultPenGenerisk" type="bons2:FaultPenGenerisk"/>
+            <xsd:element name="slettTPSamordning_faultPenGenerisk" type="bons2:FaultPenGenerisk"/>
+            <xsd:element name="opprettTPSamordning_faultPenYtelseAlleredeRegistrert" type="bons3:FaultPenYtelseAlleredeRegistrert"/>
+            <xsd:element name="hentSamordningsVedtaksListe">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsVedtaksListeRequest" nillable="true" type="bons1:ASBOPenHentSamordningsVedtaksListeRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentSamordningsVedtaksListeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="hentSamordningsVedtaksListeResponse" nillable="true" type="bons1:ASBOPenSamordningPerson"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPenGenerisk" type="bons2:FaultPenGenerisk"/>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPersonIkkeFunnet" type="bons2:FaultPenPersonIkkeFunnet"/>
+            <xsd:element name="opprettRefusjonskrav">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="opprettRefusjonskravRequest" nillable="true" type="bons1:ASBOPenOpprettRefusjonskravRequest"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettRefusjonskravResponse">
+        <xsd:complexType>
+          <xsd:sequence/>
+        </xsd:complexType>
+      </xsd:element>
+            <xsd:element name="opprettRefusjonskrav_faultPenSamIdIkkeGyldig" type="bons3:FaultPenSamIdIkkeGyldig"/>
+            <xsd:element name="opprettRefusjonskrav_faultPenGenerisk" type="bons2:FaultPenGenerisk"/>
+            <xsd:element name="opprettRefusjonskrav_faultPenKombinasjonFnrSamId" type="bons3:FaultPenKombinasjonFnrSamId"/>
+            <xsd:element name="opprettRefusjonskrav_faultPenKoblingTpnrTssEksternId" type="bons3:FaultPenKoblingTpnrTssEksternId"/>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPenVedtakIkkeGyldig" type="bons3:FaultPenVedtakIkkeGyldig"/>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPenSakIdIkkeGyldig" type="bons3:FaultPenSakIdIkkeGyldig"/>
+            <xsd:element name="hentSamordningsVedtaksListe_faultPenSamIdIkkeGyldig" type="bons3:FaultPenSamIdIkkeGyldig"/>
+            <xsd:element name="opprettRefusjonskravFault5_faultRefKravAlleredeRegElUtenforFrist" nillable="true" type="bons3:FaultRefKravAlleredeRegElUtenforFrist"/>
+        </xsd:schema>
+  </wsdl:types>
+    <wsdl:message name="opprettTPSamordningRequestMsg">
+    <wsdl:part element="tns:opprettTPSamordning" name="opprettTPSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordningResponseMsg">
+    <wsdl:part element="tns:opprettTPSamordningResponse" name="opprettTPSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdataRequestMsg">
+    <wsdl:part element="tns:hentSamordningsdata" name="hentSamordningsdataParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdataResponseMsg">
+    <wsdl:part element="tns:hentSamordningsdataResponse" name="hentSamordningsdataResult"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordningRequestMsg">
+    <wsdl:part element="tns:slettTPSamordning" name="slettTPSamordningParameters"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordningResponseMsg">
+    <wsdl:part element="tns:slettTPSamordningResponse" name="slettTPSamordningResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordning_faultPenPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:opprettTPSamordning_faultPenPersonIkkeFunnet" name="faultPenPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdata_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentSamordningsdata_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdata_faultPenYtelseIkkeIverksattMsg">
+    <wsdl:part element="tns:hentSamordningsdata_faultPenYtelseIkkeIverksatt" name="faultPenYtelseIkkeIverksatt"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordning_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:slettTPSamordning_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordning_faultPenKombinasjonInputMsg">
+    <wsdl:part element="tns:slettTPSamordning_faultPenKombinasjonInput" name="faultPenKombinasjonInput"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordning_fautPenGeneriskMsg">
+    <wsdl:part element="tns:opprettTPSamordning_fautPenGenerisk" name="fautPenGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsdata_faultPenGeneriskMsg">
+    <wsdl:part element="tns:hentSamordningsdata_faultPenGenerisk" name="faultPenGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="slettTPSamordning_faultPenGeneriskMsg">
+    <wsdl:part element="tns:slettTPSamordning_faultPenGenerisk" name="faultPenGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="opprettTPSamordning_faultPenYtelseAlleredeRegistrertMsg">
+    <wsdl:part element="tns:opprettTPSamordning_faultPenYtelseAlleredeRegistrert" name="faultPenYtelseAlleredeRegistrert"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListeRequestMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe" name="hentSamordningsVedtaksListeParameters"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListeResponseMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListeResponse" name="hentSamordningsVedtaksListeResult"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPenGeneriskMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPenGenerisk" name="faultPenGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPersonIkkeFunnetMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPersonIkkeFunnet" name="faultPersonIkkeFunnet"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskravRequestMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav" name="opprettRefusjonskravParameters"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskravResponseMsg">
+    <wsdl:part element="tns:opprettRefusjonskravResponse" name="opprettRefusjonskravResult"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultPenSamIdIkkeGyldigMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultPenSamIdIkkeGyldig" name="faultPenSamIdIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultPenGeneriskMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultPenGenerisk" name="faultPenGenerisk"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultPenKombinasjonFnrSamIdMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultPenKombinasjonFnrSamId" name="faultPenKombinasjonFnrSamId"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultPenKoblingTpnrTssEksternIdMsg">
+    <wsdl:part element="tns:opprettRefusjonskrav_faultPenKoblingTpnrTssEksternId" name="faultPenKoblingTpnrTssEksternId"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPenVedtakIkkeGyldigMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPenVedtakIkkeGyldig" name="faultPenVedtakIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPenSakIdIkkeGyldigMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPenSakIdIkkeGyldig" name="faultPenSakIdIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="hentSamordningsVedtaksListe_faultPenSamIdIkkeGyldigMsg">
+    <wsdl:part element="tns:hentSamordningsVedtaksListe_faultPenSamIdIkkeGyldig" name="faultPenSamIdIkkeGyldig"/>
+  </wsdl:message>
+    <wsdl:message name="opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFristMsg">
+    <wsdl:part element="tns:opprettRefusjonskravFault5_faultRefKravAlleredeRegElUtenforFrist" name="faultRefKravAlleredeRegElUtenforFrist"/>
+  </wsdl:message>
+    <wsdl:portType name="PSAKSamordning">
+    <wsdl:operation name="opprettTPSamordning">
+      <wsdl:input message="tns:opprettTPSamordningRequestMsg" name="opprettTPSamordningRequest"/>
+      <wsdl:output message="tns:opprettTPSamordningResponseMsg" name="opprettTPSamordningResponse"/>
+            <wsdl:fault message="tns:opprettTPSamordning_faultPenPersonIkkeFunnetMsg" name="faultPenPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:opprettTPSamordning_fautPenGeneriskMsg" name="fautPenGenerisk"/>
+            <wsdl:fault message="tns:opprettTPSamordning_faultPenYtelseAlleredeRegistrertMsg" name="faultPenYtelseAlleredeRegistrert"/>
+        </wsdl:operation>
+    <wsdl:operation name="hentSamordningsdata">
+      <wsdl:input message="tns:hentSamordningsdataRequestMsg" name="hentSamordningsdataRequest"/>
+      <wsdl:output message="tns:hentSamordningsdataResponseMsg" name="hentSamordningsdataResponse"/>
+            <wsdl:fault message="tns:hentSamordningsdata_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:hentSamordningsdata_faultPenYtelseIkkeIverksattMsg" name="faultPenYtelseIkkeIverksatt"/>
+            <wsdl:fault message="tns:hentSamordningsdata_faultPenGeneriskMsg" name="faultPenGenerisk"/>
+        </wsdl:operation>
+    <wsdl:operation name="slettTPSamordning">
+      <wsdl:input message="tns:slettTPSamordningRequestMsg" name="slettTPSamordningRequest"/>
+      <wsdl:output message="tns:slettTPSamordningResponseMsg" name="slettTPSamordningResponse"/>
+            <wsdl:fault message="tns:slettTPSamordning_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:slettTPSamordning_faultPenKombinasjonInputMsg" name="faultPenKombinasjonInput"/>
+            <wsdl:fault message="tns:slettTPSamordning_faultPenGeneriskMsg" name="faultPenGenerisk"/>
+        </wsdl:operation>
+        <wsdl:operation name="hentSamordningsVedtaksListe">
+      <wsdl:input message="tns:hentSamordningsVedtaksListeRequestMsg" name="hentSamordningsVedtaksListeRequest"/>
+      <wsdl:output message="tns:hentSamordningsVedtaksListeResponseMsg" name="hentSamordningsVedtaksListeResponse"/>
+            <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPenGeneriskMsg" name="faultPenGenerisk"/>
+            <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPersonIkkeFunnetMsg" name="faultPersonIkkeFunnet"/>
+            <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPenVedtakIkkeGyldigMsg" name="faultPenVedtakIkkeGyldig"/>
+            <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPenSakIdIkkeGyldigMsg" name="faultPenSakIdIkkeGyldig"/>
+            <wsdl:fault message="tns:hentSamordningsVedtaksListe_faultPenSamIdIkkeGyldigMsg" name="faultPenSamIdIkkeGyldig"/>
+        </wsdl:operation>
+        <wsdl:operation name="opprettRefusjonskrav">
+      <wsdl:input message="tns:opprettRefusjonskravRequestMsg" name="opprettRefusjonskravRequest"/>
+      <wsdl:output message="tns:opprettRefusjonskravResponseMsg" name="opprettRefusjonskravResponse"/>
+            <wsdl:fault message="tns:opprettRefusjonskrav_faultRefKravAlleredeRegElUtenforFristMsg" name="faultRefKravAlleredeRegElUtenforFrist"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

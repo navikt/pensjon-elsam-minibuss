@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:complexType name="ASBOPenSamordningMelding">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="samId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="meldingstatusKode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="tssEksternId" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="sendtDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="svartDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="purretDato" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="refusjonskrav" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="versjon" type="xsd:string"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

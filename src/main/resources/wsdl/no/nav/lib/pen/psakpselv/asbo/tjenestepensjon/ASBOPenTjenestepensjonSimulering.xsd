@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/tjenestepensjon">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:complexType name="ASBOPenTjenestepensjonSimulering">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="simuleringId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukePensjoneringFom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brukeLivsvarigTom" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="simuleringFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="simuleringTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="alderUtbetalingStart" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="alderUtbetalingStopp" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="belop" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="endringsInfo" type="bons0:ASBOPenEndringsInfo"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

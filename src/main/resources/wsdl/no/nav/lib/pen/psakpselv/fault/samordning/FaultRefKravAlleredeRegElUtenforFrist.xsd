@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault/samordning" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/fault" schemaLocation="../FaultPenBase.xsd">
+	</xsd:import>
+	<xsd:complexType name="FaultRefKravAlleredeRegElUtenforFrist">
+		<xsd:complexContent>
+			<xsd:extension base="bons0:FaultPenBase">
+				<xsd:sequence/>
+
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

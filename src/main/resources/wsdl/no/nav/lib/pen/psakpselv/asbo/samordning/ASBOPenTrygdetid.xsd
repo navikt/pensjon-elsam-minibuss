@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTrygdetidEOS.xsd"/>
+    <xsd:include schemaLocation="ASBOPenTrygdetidKonvensjon.xsd"/>
+    <xsd:complexType name="ASBOPenTrygdetid">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="trygdetidId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidKonvensjon" type="bons2:ASBOPenTrygdetidKonvensjon"/>
+      <xsd:element minOccurs="0" name="trygdetidEOS" type="bons2:ASBOPenTrygdetidEOS"/>
+      <xsd:element minOccurs="0" name="framtidigTrygdetid" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="framtidigTrygdetidRedusert" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="trygdetidEtterUFT" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEtterDod" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidOverfort" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidGaranti" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetid" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidFaktiskeMnd" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetid67til70" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidEtter66" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="trygdetidFor67" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="opptjeningsperiode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:Q1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/person">
+    <xsd:include schemaLocation="ASBOPenMatrikkelAdresse.xsd"/>
+    <xsd:include schemaLocation="ASBOPenOffentligAdresse.xsd"/>
+    <xsd:complexType name="ASBOPenBostedsAdresse">
+    <xsd:sequence>
+            <xsd:element minOccurs="0" name="boadresse1" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="boadresse2" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="bolignr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="postnummer" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="poststed" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="kommunenr" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="navEnhet" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="adresseType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="adresseTypeBeskrivelse" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="fom" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="tom" type="xsd:date"/>
+            <xsd:element minOccurs="0" name="offentligAdresse" type="Q1:ASBOPenOffentligAdresse"/>
+            <xsd:element minOccurs="0" name="matrikkelAdresse" type="Q1:ASBOPenMatrikkelAdresse"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

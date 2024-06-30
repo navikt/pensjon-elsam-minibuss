@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBarnekull.xsd"/>
+    <xsd:include schemaLocation="ASBOPenVernepliktsAr.xsd"/>
+    <xsd:include schemaLocation="ASBOPenPersondetalj.xsd"/>
+    <xsd:complexType name="ASBOPenPersongrunnlag">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="persongrunnlagId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="penPersonFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fodselsdato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="dodsdato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="statsborgerskapKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="flyktning" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="vedtaksdatoUDI" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="persondetaljListe" type="bons2:ASBOPenPersondetalj"/>
+      <xsd:element minOccurs="0" name="hentetPopp" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="hentetInnt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="hentetInst" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="hentetTT" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="hentetArbeid" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="fastsattTrygdetid" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="overkompUtl" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="overfortOmsorspoeng" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="godskrevetOmsorgspoeng" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="antallArUtland" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="dodAvYrkesskade" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="artikkel10" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="medlemFolketrygdenSiste3Ar" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="over60KanIkkeForsorgesSelv" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="arligPGIMinst1G" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="skiltesDelAvAvdodesTP" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+      <xsd:element minOccurs="0" name="vernepliktsArListe" type="bons2:ASBOPenVernepliktsAr"/>
+      <xsd:element minOccurs="0" name="barnekull" type="bons2:ASBOPenBarnekull"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

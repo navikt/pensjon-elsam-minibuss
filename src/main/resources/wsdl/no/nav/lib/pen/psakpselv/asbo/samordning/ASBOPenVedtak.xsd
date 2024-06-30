@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenBeregning.xsd"/>
+    <xsd:include schemaLocation="ASBOPenVilkarsvedtak.xsd"/>
+    <xsd:include schemaLocation="ASBOPenKravhode.xsd"/>
+    <xsd:complexType name="ASBOPenVedtak">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="vedtakId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="gjelderFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="virkningFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="lopendeFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="lopendeTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="virkningTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="vedtaksKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vedtakstatusKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="saksId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="saksKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ansvarligSaksbehandler" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravHode" type="bons2:ASBOPenKravhode"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="vilkarsvedtakListe" type="bons2:ASBOPenVilkarsvedtak"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="beregningListe" type="bons2:ASBOPenBeregning"/>
+      <xsd:element minOccurs="0" name="attesterer" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="attestertDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="vedtaksdato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="tilverksettelsesDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="sendtSamordningDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="samordnetDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="iverksattDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="etterbetaling" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="utvidetSamordningsfrist" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="vedtakLast" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="behandlingKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="annenPengeMottaker" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons3:ASBOPenEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

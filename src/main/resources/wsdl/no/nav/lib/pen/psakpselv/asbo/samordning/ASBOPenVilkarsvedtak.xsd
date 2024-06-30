@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" xmlns:bons3="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:include schemaLocation="ASBOPenMerknad.xsd"/>
+    <xsd:complexType name="ASBOPenVilkarsvedtak">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="vilkarsvedtakId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="anbefaltResultatKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vilkarsvedtakResultatKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="anvendtVurderingKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vilkarsvedtakResultatSpesKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravlinjeType" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="kravlinjeId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="innstillingKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="virkningFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="virkningTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="forsteVirkningsDato" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="gjelderFnr" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons2:ASBOPenEndringsInfo"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="merknadPenListe" type="bons3:ASBOPenMerknad"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="merknadPregListe" type="bons3:ASBOPenMerknad"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

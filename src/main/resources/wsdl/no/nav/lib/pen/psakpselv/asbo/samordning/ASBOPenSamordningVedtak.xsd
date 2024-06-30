@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons0="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning" xmlns:bons1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:include schemaLocation="ASBOPenSamordningMelding.xsd"/>
+    <xsd:complexType name="ASBOPenSamordningVedtak">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="samordningVedtakId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fagsystem" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="vedtakstatusKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="saksKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="etterbetaling" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="utvidetSamordningsfrist" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="vedtakId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="saksId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="virkningFom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="virkningTom" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="versjon" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="samordningMeldingListe" type="bons0:ASBOPenSamordningMelding" maxOccurs="unbounded"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

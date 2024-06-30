@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samordning">
+    <xsd:import namespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" schemaLocation="../ASBOPenEndringsInfo.xsd"/>
+    <xsd:complexType name="ASBOPenYtelseskomponent">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="ytelseskomponentId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="brutto" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="netto" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="fradrag" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="erBrukt" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="ytelsesKomponentKode" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="resultatKilde" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="endringsInfo" type="bons2:ASBOPenEndringsInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PSAKSamordningWSEXP_PSAKSamordningHttp_Service" targetNamespace="http://nav-cons-pen-psak-samordning/no/nav/inf/Binding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:Port_0="http://nav-cons-pen-psak-samordning/no/nav/inf" xmlns:this="http://nav-cons-pen-psak-samordning/no/nav/inf/Binding" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:import namespace="http://nav-cons-pen-psak-samordning/no/nav/inf" location="no/nav/inf/PSAKSamordning.wsdl">
+    </wsdl:import>
+  <wsdl:binding name="PSAKSamordningWSEXP_PSAKSamordningHttpBinding" type="Port_0:PSAKSamordning">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="opprettTPSamordning">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="opprettTPSamordningRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="opprettTPSamordningResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultPenPersonIkkeFunnet">
+        <soap:fault name="faultPenPersonIkkeFunnet" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="fautPenGenerisk">
+        <soap:fault name="fautPenGenerisk" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenYtelseAlleredeRegistrert">
+        <soap:fault name="faultPenYtelseAlleredeRegistrert" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hentSamordningsdata">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="hentSamordningsdataRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="hentSamordningsdataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultPenYtelseIkkeIverksatt">
+        <soap:fault name="faultPenYtelseIkkeIverksatt" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPersonIkkeFunnet">
+        <soap:fault name="faultPersonIkkeFunnet" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="slettTPSamordning">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="slettTPSamordningRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="slettTPSamordningResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenKombinasjonInput">
+        <soap:fault name="faultPenKombinasjonInput" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPersonIkkeFunnet">
+        <soap:fault name="faultPersonIkkeFunnet" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hentSamordningsVedtaksListe">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="hentSamordningsVedtaksListeRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="hentSamordningsVedtaksListeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultPenSamIdIkkeGyldig">
+        <soap:fault name="faultPenSamIdIkkeGyldig" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenSakIdIkkeGyldig">
+        <soap:fault name="faultPenSakIdIkkeGyldig" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPersonIkkeFunnet">
+        <soap:fault name="faultPersonIkkeFunnet" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="faultPenVedtakIkkeGyldig">
+        <soap:fault name="faultPenVedtakIkkeGyldig" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="opprettRefusjonskrav">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="opprettRefusjonskravRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="opprettRefusjonskravResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="faultRefKravAlleredeRegElUtenforFrist">
+        <soap:fault name="faultRefKravAlleredeRegElUtenforFrist" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PSAKSamordningWSEXP_PSAKSamordningHttpService">
+    <wsdl:port name="PSAKSamordningWSEXP_PSAKSamordningHttpPort" binding="this:PSAKSamordningWSEXP_PSAKSamordningHttpBinding">
+      <soap:address location="http://localhost:9080/nav-cons-pen-psak-samordningWeb/sca/PSAKSamordningWSEXP"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
