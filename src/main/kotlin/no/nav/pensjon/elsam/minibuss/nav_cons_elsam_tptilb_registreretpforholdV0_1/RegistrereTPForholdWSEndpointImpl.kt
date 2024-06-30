@@ -7,7 +7,10 @@ import jakarta.jws.WebService
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.ws.RequestWrapper
 import jakarta.xml.ws.ResponseWrapper
+import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import no.nav.elsam.registreretpforhold.v0_1.*
+import no.nav.elsam.registreretpforhold.v0_1.ObjectFactory
+import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,7 +23,9 @@ import org.springframework.stereotype.Component
 )
 @XmlSeeAlso(ObjectFactory::class)
 @Suppress("HttpUrlsUsage")
-class RegistrereTPForholdWSEndpointImpl : RegistrereTPForhold {
+class RegistrereTPForholdWSEndpointImpl(
+    private val navConsElsamTptilbRegisrereTpForhold: NavConsElsamTptilbRegisrereTpForhold,
+) : RegistrereTPForhold {
     @WebMethod
     @RequestWrapper(
         localName = "opprettTPForhold",
@@ -37,9 +42,9 @@ class RegistrereTPForholdWSEndpointImpl : RegistrereTPForhold {
         OpprettTPForholdFaultGeneriskMsg::class
     )
     override fun opprettTPForhold(
-        @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq?
+        @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
-        TODO("Not yet implemented")
+        return navConsElsamTptilbRegisrereTpForhold.opprettTPForhold(opprettTPForholdReq)
     }
 
     @WebMethod
@@ -59,9 +64,15 @@ class RegistrereTPForholdWSEndpointImpl : RegistrereTPForhold {
         HentTPForholdListeFaultGeneriskMsg::class
     )
     override fun hentTPForholdListe(
-        @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq?
+        @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq
     ): HentTPForholdListeResp? {
-        TODO("Not yet implemented")
+        try {
+            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
+        } catch (e: HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg) {
+            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo)
+        } catch (e: HentTPForholdListeIntFaultGeneriskMsg) {
+            throw HentTPForholdListeFaultGeneriskMsg(e.message, e.faultInfo)
+        }
     }
 
     @WebMethod
@@ -81,9 +92,16 @@ class RegistrereTPForholdWSEndpointImpl : RegistrereTPForhold {
         SlettTPForholdFaultGeneriskMsg::class
     )
     override fun slettTPForhold(
-
-        @WebParam(name = "slettTPForholdReq", targetNamespace = "") slettTPForholdReq: SlettTPForholdReq?
+        @WebParam(name = "slettTPForholdReq", targetNamespace = "") slettTPForholdReq: SlettTPForholdReq
     ) {
-        TODO("Not yet implemented")
+        try {
+            navConsElsamTptilbRegisrereTpForhold.slettTPForhold(slettTPForholdReq)
+        } catch (e: SlettTPForholdFinnTjenestepensjonsforholdIntFaultTjenestepensjonForholdIkkeFunnetIntMsg) {
+            throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo)
+        } catch (e: SlettTPForholdFinnTjenestepensjonsforholdIntFaultGeneriskMsg) {
+            throw SlettTPForholdFaultGeneriskMsg(e.message, e.faultInfo)
+        } catch (e: SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg) {
+            throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo)
+        }
     }
 }

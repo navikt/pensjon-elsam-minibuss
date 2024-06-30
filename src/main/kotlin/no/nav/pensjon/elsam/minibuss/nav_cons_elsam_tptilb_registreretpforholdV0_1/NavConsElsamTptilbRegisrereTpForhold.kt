@@ -12,25 +12,24 @@ import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.*
+import org.springframework.stereotype.Component
 import java.time.LocalDateTime
-import javax.xml.datatype.DatatypeConfigurationException
 import javax.xml.datatype.DatatypeFactory
 
+@Component
 class NavConsElsamTptilbRegisrereTpForhold(
-    private val registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold: RegistrereTPForholdInt,
-    private val SamhandlerPartner: Samhandler,
-    private val registrereTPForholdV0_1IntPartner_Tjenestepensjon: RegistrereTPForholdInt
+    private val registrereTPForholdInt: RegistrereTPForholdInt,
+    private val samhandler: Samhandler,
 ) {
     @Throws(
         ServiceBusinessException::class,
-        DatatypeConfigurationException::class,
         HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg::class,
         HentTPForholdListeIntFaultGeneriskMsg::class
     )
     fun hentTPForholdListe(hentTPForholdListeRequest: HentTPForholdListeReq): HentTPForholdListeResp {
         val response: HentTPForholdListeResp
         try {
-            response = registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold.hentTPForholdListeInt(
+            response = registrereTPForholdInt.hentTPForholdListeInt(
                 HentTPForholdListeRequestInt().apply {
                     extRequest = hentTPForholdListeRequest
                 })
@@ -53,7 +52,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
     @Throws(ServiceBusinessException::class)
     fun opprettTPForhold(opprettTPForholdRequest: OpprettTPForholdReq) {
         try {
-            registrereTPForholdV0_1IntPartner_Tjenestepensjon.opprettTPForholdInt(OpprettTPForholdRequestInt().apply {
+            registrereTPForholdInt.opprettTPForholdInt(OpprettTPForholdRequestInt().apply {
                 extRequest = opprettTPForholdRequest
                 eksternTSSId = mapTPnrToTSSEksternId(opprettTPForholdRequest.tpnr)
             })
@@ -68,14 +67,13 @@ class NavConsElsamTptilbRegisrereTpForhold(
         ServiceBusinessException::class,
         SlettTPForholdFinnTjenestepensjonsforholdIntFaultTjenestepensjonForholdIkkeFunnetIntMsg::class,
         SlettTPForholdFinnTjenestepensjonsforholdIntFaultGeneriskMsg::class,
-        DatatypeConfigurationException::class,
         SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg::class
     )
     fun slettTPForhold(slettTPForholdRequest: SlettTPForholdReq) {
         val response: GBOTjenestepensjon
         try {
             response =
-                registrereTPForholdV0_1IntPartner_FinnTjenestepensjonsforhold.slettTPForholdFinnTjenestepensjonsforholdInt(
+                registrereTPForholdInt.slettTPForholdFinnTjenestepensjonsforholdInt(
                     SlettTPForholdFinnTjenestepensjonsforholdRequestInt().apply {
                         extRequest = slettTPForholdRequest
                         eksternTSSId = mapTPnrToTSSEksternId(slettTPForholdRequest.tpnr)
@@ -102,7 +100,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
 
         try {
-            registrereTPForholdV0_1IntPartner_Tjenestepensjon.slettTPForholdTjenestepensjonInt(
+            registrereTPForholdInt.slettTPForholdTjenestepensjonInt(
                 SlettTPForholdTjenestepensjonRequestInt().apply {
                     forholdId = tpForholdet.forholdId
                 })
@@ -126,7 +124,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
 
         val samhandlerResponse: GBOSamhandlerListe?
         try {
-            samhandlerResponse = SamhandlerPartner.finnSamhandler(GBOFinnSamhandlerRequest().also {
+            samhandlerResponse = samhandler.finnSamhandler(GBOFinnSamhandlerRequest().also {
                 it.offentligId = tpNr
                 it.idType = "TPNR"
                 it.samhandlerType = "TEPE"
@@ -188,7 +186,6 @@ class NavConsElsamTptilbRegisrereTpForhold(
                 this.errorDetails.addAll(errorDetails)
             })
 
-        @Throws(DatatypeConfigurationException::class)
         private fun getFaultTjenestepensjonForholdIkkeFunnet(errorMessage: String): FaultTjenestepensjonForholdIkkeFunnet {
             val faultBo = FaultTjenestepensjonForholdIkkeFunnet()
             faultBo.errorMessage = errorMessage
@@ -199,7 +196,6 @@ class NavConsElsamTptilbRegisrereTpForhold(
             return faultBo
         }
 
-        @Throws(DatatypeConfigurationException::class)
         private fun getFaultKanIkkeSlettes(errorMessage: String): FaultKanIkkeSlettes {
             val faultBo = FaultKanIkkeSlettes()
             faultBo.errorMessage = errorMessage
