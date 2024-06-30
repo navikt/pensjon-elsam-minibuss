@@ -1,8 +1,12 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.HentSamordningsdataReqInt;
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.LagreTPYtelseReqInt;
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.OpprettRefusjonskravReqInt;
@@ -19,13 +23,18 @@ import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp;
 import no.nav.elsam.tpsamordningregistrering.v1_0.Vedtak;
 import no.nav.pensjon.elsam.minibuss.DateUtil;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
+
 
 public class Mapper {
-    public static void FaultKombinasjonInputTOFaultTPYtelseIkkeFunnet(FaultKombinasjonInput FaultKombinasjonInput, FaultTPYtelseIkkeFunnet FaultTPYtelseIkkeFunnet) {
+    public static void FaultKombinasjonInputTOFaultTPYtelseIkkeFunnet(FaultKombinasjonInput FaultKombinasjonInput, FaultTPYtelseIkkeFunnet FaultTPYtelseIkkeFunnet) throws DatatypeConfigurationException {
         FaultTPYtelseIkkeFunnet.setErrorMessage(FaultKombinasjonInput.getErrorMessage()); // move (executionOrder=1)
         FaultTPYtelseIkkeFunnet.setErrorSource(FaultKombinasjonInput.getErrorSource()); // move (executionOrder=2)
         FaultTPYtelseIkkeFunnet.setRootCause(FaultKombinasjonInput.getRootCause()); // move (executionOrder=3)
-        FaultTPYtelseIkkeFunnet.setDateTimeStamp(FaultKombinasjonInput.getDateTimeStamp()); // move (executionOrder=4)
+        FaultTPYtelseIkkeFunnet.setDateTimeStamp(toXMLGregorianCalendar(FaultKombinasjonInput.getDateTimeStamp())); // move (executionOrder=4)
     }
 
     public static void FaultPersonIkkeFunnetTOFaultGenerisk(nav_lib_frg.no.nav.lib.frg.fault.FaultPersonIkkeFunnet FaultPersonIkkeFunnet, FaultGenerisk FaultGenerisk) {
@@ -33,63 +42,46 @@ public class Mapper {
         FaultGenerisk.setErrorDescription(FaultPersonIkkeFunnet.getErrorMessage()); // move (executionOrder=2)
     }
 
-    public static void FaultRefKravAlleredeRegElUtenforFristTOFaultAlleredeMottattRefusjonskrav(FaultRefKravAlleredeRegElUtenforFrist FaultRefKravAlleredeRegElUtenforFrist, FaultAlleredeMottattRefusjonskrav FaultAlleredeMottattRefusjonskrav) {
+    public static void FaultRefKravAlleredeRegElUtenforFristTOFaultAlleredeMottattRefusjonskrav(FaultRefKravAlleredeRegElUtenforFrist FaultRefKravAlleredeRegElUtenforFrist, FaultAlleredeMottattRefusjonskrav FaultAlleredeMottattRefusjonskrav) throws DatatypeConfigurationException {
         FaultAlleredeMottattRefusjonskrav.setErrorMessage(FaultRefKravAlleredeRegElUtenforFrist.getErrorMessage()); // move (executionOrder=1)
         FaultAlleredeMottattRefusjonskrav.setErrorSource(FaultRefKravAlleredeRegElUtenforFrist.getErrorSource()); // move (executionOrder=2)
         FaultAlleredeMottattRefusjonskrav.setRootCause(FaultRefKravAlleredeRegElUtenforFrist.getRootCause()); // move (executionOrder=3)
-        FaultAlleredeMottattRefusjonskrav.setDateTimeStamp(FaultRefKravAlleredeRegElUtenforFrist.getDateTimeStamp()); // move (executionOrder=4)
+        FaultAlleredeMottattRefusjonskrav.setDateTimeStamp(toXMLGregorianCalendar(FaultRefKravAlleredeRegElUtenforFrist.getDateTimeStamp())); // move (executionOrder=4)
     }
 
-    public static void FaultSamIdIkkeGyldigTOFaultSamordningsIdIkkeFunnet(FaultSamIdIkkeGyldig FaultSamIdIkkeGyldig, FaultSamordningsIdIkkeFunnet FaultSamordningsIdIkkeFunnet) {
+    public static void FaultSamIdIkkeGyldigTOFaultSamordningsIdIkkeFunnet(FaultSamIdIkkeGyldig FaultSamIdIkkeGyldig, FaultSamordningsIdIkkeFunnet FaultSamordningsIdIkkeFunnet) throws DatatypeConfigurationException {
         FaultSamordningsIdIkkeFunnet.setErrorMessage(FaultSamIdIkkeGyldig.getErrorMessage()); // move (executionOrder=1)
         FaultSamordningsIdIkkeFunnet.setErrorSource(FaultSamIdIkkeGyldig.getErrorSource()); // move (executionOrder=2)
         FaultSamordningsIdIkkeFunnet.setRootCause(FaultSamIdIkkeGyldig.getRootCause()); // move (executionOrder=3)
-        FaultSamordningsIdIkkeFunnet.setDateTimeStamp(FaultSamIdIkkeGyldig.getDateTimeStamp()); // move (executionOrder=4)
+        FaultSamordningsIdIkkeFunnet.setDateTimeStamp(toXMLGregorianCalendar(FaultSamIdIkkeGyldig.getDateTimeStamp())); // move (executionOrder=4)
     }
 
-    public static void FaultSvarUtenforPeriodeTOFaultRefusjonskravUtenforSamordningspliktigPeriode(FaultSvarUtenforPeriode FaultSvarUtenforPeriode, FaultRefusjonskravUtenforSamordningspliktigPeriode FaultRefusjonskravUtenforSamordningspliktigPeriode) {
+    public static void FaultSvarUtenforPeriodeTOFaultRefusjonskravUtenforSamordningspliktigPeriode(FaultSvarUtenforPeriode FaultSvarUtenforPeriode, FaultRefusjonskravUtenforSamordningspliktigPeriode FaultRefusjonskravUtenforSamordningspliktigPeriode) throws DatatypeConfigurationException {
         FaultRefusjonskravUtenforSamordningspliktigPeriode.setErrorMessage(FaultSvarUtenforPeriode.getErrorMessage()); // move (executionOrder=1)
         FaultRefusjonskravUtenforSamordningspliktigPeriode.setErrorSource(FaultSvarUtenforPeriode.getErrorSource()); // move (executionOrder=2)
         FaultRefusjonskravUtenforSamordningspliktigPeriode.setRootCause(FaultSvarUtenforPeriode.getRootCause()); // move (executionOrder=3)
-        FaultRefusjonskravUtenforSamordningspliktigPeriode.setDateTimeStamp(FaultSvarUtenforPeriode.getDateTimeStamp()); // move (executionOrder=4)
+        FaultRefusjonskravUtenforSamordningspliktigPeriode.setDateTimeStamp(toXMLGregorianCalendar(FaultSvarUtenforPeriode.getDateTimeStamp())); // move (executionOrder=4)
     }
 
-    public static void FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert(FaultYtelseAlleredeRegistrert FaultYtelseAlleredeRegistrert, FaultTPYtelseAlleredeRegistrert FaultTPYtelseAlleredeRegistrert) {
+    public static void FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert(FaultYtelseAlleredeRegistrert FaultYtelseAlleredeRegistrert, FaultTPYtelseAlleredeRegistrert FaultTPYtelseAlleredeRegistrert) throws DatatypeConfigurationException {
         FaultTPYtelseAlleredeRegistrert.setErrorMessage(FaultYtelseAlleredeRegistrert.getErrorMessage()); // move (executionOrder=1)
         FaultTPYtelseAlleredeRegistrert.setErrorSource(FaultYtelseAlleredeRegistrert.getErrorSource()); // move (executionOrder=2)
         FaultTPYtelseAlleredeRegistrert.setRootCause(FaultYtelseAlleredeRegistrert.getRootCause()); // move (executionOrder=3)
-        FaultTPYtelseAlleredeRegistrert.setDateTimeStamp(FaultYtelseAlleredeRegistrert.getDateTimeStamp()); // move (executionOrder=4)
+        FaultTPYtelseAlleredeRegistrert.setDateTimeStamp(toXMLGregorianCalendar(FaultYtelseAlleredeRegistrert.getDateTimeStamp())); // move (executionOrder=4)
     }
 
-    public static void FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt(FaultYtelseIkkeIverksatt FaultYtelseIkkeIverksatt, FaultTPForholdIkkeIverksatt FaultTPForholdIkkeIverksatt) {
+    public static void FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt(FaultYtelseIkkeIverksatt FaultYtelseIkkeIverksatt, FaultTPForholdIkkeIverksatt FaultTPForholdIkkeIverksatt) throws DatatypeConfigurationException {
         FaultTPForholdIkkeIverksatt.setErrorMessage(FaultYtelseIkkeIverksatt.getErrorMessage()); // move (executionOrder=1)
         FaultTPForholdIkkeIverksatt.setErrorSource(FaultYtelseIkkeIverksatt.getErrorSource()); // move (executionOrder=2)
         FaultTPForholdIkkeIverksatt.setRootCause(FaultYtelseIkkeIverksatt.getRootCause()); // move (executionOrder=3)
-        FaultTPForholdIkkeIverksatt.setDateTimeStamp(FaultYtelseIkkeIverksatt.getDateTimeStamp()); // move (executionOrder=4)
+        FaultTPForholdIkkeIverksatt.setDateTimeStamp(toXMLGregorianCalendar(FaultYtelseIkkeIverksatt.getDateTimeStamp())); // move (executionOrder=4)
     }
 
-    public static void GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(GBOArbeidOgAktivitetsvedtak GBOArbeidOgAktivitetsvedtak, ArbeidOgAktivitetsvedtak ArbeidOgAktivitetsvedtak) {
+    public static void GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(GBOArbeidOgAktivitetsvedtak GBOArbeidOgAktivitetsvedtak, ArbeidOgAktivitetsvedtak ArbeidOgAktivitetsvedtak) throws DatatypeConfigurationException {
         ArbeidOgAktivitetsvedtak.setVedtakId(GBOArbeidOgAktivitetsvedtak.getVedtakId()); // move (executionOrder=1)
         ArbeidOgAktivitetsvedtak.setGjelderFnr(GBOArbeidOgAktivitetsvedtak.getGjelderFnr()); // move (executionOrder=2)
-    {
-        String GBOArbeidOgAktivitetsvedtak_virkningFom = GBOArbeidOgAktivitetsvedtak.getVirkningFom(); // custom.input.forEach (executionOrder=3)
-        String ArbeidOgAktivitetsvedtak_virkningFom = null; // custom.output declaration (executionOrder=3)
-        // The specific type of variable GBOArbeidOgAktivitetsvedtak_virkningFom is java.lang.String
-        // The specific type of variable ArbeidVedtak_virkingFom is java.util.Date
-        ArbeidOgAktivitetsvedtak_virkningFom = DateUtil.parseWIDString((String)GBOArbeidOgAktivitetsvedtak_virkningFom);
-        
-        ArbeidOgAktivitetsvedtak.setVirkningFom(ArbeidOgAktivitetsvedtak_virkningFom); // custom.output assignment (executionOrder=3)
-
-    }
-    {
-        String GBOArbeidOgAktivitetsvedtak_virkningTom = GBOArbeidOgAktivitetsvedtak.getVirkningTom(); // custom.input.forEach (executionOrder=4)
-        String ArbeidOgAktivitetsvedtak_virkningTom = null; // custom.output declaration (executionOrder=4)
-        // The specific type of variable GBOArbeidOgAktivitetsvedtak_virkningTom is java.lang.String
-        // The specific type of variable ArbeidVedtak_virkingTom is java.util.Date
-        ArbeidOgAktivitetsvedtak_virkningTom = DateUtil.parseWIDString((String)GBOArbeidOgAktivitetsvedtak_virkningTom);
-        ArbeidOgAktivitetsvedtak.setVirkningTom(ArbeidOgAktivitetsvedtak_virkningTom); // custom.output assignment (executionOrder=4)
-
-    }
+        ArbeidOgAktivitetsvedtak.setVirkningFom(toXMLGregorianCalendar(DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.getVirkningFom()))); // custom.output assignment (executionOrder=3)
+        ArbeidOgAktivitetsvedtak.setVirkningTom(toXMLGregorianCalendar(DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.getVirkningTom()))); // custom.output assignment (executionOrder=4)
         ArbeidOgAktivitetsvedtak.setVedtaksKode(GBOArbeidOgAktivitetsvedtak.getVedtakstypeKode()); // move (executionOrder=5)
         ArbeidOgAktivitetsvedtak.setVedtakstatusKode(GBOArbeidOgAktivitetsvedtak.getVedtakstatusKode()); // move (executionOrder=6)
         ArbeidOgAktivitetsvedtak.setSaksKode(GBOArbeidOgAktivitetsvedtak.getSakstypeKode()); // move (executionOrder=7)
@@ -99,7 +91,7 @@ public class Mapper {
         ArbeidOgAktivitetsvedtak.setDagsatsUBT(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getDagsatsUBT()); // move (executionOrder=11)
         ArbeidOgAktivitetsvedtak.setDagsatsMBT(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getDagsatsMBT()); // move (executionOrder=12)
         ArbeidOgAktivitetsvedtak.setDagstatsMBTFS(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getDagsatsMBTFS()); // move (executionOrder=13)
-        ArbeidOgAktivitetsvedtak.setAntallBarn(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getAntallBarn()); // move (executionOrder=14)
+        ArbeidOgAktivitetsvedtak.setAntallBarn(toInteger(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getAntallBarn())); // move (executionOrder=14)
         ArbeidOgAktivitetsvedtak.setBeregningsgrunnlag(GBOArbeidOgAktivitetsvedtak.getVedtaksfaktaAAP().getBeregningsgrunnlag()); // move (executionOrder=15)
     }
 
@@ -109,33 +101,13 @@ public class Mapper {
         GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.getSpt(),BeregningNokkelinfo.getSpt()); // submap (executionOrder=3)
         GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.getYpt(),BeregningNokkelinfo.getYpt()); // submap (executionOrder=4)
         GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.getOpt(),BeregningNokkelinfo.getOpt()); // submap (executionOrder=5)
-        BeregningNokkelinfo.setAnvendtTrygdetid(GBOBeregningNokkelinfo.getTtAnv()); // move (executionOrder=6)
-        BeregningNokkelinfo.setAnvendtIBeregningen(GBOBeregningNokkelinfo.getAnvendtIBeregningen()); // move (executionOrder=7)
+        BeregningNokkelinfo.setAnvendtTrygdetid(toJAXBElement("anvendtTrygdetid", Integer.class, toInteger(GBOBeregningNokkelinfo.getTtAnv()))); // move (executionOrder=6)
+        BeregningNokkelinfo.setAnvendtIBeregningen(toJAXBElement("anvendtIBeregningen", Boolean.class, GBOBeregningNokkelinfo.getAnvendtIBeregningen())); // move (executionOrder=7)
     }
 
-    public static void GBOBeregningTOBeregning(nav_lib_pen.no.nav.lib.pen.gbo.GBOBeregning GBOBeregning, Beregning Beregning_1) {
-    {
-        String GBOBeregning_virkDatoFom = GBOBeregning.getVirkDatoFom(); // custom.input.forEach (executionOrder=1)
-        String Beregning_1_virkningFom = null; // custom.output declaration (executionOrder=1)
-        // The specific type of variable GBOBeregning_virkDatoFom is java.lang.String
-        // The specific type of variable Beregning_1_virkningFom is java.util.Date
-        if (GBOBeregning_virkDatoFom != null) {
-        	Beregning_1_virkningFom = DateUtil.parseWIDString((String) GBOBeregning_virkDatoFom);
-        }
-        Beregning_1.setVirkningFom(Beregning_1_virkningFom); // custom.output assignment (executionOrder=1)
-
-    }
-    {
-        String GBOBeregning_virkDatoTom = GBOBeregning.getVirkDatoTom(); // custom.input.forEach (executionOrder=2)
-        String Beregning_1_virkningTom = null; // custom.output declaration (executionOrder=2)
-        // The specific type of variable GBOBeregning_virkDatoTom is java.lang.String
-        // The specific type of variable Beregning_1_virkningTom is java.util.Date
-        if (GBOBeregning_virkDatoTom != null) {
-        	Beregning_1_virkningTom = DateUtil.parseWIDString((String) GBOBeregning_virkDatoTom);
-        }
-        Beregning_1.setVirkningTom(Beregning_1_virkningTom); // custom.output assignment (executionOrder=2)
-
-    }
+    public static void GBOBeregningTOBeregning(nav_lib_pen.no.nav.lib.pen.gbo.GBOBeregning GBOBeregning, Beregning Beregning_1) throws DatatypeConfigurationException {
+        Beregning_1.setVirkningFom(toXMLGregorianCalendar(GBOBeregning.getVirkDatoFom() != null ? DateUtil.parseWIDString(GBOBeregning.getVirkDatoFom()) : null)); // custom.output assignment (executionOrder=1)
+        Beregning_1.setVirkningTom(toXMLGregorianCalendar(GBOBeregning.getVirkDatoTom() != null ? DateUtil.parseWIDString(GBOBeregning.getVirkDatoTom()) : null)); // custom.output assignment (executionOrder=2)
         Beregning_1.setResultatKode(GBOBeregning.getResultatKode()); // move (executionOrder=3)
         Beregning_1.setP67Berergning(GBOBeregning.getP67Beregning()); // move (executionOrder=4)
         Beregning_1.setAfpPensjonsgrad(GBOBeregning.getAfpPensjonsgrad()); // move (executionOrder=5)
@@ -304,7 +276,7 @@ public class Mapper {
         if (GBOPerson_dodsdato != null) {
         	Person_dodsdato = DateUtil.parseWIDString((String) GBOPerson_dodsdato);
         }
-        
+
         Person.setDodsdato(Person_dodsdato); // custom.output assignment (executionOrder=6)
 
     }
@@ -314,7 +286,7 @@ public class Mapper {
         // The specific type of variable Person_utbetalingsadresse is commonj.sdo.DataObject
         if (GBOPerson != null && Person_utbetalingsadresse != null) {
         	DataObject person = (DataObject) Person_utbetalingsadresse;
-        
+
         	if (GBOPerson.getDataObject("bostedsAdresse") != null) {
         		DataObject bostedsAdresse = (DataObject) GBOPerson.getDataObject("bostedsAdresse");
         		String postnr = bostedsAdresse.getString("postnr");
@@ -324,8 +296,8 @@ public class Mapper {
         			person.setString("postnr", bostedsAdresse.getString("postnr"));
         			person.setString("poststed", bostedsAdresse.getString("poststed"));
         		}
-        	} 
-        
+        	}
+
         	DataObject annenAdresse = null;
         	if (GBOPerson.getDataObject("postAdresse") != null) {
         		DataObject postAdresse = GBOPerson.getDataObject("postAdresse");
@@ -352,7 +324,7 @@ public class Mapper {
         			annenAdresse = utenlandsAdresse;
         		}
         	}
-        	
+
         	if (annenAdresse != null) {
         		person.setString("adresselinje1", annenAdresse.getString("adresselinje1"));
         		person.setString("adresselinje2", annenAdresse.getString("adresselinje2"));
@@ -361,8 +333,8 @@ public class Mapper {
         		person.setString("poststed", annenAdresse.getString("poststed"));
         		person.setString("land", annenAdresse.getString("land"));
         	}
-        } 
-        
+        }
+
         Person.setUtbetalingsadresse(Person_utbetalingsadresse); // custom.output assignment (executionOrder=7)
 
     }
@@ -379,12 +351,12 @@ public class Mapper {
         String HentSamordningsdataResp_tjenestepensjonYtelseListe = null; // custom.output declaration (executionOrder=6)
         // The specific type of variable GBOSamordningsdata_tjenestepensjonForholdListe is java.util.List
         // The specific type of variable HentSamordningsdataResp_tjenestepensjonYtelseListe is java.util.List
-        
+
         if (GBOSamordningsdata_tjenestepensjonForholdListe != null &&
         	HentSamordningsdataResp_tjenestepensjonYtelseListe != null) {
         	// Clear list to work around WID bug until JR27952 is fixed
         	((List) HentSamordningsdataResp_tjenestepensjonYtelseListe).clear();
-        
+
         	for (Iterator iter = ((List) GBOSamordningsdata_tjenestepensjonForholdListe).iterator(); iter.hasNext();) {
             	DataObject tpForhold = (DataObject) iter.next();
             	for (Iterator iterator = ((List) tpForhold.getList("tjenestepensjonYtelseListe")).iterator(); iterator.hasNext();) {
@@ -417,10 +389,10 @@ public class Mapper {
         String LagreTPYtelseResp_tjenestepensjonYtelseListe = null; // custom.output declaration (executionOrder=5)
         // The specific type of variable GBOSamordningsdata_tjenestepensjonForholdListe is java.util.List
         // The specific type of variable LagreTPYtelseResp_tjenestepensjonYtelseListe is java.util.List
-        
+
         // Clear list to work around WID bug until JR27952 is fixed
         ((List) LagreTPYtelseResp_tjenestepensjonYtelseListe).clear();
-        
+
         if (GBOSamordningsdata_tjenestepensjonForholdListe != null) {
         	for (Iterator iter = ((List) GBOSamordningsdata_tjenestepensjonForholdListe).iterator(); iter.hasNext();) {
         	    DataObject tpForhold = (DataObject) iter.next();
@@ -490,7 +462,7 @@ public class Mapper {
         // The specific type of variable GBOVedtak_kravHode_kravVelgKode is java.lang.String
         // The specific type of variable Vedtak_typeKrigspensjon is java.lang.String
         String[] gyldigeKoder = {"MIL_INV", "MIL_GJENLEV", "MIL_BARNEP", "SIVIL_INV", "SIVIL_GJENLEV", "SIVIL_BARNEP", "UP", "EP", "BP"};
-        
+
         if (GBOVedtak_kravHode_kravVelgKode != null) {
         	String kravVelgKode = (String) GBOVedtak_kravHode_kravVelgKode;
         	if (Arrays.asList(gyldigeKoder).contains(kravVelgKode)) {
@@ -509,7 +481,7 @@ public class Mapper {
         String Vilkarsvedtak_tom = null; // custom.output declaration (executionOrder=2)
         // The specific type of variable GBOVilkarsvedtak_virkningTom is java.lang.String
         // The specific type of variable Vilkarsvedtak_tom is java.util.Date
-        
+
         if (GBOVilkarsvedtak_virkningTom != null) {
         	Vilkarsvedtak_tom = DateUtil.parseWIDString((String) GBOVilkarsvedtak_virkningTom);
         }
@@ -524,7 +496,7 @@ public class Mapper {
         if (GBOVilkarsvedtak_virkningFom != null) {
         	Vilkarsvedtak_fom = DateUtil.parseWIDString((String) GBOVilkarsvedtak_virkningFom);
         }
-        
+
         Vilkarsvedtak.setFom(Vilkarsvedtak_fom); // custom.output assignment (executionOrder=3)
 
     }
@@ -539,7 +511,7 @@ public class Mapper {
         String GBOHentSamordningsdataRequest_fom = null; // custom.output declaration (executionOrder=4)
         // The specific type of variable HentSamordningsdataReqInt_extRequest_datoFom is java.util.Date
         // The specific type of variable GBOHentSamordningsdataRequest_fom is java.lang.String
-        
+
         if (HentSamordningsdataReqInt_extRequest_datoFom != null) {
         	GBOHentSamordningsdataRequest_fom = DateUtil.formatWIDString((Date) HentSamordningsdataReqInt_extRequest_datoFom);
         }
@@ -558,11 +530,11 @@ public class Mapper {
         String GBOOpprettTPSamordningRequest_iverksattFom = null; // custom.output declaration (executionOrder=4)
         // The specific type of variable LagreTPYtelseReqInt_extRequest_datoFom is java.util.Date
         // The specific type of variable GBOOpprettTPSamordningRequest_iverksattFom is java.lang.String
-        
-        if (LagreTPYtelseReqInt_extRequest_datoFom != null) 
+
+        if (LagreTPYtelseReqInt_extRequest_datoFom != null)
         GBOOpprettTPSamordningRequest_iverksattFom = DateUtil.formatWIDString((java.util.Date)LagreTPYtelseReqInt_extRequest_datoFom);
-        
-        
+
+
         GBOOpprettTPSamordningRequest.setIverksattFom(GBOOpprettTPSamordningRequest_iverksattFom); // custom.output assignment (executionOrder=4)
 
     }
@@ -596,7 +568,7 @@ public class Mapper {
         String GBOPeriodisertBelop_datoFom = null; // custom.output declaration (executionOrder=3)
         // The specific type of variable PeriodisertBelop_datoFom is java.util.Date
         // The specific type of variable GBOPeriodisertBelop_datoFom is java.lang.String
-        
+
         if (PeriodisertBelop_datoFom != null) {
         	GBOPeriodisertBelop_datoFom = DateUtil.formatWIDString((Date) PeriodisertBelop_datoFom);
         }
@@ -608,7 +580,7 @@ public class Mapper {
         String GBOPeriodisertBelop_datoTom = null; // custom.output declaration (executionOrder=4)
         // The specific type of variable PeriodisertBelop_datoTom is java.util.Date
         // The specific type of variable GBOPeriodisertBelop_datoTom is java.lang.String
-        
+
         if (PeriodisertBelop_datoTom != null) {
         	GBOPeriodisertBelop_datoTom = DateUtil.formatWIDString((Date) PeriodisertBelop_datoTom);
         }
@@ -641,5 +613,27 @@ public class Mapper {
     }
         GBOSlettTPSamordningRequest.setTssEksternId(SlettTPYtelseReqInt.getTssEksternId()); // move (executionOrder=6)
         GBOSlettTPSamordningRequest.setYtelseKode(SlettTPYtelseReqInt.getExtRequest().getTpArt()); // move (executionOrder=7)
+    }
+
+    public static XMLGregorianCalendar toXMLGregorianCalendar(Date date) throws DatatypeConfigurationException {
+        if (date != null) {
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+            return DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar);
+        } else {
+            return null;
+        }
+    }
+
+    public static XMLGregorianCalendar toXMLGregorianCalendar(String date) throws DatatypeConfigurationException {
+        return null != date ? DatatypeFactory.newInstance().newXMLGregorianCalendar(date) : null;
+    }
+
+    public static Integer toInteger(String value) {
+        return value != null ? Integer.parseInt(value) : null;
+    }
+
+    public static <T> JAXBElement<T> toJAXBElement(String localPart, Class<T> type, T object) {
+        return object != null ? new JAXBElement<>(new QName(localPart), type, object) : null;
     }
 }
