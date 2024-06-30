@@ -31,7 +31,9 @@ import org.springframework.stereotype.Component
 )
 @Addressing
 @BindingType
-class NPTjenestepensjonWSEndpointImpl : NPTjenestepensjon {
+class NPTjenestepensjonWSEndpointImpl(
+    private val npTjenestepensjonToFinnTjenestepensjonsforhold: NPTjenestepensjonToFinnTjenestepensjonsforhold,
+) : NPTjenestepensjon {
     @WebMethod
     @RequestWrapper(
         localName = "harTjenestepensjonsforhold",
@@ -51,8 +53,8 @@ class NPTjenestepensjonWSEndpointImpl : NPTjenestepensjon {
         @WebParam(
             name = "harTjenestepensjonsRequest",
             targetNamespace = ""
-        ) harTjenestepensjonsRequest: ASBONpHarTjenestepensjonsforholdRequest?
+        ) harTjenestepensjonsRequest: ASBONpHarTjenestepensjonsforholdRequest
     ): ASBONpHarTjenestepensjonsforholdResponse? {
-        TODO("Not yet implemented")
+        return npTjenestepensjonToFinnTjenestepensjonsforhold.harTjenestepensjonsforhold(harTjenestepensjonsRequest)
     }
 }
