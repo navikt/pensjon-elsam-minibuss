@@ -5,28 +5,39 @@ import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdReq
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
+import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.OpprettTjenestepensjonsforholdFaultStoElementetErDuplikatMsg
+import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.SAMTjenestepensjon
+import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
+import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetErDuplikat
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.*
 import no.nav.elsam.registreretpforhold.v0_1.HentTPForholdListeResp
-import no.nav.pensjon.elsam.minibuss.nav_bsrv_frg_finntjenestepensjonsforhold.NavBsrvFrgFinnTjenestepensjonsforhold
 import org.springframework.stereotype.Component
 
 @Component
 class RegistrereTPForholdIntTOTjenestepensjon(
-    private val finnTjenestepensjonsforhold: NavBsrvFrgFinnTjenestepensjonsforhold,
-    private val tjenstepensjon: Tjenestepensjon,
-) : RegistrereTPForholdInt {
+    private val finnTjenestepensjonsforhold: SAMTjenestepensjon,
+    private val samTjenstepensjon: SAMTjenestepensjon,
+    private val tjenestepensjon: Tjenestepensjon,
+) {
     // RegistrereTPForholdIntTOTjenestepensjon
-    override fun opprettTPForholdInt(opprettTPForholdRequestInt: OpprettTPForholdRequestInt) {
+    fun opprettTPForholdInt(opprettTPForholdRequestInt: OpprettTPForholdRequestInt) {
         try {
-            tjenstepensjon.opprettTjenestepensjonsforhold(opprettTPForholdRequestInt.toGBOTjenestepensjon())
-        } catch (e: OpprettTjenestepensjonsforholdFaultElementetErDuplikatMsg) {
-            throw OpprettTPForholdIntFaultElementetErDuplikatMsg(e.message, e.faultInfo)
+            samTjenstepensjon.opprettTjenestepensjonsforhold(opprettTPForholdRequestInt.toGBOTjenestepensjon())
+        } catch (e: OpprettTjenestepensjonsforholdFaultStoElementetErDuplikatMsg) {
+            throw OpprettTPForholdIntFaultElementetErDuplikatMsg(e.message, e.faultInfo?.let {
+                FaultElementetErDuplikat().apply {
+                    errorMessage = it.errorMessage
+                    errorSource = it.errorSource
+                    errorType = it.errorType
+                    rootCause = it.rootCause
+                    dateTimeStamp = it.dateTimeStamp.toString()
+                }
+            })
         }
     }
 
     // RegistrereTPForholdIntTOFinnTjenestepensjonsforhold
-    override fun slettTPForholdFinnTjenestepensjonsforholdInt(slettTPForholdRequestInt: SlettTPForholdFinnTjenestepensjonsforholdRequestInt): GBOTjenestepensjon? {
+    fun slettTPForholdFinnTjenestepensjonsforholdInt(slettTPForholdRequestInt: SlettTPForholdFinnTjenestepensjonsforholdRequestInt): ASBOStoTjenestepensjon {
         try {
             return finnTjenestepensjonsforhold.finnTjenestepensjonsforhold(slettTPForholdRequestInt.toGBOFinnTjenestepensjonsforholdRequest())
         } catch (e: HentTjenestepensjonInfoFaultElementetFinnesIkkeMsg) {
@@ -37,9 +48,9 @@ class RegistrereTPForholdIntTOTjenestepensjon(
     }
 
     // RegistrereTPForholdIntTOFinnTjenestepensjonsforhold
-    override fun hentTPForholdListeInt(hentTPForholdListeRequestInt: HentTPForholdListeRequestInt): HentTPForholdListeResp? {
+    fun hentTPForholdListeInt(hentTPForholdListeRequestInt: HentTPForholdListeRequestInt): HentTPForholdListeResp {
         try {
-            return finnTjenestepensjonsforhold.finnTjenestepensjonsforhold(hentTPForholdListeRequestInt.toGBOFinnTjenestepensjonsforholdRequest())?.toHentTPForholdListeResp()
+            return finnTjenestepensjonsforhold.finnTjenestepensjonsforhold(hentTPForholdListeRequestInt.toGBOFinnTjenestepensjonsforholdRequest()).toHentTPForholdListeResp()
         } catch (e: HentTjenestepensjonInfoFaultElementetFinnesIkkeMsg) {
             throw HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo?.toFaultTjenestepensjonForholdIkkeFunnet())
         } catch (e: HentTjenestepensjonInfoFaultTomDatoForanFomDatoMsg) {
@@ -48,9 +59,9 @@ class RegistrereTPForholdIntTOTjenestepensjon(
     }
 
     // RegistrereTPForholdIntTOTjenestepensjon
-    override fun slettTPForholdTjenestepensjonInt(slettTPForholdRequestInt: SlettTPForholdTjenestepensjonRequestInt) {
+    fun slettTPForholdTjenestepensjonInt(slettTPForholdRequestInt: SlettTPForholdTjenestepensjonRequestInt) {
         try {
-            tjenstepensjon.slettTjenestepensjonsforhold(slettTPForholdRequestInt.toGBOTjenestepensjonForhold())
+            tjenestepensjon.slettTjenestepensjonsforhold(slettTPForholdRequestInt.toGBOTjenestepensjonForhold())
         } catch (e: SlettTjenestepensjonsforholdFaultElementetErUgyldigMsg) {
             throw SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg(e.message, e.faultInfo?.toFaultTjenestepensjonForholdIkkeFunnet())
         }

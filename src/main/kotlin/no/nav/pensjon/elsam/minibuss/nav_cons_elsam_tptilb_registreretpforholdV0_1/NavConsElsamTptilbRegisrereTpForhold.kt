@@ -8,9 +8,7 @@ import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandlerListe
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnSamhandlerRequest
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
+import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.*
@@ -20,7 +18,7 @@ import javax.xml.datatype.DatatypeFactory
 
 @Component
 class NavConsElsamTptilbRegisrereTpForhold(
-    private val registrereTPForholdInt: RegistrereTPForholdInt,
+    private val registrereTPForholdInt: RegistrereTPForholdIntTOTjenestepensjon,
     private val samhandler: PSAKSamhandler,
 ) {
     @Throws(
@@ -72,7 +70,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
         SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg::class
     )
     fun slettTPForhold(slettTPForholdRequest: SlettTPForholdReq) {
-        val response: GBOTjenestepensjon
+        val response: ASBOStoTjenestepensjon
         try {
             response =
                 registrereTPForholdInt.slettTPForholdFinnTjenestepensjonsforholdInt(
@@ -83,7 +81,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }
-        val tpForholdene = response.tjenestepensjonForholdene
+        val tpForholdene = response.tjenestepensjonsforholdListe
         if (tpForholdene.isEmpty()) {
             throw ServiceBusinessException(
                 getFaultTjenestepensjonForholdIkkeFunnet("TP-forholdet finnes ikke i registeret")
