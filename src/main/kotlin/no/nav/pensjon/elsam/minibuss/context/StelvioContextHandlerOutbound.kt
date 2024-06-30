@@ -38,10 +38,11 @@ class StelvioContextHandlerOutbound : SOAPHandler<SOAPMessageContext> {
     private val currentStelvioContextData: StelvioContextData
         get() {
             val requestContext = RequestContextHolder.currentRequestContext()
-            val stelvioContextData = StelvioContextData()
-            stelvioContextData.applicationId = "TPLEV"
-            stelvioContextData.correlationId = requestContext?.transactionId
-            stelvioContextData.userId = requestContext?.userId
+            val stelvioContextData = StelvioContextData(
+                applicationId = "TPLEV",
+                correlationId = requestContext?.transactionId,
+                userId = requestContext?.userId
+            )
             return stelvioContextData
         }
 

@@ -1,48 +1,14 @@
-package no.nav.pensjon.elsam.minibuss.context;
+package no.nav.pensjon.elsam.minibuss.context
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement
+import jakarta.xml.bind.annotation.XmlRootElement
 
 @XmlRootElement(name = "StelvioContext", namespace = "http://www.nav.no/StelvioContextPropagation")
-public class StelvioContextData {
-	private String applicationId;
-	private String correlationId;
-	private String languageId;
-	private String userId;
-
-	@XmlElement(name = "applicationId")
-	public String getApplicationId() {
-		return applicationId;
-	}
-
-	public void setApplicationId(String applicationId) {
-		this.applicationId = applicationId;
-	}
-
-	@XmlElement(name = "correlationId")
-	public String getCorrelationId() {
-		return correlationId;
-	}
-
-	public void setCorrelationId(String correlationId) {
-		this.correlationId = correlationId;
-	}
-
-	@XmlElement(name = "languageId")
-	public String getLanguageId() {
-		return languageId;
-	}
-
-	public void setLanguageId(String languageId) {
-		this.languageId = languageId;
-	}
-
-	@XmlElement(name = "userId")
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-}
+class StelvioContextData(
+    @get:XmlElement(name = "applicationId")
+    val applicationId: String? = null,
+    @get:XmlElement(name = "correlationId")
+    var correlationId: String? = null,
+    @get:XmlElement(name = "userId")
+    val userId: String? = null,
+)

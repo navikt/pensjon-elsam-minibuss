@@ -34,8 +34,8 @@ class StelvioContextHandlerInbound : SOAPHandler<SOAPMessageContext> {
                     val contextData = headers[0] as StelvioContextData
 
                     transactionId = contextData.correlationId?.takeIf { it.isNotBlank() } ?: UUID.randomUUID().toString()
-                    userId = contextData.userId
-                    componentId = contextData.applicationId
+                    userId = contextData.userId ?: "UNKNOWN_USER"
+                    componentId = contextData.applicationId ?: "UNKNOWN_COMPONENT"
                 } else {
                     transactionId = UUID.randomUUID().toString()
                     userId = "UNKNOWN_USER"
