@@ -51,7 +51,7 @@ class TPSamordningRegistreringWSEndpointImpl(
         SlettTPYtelseFaultTPYtelseIkkeFunnetMsg::class
     )
     override fun slettTPYtelse(
-        @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq?
+        @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
         try {
             navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
@@ -81,7 +81,7 @@ class TPSamordningRegistreringWSEndpointImpl(
         HentSamordningsdataFaultGeneriskMsg::class
     )
     override fun hentSamordningsdata(
-        @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq?
+        @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
     ): HentSamordningsdataResp? {
         try {
             return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
@@ -117,7 +117,7 @@ class TPSamordningRegistreringWSEndpointImpl(
         @WebParam(
             name = "opprettRefusjonskravReq",
             targetNamespace = ""
-        ) opprettRefusjonskravReq: OpprettRefusjonskravReq?
+        ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
         try {
             return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
@@ -151,7 +151,7 @@ class TPSamordningRegistreringWSEndpointImpl(
         LagreTPYtelseFaultGeneriskMsg::class
     )
     override fun lagreTPYtelse(
-        @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq?
+        @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq
     ): LagreTPYtelseResp? {
         try {
             return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)

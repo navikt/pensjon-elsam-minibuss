@@ -1,183 +1,217 @@
-package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering;
+package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
-import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*;
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOAvdeling;
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnSamhandlerRequest;
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandler;
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe;
-import nav_lib_frg.no.nav.lib.frg.inf.Samhandler;
-import no.nav.elsam.tpsamordningregistrering.v0_5.*;
-import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp;
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp;
-import no.nav.pensjon.elsam.minibuss.ServiceBusinessException;
-import org.springframework.core.NestedExceptionUtils;
-import org.springframework.stereotype.Component;
-
-import java.util.Iterator;
-import java.util.List;
+import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOAvdeling
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnSamhandlerRequest
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
+import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
+import no.nav.elsam.tpsamordningregistrering.v0_5.*
+import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
+import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
+import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
+import org.springframework.core.NestedExceptionUtils
+import org.springframework.stereotype.Component
 
 @Component
-public class NavConsElsamTplibTpSamordningRegistrering {
-	private final static String INTERNALERROR = "InternalError";
+class NavConsElsamTplibTpSamordningRegistrering(
+    private val samhandlerPartner: Samhandler,
+    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringInt
+) {
+    @Throws(
+        LagreTPYtelseIntFaultGeneriskMsg::class,
+        LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg::class,
+        ServiceBusinessException::class
+    )
+    fun lagreTPYtelse(lagreTPYtelseReq: LagreTPYtelseReq): LagreTPYtelseResp {
+        // Map TP-nummer to tssEksternId
+        val eksternTSSId = mapTPnrToTSSEksternId(lagreTPYtelseReq.tpnr)
 
-	private final Samhandler samhandlerPartner;
-	private final TPSamordningRegistreringInt tpSamordningRegistreringIntPartner;
+        // Copy external interface to internal and set externalTSSId
+        val intRequest = LagreTPYtelseReqInt()
+        intRequest.extRequest = lagreTPYtelseReq
+        intRequest.tssEksternId = eksternTSSId
 
-    public NavConsElsamTplibTpSamordningRegistrering(Samhandler samhandlerPartner, TPSamordningRegistreringInt tpSamordningRegistreringIntPartner) {
-        this.samhandlerPartner = samhandlerPartner;
-        this.tpSamordningRegistreringIntPartner = tpSamordningRegistreringIntPartner;
+        // Call entity service
+        try {
+            return tpSamordningRegistreringIntPartner.lagreTPYtelseInt(intRequest)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(
+                INTERNALERROR, e.message, NestedExceptionUtils.getMostSpecificCause(e).toString()
+            )
+        }
     }
 
-    public LagreTPYtelseResp lagreTPYtelse(LagreTPYtelseReq lagreTPYtelseReq) throws LagreTPYtelseIntFaultGeneriskMsg, LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg, ServiceBusinessException {
-		// Map TP-nummer to tssEksternId
-		String eksternTSSId = mapTPnrToTSSEksternId(lagreTPYtelseReq.getTpnr());
+    @Throws(
+        SlettTPYtelseIntFaultGeneriskMsg::class,
+        SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg::class,
+        ServiceBusinessException::class
+    )
+    fun slettTPYtelse(slettTPYtelseReq: SlettTPYtelseReq) {
+        // Map TP-nummer to tssEksternId
+        val eksternTSSId = mapTPnrToTSSEksternId(slettTPYtelseReq.tpnr)
 
-		// Copy external interface to internal and set externalTSSId
-		LagreTPYtelseReqInt intRequest = new LagreTPYtelseReqInt();
-		intRequest.setExtRequest(lagreTPYtelseReq);
-		intRequest.setTssEksternId(eksternTSSId);
+        // Copy external interface to internal and set externalTSSId
+        val intRequest = SlettTPYtelseReqInt()
+        intRequest.extRequest = slettTPYtelseReq
+        intRequest.tssEksternId = eksternTSSId
 
-		// Call entity service
-		try {
-			return tpSamordningRegistreringIntPartner.lagreTPYtelseInt(intRequest);
-		} catch (RuntimeException e) {
-			throw createTechnicalFault(INTERNALERROR, e.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).toString());
-		}
-	}
+        // Call entity service
+        try {
+            tpSamordningRegistreringIntPartner.slettTPYtelseInt(intRequest)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(
+                INTERNALERROR, e.message, NestedExceptionUtils.getMostSpecificCause(e).toString()
+            )
+        }
+    }
 
-	public void slettTPYtelse(SlettTPYtelseReq slettTPYtelseReq) throws SlettTPYtelseIntFaultGeneriskMsg, SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg, ServiceBusinessException {
-		// Map TP-nummer to tssEksternId
-		String eksternTSSId = mapTPnrToTSSEksternId(slettTPYtelseReq.getTpnr());
+    @Throws(
+        HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg::class,
+        HentSamordningsdataIntFaultGeneriskMsg::class,
+        ServiceBusinessException::class
+    )
+    fun hentSamordningsdata(hentSamordningsdataReq: HentSamordningsdataReq): HentSamordningsdataResp {
+        // Map TP-nummer to tssEksternId
+        val eksternTSSId = mapTPnrToTSSEksternId(hentSamordningsdataReq.tpnr)
 
-		// Copy external interface to internal and set externalTSSId
-		SlettTPYtelseReqInt intRequest = new SlettTPYtelseReqInt();
-		intRequest.setExtRequest(slettTPYtelseReq);
-		intRequest.setTssEksternId(eksternTSSId);
+        // Copy external interface to internal and set externalTSSId
+        val intRequest = HentSamordningsdataReqInt()
+        intRequest.extRequest = hentSamordningsdataReq
+        intRequest.tssEksternId = eksternTSSId
 
-		// Call entity service
-		try {
-			tpSamordningRegistreringIntPartner.slettTPYtelseInt(intRequest);
-		} catch (RuntimeException e) {
-			throw createTechnicalFault(INTERNALERROR, e.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).toString());
-		}
-	}
+        // Call entity service
+        try {
+            return tpSamordningRegistreringIntPartner.hentSamordningsdataInt(intRequest)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(
+                INTERNALERROR, e.message, NestedExceptionUtils.getMostSpecificCause(e).toString()
+            )
+        }
+    }
 
-	public HentSamordningsdataResp hentSamordningsdata(HentSamordningsdataReq hentSamordningsdataReq) throws HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg, HentSamordningsdataIntFaultGeneriskMsg, ServiceBusinessException {
-		// Map TP-nummer to tssEksternId
-		String eksternTSSId = mapTPnrToTSSEksternId(hentSamordningsdataReq.getTpnr());
+    @Throws(
+        ServiceBusinessException::class,
+        OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg::class,
+        OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg::class,
+        OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg::class,
+        OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg::class,
+        OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg::class,
+        OpprettRefusjonskravIntFaultGeneriskMsg::class
+    )
+    fun opprettRefusjonskrav(opprettRefusjonskravReq: OpprettRefusjonskravReq) {
+        // Map TP-nummer to tssEksternId
+        val eksternTSSId = mapTPnrToTSSEksternId(opprettRefusjonskravReq.tpnr)
 
-		// Copy external interface to internal and set externalTSSId
-		HentSamordningsdataReqInt intRequest = new HentSamordningsdataReqInt();
-		intRequest.setExtRequest(hentSamordningsdataReq);
-		intRequest.setTssEksternId(eksternTSSId);
+        // Copy external interface to internal and set externalTSSId
+        val intRequest = OpprettRefusjonskravReqInt()
+        intRequest.extRequest = opprettRefusjonskravReq
+        intRequest.tssEksternId = eksternTSSId
 
-		// Call entity service
-		try {
-			return tpSamordningRegistreringIntPartner.hentSamordningsdataInt(intRequest);
-		} catch (RuntimeException e) {
-			throw createTechnicalFault(INTERNALERROR, e.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).toString());
-		}
-	}
+        // Call entity service
+        try {
+            tpSamordningRegistreringIntPartner.opprettRefusjonskravInt(intRequest)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(
+                INTERNALERROR, e.message, NestedExceptionUtils.getMostSpecificCause(e).toString()
+            )
+        }
+    }
 
-	public void opprettRefusjonskrav(OpprettRefusjonskravReq opprettRefusjonskravReq) throws ServiceBusinessException, OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg, OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg, OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg, OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg, OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg, OpprettRefusjonskravIntFaultGeneriskMsg {
-		// Map TP-nummer to tssEksternId
-		String eksternTSSId = mapTPnrToTSSEksternId(opprettRefusjonskravReq.getTpnr());
+    /**
+     * Map from TP-nummer to tssEksternId by searching TSS for samhandler with
+     * samhandlerType TEPE, idType TPNR and the specified TP-nummer Should only
+     * return one tssEksternId
+     *
+     * @param tpNr
+     * TP-number (4 digits)
+     *
+     * @return eksternTSSId (key to Samhandler)
+     */
+    @Throws(ServiceBusinessException::class)
+    private fun mapTPnrToTSSEksternId(tpNr: String): String {
+        // Build request object for samhandler
+        val samhandlerRequest = GBOFinnSamhandlerRequest()
+        samhandlerRequest.offentligId = tpNr
+        samhandlerRequest.idType = "TPNR"
+        samhandlerRequest.samhandlerType = "TEPE"
 
-		// Copy external interface to internal and set externalTSSId
-		OpprettRefusjonskravReqInt intRequest = new OpprettRefusjonskravReqInt();
-		intRequest.setExtRequest(opprettRefusjonskravReq);
-		intRequest.setTssEksternId(eksternTSSId);
+        var samhandlerResponse: GBOSamhandlerListe?
+        try {
+            samhandlerResponse = samhandlerPartner.finnSamhandler(samhandlerRequest)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(
+                INTERNALERROR, e.message, NestedExceptionUtils.getMostSpecificCause(e).toString()
+            )
+        }
 
-		// Call entity service
-		try {
-			tpSamordningRegistreringIntPartner.opprettRefusjonskravInt(intRequest);
-		} catch (RuntimeException e) {
-			throw createTechnicalFault(INTERNALERROR, e.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).toString());
-		}
-	}
+        if (samhandlerResponse == null) {
+            throw createTechnicalFault(
+                INTERNALERROR,
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Tomt svar ved oppslag av samhandler"
+            )
+        }
 
-	/**
-	 * Map from TP-nummer to tssEksternId by searching TSS for samhandler with
-	 * samhandlerType TEPE, idType TPNR and the specified TP-nummer Should only
-	 * return one tssEksternId
-	 * 
-	 * @param tpNr
-	 *            TP-number (4 digits)
-	 * 
-	 * @return eksternTSSId (key to Samhandler)
-	 */
-	private String mapTPnrToTSSEksternId(String tpNr) throws ServiceBusinessException {
-		// Build request object for samhandler
-		GBOFinnSamhandlerRequest samhandlerRequest = new GBOFinnSamhandlerRequest();
-		samhandlerRequest.setOffentligId(tpNr);
-		samhandlerRequest.setIdType("TPNR");
-		samhandlerRequest.setSamhandlerType("TEPE");
+        val samhandlere = samhandlerResponse.samhandlere
+        if (samhandlere.size > 1) {
+            // Got more than 1 samhandler in the response. Should receive only
+            // 1.
+            throw createTechnicalFault(
+                INTERNALERROR,
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Ikke entydig treff på TP-nr"
+            )
+        } else if (samhandlere.size == 1) {
+            val samhandler = samhandlere[0]
 
-		GBOSamhandlerListe samhandlerResponse = null;
-		try {
-			samhandlerResponse = samhandlerPartner.finnSamhandler(samhandlerRequest);
-		} catch (RuntimeException e) {
-			throw createTechnicalFault(INTERNALERROR, e.getMessage(), NestedExceptionUtils.getMostSpecificCause(e).toString());
-		}
+            // Store idTSSEkstern in class variable for later use in other
+            // methods
+            val avdelinger = samhandler.avdelinger ?: throw createTechnicalFault(
+                INTERNALERROR,
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Fant ingen avdelinger på samhandleren"
+            )
+            val iter: Iterator<GBOAvdeling> = avdelinger.iterator()
+            while (iter.hasNext()) {
+                val avdeling = iter.next()
+                if (avdeling != null) {
+                    if (avdeling.avdelingsnr == "01") {
+                        return avdeling.idTSSEkstern
+                    }
+                }
+            }
+            throw createTechnicalFault(
+                INTERNALERROR,
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "Ikke registrert en avdeling 01 på samhandleren"
+            )
+        } else {
+            // Samhandler list is null-object.
+            throw createTechnicalFault(
+                INTERNALERROR,
+                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
+                "TP-nummeret er ikke registrert"
+            )
+        }
+    }
 
-		if (samhandlerResponse == null) {
-			throw createTechnicalFault(
-					INTERNALERROR,
-					"Det oppstod en feil under mapping fra TP-nummer til intern ID",
-					"Tomt svar ved oppslag av samhandler");
-		}
+    private fun createTechnicalFault(
+        errorCode: String, errorDescription: String?, errorDetail: String
+    ): ServiceBusinessException {
+        return createTechnicalFault(errorCode, errorDescription, java.util.List.of(errorDetail))
+    }
 
-		List<GBOSamhandler> samhandlere = samhandlerResponse.getSamhandlere();
-		if (samhandlere.size() > 1) {
-			// Got more than 1 samhandler in the response. Should receive only
-			// 1.
-			throw createTechnicalFault(
-					INTERNALERROR,
-					"Det oppstod en feil under mapping fra TP-nummer til intern ID",
-					"Ikke entydig treff på TP-nr");
-		} else if (samhandlere.size() == 1) {
-			GBOSamhandler samhandler = samhandlere.get(0);
+    private fun createTechnicalFault(
+        errorCode: String, errorDescription: String?, errorDetails: List<String>
+    ): ServiceBusinessException {
+        val faultBO = FaultGenerisk()
+        faultBO.errorCode = errorCode
+        faultBO.errorDescription = errorDescription
+        faultBO.errorDetails.addAll(errorDetails)
+        return ServiceBusinessException(faultBO)
+    }
 
-			// Store idTSSEkstern in class variable for later use in other
-			// methods
-			List<GBOAvdeling> avdelinger = samhandler.getAvdelinger();
-			if (avdelinger == null) {
-				throw createTechnicalFault(
-						INTERNALERROR,
-						"Det oppstod en feil under mapping fra TP-nummer til intern ID",
-						"Fant ingen avdelinger på samhandleren");
-			}
-			for (Iterator<GBOAvdeling> iter = avdelinger.iterator(); iter.hasNext();) {
-				GBOAvdeling avdeling = iter.next();
-				if (avdeling != null) {
-					if (avdeling.getAvdelingsnr().equals("01")) {
-						return avdeling.getIdTSSEkstern();
-					}
-				}
-			}
-			throw createTechnicalFault(
-					INTERNALERROR,
-					"Det oppstod en feil under mapping fra TP-nummer til intern ID",
-					"Ikke registrert en avdeling 01 på samhandleren");
-		} else {
-			// Samhandler list is null-object.
-			throw createTechnicalFault(
-					INTERNALERROR,
-					"Det oppstod en feil under mapping fra TP-nummer til intern ID",
-					"TP-nummeret er ikke registrert");
-		}
-	}
-
-	private ServiceBusinessException createTechnicalFault(String errorCode, String errorDescription, String errorDetail) {
-		return createTechnicalFault(errorCode, errorDescription, List.of(errorDetail));
-	}
-
-	private ServiceBusinessException createTechnicalFault(String errorCode, String errorDescription, List errorDetails) {
-		FaultGenerisk faultBO = new FaultGenerisk();
-		faultBO.setErrorCode(errorCode);
-		faultBO.setErrorDescription(errorDescription);
-		faultBO.getErrorDetails().addAll(errorDetails);
-		return new ServiceBusinessException(faultBO);
-	}
-
+    companion object {
+        private const val INTERNALERROR = "InternalError"
+    }
 }
