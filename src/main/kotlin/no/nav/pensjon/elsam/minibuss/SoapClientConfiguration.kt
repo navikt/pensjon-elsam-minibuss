@@ -22,6 +22,7 @@ class SoapClientConfiguration {
     fun handlers(stsClient: StsClient) = listOf(
         PenCallerIdHandler(),
         StelvioContextHandlerOutbound(),
+        SoapLoggingHandler(),  // Don't include security token in log output
         SAMLSoapHandler(stsClient),
     )
 
