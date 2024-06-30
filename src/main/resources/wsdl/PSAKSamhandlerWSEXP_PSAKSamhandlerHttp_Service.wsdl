@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="PSAKSamhandlerWSEXP_PSAKSamhandlerHttp_Service" targetNamespace="http://nav-cons-pen-psak-samhandler/no/nav/inf/Binding" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:Port_0="http://nav-cons-pen-psak-samhandler/no/nav/inf" xmlns:this="http://nav-cons-pen-psak-samhandler/no/nav/inf/Binding" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <import namespace="http://nav-cons-pen-psak-samhandler/no/nav/inf" location="no/nav/inf/PSAKSamhandler.wsdl">
+    </import>
+  <binding name="PSAKSamhandlerWSEXP_PSAKSamhandlerHttpBinding" type="Port_0:PSAKSamhandler">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="hentSamhandler">
+      <soap:operation/>
+      <input name="hentSamhandlerRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="hentSamhandlerResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultPenSamhandlerIkkeFunnet">
+        <soap:fault name="faultPenSamhandlerIkkeFunnet" use="literal"/>
+      </fault>
+      <fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="lagreSamhandler">
+      <soap:operation/>
+      <input name="lagreSamhandlerRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="lagreSamhandlerResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultPenSamhandlerIkkeFunnet">
+        <soap:fault name="faultPenSamhandlerIkkeFunnet" use="literal"/>
+      </fault>
+      <fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="opprettSamhandler">
+      <soap:operation/>
+      <input name="opprettSamhandlerRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="opprettSamhandlerResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultPenOffentligIdIkkeFunnet">
+        <soap:fault name="faultPenOffentligIdIkkeFunnet" use="literal"/>
+      </fault>
+      <fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="finnSamhandler">
+      <soap:operation/>
+      <input name="finnSamhandlerRequest">
+        <soap:body use="literal"/>
+      </input>
+      <output name="finnSamhandlerResponse">
+        <soap:body use="literal"/>
+      </output>
+      <fault name="faultPenGenerisk">
+        <soap:fault name="faultPenGenerisk" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="PSAKSamhandlerWSEXP_PSAKSamhandlerHttpService">
+    <port name="PSAKSamhandlerWSEXP_PSAKSamhandlerHttpPort" binding="this:PSAKSamhandlerWSEXP_PSAKSamhandlerHttpBinding">
+      <soap:address location="http://localhost:9080/nav-cons-pen-psak-samhandlerWeb/sca/PSAKSamhandlerWSEXP"/>
+    </port>
+  </service>
+</definitions>

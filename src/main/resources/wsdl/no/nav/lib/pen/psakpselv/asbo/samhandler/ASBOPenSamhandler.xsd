@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:bons1="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo" xmlns:bons2="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samhandler" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nav-lib-cons-pen-psakpselv/no/nav/lib/pen/psakpselv/asbo/samhandler">
+    <xsd:include schemaLocation="ASBOPenAlternativId.xsd"/>
+    <xsd:include schemaLocation="ASBOPenKonto.xsd"/>
+    <xsd:include schemaLocation="ASBOPenAvdeling.xsd"/>
+    <xsd:complexType name="ASBOPenSamhandler">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="navn" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sprak" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="samhandlerType" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="offentligId" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="idType" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="avdelinger" type="bons2:ASBOPenAvdeling"/>
+            <xsd:element minOccurs="0" name="alternativeIder" type="bons2:ASBOPenAlternativId" maxOccurs="unbounded"/>
+        </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
