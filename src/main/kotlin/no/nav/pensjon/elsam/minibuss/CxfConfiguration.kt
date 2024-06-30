@@ -5,6 +5,7 @@ import jakarta.xml.ws.Endpoint
 import nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.NPTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.RegistrereTPForhold
 import no.nav.elsam.tpsamordningregistrering.v1_0.TPSamordningRegistrering
+import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerInbound
 import org.apache.cxf.Bus
 import org.apache.cxf.jaxws.EndpointImpl
 import org.springframework.context.annotation.Bean
@@ -37,6 +38,8 @@ class CxfConfiguration(
                 "allowNonMatchingToDefaultSoapAction" to true,
             )
         }
+
+        endpoint.handlers = listOf(StelvioContextHandlerInbound())
 
         endpoint.publish("/$serviceName")
 

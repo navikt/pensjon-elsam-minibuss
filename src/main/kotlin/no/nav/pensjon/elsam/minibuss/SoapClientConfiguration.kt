@@ -8,6 +8,7 @@ import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.Tjenestepensjon
 import nav_lib_sto.no.nav.lib.sto.inf.samordning.Samordning
 import no.nav.pensjon.elsam.minibuss.security.SAMLSoapHandler
 import no.nav.pensjon.elsam.minibuss.security.StsClient
+import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerOutbound
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -18,6 +19,7 @@ import javax.xml.namespace.QName
 class SoapClientConfiguration {
     @Bean
     fun handlers(stsClient: StsClient) = listOf(
+        StelvioContextHandlerOutbound(),
         SAMLSoapHandler(stsClient),
     )
 
