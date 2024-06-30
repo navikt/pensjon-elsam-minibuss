@@ -8,6 +8,8 @@ import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseR
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.tpsamordningregistrering.v1_0.asbo.BeregningUforetrygd
 import nav_lib_frg.no.nav.lib.frg.fault.FaultPersonIkkeFunnet
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOPerson
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonYtelse
 import nav_lib_pen.no.nav.lib.pen.gbo.*
 import nav_lib_sak.no.nav.lib.sak.gbo.GBOArbeidOgAktivitetsvedtak
 import nav_lib_sto.no.nav.lib.sto.fault.*
@@ -24,391 +26,215 @@ import javax.xml.datatype.DatatypeConfigurationException
 import javax.xml.datatype.DatatypeFactory
 import javax.xml.datatype.XMLGregorianCalendar
 import javax.xml.namespace.QName
+import kotlin.collections.ArrayList
 
 object Mapper {
     @Throws(DatatypeConfigurationException::class)
-    fun FaultKombinasjonInputTOFaultTPYtelseIkkeFunnet(
-        FaultKombinasjonInput: FaultKombinasjonInput,
-        FaultTPYtelseIkkeFunnet: FaultTPYtelseIkkeFunnet
-    ) {
+    fun FaultKombinasjonInputTOFaultTPYtelseIkkeFunnet(FaultKombinasjonInput: FaultKombinasjonInput, FaultTPYtelseIkkeFunnet: FaultTPYtelseIkkeFunnet) {
         FaultTPYtelseIkkeFunnet.errorMessage = FaultKombinasjonInput.errorMessage // move (executionOrder=1)
         FaultTPYtelseIkkeFunnet.errorSource = FaultKombinasjonInput.errorSource // move (executionOrder=2)
         FaultTPYtelseIkkeFunnet.rootCause = FaultKombinasjonInput.rootCause // move (executionOrder=3)
-        FaultTPYtelseIkkeFunnet.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultKombinasjonInput.dateTimeStamp
-            ) // move (executionOrder=4)
+        FaultTPYtelseIkkeFunnet.dateTimeStamp = FaultKombinasjonInput.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
-    fun FaultPersonIkkeFunnetTOFaultGenerisk(
-        FaultPersonIkkeFunnet: FaultPersonIkkeFunnet,
-        FaultGenerisk: FaultGenerisk
-    ) {
+    fun FaultPersonIkkeFunnetTOFaultGenerisk(FaultPersonIkkeFunnet: FaultPersonIkkeFunnet, FaultGenerisk: FaultGenerisk) {
         FaultGenerisk.errorCode = "UnknownId" // set (executionOrder=1)
         FaultGenerisk.errorDescription = FaultPersonIkkeFunnet.errorMessage // move (executionOrder=2)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun FaultRefKravAlleredeRegElUtenforFristTOFaultAlleredeMottattRefusjonskrav(
-        FaultRefKravAlleredeRegElUtenforFrist: FaultRefKravAlleredeRegElUtenforFrist,
-        FaultAlleredeMottattRefusjonskrav: FaultAlleredeMottattRefusjonskrav
-    ) {
-        FaultAlleredeMottattRefusjonskrav.errorMessage =
-            FaultRefKravAlleredeRegElUtenforFrist.errorMessage // move (executionOrder=1)
-        FaultAlleredeMottattRefusjonskrav.errorSource =
-            FaultRefKravAlleredeRegElUtenforFrist.errorSource // move (executionOrder=2)
-        FaultAlleredeMottattRefusjonskrav.rootCause =
-            FaultRefKravAlleredeRegElUtenforFrist.rootCause // move (executionOrder=3)
-        FaultAlleredeMottattRefusjonskrav.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultRefKravAlleredeRegElUtenforFrist.dateTimeStamp
-            ) // move (executionOrder=4)
+    fun FaultRefKravAlleredeRegElUtenforFristTOFaultAlleredeMottattRefusjonskrav(FaultRefKravAlleredeRegElUtenforFrist: FaultRefKravAlleredeRegElUtenforFrist, FaultAlleredeMottattRefusjonskrav: FaultAlleredeMottattRefusjonskrav) {
+        FaultAlleredeMottattRefusjonskrav.errorMessage = FaultRefKravAlleredeRegElUtenforFrist.errorMessage // move (executionOrder=1)
+        FaultAlleredeMottattRefusjonskrav.errorSource = FaultRefKravAlleredeRegElUtenforFrist.errorSource // move (executionOrder=2)
+        FaultAlleredeMottattRefusjonskrav.rootCause = FaultRefKravAlleredeRegElUtenforFrist.rootCause // move (executionOrder=3)
+        FaultAlleredeMottattRefusjonskrav.dateTimeStamp = FaultRefKravAlleredeRegElUtenforFrist.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun FaultSamIdIkkeGyldigTOFaultSamordningsIdIkkeFunnet(
-        FaultSamIdIkkeGyldig: FaultSamIdIkkeGyldig,
-        FaultSamordningsIdIkkeFunnet: FaultSamordningsIdIkkeFunnet
-    ) {
+    fun FaultSamIdIkkeGyldigTOFaultSamordningsIdIkkeFunnet(FaultSamIdIkkeGyldig: FaultSamIdIkkeGyldig, FaultSamordningsIdIkkeFunnet: FaultSamordningsIdIkkeFunnet) {
         FaultSamordningsIdIkkeFunnet.errorMessage = FaultSamIdIkkeGyldig.errorMessage // move (executionOrder=1)
         FaultSamordningsIdIkkeFunnet.errorSource = FaultSamIdIkkeGyldig.errorSource // move (executionOrder=2)
         FaultSamordningsIdIkkeFunnet.rootCause = FaultSamIdIkkeGyldig.rootCause // move (executionOrder=3)
-        FaultSamordningsIdIkkeFunnet.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultSamIdIkkeGyldig.dateTimeStamp
-            ) // move (executionOrder=4)
+        FaultSamordningsIdIkkeFunnet.dateTimeStamp = FaultSamIdIkkeGyldig.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun FaultSvarUtenforPeriodeTOFaultRefusjonskravUtenforSamordningspliktigPeriode(
-        FaultSvarUtenforPeriode: FaultSvarUtenforPeriode,
-        FaultRefusjonskravUtenforSamordningspliktigPeriode: FaultRefusjonskravUtenforSamordningspliktigPeriode
-    ) {
-        FaultRefusjonskravUtenforSamordningspliktigPeriode.errorMessage =
-            FaultSvarUtenforPeriode.errorMessage // move (executionOrder=1)
-        FaultRefusjonskravUtenforSamordningspliktigPeriode.errorSource =
-            FaultSvarUtenforPeriode.errorSource // move (executionOrder=2)
-        FaultRefusjonskravUtenforSamordningspliktigPeriode.rootCause =
-            FaultSvarUtenforPeriode.rootCause // move (executionOrder=3)
-        FaultRefusjonskravUtenforSamordningspliktigPeriode.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultSvarUtenforPeriode.dateTimeStamp
-            ) // move (executionOrder=4)
+    fun FaultSvarUtenforPeriodeTOFaultRefusjonskravUtenforSamordningspliktigPeriode(FaultSvarUtenforPeriode: FaultSvarUtenforPeriode, FaultRefusjonskravUtenforSamordningspliktigPeriode: FaultRefusjonskravUtenforSamordningspliktigPeriode) {
+        FaultRefusjonskravUtenforSamordningspliktigPeriode.errorMessage = FaultSvarUtenforPeriode.errorMessage // move (executionOrder=1)
+        FaultRefusjonskravUtenforSamordningspliktigPeriode.errorSource = FaultSvarUtenforPeriode.errorSource // move (executionOrder=2)
+        FaultRefusjonskravUtenforSamordningspliktigPeriode.rootCause = FaultSvarUtenforPeriode.rootCause // move (executionOrder=3)
+        FaultRefusjonskravUtenforSamordningspliktigPeriode.dateTimeStamp = FaultSvarUtenforPeriode.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert(
-        FaultYtelseAlleredeRegistrert: FaultYtelseAlleredeRegistrert,
-        FaultTPYtelseAlleredeRegistrert: FaultTPYtelseAlleredeRegistrert
-    ) {
-        FaultTPYtelseAlleredeRegistrert.errorMessage =
-            FaultYtelseAlleredeRegistrert.errorMessage // move (executionOrder=1)
-        FaultTPYtelseAlleredeRegistrert.errorSource =
-            FaultYtelseAlleredeRegistrert.errorSource // move (executionOrder=2)
+    fun FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert(FaultYtelseAlleredeRegistrert: FaultYtelseAlleredeRegistrert, FaultTPYtelseAlleredeRegistrert: FaultTPYtelseAlleredeRegistrert) {
+        FaultTPYtelseAlleredeRegistrert.errorMessage = FaultYtelseAlleredeRegistrert.errorMessage // move (executionOrder=1)
+        FaultTPYtelseAlleredeRegistrert.errorSource = FaultYtelseAlleredeRegistrert.errorSource // move (executionOrder=2)
         FaultTPYtelseAlleredeRegistrert.rootCause = FaultYtelseAlleredeRegistrert.rootCause // move (executionOrder=3)
-        FaultTPYtelseAlleredeRegistrert.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultYtelseAlleredeRegistrert.dateTimeStamp
-            ) // move (executionOrder=4)
+        FaultTPYtelseAlleredeRegistrert.dateTimeStamp = FaultYtelseAlleredeRegistrert.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt(
-        FaultYtelseIkkeIverksatt: FaultYtelseIkkeIverksatt,
-        FaultTPForholdIkkeIverksatt: FaultTPForholdIkkeIverksatt
-    ) {
+    fun FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt(FaultYtelseIkkeIverksatt: FaultYtelseIkkeIverksatt, FaultTPForholdIkkeIverksatt: FaultTPForholdIkkeIverksatt) {
         FaultTPForholdIkkeIverksatt.errorMessage = FaultYtelseIkkeIverksatt.errorMessage // move (executionOrder=1)
         FaultTPForholdIkkeIverksatt.errorSource = FaultYtelseIkkeIverksatt.errorSource // move (executionOrder=2)
         FaultTPForholdIkkeIverksatt.rootCause = FaultYtelseIkkeIverksatt.rootCause // move (executionOrder=3)
-        FaultTPForholdIkkeIverksatt.dateTimeStamp =
-            toXMLGregorianCalendar(
-                FaultYtelseIkkeIverksatt.dateTimeStamp
-            ) // move (executionOrder=4)
+        FaultTPForholdIkkeIverksatt.dateTimeStamp = FaultYtelseIkkeIverksatt.dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
     }
 
     @Throws(DatatypeConfigurationException::class)
-    fun GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(
-        GBOArbeidOgAktivitetsvedtak: GBOArbeidOgAktivitetsvedtak,
-        ArbeidOgAktivitetsvedtak: ArbeidOgAktivitetsvedtak
-    ) {
+    fun GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(GBOArbeidOgAktivitetsvedtak: GBOArbeidOgAktivitetsvedtak, ArbeidOgAktivitetsvedtak: ArbeidOgAktivitetsvedtak) {
         ArbeidOgAktivitetsvedtak.vedtakId = GBOArbeidOgAktivitetsvedtak.vedtakId // move (executionOrder=1)
         ArbeidOgAktivitetsvedtak.gjelderFnr = GBOArbeidOgAktivitetsvedtak.gjelderFnr // move (executionOrder=2)
-        ArbeidOgAktivitetsvedtak.virkningFom =
-            toXMLGregorianCalendar(
-                DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.virkningFom)
-            ) // custom.output assignment (executionOrder=3)
-        ArbeidOgAktivitetsvedtak.virkningTom =
-            toXMLGregorianCalendar(
-                DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.virkningTom)
-            ) // custom.output assignment (executionOrder=4)
+        ArbeidOgAktivitetsvedtak.virkningFom = DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.virkningFom)?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
+        ArbeidOgAktivitetsvedtak.virkningTom = DateUtil.parseWIDString(GBOArbeidOgAktivitetsvedtak.virkningTom)?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=4)
         ArbeidOgAktivitetsvedtak.vedtaksKode = GBOArbeidOgAktivitetsvedtak.vedtakstypeKode // move (executionOrder=5)
-        ArbeidOgAktivitetsvedtak.vedtakstatusKode =
-            GBOArbeidOgAktivitetsvedtak.vedtakstatusKode // move (executionOrder=6)
+        ArbeidOgAktivitetsvedtak.vedtakstatusKode = GBOArbeidOgAktivitetsvedtak.vedtakstatusKode // move (executionOrder=6)
         ArbeidOgAktivitetsvedtak.saksKode = GBOArbeidOgAktivitetsvedtak.sakstypeKode // move (executionOrder=7)
         ArbeidOgAktivitetsvedtak.navEnhet = GBOArbeidOgAktivitetsvedtak.navEnhet // move (executionOrder=8)
         ArbeidOgAktivitetsvedtak.utfallKode = GBOArbeidOgAktivitetsvedtak.utfallKode // move (executionOrder=9)
         ArbeidOgAktivitetsvedtak.rettighetKode = GBOArbeidOgAktivitetsvedtak.rettighetKode // move (executionOrder=10)
-        ArbeidOgAktivitetsvedtak.dagsatsUBT =
-            GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP.dagsatsUBT // move (executionOrder=11)
-        ArbeidOgAktivitetsvedtak.dagsatsMBT =
-            GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP.dagsatsMBT // move (executionOrder=12)
-        ArbeidOgAktivitetsvedtak.dagstatsMBTFS =
-            GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP.dagsatsMBTFS // move (executionOrder=13)
-        ArbeidOgAktivitetsvedtak.antallBarn = toInteger(
-            GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP.antallBarn
-        ) // move (executionOrder=14)
-        ArbeidOgAktivitetsvedtak.beregningsgrunnlag =
-            GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP.beregningsgrunnlag // move (executionOrder=15)
+        ArbeidOgAktivitetsvedtak.dagsatsUBT = GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP?.dagsatsUBT // move (executionOrder=11)
+        ArbeidOgAktivitetsvedtak.dagsatsMBT = GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP?.dagsatsMBT // move (executionOrder=12)
+        ArbeidOgAktivitetsvedtak.dagstatsMBTFS = GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP?.dagsatsMBTFS // move (executionOrder=13)
+        ArbeidOgAktivitetsvedtak.antallBarn = GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP?.antallBarn?.toInt() // move (executionOrder=14)
+        ArbeidOgAktivitetsvedtak.beregningsgrunnlag = GBOArbeidOgAktivitetsvedtak.vedtaksfaktaAAP?.beregningsgrunnlag // move (executionOrder=15)
     }
 
-    fun GBOBeregningNokkelinfoTOBeregningNokkelinfo(
-        GBOBeregningNokkelinfo: GBOBeregningNokkelinfo,
-        BeregningNokkelinfo: BeregningNokkelinfo
-    ) {
+    fun GBOBeregningNokkelinfoTOBeregningNokkelinfo(GBOBeregningNokkelinfo: GBOBeregningNokkelinfo, BeregningNokkelinfo: BeregningNokkelinfo) {
         BeregningNokkelinfo.fnr = GBOBeregningNokkelinfo.fnr // move (executionOrder=1)
         BeregningNokkelinfo.grunnlagsrolleKode = GBOBeregningNokkelinfo.grunnlagsrolleKode // move (executionOrder=2)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningNokkelinfo.spt,
-            BeregningNokkelinfo.spt
-        ) // submap (executionOrder=3)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningNokkelinfo.ypt,
-            BeregningNokkelinfo.ypt
-        ) // submap (executionOrder=4)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningNokkelinfo.opt,
-            BeregningNokkelinfo.opt
-        ) // submap (executionOrder=5)
-        BeregningNokkelinfo.anvendtTrygdetid =
-            toJAXBElement(
-                "anvendtTrygdetid",
-                Int::class.java,
-                toInteger(
-                    GBOBeregningNokkelinfo.ttAnv
-                )
-            ) // move (executionOrder=6)
-        BeregningNokkelinfo.anvendtIBeregningen =
-            toJAXBElement(
-                "anvendtIBeregningen",
-                Boolean::class.java,
-                GBOBeregningNokkelinfo.anvendtIBeregningen
-            ) // move (executionOrder=7)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.spt, BeregningNokkelinfo.spt) // submap (executionOrder=3)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.ypt, BeregningNokkelinfo.ypt) // submap (executionOrder=4)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningNokkelinfo.opt, BeregningNokkelinfo.opt) // submap (executionOrder=5)
+        BeregningNokkelinfo.anvendtTrygdetid = GBOBeregningNokkelinfo.ttAnv?.toInt()?.toJAXBElement("anvendtTrygdetid") // move (executionOrder=6)
+        BeregningNokkelinfo.anvendtIBeregningen = GBOBeregningNokkelinfo.anvendtIBeregningen?.toJAXBElement("anvendtIBeregningen") // move (executionOrder=7)
     }
 
     @Throws(DatatypeConfigurationException::class)
     fun GBOBeregningTOBeregning(GBOBeregning: GBOBeregning, Beregning_1: Beregning) {
-        Beregning_1.virkningFom =
-            toXMLGregorianCalendar(
-                if (GBOBeregning.virkDatoFom != null) DateUtil.parseWIDString(GBOBeregning.virkDatoFom) else null
-            ) // custom.output assignment (executionOrder=1)
-        Beregning_1.virkningTom =
-            toXMLGregorianCalendar(
-                if (GBOBeregning.virkDatoTom != null) DateUtil.parseWIDString(GBOBeregning.virkDatoTom) else null
-            ) // custom.output assignment (executionOrder=2)
+        Beregning_1.afpPensjonsgrad = GBOBeregning.afpPensjonsgrad?.toInt()?.toJAXBElement("afpPensjonsgrad") // move (executionOrder=5)
+        Beregning_1.antallBarnetilleggFellesbarn = GBOBeregning.barnetilleggFellesBarn?.antallBarn?.toInt()?.toJAXBElement("antallBarnetilleggFellesbarn") // move (executionOrder=12)
+        Beregning_1.antallBarnetilleggSerkullsbarn = GBOBeregning.barnetilleggSerkullsbarn?.antallBarn?.toInt()?.toJAXBElement("antallBarnetilleggSerkullsbarn") // move (executionOrder=14)
+        Beregning_1.brutto = GBOBeregning.brutto?.toInt()?.toJAXBElement("") // move (executionOrder=22)
+        Beregning_1.bruttoAFPtillegg = GBOBeregning.afpTillegg?.brutto?.toInt()?.toJAXBElement("bruttoAFPtillegg") // move (executionOrder=10)
+        Beregning_1.bruttoBarnetilleggFellesbarn = GBOBeregning.barnetilleggFellesBarn?.brutto?.toInt()?.toJAXBElement("bruttoBarnetilleggFellesbarn") // move (executionOrder=11)
+        Beregning_1.bruttoBarnetilleggSerkullsbarn = GBOBeregning.barnetilleggSerkullsbarn?.brutto?.toInt()?.toJAXBElement("bruttoBarnetilleggSerkullsbarn") // move (executionOrder=13)
+        Beregning_1.bruttoGrunnpensjon = GBOBeregning.grunnpensjon?.brutto?.toInt()?.toJAXBElement("bruttoGrunnpensjon") // move (executionOrder=6)
+        Beregning_1.bruttoSertillegg = GBOBeregning.sertillegg?.brutto?.toInt()?.toJAXBElement("bruttoSertillegg") // move (executionOrder=8)
+        Beregning_1.bruttoTilleggspensjon = GBOBeregning.tilleggspensjon?.brutto?.toInt()?.toJAXBElement("bruttoTilleggspensjon") // move (executionOrder=7)
+        Beregning_1.ektefelletillegg = GBOBeregning.ektefelleTillegg?.netto?.toInt()?.toJAXBElement("ektefelletillegg") // move (executionOrder=28)
+        Beregning_1.fremtidigPensjonsgivendeInntektBruker = GBOBeregning.inntektBruktIAvkortning?.toInt()?.toJAXBElement("fremtidigPensjonsgivendeInntektBruker") // move (executionOrder=34)
+        Beregning_1.grunnpensjonsats = GBOBeregning.grunnpensjon?.grunnpensjonsats?.toJAXBElement("grunnpensjonsats") // move (executionOrder=21)
+
+        Beregning_1.krigOgGammelYrkesskade = GBOBeregning.krigOgGammelYrkesskade?.let { src ->
+            KrigOgGammelYrkesskade().also { dst ->
+                dst.forholdstallYG = src.forholdstallYG?.toJAXBElement("forholdstallYG") // move (executionOrder=20)
+                dst.grunnlag = src.grunnlagForUtbetaling?.toJAXBElement("grunnlag") // move (executionOrder=19)
+                dst.pensjonsgrad = src.pensjonsgrad?.toJAXBElement("pensjonsgrad") // move (executionOrder=18)
+                dst.belop = src.netto?.toInt()?.toJAXBElement("krigOgGammelYrkesskade") // move (executionOrder=33)
+            }
+        }
+
+        Beregning_1.minstenivatilleggIndividuelt = GBOBeregning.minstenivatilleggIndividuelt?.netto?.toInt() // move (executionOrder=37)
+        Beregning_1.minstenivatilleggPensjonistpar = GBOBeregning.minstenivatilleggPensjonistpar?.netto?.toInt() // move (executionOrder=36)
+        Beregning_1.netto = GBOBeregning.netto?.toInt()?.toJAXBElement("") // move (executionOrder=23)
+        Beregning_1.nettoAFPtillegg = GBOBeregning.afpTillegg?.netto?.toInt()?.toJAXBElement("nettoAFPtillegg") // move (executionOrder=27)
+        Beregning_1.nettoBarnetilleggFellesbarn = GBOBeregning.barnetilleggFellesBarn?.netto?.toInt()?.toJAXBElement("nettoBarnetilleggFellesbarn") // move (executionOrder=29)
+        Beregning_1.nettoBarnetilleggSerkullsbarn = GBOBeregning.barnetilleggSerkullsbarn?.netto?.toInt()?.toJAXBElement("nettoBarnetilleggSerkullsbarn") // move (executionOrder=30)
+        Beregning_1.nettoGrunnpensjon = GBOBeregning.grunnpensjon?.netto?.toInt()?.toJAXBElement("nettoGrunnpensjon") // move (executionOrder=24)
+        Beregning_1.nettoSertillegg = GBOBeregning.sertillegg?.netto?.toInt()?.toJAXBElement("nettoSertillegg") // move (executionOrder=26)
+        Beregning_1.nettoTilleggspensjon = GBOBeregning.tilleggspensjon?.netto?.toInt()?.toJAXBElement("nettoTilleggspensjon") // move (executionOrder=25)
+        Beregning_1.nettoVentetillegg = GBOBeregning.ventetillegg?.netto?.toInt()?.toJAXBElement("nettoVentetillegg") // move (executionOrder=31)
+        Beregning_1.p67Berergning = GBOBeregning.p67Beregning?.toJAXBElement("p67Berergning") // move (executionOrder=4)
+        Beregning_1.paragraf851Tillegg = GBOBeregning.paragraf851Tillegg?.netto?.toInt()?.toJAXBElement("paragraf851Tillegg") // move (executionOrder=32)
         Beregning_1.resultatKode = GBOBeregning.resultatKode // move (executionOrder=3)
-        Beregning_1.setP67Berergning(GBOBeregning.p67Beregning) // move (executionOrder=4)
-        Beregning_1.setAfpPensjonsgrad(GBOBeregning.afpPensjonsgrad) // move (executionOrder=5)
-        Beregning_1.setBruttoGrunnpensjon(GBOBeregning.grunnpensjon.brutto) // move (executionOrder=6)
-        Beregning_1.setBruttoTilleggspensjon(GBOBeregning.tilleggspensjon.brutto) // move (executionOrder=7)
-        Beregning_1.setBruttoSertillegg(GBOBeregning.sertillegg.brutto) // move (executionOrder=8)
-        Beregning_1.setSertilleggSats(GBOBeregning.sertillegg.sertilleggsats) // move (executionOrder=9)
-        Beregning_1.setBruttoAFPtillegg(GBOBeregning.afpTillegg.brutto) // move (executionOrder=10)
-        Beregning_1.setBruttoBarnetilleggFellesbarn(GBOBeregning.barnetilleggFellesBarn.brutto) // move (executionOrder=11)
-        Beregning_1.setAntallBarnetilleggFellesbarn(GBOBeregning.barnetilleggFellesBarn.antallBarn) // move (executionOrder=12)
-        Beregning_1.setBruttoBarnetilleggSerkullsbarn(GBOBeregning.barnetilleggSerkullsbarn.brutto) // move (executionOrder=13)
-        Beregning_1.setAntallBarnetilleggSerkullsbarn(GBOBeregning.barnetilleggSerkullsbarn.antallBarn) // move (executionOrder=14)
-        Beregning_1.setVentetilleggProsent(GBOBeregning.ventetillegg.ventetilleggProsent) // move (executionOrder=15)
-        Beregning_1.setYrkesskadegrad(GBOBeregning.yrkesskadegrad) // move (executionOrder=16)
-        Beregning_1.setUforegrad(GBOBeregning.uforegrad) // move (executionOrder=17)
-        Beregning_1.krigOgGammelYrkesskade.setPensjonsgrad(GBOBeregning.krigOgGammelYrkesskade.pensjonsgrad) // move (executionOrder=18)
-        Beregning_1.krigOgGammelYrkesskade.setGrunnlag(GBOBeregning.krigOgGammelYrkesskade.grunnlagForUtbetaling) // move (executionOrder=19)
-        Beregning_1.krigOgGammelYrkesskade.setForholdstallYG(GBOBeregning.krigOgGammelYrkesskade.forholdstallYG) // move (executionOrder=20)
-        Beregning_1.setGrunnpensjonsats(GBOBeregning.grunnpensjon.grunnpensjonsats) // move (executionOrder=21)
-        Beregning_1.setBrutto(GBOBeregning.brutto) // move (executionOrder=22)
-        Beregning_1.setNetto(GBOBeregning.netto) // move (executionOrder=23)
-        Beregning_1.setNettoGrunnpensjon(GBOBeregning.grunnpensjon.netto) // move (executionOrder=24)
-        Beregning_1.setNettoTilleggspensjon(GBOBeregning.tilleggspensjon.netto) // move (executionOrder=25)
-        Beregning_1.setNettoSertillegg(GBOBeregning.sertillegg.netto) // move (executionOrder=26)
-        Beregning_1.setNettoAFPtillegg(GBOBeregning.afpTillegg.netto) // move (executionOrder=27)
-        Beregning_1.setEktefelletillegg(GBOBeregning.ektefelleTillegg.netto) // move (executionOrder=28)
-        Beregning_1.setNettoBarnetilleggFellesbarn(GBOBeregning.barnetilleggFellesBarn.netto) // move (executionOrder=29)
-        Beregning_1.setNettoBarnetilleggSerkullsbarn(GBOBeregning.barnetilleggSerkullsbarn.netto) // move (executionOrder=30)
-        Beregning_1.setNettoVentetillegg(GBOBeregning.ventetillegg.netto) // move (executionOrder=31)
-        Beregning_1.setParagraf851Tillegg(GBOBeregning.paragraf851Tillegg.netto) // move (executionOrder=32)
-        Beregning_1.krigOgGammelYrkesskade.setBelop(GBOBeregning.krigOgGammelYrkesskade.netto) // move (executionOrder=33)
-        Beregning_1.setFremtidigPensjonsgivendeInntektBruker(GBOBeregning.inntektBruktIAvkortning) // move (executionOrder=34)
-        GBOBeregningNokkelinfoTOBeregningNokkelinfo(
-            GBOBeregning.beregningNokkelinfoListe,
-            Beregning_1.involvertePersonerNokkelinfoListe
-        ) // submap (executionOrder=35)
-        Beregning_1.setMinstenivatilleggPensjonistpar(GBOBeregning.minstenivatilleggPensjonistpar.netto) // move (executionOrder=36)
-        Beregning_1.setMinstenivatilleggIndividuelt(GBOBeregning.minstenivatilleggIndividuelt.netto) // move (executionOrder=37)
+        Beregning_1.sertilleggSats = GBOBeregning.sertillegg?.sertilleggsats?.toJAXBElement("sertilleggSats") // move (executionOrder=9)
+        Beregning_1.uforegrad = GBOBeregning.uforegrad?.toInt()?.toJAXBElement("uforegrad") // move (executionOrder=17)
+        Beregning_1.ventetilleggProsent = GBOBeregning.ventetillegg?.ventetilleggProsent?.toJAXBElement("ventetilleggProsent") // move (executionOrder=15)
+        Beregning_1.virkningFom = GBOBeregning.virkDatoFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
+        Beregning_1.virkningTom = GBOBeregning.virkDatoTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+        Beregning_1.yrkesskadegrad = GBOBeregning.yrkesskadegrad?.toInt()?.toJAXBElement("yrkesskadegrad") // move (executionOrder=16)
+
+        Beregning_1.involvertePersonerNokkelinfoListe.addAll(GBOBeregning.beregningNokkelinfoListe.map { BeregningNokkelinfo().apply { GBOBeregningNokkelinfoTOBeregningNokkelinfo(it, this) } }) // submap (executionOrder=35)
     }
 
-    fun GBOBeregningsResultatTOBeregning2011(
-        GBOBeregningsResultat: GBOBeregningsResultat,
-        Beregning2011: Beregning2011
-    ) {
-        run {
-            val GBOBeregningsResultat_virkFom = GBOBeregningsResultat.virkFom // custom.input.forEach (executionOrder=1)
-            var Beregning2011_virkningFom: String? = null // custom.output declaration (executionOrder=1)
-            // The specific type of variable GBOBeregningsResultat_virkFom is java.lang.String
-            // The specific type of variable Beregning2011_virkningFom is java.util.Date
-            if (GBOBeregningsResultat_virkFom != null) {
-                Beregning2011_virkningFom = DateUtil.parseWIDString(
-                    GBOBeregningsResultat_virkFom
-                )
-            }
-            Beregning2011.setVirkningFom(Beregning2011_virkningFom) // custom.output assignment (executionOrder=1)
-        }
-        run {
-            val GBOBeregningsResultat_virkTom = GBOBeregningsResultat.virkTom // custom.input.forEach (executionOrder=2)
-            var Beregning2011_virkningTom: String? = null // custom.output declaration (executionOrder=2)
-            // The specific type of variable GBOBeregningsResultat_virkTom is java.lang.String
-            // The specific type of variable Beregning2011_virkningTom is java.util.Date
-            if (GBOBeregningsResultat_virkTom != null) {
-                Beregning2011_virkningTom = DateUtil.parseWIDString(
-                    GBOBeregningsResultat_virkTom
-                )
-            }
-            Beregning2011.setVirkningTom(Beregning2011_virkningTom) // custom.output assignment (executionOrder=2)
-        }
-        Beregning2011.setUttaksgrad(GBOBeregningsResultat.uttaksgrad) // move (executionOrder=3)
-        Beregning2011.setBasisgp(GBOBeregningsResultat.beregningInformasjonKapittel19.basisgp) // move (executionOrder=4)
-        Beregning2011.setBasistp(GBOBeregningsResultat.beregningInformasjonKapittel19.basistp) // move (executionOrder=5)
-        Beregning2011.setBasispt(GBOBeregningsResultat.beregningInformasjonKapittel19.basispt) // move (executionOrder=6)
-        Beregning2011.setForholdstallUttak(GBOBeregningsResultat.beregningInformasjonKapittel19.forholdstallUttak) // move (executionOrder=7)
-        Beregning2011.setForholdstall67(GBOBeregningsResultat.beregningInformasjonKapittel19.forholdstall67) // move (executionOrder=8)
-        Beregning2011.setGrunnpensjon(GBOBeregningsResultat.beregningInformasjonKapittel19.gp) // move (executionOrder=9)
-        Beregning2011.setGpRestpensjon(GBOBeregningsResultat.beregningInformasjonKapittel19.gpRestpensjon) // move (executionOrder=10)
-        Beregning2011.setTilleggspensjon(GBOBeregningsResultat.beregningInformasjonKapittel19.tp) // move (executionOrder=11)
-        Beregning2011.setTpRestpensjon(GBOBeregningsResultat.beregningInformasjonKapittel19.tpRestpensjon) // move (executionOrder=12)
-        Beregning2011.setPensjonstillegg(GBOBeregningsResultat.beregningInformasjonKapittel19.pt) // move (executionOrder=13)
-        Beregning2011.setPtRestpensjon(GBOBeregningsResultat.beregningInformasjonKapittel19.ptRestpensjon) // move (executionOrder=14)
-        Beregning2011.setTotalBelop(GBOBeregningsResultat.pensjonUnderUtbetaling.totalBelop) // move (executionOrder=15)
-        Beregning2011.resultatKode =
-            GBOBeregningsResultat.beregningInformasjonKapittel19.resultatType // move (executionOrder=16)
-        Beregning2011.setMndGrunnpensjon(GBOBeregningsResultat.pensjonUnderUtbetaling.grunnpensjon.netto) // move (executionOrder=17)
-        Beregning2011.setMndTilleggspensjon(GBOBeregningsResultat.pensjonUnderUtbetaling.tilleggspensjon.netto) // move (executionOrder=18)
-        Beregning2011.setMndPensjonstillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.pensjonstillegg.netto) // move (executionOrder=19)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningsResultat.beregningInformasjonKapittel19.spt,
-            Beregning2011.spt
-        ) // submap (executionOrder=20)
-        Beregning2011.grunnpensjonsats =
-            GBOBeregningsResultat.pensjonUnderUtbetaling.grunnpensjon.grunnpensjonsats // move (executionOrder=21)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningsResultat.beregningInformasjonKapittel19.ypt,
-            Beregning2011.ypt
-        ) // submap (executionOrder=22)
-        Beregning2011.setYrkesskadegrad(GBOBeregningsResultat.beregningInformasjonKapittel19.yrkesskadegrad) // move (executionOrder=23)
-        Beregning2011.setAnvendtTrygdetid(GBOBeregningsResultat.beregningInformasjonKapittel19.ttAnv) // move (executionOrder=24)
-        Beregning2011.setBruttoBarnetilleggFellesbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.brutto) // move (executionOrder=25)
-        Beregning2011.setNettoBarnetilleggFellesbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.netto) // move (executionOrder=26)
-        Beregning2011.setAntallBarnetilleggFellesbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.antallBarn) // move (executionOrder=27)
-        Beregning2011.setBruttoBarnetilleggSerkullsbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.brutto) // move (executionOrder=28)
-        Beregning2011.setNettoBarnetilleggSerkullsbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.netto) // move (executionOrder=29)
-        Beregning2011.setAntallBarnetilleggSerkullsbarn(GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.antallBarn) // move (executionOrder=30)
-        Beregning2011.setEktefelletillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.ektefelletillegg.brutto) // move (executionOrder=31)
-        Beregning2011.setMinstenivatilleggPensjonistpar(GBOBeregningsResultat.pensjonUnderUtbetaling.minstenivatilleggPensjonistpar.netto) // move (executionOrder=32)
-        Beregning2011.setAfpLivsvarig(GBOBeregningsResultat.pensjonUnderUtbetaling.afpLivsvarig.brutto) // move (executionOrder=33)
-        Beregning2011.setAfpKronetillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.afpKronetillegg.brutto) // move (executionOrder=34)
-        Beregning2011.setAfpKompensasjonstillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.afpKompensasjonstillegg.brutto) // move (executionOrder=35)
-        Beregning2011.setForholdstallKompensasjonstillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.afpKompensasjonstillegg.forholdstallKompensasjonstillegg) // move (executionOrder=36)
-        Beregning2011.setAfpOpptjeningTotalbelop(GBOBeregningsResultat.beregningInformasjonKapittel19.utbetaltForrige) // move (executionOrder=37)
+    fun GBOBeregningsResultatTOBeregning2011(GBOBeregningsResultat: GBOBeregningsResultat, Beregning2011: Beregning2011) {
+        Beregning2011.afpKompensasjonstillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.afpKompensasjonstillegg.brutto?.toInt() // move (executionOrder=35)
+        Beregning2011.afpKronetillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.afpKronetillegg.brutto?.toInt() // move (executionOrder=34)
+        Beregning2011.afpLivsvarig = GBOBeregningsResultat.pensjonUnderUtbetaling.afpLivsvarig.brutto?.toInt() // move (executionOrder=33)
+        Beregning2011.afpOpptjeningTotalbelop = GBOBeregningsResultat.beregningInformasjonKapittel19.utbetaltForrige?.toDouble() // move (executionOrder=37)
+        Beregning2011.antallBarnetilleggFellesbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.antallBarn?.toInt() // move (executionOrder=27)
+        Beregning2011.antallBarnetilleggSerkullsbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.antallBarn?.toInt() // move (executionOrder=30)
+        Beregning2011.anvendtTrygdetid = GBOBeregningsResultat.beregningInformasjonKapittel19.ttAnv?.toInt() // move (executionOrder=24)
+        Beregning2011.anvendtTrygdetidAvdod = GBOBeregningsResultat.beregningsinformasjonAvdod.ttAnv?.toInt() // move (executionOrder=43)
+        Beregning2011.basisgp = GBOBeregningsResultat.beregningInformasjonKapittel19.basisgp?.toDouble() // move (executionOrder=4)
+        Beregning2011.basispt = GBOBeregningsResultat.beregningInformasjonKapittel19.basispt?.toDouble() // move (executionOrder=6)
+        Beregning2011.basistp = GBOBeregningsResultat.beregningInformasjonKapittel19.basistp?.toDouble() // move (executionOrder=5)
+        Beregning2011.bruttoBarnetilleggFellesbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.brutto?.toInt() // move (executionOrder=25)
+        Beregning2011.bruttoBarnetilleggSerkullsbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.brutto?.toInt() // move (executionOrder=28)
+        Beregning2011.ektefelletillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.ektefelletillegg.brutto?.toInt() // move (executionOrder=31)
         Beregning2011.fnrAvdod = GBOBeregningsResultat.beregningsinformasjonAvdod.fnr // move (executionOrder=38)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningsResultat.beregningsinformasjonAvdod.spt,
-            Beregning2011.sptAvdod
-        ) // submap (executionOrder=39)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningsResultat.beregningsinformasjonAvdod.ypt,
-            Beregning2011.yptAvdod
-        ) // submap (executionOrder=40)
-        GBOSluttpoengtallTOSluttpoengtall(
-            GBOBeregningsResultat.beregningsinformasjonAvdod.opt,
-            Beregning2011.optAvdod
-        ) // submap (executionOrder=41)
-        Beregning2011.setYrkesskadegradAvdod(GBOBeregningsResultat.beregningsinformasjonAvdod.yrkesskadegrad) // move (executionOrder=42)
-        Beregning2011.setAnvendtTrygdetidAvdod(GBOBeregningsResultat.beregningsinformasjonAvdod.ttAnv) // move (executionOrder=43)
-        Beregning2011.setMinstenivatilleggIndividuelt(GBOBeregningsResultat.pensjonUnderUtbetaling.minstenivatilleggIndividuelt.netto) // move (executionOrder=44)
-        Beregning2011.setSkjermingstillegg(GBOBeregningsResultat.pensjonUnderUtbetaling.skjermingstillegg.netto) // move (executionOrder=45)
-        Beregning2011.setUforegrad(GBOBeregningsResultat.pensjonUnderUtbetaling.skjermingstillegg.uforegrad) // move (executionOrder=46)
+        Beregning2011.forholdstall67 = GBOBeregningsResultat.beregningInformasjonKapittel19.forholdstall67?.toDouble() // move (executionOrder=8)
+        Beregning2011.forholdstallKompensasjonstillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.afpKompensasjonstillegg.forholdstallKompensasjonstillegg?.toDouble() // move (executionOrder=36)
+        Beregning2011.forholdstallUttak = GBOBeregningsResultat.beregningInformasjonKapittel19.forholdstallUttak?.toDouble() // move (executionOrder=7)
+        Beregning2011.gpRestpensjon = GBOBeregningsResultat.beregningInformasjonKapittel19.gpRestpensjon?.toDouble() // move (executionOrder=10)
+        Beregning2011.grunnpensjon = GBOBeregningsResultat.beregningInformasjonKapittel19.gp?.toDouble() // move (executionOrder=9)
+        Beregning2011.grunnpensjonsats = GBOBeregningsResultat.pensjonUnderUtbetaling.grunnpensjon.grunnpensjonsats // move (executionOrder=21)
+        Beregning2011.minstenivatilleggIndividuelt = GBOBeregningsResultat.pensjonUnderUtbetaling.minstenivatilleggIndividuelt.netto?.toInt() // move (executionOrder=44)
+        Beregning2011.minstenivatilleggPensjonistpar = GBOBeregningsResultat.pensjonUnderUtbetaling.minstenivatilleggPensjonistpar.netto?.toInt() // move (executionOrder=32)
+        Beregning2011.mndGrunnpensjon = GBOBeregningsResultat.pensjonUnderUtbetaling.grunnpensjon.netto?.toInt() // move (executionOrder=17)
+        Beregning2011.mndPensjonstillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.pensjonstillegg.netto?.toInt() // move (executionOrder=19)
+        Beregning2011.mndTilleggspensjon = GBOBeregningsResultat.pensjonUnderUtbetaling.tilleggspensjon.netto?.toInt() // move (executionOrder=18)
+        Beregning2011.nettoBarnetilleggFellesbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggFellesbarn.netto?.toInt() // move (executionOrder=26)
+        Beregning2011.nettoBarnetilleggSerkullsbarn = GBOBeregningsResultat.pensjonUnderUtbetaling.barnetilleggSerkullsbarn.netto?.toInt() // move (executionOrder=29)
+        Beregning2011.pensjonstillegg = GBOBeregningsResultat.beregningInformasjonKapittel19.pt?.toDouble() // move (executionOrder=13)
+        Beregning2011.ptRestpensjon = GBOBeregningsResultat.beregningInformasjonKapittel19.ptRestpensjon?.toDouble() // move (executionOrder=14)
+        Beregning2011.resultatKode = GBOBeregningsResultat.beregningInformasjonKapittel19.resultatType // move (executionOrder=16)
+        Beregning2011.skjermingstillegg = GBOBeregningsResultat.pensjonUnderUtbetaling.skjermingstillegg.netto?.toInt() // move (executionOrder=45)
+        Beregning2011.tilleggspensjon = GBOBeregningsResultat.beregningInformasjonKapittel19.tp?.toDouble() // move (executionOrder=11)
+        Beregning2011.totalBelop = GBOBeregningsResultat.pensjonUnderUtbetaling.totalBelop?.toInt() // move (executionOrder=15)
+        Beregning2011.tpRestpensjon = GBOBeregningsResultat.beregningInformasjonKapittel19.tpRestpensjon?.toDouble() // move (executionOrder=12)
+        Beregning2011.uforegrad = GBOBeregningsResultat.pensjonUnderUtbetaling.skjermingstillegg.uforegrad?.toInt() // move (executionOrder=46)
+        Beregning2011.uttaksgrad = GBOBeregningsResultat.uttaksgrad?.toInt() // move (executionOrder=3)
+        Beregning2011.virkningFom = GBOBeregningsResultat.virkFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
+        Beregning2011.virkningTom = GBOBeregningsResultat.virkTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+        Beregning2011.yrkesskadegrad = GBOBeregningsResultat.beregningInformasjonKapittel19.yrkesskadegrad?.toDouble() // move (executionOrder=23)
+        Beregning2011.yrkesskadegradAvdod = GBOBeregningsResultat.beregningsinformasjonAvdod.yrkesskadegrad?.toDouble() // move (executionOrder=42)
+
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningsResultat.beregningInformasjonKapittel19.spt, Beregning2011.spt) // submap (executionOrder=20)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningsResultat.beregningInformasjonKapittel19.ypt, Beregning2011.ypt) // submap (executionOrder=22)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningsResultat.beregningsinformasjonAvdod.spt, Beregning2011.sptAvdod) // submap (executionOrder=39)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningsResultat.beregningsinformasjonAvdod.ypt, Beregning2011.yptAvdod) // submap (executionOrder=40)
+        GBOSluttpoengtallTOSluttpoengtall(GBOBeregningsResultat.beregningsinformasjonAvdod.opt, Beregning2011.optAvdod) // submap (executionOrder=41)
     }
 
-    fun GBOBeregningsResultatUforetrygdTOBeregningUforetrygd(
-        GBOBeregningsResultatUforetrygd: GBOBeregningsResultatUforetrygd,
-        BeregningUforetrygd: BeregningUforetrygd
-    ) {
-        BeregningUforetrygd.inntektForUforhet =
-            GBOBeregningsResultatUforetrygd.inntektForUforhet // move (executionOrder=1)
-        BeregningUforetrygd.nettoUforetrygdOrdinar =
-            GBOBeregningsResultatUforetrygd.nettoUforetrygdOrdinar // move (executionOrder=2)
-        BeregningUforetrygd.bruttoUforetrygdOrdinar =
-            GBOBeregningsResultatUforetrygd.bruttoUforetrygdOrdinar // move (executionOrder=3)
+    fun GBOBeregningsResultatUforetrygdTOBeregningUforetrygd(GBOBeregningsResultatUforetrygd: GBOBeregningsResultatUforetrygd, BeregningUforetrygd: BeregningUforetrygd) {
+        BeregningUforetrygd.anvendtTrygdetid = GBOBeregningsResultatUforetrygd.anvendtTrygdetid // move (executionOrder=17)
+        BeregningUforetrygd.anvendtTrygdetidAvdod = GBOBeregningsResultatUforetrygd.anvendtTrygdetidAvdod // move (executionOrder=23)
+        BeregningUforetrygd.benyttetSivilstand = GBOBeregningsResultatUforetrygd.benyttetSivilstand // move (executionOrder=18)
+        BeregningUforetrygd.beregningsgrunnlagOrdiner = GBOBeregningsResultatUforetrygd.beregningsgrunnlagOrdiner // move (executionOrder=19)
+        BeregningUforetrygd.beregningsgrunnlagOrdinerAvdod = GBOBeregningsResultatUforetrygd.beregningsgrunnlagOrdinerAvdod // move (executionOrder=21)
+        BeregningUforetrygd.beregningsgrunnlagYrkesskade = GBOBeregningsResultatUforetrygd.beregningsgrunnlagYrkesskade // move (executionOrder=20)
+        BeregningUforetrygd.beregningsgrunnlagYrkesskadeAvdod = GBOBeregningsResultatUforetrygd.beregningsgrunnlagYrkesskadeAvdod // move (executionOrder=22)
+        BeregningUforetrygd.bruttoBarnetilleggFellesbarn = GBOBeregningsResultatUforetrygd.bruttoBarnetilleggFellesbarn // move (executionOrder=9)
+        BeregningUforetrygd.bruttoBarnetilleggSerkullsbarn = GBOBeregningsResultatUforetrygd.bruttoBarnetilleggSerkullsbarn // move (executionOrder=7)
+        BeregningUforetrygd.bruttoGjenlevendetillegg = GBOBeregningsResultatUforetrygd.bruttoGjenlevendetillegg // move (executionOrder=11)
+        BeregningUforetrygd.bruttoUforetrygdOrdinar = GBOBeregningsResultatUforetrygd.bruttoUforetrygdOrdinar // move (executionOrder=3)
+        BeregningUforetrygd.fom = GBOBeregningsResultatUforetrygd.virkFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=14)
+        BeregningUforetrygd.inntektBruktIInntektsavkorting = GBOBeregningsResultatUforetrygd.inntektBruktIInntektsavkorting // move (executionOrder=25)
+        BeregningUforetrygd.inntektEtterUforhet = GBOBeregningsResultatUforetrygd.inntektEtterUforhet // move (executionOrder=16)
+        BeregningUforetrygd.inntektForUforhet = GBOBeregningsResultatUforetrygd.inntektForUforhet // move (executionOrder=1)
+        BeregningUforetrygd.nettoBarnetilleggFellesbarn = GBOBeregningsResultatUforetrygd.nettoBarnetilleggFellesbarn // move (executionOrder=8)
+        BeregningUforetrygd.nettoBarnetilleggSerkullsbarn = GBOBeregningsResultatUforetrygd.nettoBarnetilleggSerkullsbarn // move (executionOrder=6)
+        BeregningUforetrygd.nettoEktefelletillegg = GBOBeregningsResultatUforetrygd.nettoEktefelletillegg // move (executionOrder=12)
+        BeregningUforetrygd.nettoGjenlevendetillegg = GBOBeregningsResultatUforetrygd.nettoGjenlevendetillegg // move (executionOrder=10)
+        BeregningUforetrygd.nettoUforetrygdOrdinar = GBOBeregningsResultatUforetrygd.nettoUforetrygdOrdinar // move (executionOrder=2)
+        BeregningUforetrygd.resultatKode = GBOBeregningsResultatUforetrygd.resultatKode // move (executionOrder=13)
+        BeregningUforetrygd.tom = GBOBeregningsResultatUforetrygd.virkTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=15)
         BeregningUforetrygd.uforegrad = GBOBeregningsResultatUforetrygd.uforegrad // move (executionOrder=4)
         BeregningUforetrygd.yrkesskadegrad = GBOBeregningsResultatUforetrygd.yrkesskadegrad // move (executionOrder=5)
-        BeregningUforetrygd.nettoBarnetilleggSerkullsbarn =
-            GBOBeregningsResultatUforetrygd.nettoBarnetilleggSerkullsbarn // move (executionOrder=6)
-        BeregningUforetrygd.bruttoBarnetilleggSerkullsbarn =
-            GBOBeregningsResultatUforetrygd.bruttoBarnetilleggSerkullsbarn // move (executionOrder=7)
-        BeregningUforetrygd.nettoBarnetilleggFellesbarn =
-            GBOBeregningsResultatUforetrygd.nettoBarnetilleggFellesbarn // move (executionOrder=8)
-        BeregningUforetrygd.bruttoBarnetilleggFellesbarn =
-            GBOBeregningsResultatUforetrygd.bruttoBarnetilleggFellesbarn // move (executionOrder=9)
-        BeregningUforetrygd.nettoGjenlevendetillegg =
-            GBOBeregningsResultatUforetrygd.nettoGjenlevendetillegg // move (executionOrder=10)
-        BeregningUforetrygd.bruttoGjenlevendetillegg =
-            GBOBeregningsResultatUforetrygd.bruttoGjenlevendetillegg // move (executionOrder=11)
-        BeregningUforetrygd.nettoEktefelletillegg =
-            GBOBeregningsResultatUforetrygd.nettoEktefelletillegg // move (executionOrder=12)
-        BeregningUforetrygd.resultatKode = GBOBeregningsResultatUforetrygd.resultatKode // move (executionOrder=13)
-        run {
-            val GBOBeregningsResultatUforetrygd_virkFom =
-                GBOBeregningsResultatUforetrygd.virkFom // custom.input.forEach (executionOrder=14)
-            var BeregningUforetrygd_fom: String? = null // custom.output declaration (executionOrder=14)
-            // The specific type of variable GBOBeregningsResultatUforetrygd_virkFom is java.lang.String
-            // The specific type of variable BeregningUforetrygd_fom is java.util.Date
-            if (GBOBeregningsResultatUforetrygd_virkFom != null) {
-                BeregningUforetrygd_fom = DateUtil.parseWIDString(
-                    GBOBeregningsResultatUforetrygd_virkFom
-                )
-            }
-            BeregningUforetrygd.setFom(BeregningUforetrygd_fom) // custom.output assignment (executionOrder=14)
-        }
-        run {
-            val GBOBeregningsResultatUforetrygd_virkTom =
-                GBOBeregningsResultatUforetrygd.virkTom // custom.input.forEach (executionOrder=15)
-            var BeregningUforetrygd_tom: String? = null // custom.output declaration (executionOrder=15)
-            // The specific type of variable GBOBeregningsResultatUforetrygd_virkTom is java.lang.String
-            // The specific type of variable BeregningUforetrygd_tom is java.util.Date
-            if (GBOBeregningsResultatUforetrygd_virkTom != null) {
-                BeregningUforetrygd_tom = DateUtil.parseWIDString(
-                    GBOBeregningsResultatUforetrygd_virkTom
-                )
-            }
-            BeregningUforetrygd.setTom(BeregningUforetrygd_tom) // custom.output assignment (executionOrder=15)
-        }
-        BeregningUforetrygd.inntektEtterUforhet =
-            GBOBeregningsResultatUforetrygd.inntektEtterUforhet // move (executionOrder=16)
-        BeregningUforetrygd.anvendtTrygdetid =
-            GBOBeregningsResultatUforetrygd.anvendtTrygdetid // move (executionOrder=17)
-        BeregningUforetrygd.benyttetSivilstand =
-            GBOBeregningsResultatUforetrygd.benyttetSivilstand // move (executionOrder=18)
-        BeregningUforetrygd.beregningsgrunnlagOrdiner =
-            GBOBeregningsResultatUforetrygd.beregningsgrunnlagOrdiner // move (executionOrder=19)
-        BeregningUforetrygd.beregningsgrunnlagYrkesskade =
-            GBOBeregningsResultatUforetrygd.beregningsgrunnlagYrkesskade // move (executionOrder=20)
-        BeregningUforetrygd.beregningsgrunnlagOrdinerAvdod =
-            GBOBeregningsResultatUforetrygd.beregningsgrunnlagOrdinerAvdod // move (executionOrder=21)
-        BeregningUforetrygd.beregningsgrunnlagYrkesskadeAvdod =
-            GBOBeregningsResultatUforetrygd.beregningsgrunnlagYrkesskadeAvdod // move (executionOrder=22)
-        BeregningUforetrygd.anvendtTrygdetidAvdod =
-            GBOBeregningsResultatUforetrygd.anvendtTrygdetidAvdod // move (executionOrder=23)
-        BeregningUforetrygd.yrkesskadegradAvdod =
-            GBOBeregningsResultatUforetrygd.yrkesskadegradAvdod // move (executionOrder=24)
-        BeregningUforetrygd.inntektBruktIInntektsavkorting =
-            GBOBeregningsResultatUforetrygd.inntektBruktIInntektsavkorting // move (executionOrder=25)
+        BeregningUforetrygd.yrkesskadegradAvdod = GBOBeregningsResultatUforetrygd.yrkesskadegradAvdod // move (executionOrder=24)
     }
 
     fun GBOPersonTOPerson(GBOPerson: GBOPerson, Person: Person) {
@@ -417,17 +243,8 @@ object Mapper {
         Person.mellomnavn = GBOPerson.mellomnavn // move (executionOrder=3)
         Person.etternavn = GBOPerson.etternavn // move (executionOrder=4)
         Person.sivilstand = GBOPerson.sivilstand // move (executionOrder=5)
-        run {
-            val GBOPerson_dodsdato = GBOPerson.dodsdato // custom.input.forEach (executionOrder=6)
-            var Person_dodsdato: String? = null // custom.output declaration (executionOrder=6)
-            // The specific type of variable GBOPerson_dodsdato is java.lang.String
-            // The specific type of variable Person_dodsdato is java.util.Date
-            if (GBOPerson_dodsdato != null) {
-                Person_dodsdato = DateUtil.parseWIDString(GBOPerson_dodsdato)
-            }
+        Person.dodsdato = GBOPerson.dodsdato?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=6)
 
-            Person.setDodsdato(Person_dodsdato) // custom.output assignment (executionOrder=6)
-        }
         run {
             val GBOPerson: String? = GBOPerson // custom.input.forEach (executionOrder=7)
             val Person_utbetalingsadresse: String? = null // custom.output declaration (executionOrder=7)
@@ -488,117 +305,91 @@ object Mapper {
         }
     }
 
-    fun GBOSamordningsdataTOHentSamordningsdataResp(
-        GBOSamordningsdata: GBOSamordningsdata,
-        HentSamordningsdataResp: HentSamordningsdataResp
-    ) {
+    fun GBOSamordningsdataTOHentSamordningsdataResp(GBOSamordningsdata: GBOSamordningsdata, HentSamordningsdataResp: HentSamordningsdataResp) {
         HentSamordningsdataResp.tpnr = GBOSamordningsdata.tpnr // move (executionOrder=1)
         GBOPersonTOPerson(GBOSamordningsdata.person, HentSamordningsdataResp.person) // submap (executionOrder=2)
-        GBOVedtakTOVedtak(
-            GBOSamordningsdata.vedtakListe.vedtakListe,
-            HentSamordningsdataResp.pensjonVedtakListe
-        ) // submap (executionOrder=3)
-        GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(
-            GBOSamordningsdata.arbeidOgAktivitetsvedtakListe,
-            HentSamordningsdataResp.arbeidVedtakListe
-        ) // submap (executionOrder=4)
+        HentSamordningsdataResp.pensjonVedtakListe.addAll(GBOSamordningsdata.vedtakListe.vedtakListe.map { Vedtak().apply { GBOVedtakTOVedtak(it, this) } } ) // submap (executionOrder=3)
+        HentSamordningsdataResp.arbeidVedtakListe.addAll(GBOSamordningsdata.arbeidOgAktivitetsvedtakListe.map { ArbeidOgAktivitetsvedtak().apply { GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(it, this) } } ) // submap (executionOrder=4)
         HentSamordningsdataResp.ufullstendigeData = GBOSamordningsdata.ufullstendigeData // move (executionOrder=5)
         run {
-            val GBOSamordningsdata_tjenestepensjonForholdListe: String? =
-                GBOSamordningsdata.tjenestepensjonForholdListe // custom.input.forEach (executionOrder=6)
-            val HentSamordningsdataResp_tjenestepensjonYtelseListe: String? =
-                null // custom.output declaration (executionOrder=6)
+            val GBOSamordningsdata_tjenestepensjonForholdListe: List<GBOTjenestepensjonForhold>? = GBOSamordningsdata.tjenestepensjonForholdListe // custom.input.forEach (executionOrder=6)
+            val HentSamordningsdataResp_tjenestepensjonYtelseListe: MutableList<TPYtelse> = ArrayList() // custom.output declaration (executionOrder=6)
 
             // The specific type of variable GBOSamordningsdata_tjenestepensjonForholdListe is java.util.List
             // The specific type of variable HentSamordningsdataResp_tjenestepensjonYtelseListe is java.util.List
-            if (GBOSamordningsdata_tjenestepensjonForholdListe != null &&
-                HentSamordningsdataResp_tjenestepensjonYtelseListe != null
+            if (GBOSamordningsdata_tjenestepensjonForholdListe != null && HentSamordningsdataResp_tjenestepensjonYtelseListe != null
             ) {
                 // Clear list to work around WID bug until JR27952 is fixed
                 (HentSamordningsdataResp_tjenestepensjonYtelseListe as MutableList<*>).clear()
 
-                val iter: Iterator = (GBOSamordningsdata_tjenestepensjonForholdListe as List<*>).iterator()
+                val iter: Iterator<GBOTjenestepensjonForhold> = GBOSamordningsdata_tjenestepensjonForholdListe.iterator()
                 while (iter.hasNext()) {
-                    val tpForhold: DataObject = iter.next() as DataObject
-                    val iterator: Iterator = (tpForhold.getList("tjenestepensjonYtelseListe") as List<*>).iterator()
+                    val tpForhold: GBOTjenestepensjonForhold = iter.next()
+                    val iterator: Iterator<GBOTjenestepensjonYtelse> = tpForhold.getTjenestepensjonYtelseListe().iterator()
                     while (iterator.hasNext()) {
-                        val gboTpYtelse: DataObject = iterator.next() as DataObject
-                        val tpYtelse: DataObject =
-                            DataFactory.INSTANCE.create("http://nav.no/elsam/tpsamordningregistrering/V0_5", "TPYtelse")
-                        tpYtelse.setString("tpnr", tpForhold.getString("tpnr"))
-                        tpYtelse.setString("tpArt", gboTpYtelse.getString("ytelseKode"))
-                        if (gboTpYtelse.getString("iverksattFom") != null) {
-                            tpYtelse.setDate("datoFom", DateUtil.parseWIDString(gboTpYtelse.getString("iverksattFom")))
+                        val gboTpYtelse: GBOTjenestepensjonYtelse = iterator.next()
+                        val tpYtelse = TPYtelse()
+                        tpYtelse.tpnr = tpForhold.tpnr
+                        tpYtelse.tpArt = gboTpYtelse.ytelseKode
+                        if (gboTpYtelse.iverksattFom != null) {
+                            tpYtelse.datoFom = DateUtil.parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
                         }
-                        if (gboTpYtelse.getString("iverksattTom") != null) {
-                            tpYtelse.setDate("datoTom", DateUtil.parseWIDString(gboTpYtelse.getString("iverksattTom")))
+                        if (gboTpYtelse.iverksattTom != null) {
+                            tpYtelse.datoTom = DateUtil.parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
                         }
-                        (HentSamordningsdataResp_tjenestepensjonYtelseListe as MutableList<*>).add(tpYtelse)
+                        HentSamordningsdataResp_tjenestepensjonYtelseListe.add(tpYtelse)
                     }
                 }
             }
-            HentSamordningsdataResp.setTjenestepensjonYtelseListe(HentSamordningsdataResp_tjenestepensjonYtelseListe) // custom.output assignment (executionOrder=6)
+            HentSamordningsdataResp.getTjenestepensjonYtelseListe().addAll(HentSamordningsdataResp_tjenestepensjonYtelseListe) // custom.output assignment (executionOrder=6)
         }
     }
 
-    fun GBOSamordningsdataTOLagreTPYtelseResp(
-        GBOSamordningsdata: GBOSamordningsdata,
-        LagreTPYtelseResp: LagreTPYtelseResp
-    ) {
+    fun GBOSamordningsdataTOLagreTPYtelseResp(GBOSamordningsdata: GBOSamordningsdata, LagreTPYtelseResp: LagreTPYtelseResp) {
         LagreTPYtelseResp.tpnr = GBOSamordningsdata.tpnr // move (executionOrder=1)
         GBOPersonTOPerson(GBOSamordningsdata.person, LagreTPYtelseResp.person) // submap (executionOrder=2)
-        GBOVedtakTOVedtak(
-            GBOSamordningsdata.vedtakListe.vedtakListe,
-            LagreTPYtelseResp.pensjonVedtakListe
-        ) // submap (executionOrder=3)
-        GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(
-            GBOSamordningsdata.arbeidOgAktivitetsvedtakListe,
-            LagreTPYtelseResp.arbeidOgAktivitetsvedtakListe
-        ) // submap (executionOrder=4)
+        LagreTPYtelseResp.pensjonVedtakListe.addAll(GBOSamordningsdata.vedtakListe.vedtakListe.map { Vedtak().apply { GBOVedtakTOVedtak(it, this) } } ) // submap (executionOrder=3)
+        LagreTPYtelseResp.arbeidOgAktivitetsvedtakListe.addAll(GBOSamordningsdata.arbeidOgAktivitetsvedtakListe.map { ArbeidOgAktivitetsvedtak().apply { GBOArbeidOgAktivitetsvedtakTOArbeidOgAktivitetsvedtak(it, this) } } ) // submap (executionOrder=4)
         run {
-            val GBOSamordningsdata_tjenestepensjonForholdListe: String? =
-                GBOSamordningsdata.tjenestepensjonForholdListe // custom.input.forEach (executionOrder=5)
-            val LagreTPYtelseResp_tjenestepensjonYtelseListe: String? =
-                null // custom.output declaration (executionOrder=5)
-
-            // The specific type of variable GBOSamordningsdata_tjenestepensjonForholdListe is java.util.List
-            // The specific type of variable LagreTPYtelseResp_tjenestepensjonYtelseListe is java.util.List
-
-            // Clear list to work around WID bug until JR27952 is fixed
-            (LagreTPYtelseResp_tjenestepensjonYtelseListe as MutableList<*>?)!!.clear()
+            val GBOSamordningsdata_tjenestepensjonForholdListe: List<GBOTjenestepensjonForhold>? = GBOSamordningsdata.tjenestepensjonForholdListe // custom.input.forEach (executionOrder=5)
+            val LagreTPYtelseResp_tjenestepensjonYtelseListe: MutableList<TPYtelse> = ArrayList() // custom.output declaration (executionOrder=5)
 
             if (GBOSamordningsdata_tjenestepensjonForholdListe != null) {
-                val iter: Iterator = (GBOSamordningsdata_tjenestepensjonForholdListe as List<*>).iterator()
+                val iter: Iterator<GBOTjenestepensjonForhold> = GBOSamordningsdata_tjenestepensjonForholdListe.iterator()
                 while (iter.hasNext()) {
-                    val tpForhold: DataObject = iter.next() as DataObject
-                    val iterator: Iterator = (tpForhold.getList("tjenestepensjonYtelseListe") as List<*>).iterator()
+                    val tpForhold: GBOTjenestepensjonForhold = iter.next()
+                    val iterator: Iterator<GBOTjenestepensjonYtelse> = tpForhold.getTjenestepensjonYtelseListe().iterator()
                     while (iterator.hasNext()) {
-                        val gboTpYtelse: DataObject = iterator.next() as DataObject
-                        val tpYtelse: DataObject =
-                            DataFactory.INSTANCE.create("http://nav.no/elsam/tpsamordningregistrering/V0_5", "TPYtelse")
-                        tpYtelse.setString("tpnr", tpForhold.getString("tpnr"))
-                        tpYtelse.setString("tpArt", gboTpYtelse.getString("ytelseKode"))
-                        if (gboTpYtelse.getString("iverksattFom") != null) {
-                            tpYtelse.setDate("datoFom", DateUtil.parseWIDString(gboTpYtelse.getString("iverksattFom")))
+                        val gboTpYtelse: GBOTjenestepensjonYtelse = iterator.next()
+                        val tpYtelse = TPYtelse()
+                        tpYtelse.tpnr = tpForhold.tpnr
+                        tpYtelse.tpArt = gboTpYtelse.ytelseKode
+                        if (gboTpYtelse.iverksattFom != null) {
+                            tpYtelse.datoFom = DateUtil.parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
                         }
-                        if (gboTpYtelse.getString("iverksattTom") != null) {
-                            tpYtelse.setDate("datoTom", DateUtil.parseWIDString(gboTpYtelse.getString("iverksattTom")))
+                        if (gboTpYtelse.iverksattTom != null) {
+                            tpYtelse.datoTom = DateUtil.parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
                         }
-                        (LagreTPYtelseResp_tjenestepensjonYtelseListe as MutableList<*>?)!!.add(tpYtelse)
+                        LagreTPYtelseResp_tjenestepensjonYtelseListe.add(tpYtelse)
                     }
                 }
             }
-            LagreTPYtelseResp.setTjenestepensjonYtelseListe(LagreTPYtelseResp_tjenestepensjonYtelseListe) // custom.output assignment (executionOrder=5)
+            LagreTPYtelseResp.getTjenestepensjonYtelseListe().addAll(LagreTPYtelseResp_tjenestepensjonYtelseListe) // custom.output assignment (executionOrder=5)
         }
         LagreTPYtelseResp.ufullstendigeData = GBOSamordningsdata.ufullstendigeData // move (executionOrder=6)
     }
 
     fun GBOSluttpoengtallTOSluttpoengtall(GBOSluttpoengtall: GBOSluttpoengtall, Sluttpoengtall: Sluttpoengtall) {
-        Sluttpoengtall.setPoengtall(GBOSluttpoengtall.poengtall) // move (executionOrder=1)
-        Sluttpoengtall.poengrekke.setPa(GBOSluttpoengtall.poengrekke.poengAr) // move (executionOrder=2)
-        Sluttpoengtall.poengrekke.setPaF92(GBOSluttpoengtall.poengrekke.poengArFor92) // move (executionOrder=3)
-        Sluttpoengtall.poengrekke.setPaE91(GBOSluttpoengtall.poengrekke.poengArEtter91) // move (executionOrder=4)
-        Sluttpoengtall.poengrekke.setTpiFaktor(GBOSluttpoengtall.poengrekke.tidligerePenInntektFaktor) // move (executionOrder=5)
+        Sluttpoengtall.poengtall = GBOSluttpoengtall.poengtall?.toDouble()?.toJAXBElement("poengtall") // move (executionOrder=1)
+
+        Sluttpoengtall.poengrekke = GBOSluttpoengtall.poengrekke?.let { src ->
+            Poengrekke().also { dst ->
+                dst.pa = src.poengAr?.toInt()?.toJAXBElement("pa") // move (executionOrder=2)
+                dst.paF92 = src.poengArFor92?.toInt()?.toJAXBElement("pa_f92") // move (executionOrder=3)
+                dst.paE91 = src.poengArEtter91?.toInt()?.toJAXBElement("pa_e91") // move (executionOrder=4)
+                dst.tpiFaktor = src.tidligerePenInntektFaktor?.toDouble()?.toJAXBElement("tpiFaktor") // move (executionOrder=5)
+            }
+        }
     }
 
     fun GBOVedtakTOVedtak(GBOVedtak: GBOVedtak, Vedtak: Vedtak) {
@@ -606,256 +397,85 @@ object Mapper {
         Vedtak.vedtakId = GBOVedtak.vedtakId // move (executionOrder=2)
         Vedtak.vedtaksKode = GBOVedtak.vedtaksKode // move (executionOrder=3)
         Vedtak.regelverkKode = GBOVedtak.kravHode.regelverkKode // move (executionOrder=4)
-        GBOBeregningTOBeregning(GBOVedtak.beregningListe, Vedtak.beregningListe) // submap (executionOrder=5)
-        GBOBeregningsResultatTOBeregning2011(
-            GBOVedtak.beregningsResultatListe,
-            Vedtak.beregning2011Liste
-        ) // submap (executionOrder=6)
-        GBOVilkarsvedtakTOVilkarsvedtak(GBOVedtak.vilkarsvedtakListe, Vedtak.barnListe) // submap (executionOrder=7)
-        GBOBeregningsResultatUforetrygdTOBeregningUforetrygd(
-            GBOVedtak.beregningsresultatUforetrygdListe,
-            Vedtak.beregningUforetrygdListe
-        ) // submap (executionOrder=8)
-        run {
-            val GBOVedtak_virkningFom = GBOVedtak.virkningFom // custom.input.forEach (executionOrder=9)
-            var Vedtak_virkningFom: String? = null // custom.output declaration (executionOrder=9)
-            // The specific type of variable GBOVedtak_virkningFom is java.lang.String
-            // The specific type of variable Vedtak_virkningFom is java.util.Date
-            if (GBOVedtak_virkningFom != null) {
-                Vedtak_virkningFom = DateUtil.parseWIDString(GBOVedtak_virkningFom)
-            }
-            Vedtak.setVirkningFom(Vedtak_virkningFom) // custom.output assignment (executionOrder=9)
-        }
-        run {
-            val GBOVedtak_virkningTom = GBOVedtak.virkningTom // custom.input.forEach (executionOrder=10)
-            var Vedtak_virkningTom: String? = null // custom.output declaration (executionOrder=10)
-            // The specific type of variable GBOVedtak_virkningTom is java.lang.String
-            // The specific type of variable Vedtak_virkningTom is java.util.Date
-            if (GBOVedtak_virkningTom != null) {
-                Vedtak_virkningTom = DateUtil.parseWIDString(GBOVedtak_virkningTom)
-            }
-            Vedtak.setVirkningTom(Vedtak_virkningTom) // custom.output assignment (executionOrder=10)
-        }
-        run {
-            val GBOVedtak_kravHode_kravVelgKode =
-                GBOVedtak.kravHode.kravVelgKode // custom.input.forEach (executionOrder=11)
-            var Vedtak_typeKrigspensjon: String? = null // custom.output declaration (executionOrder=11)
-            // The specific type of variable GBOVedtak_kravHode_kravVelgKode is java.lang.String
-            // The specific type of variable Vedtak_typeKrigspensjon is java.lang.String
-            val gyldigeKoder = arrayOf(
-                "MIL_INV",
-                "MIL_GJENLEV",
-                "MIL_BARNEP",
-                "SIVIL_INV",
-                "SIVIL_GJENLEV",
-                "SIVIL_BARNEP",
-                "UP",
-                "EP",
-                "BP"
-            )
+        Vedtak.virkningFom = GBOVedtak.virkningFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=9)
+        Vedtak.virkningTom = GBOVedtak.virkningTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=10)
+        Vedtak.typeKrigspensjon = GBOVedtak.kravHode.kravVelgKode?.takeIf { gyldigeKrigspensjonKoder.contains(it) } // custom.output assignment (executionOrder=11)
 
-            if (GBOVedtak_kravHode_kravVelgKode != null) {
-                if (Arrays.asList(gyldigeKoder).contains(GBOVedtak_kravHode_kravVelgKode)) {
-                    Vedtak_typeKrigspensjon = GBOVedtak_kravHode_kravVelgKode
-                }
-            }
-            Vedtak.typeKrigspensjon = Vedtak_typeKrigspensjon // custom.output assignment (executionOrder=11)
-        }
+        Vedtak.beregningListe.addAll(GBOVedtak.beregningListe.map { Beregning().apply { GBOBeregningTOBeregning(it, this) } }) // submap (executionOrder=5)
+        Vedtak.beregning2011Liste.addAll(GBOVedtak.beregningsResultatListe.map { Beregning2011().apply { GBOBeregningsResultatTOBeregning2011(it, this) } } ) // submap (executionOrder=6)
+        Vedtak.barnListe.addAll(GBOVedtak.vilkarsvedtakListe.map { Vilkarsvedtak().apply { GBOVilkarsvedtakTOVilkarsvedtak(it, this) } } ) // submap (executionOrder=7)
+        Vedtak.beregningUforetrygdListe.addAll(GBOVedtak.beregningsresultatUforetrygdListe.map { BeregningUforetrygd().apply { GBOBeregningsResultatUforetrygdTOBeregningUforetrygd(it, this) } }) // submap (executionOrder=8)
     }
 
     fun GBOVilkarsvedtakTOVilkarsvedtak(GBOVilkarsvedtak: GBOVilkarsvedtak, Vilkarsvedtak: Vilkarsvedtak) {
         Vilkarsvedtak.gjelderFnr = GBOVilkarsvedtak.gjelderFnr // move (executionOrder=1)
-        run {
-            val GBOVilkarsvedtak_virkningTom = GBOVilkarsvedtak.virkningTom // custom.input.forEach (executionOrder=2)
-            var Vilkarsvedtak_tom: String? = null // custom.output declaration (executionOrder=2)
-
-            // The specific type of variable GBOVilkarsvedtak_virkningTom is java.lang.String
-            // The specific type of variable Vilkarsvedtak_tom is java.util.Date
-            if (GBOVilkarsvedtak_virkningTom != null) {
-                Vilkarsvedtak_tom = DateUtil.parseWIDString(GBOVilkarsvedtak_virkningTom)
-            }
-            Vilkarsvedtak.setTom(Vilkarsvedtak_tom) // custom.output assignment (executionOrder=2)
-        }
-        run {
-            val GBOVilkarsvedtak_virkningFom = GBOVilkarsvedtak.virkningFom // custom.input.forEach (executionOrder=3)
-            var Vilkarsvedtak_fom: String? = null // custom.output declaration (executionOrder=3)
-            // The specific type of variable GBOVilkarsvedtak_virkningFom is java.lang.String
-            // The specific type of variable Vilkarsvedtak_fom is java.util.Date
-            if (GBOVilkarsvedtak_virkningFom != null) {
-                Vilkarsvedtak_fom = DateUtil.parseWIDString(GBOVilkarsvedtak_virkningFom)
-            }
-
-            Vilkarsvedtak.setFom(Vilkarsvedtak_fom) // custom.output assignment (executionOrder=3)
-        }
+        Vilkarsvedtak.tom = GBOVilkarsvedtak.virkningTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+        Vilkarsvedtak.fom = GBOVilkarsvedtak.virkningFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
     }
 
-    fun HentSamordningsdataReqIntTOGBOHentSamordningsdataRequest(
-        HentSamordningsdataReqInt: HentSamordningsdataReqInt,
-        GBOHentSamordningsdataRequest: GBOHentSamordningsdataRequest
-    ) {
-        GBOHentSamordningsdataRequest.setSvarBrev("false") // set (executionOrder=1)
+    fun HentSamordningsdataReqIntTOGBOHentSamordningsdataRequest(HentSamordningsdataReqInt: HentSamordningsdataReqInt, GBOHentSamordningsdataRequest: GBOHentSamordningsdataRequest) {
+        GBOHentSamordningsdataRequest.svarBrev = false // set (executionOrder=1)
         GBOHentSamordningsdataRequest.tpnr = HentSamordningsdataReqInt.extRequest.tpnr // move (executionOrder=2)
         GBOHentSamordningsdataRequest.fnr = HentSamordningsdataReqInt.extRequest.fnr // move (executionOrder=3)
-        run {
-            val HentSamordningsdataReqInt_extRequest_datoFom: String? =
-                HentSamordningsdataReqInt.extRequest.datoFom // custom.input.forEach (executionOrder=4)
-            var GBOHentSamordningsdataRequest_fom: String? = null // custom.output declaration (executionOrder=4)
-
-            // The specific type of variable HentSamordningsdataReqInt_extRequest_datoFom is java.util.Date
-            // The specific type of variable GBOHentSamordningsdataRequest_fom is java.lang.String
-            if (HentSamordningsdataReqInt_extRequest_datoFom != null) {
-                GBOHentSamordningsdataRequest_fom =
-                    DateUtil.formatWIDString(HentSamordningsdataReqInt_extRequest_datoFom as Date?)
-            }
-            GBOHentSamordningsdataRequest.fom =
-                GBOHentSamordningsdataRequest_fom // custom.output assignment (executionOrder=4)
-        }
+        GBOHentSamordningsdataRequest.fom = HentSamordningsdataReqInt.extRequest.datoFom?.let { DateUtil.formatWIDString(it.toDate()) } // custom.output assignment (executionOrder=4)
         GBOHentSamordningsdataRequest.tssEksternId = HentSamordningsdataReqInt.tssEksternId // move (executionOrder=5)
     }
 
-    fun LagreTPYtelseReqIntTOGBOOpprettTPSamordningRequest(
-        LagreTPYtelseReqInt: LagreTPYtelseReqInt,
-        GBOOpprettTPSamordningRequest: GBOOpprettTPSamordningRequest
-    ) {
-        GBOOpprettTPSamordningRequest.setSvarBrev("false") // set (executionOrder=1)
+    fun LagreTPYtelseReqIntTOGBOOpprettTPSamordningRequest(LagreTPYtelseReqInt: LagreTPYtelseReqInt, GBOOpprettTPSamordningRequest: GBOOpprettTPSamordningRequest) {
+        GBOOpprettTPSamordningRequest.svarBrev = false // set (executionOrder=1)
         GBOOpprettTPSamordningRequest.tpnr = LagreTPYtelseReqInt.extRequest.tpnr // move (executionOrder=2)
         GBOOpprettTPSamordningRequest.fnr = LagreTPYtelseReqInt.extRequest.fnr // move (executionOrder=3)
-        run {
-            val LagreTPYtelseReqInt_extRequest_datoFom: String? =
-                LagreTPYtelseReqInt.extRequest.datoFom // custom.input.forEach (executionOrder=4)
-            var GBOOpprettTPSamordningRequest_iverksattFom: String? =
-                null // custom.output declaration (executionOrder=4)
-
-            // The specific type of variable LagreTPYtelseReqInt_extRequest_datoFom is java.util.Date
-            // The specific type of variable GBOOpprettTPSamordningRequest_iverksattFom is java.lang.String
-            if (LagreTPYtelseReqInt_extRequest_datoFom != null) GBOOpprettTPSamordningRequest_iverksattFom =
-                DateUtil.formatWIDString(LagreTPYtelseReqInt_extRequest_datoFom as Date?)
-
-
-            GBOOpprettTPSamordningRequest.iverksattFom =
-                GBOOpprettTPSamordningRequest_iverksattFom // custom.output assignment (executionOrder=4)
-        }
+        GBOOpprettTPSamordningRequest.iverksattFom = LagreTPYtelseReqInt.extRequest.datoFom?.let { DateUtil.formatWIDString(it.toDate()) } // custom.output assignment (executionOrder=4)
         GBOOpprettTPSamordningRequest.tssEksternId = LagreTPYtelseReqInt.tssEksternId // move (executionOrder=5)
         GBOOpprettTPSamordningRequest.ytelseKode = LagreTPYtelseReqInt.extRequest.tpArt // move (executionOrder=6)
-        run {
-            val LagreTPYtelseReqInt_extRequest_datoFomMedlemskap: String =
-                LagreTPYtelseReqInt.extRequest.datoFomMedlemskap // custom.input.forEach (executionOrder=7)
-            var GBOOpprettTPSamordningRequest_innmeldtFom: String? =
-                null // custom.output declaration (executionOrder=7)
-            // The specific type of variable LagreTPYtelseReqInt_extRequest_datoFomMedlemskap is java.util.Date
-            // The specific type of variable GBOOpprettTPSamordningRequest_innmeldtFom is java.lang.String
-            GBOOpprettTPSamordningRequest_innmeldtFom =
-                DateUtil.formatWIDString(LagreTPYtelseReqInt_extRequest_datoFomMedlemskap as Date)
-            GBOOpprettTPSamordningRequest.innmeldtFom =
-                GBOOpprettTPSamordningRequest_innmeldtFom // custom.output assignment (executionOrder=7)
-        }
+        GBOOpprettTPSamordningRequest.innmeldtFom = DateUtil.formatWIDString(LagreTPYtelseReqInt.extRequest.datoFomMedlemskap?.toDate()) // custom.output assignment (executionOrder=7)
     }
 
-    fun OpprettRefusjonskravReqIntTOGBOOpprettRefusjonskravRequest(
-        OpprettRefusjonskravReqInt: OpprettRefusjonskravReqInt,
-        GBOOpprettRefusjonskravRequest: GBOOpprettRefusjonskravRequest
-    ) {
-        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.tpnr =
-            OpprettRefusjonskravReqInt.extRequest.tpnr // move (executionOrder=1)
-        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.fnr =
-            OpprettRefusjonskravReqInt.extRequest.fnr // move (executionOrder=2)
-        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.samId =
-            OpprettRefusjonskravReqInt.extRequest.samordningsmeldingId // move (executionOrder=3)
-        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.refusjonskrav =
-            OpprettRefusjonskravReqInt.extRequest.refusjonskrav // move (executionOrder=4)
-        PeriodisertBelopTOGBOPeriodisertBelop(
-            OpprettRefusjonskravReqInt.extRequest.periodisertBelopListe,
-            GBOOpprettRefusjonskravRequest.svarRefusjonskrav.periodisertBelopListe
-        ) // submap (executionOrder=5)
-        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.tssEksternId =
-            OpprettRefusjonskravReqInt.tssEksternId // move (executionOrder=6)
+    fun OpprettRefusjonskravReqIntTOGBOOpprettRefusjonskravRequest(OpprettRefusjonskravReqInt: OpprettRefusjonskravReqInt, GBOOpprettRefusjonskravRequest: GBOOpprettRefusjonskravRequest) {
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.tpnr = OpprettRefusjonskravReqInt.extRequest.tpnr // move (executionOrder=1)
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.fnr = OpprettRefusjonskravReqInt.extRequest.fnr // move (executionOrder=2)
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.samId = OpprettRefusjonskravReqInt.extRequest.samordningsmeldingId // move (executionOrder=3)
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.refusjonskrav = OpprettRefusjonskravReqInt.extRequest.refusjonskrav // move (executionOrder=4)
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.tssEksternId = OpprettRefusjonskravReqInt.tssEksternId // move (executionOrder=6)
+        GBOOpprettRefusjonskravRequest.svarRefusjonskrav.periodisertBelopListe.addAll(OpprettRefusjonskravReqInt.extRequest.periodisertBelopListe.map { GBOPeriodisertBelop().apply { PeriodisertBelopTOGBOPeriodisertBelop(it, this) } }) // submap (executionOrder=5)
     }
 
-    fun PeriodisertBelopTOGBOPeriodisertBelop(
-        PeriodisertBelop: PeriodisertBelop,
-        GBOPeriodisertBelop: GBOPeriodisertBelop
-    ) {
-        GBOPeriodisertBelop.setBelop(PeriodisertBelop.belop) // move (executionOrder=1)
+    fun PeriodisertBelopTOGBOPeriodisertBelop(PeriodisertBelop: PeriodisertBelop, GBOPeriodisertBelop: GBOPeriodisertBelop) {
+        GBOPeriodisertBelop.belop = PeriodisertBelop.belop.toString() // move (executionOrder=1)
         GBOPeriodisertBelop.kravstillersRef = PeriodisertBelop.kravstillersReferanse // move (executionOrder=2)
-        run {
-            val PeriodisertBelop_datoFom: String? = PeriodisertBelop.datoFom // custom.input.forEach (executionOrder=3)
-            var GBOPeriodisertBelop_datoFom: String? = null // custom.output declaration (executionOrder=3)
-
-            // The specific type of variable PeriodisertBelop_datoFom is java.util.Date
-            // The specific type of variable GBOPeriodisertBelop_datoFom is java.lang.String
-            if (PeriodisertBelop_datoFom != null) {
-                GBOPeriodisertBelop_datoFom = DateUtil.formatWIDString(PeriodisertBelop_datoFom as Date?)
-            }
-            GBOPeriodisertBelop.datoFom = GBOPeriodisertBelop_datoFom // custom.output assignment (executionOrder=3)
-        }
-        run {
-            val PeriodisertBelop_datoTom: String? = PeriodisertBelop.datoTom // custom.input.forEach (executionOrder=4)
-            var GBOPeriodisertBelop_datoTom: String? = null // custom.output declaration (executionOrder=4)
-
-            // The specific type of variable PeriodisertBelop_datoTom is java.util.Date
-            // The specific type of variable GBOPeriodisertBelop_datoTom is java.lang.String
-            if (PeriodisertBelop_datoTom != null) {
-                GBOPeriodisertBelop_datoTom = DateUtil.formatWIDString(PeriodisertBelop_datoTom as Date?)
-            }
-            GBOPeriodisertBelop.datoTom = GBOPeriodisertBelop_datoTom // custom.output assignment (executionOrder=4)
-        }
+        GBOPeriodisertBelop.datoFom = PeriodisertBelop.datoFom?.let { DateUtil.formatWIDString(it.toDate()) } // custom.output assignment (executionOrder=3)
+        GBOPeriodisertBelop.datoTom = PeriodisertBelop.datoTom?.let { DateUtil.formatWIDString(it.toDate()) } // custom.output assignment (executionOrder=4)
     }
 
-    fun SlettTPYtelseReqIntTOGBOSlettTPSamordningRequest(
-        SlettTPYtelseReqInt: SlettTPYtelseReqInt,
-        GBOSlettTPSamordningRequest: GBOSlettTPSamordningRequest
-    ) {
+    fun SlettTPYtelseReqIntTOGBOSlettTPSamordningRequest(SlettTPYtelseReqInt: SlettTPYtelseReqInt, GBOSlettTPSamordningRequest: GBOSlettTPSamordningRequest) {
         GBOSlettTPSamordningRequest.tpnr = SlettTPYtelseReqInt.extRequest.tpnr // move (executionOrder=1)
         GBOSlettTPSamordningRequest.fnr = SlettTPYtelseReqInt.extRequest.fnr // move (executionOrder=2)
-        GBOSlettTPSamordningRequest.meldingKode =
-            SlettTPYtelseReqInt.extRequest.henvendelseType // move (executionOrder=3)
-        run {
-            val SlettTPYtelseReqInt_extRequest_datoFom: String =
-                SlettTPYtelseReqInt.extRequest.datoFom // custom.input.forEach (executionOrder=4)
-            var GBOSlettTPSamordningRequest_iverksattFom: String? = null // custom.output declaration (executionOrder=4)
-            // The specific type of variable SlettTPYtelseReqInt_extRequest_datoFom is java.util.Date
-            // The specific type of variable GBOSlettTPSamordningRequest_iverksattFom is java.lang.String
-            GBOSlettTPSamordningRequest_iverksattFom =
-                DateUtil.formatWIDString(SlettTPYtelseReqInt_extRequest_datoFom as Date)
-            GBOSlettTPSamordningRequest.iverksattFom =
-                GBOSlettTPSamordningRequest_iverksattFom // custom.output assignment (executionOrder=4)
-        }
-        run {
-            val SlettTPYtelseReqInt_extRequest_datoTom: String =
-                SlettTPYtelseReqInt.extRequest.datoTom // custom.input.forEach (executionOrder=5)
-            var GBOSlettTPSamordningRequest_iverksattTom: String? = null // custom.output declaration (executionOrder=5)
-            // The specific type of variable SlettTPYtelseReqInt_extRequest_datoTom is java.util.Date
-            // The specific type of variable GBOSlettTPSamordningRequest_iverksattTom is java.lang.String
-            GBOSlettTPSamordningRequest_iverksattTom =
-                DateUtil.formatWIDString(SlettTPYtelseReqInt_extRequest_datoTom as Date)
-            GBOSlettTPSamordningRequest.iverksattTom =
-                GBOSlettTPSamordningRequest_iverksattTom // custom.output assignment (executionOrder=5)
-        }
+        GBOSlettTPSamordningRequest.meldingKode = SlettTPYtelseReqInt.extRequest.henvendelseType // move (executionOrder=3)
+        GBOSlettTPSamordningRequest.iverksattFom = DateUtil.formatWIDString(SlettTPYtelseReqInt.extRequest.datoFom?.toDate()) // custom.output assignment (executionOrder=4)
+        GBOSlettTPSamordningRequest.iverksattTom = DateUtil.formatWIDString(SlettTPYtelseReqInt.extRequest.datoTom?.toDate()) // custom.output assignment (executionOrder=5)
         GBOSlettTPSamordningRequest.tssEksternId = SlettTPYtelseReqInt.tssEksternId // move (executionOrder=6)
         GBOSlettTPSamordningRequest.ytelseKode = SlettTPYtelseReqInt.extRequest.tpArt // move (executionOrder=7)
     }
 
-    @Throws(DatatypeConfigurationException::class)
-    fun toXMLGregorianCalendar(date: Date?): XMLGregorianCalendar? {
-        if (date != null) {
-            val calendar = GregorianCalendar()
-            calendar.time = date
-            return DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar)
-        } else {
-            return null
-        }
+    private inline fun <reified T> T.toJAXBElement(localPart: String): JAXBElement<T> {
+        return JAXBElement(QName(localPart), T::class.java, this)
     }
 
-    @Throws(DatatypeConfigurationException::class)
-    fun toXMLGregorianCalendar(date: String?): XMLGregorianCalendar? {
-        return if (null != date) DatatypeFactory.newInstance().newXMLGregorianCalendar(date) else null
-    }
+    private fun Date.toXMLGregorianCalendar() = DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar().also { it.time = this })
 
-    fun toInteger(value: String?): Int? {
-        return value?.toInt()
-    }
+    private fun String.toXMLGregorianCalendar() = DatatypeFactory.newInstance().newXMLGregorianCalendar(this)
 
-    fun <T> toJAXBElement(localPart: String?, type: Class<T>?, `object`: T?): JAXBElement<T>? {
-        return if (`object` != null) JAXBElement(QName(localPart), type, `object`) else null
-    }
+    private fun XMLGregorianCalendar.toDate() = toGregorianCalendar().time
+
+    val gyldigeKrigspensjonKoder = setOf(
+        "MIL_INV",
+        "MIL_GJENLEV",
+        "MIL_BARNEP",
+        "SIVIL_INV",
+        "SIVIL_GJENLEV",
+        "SIVIL_BARNEP",
+        "UP",
+        "EP",
+        "BP"
+    )
 }
