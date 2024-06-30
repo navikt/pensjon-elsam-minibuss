@@ -7,6 +7,7 @@ import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.OpprettRefusjo
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.tpsamordningregistrering.v1_0.asbo.BeregningUforetrygd
 import nav_lib_frg.no.nav.lib.frg.fault.FaultPersonIkkeFunnet
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOAnnenAdresse
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOPerson
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonYtelse
@@ -246,62 +247,62 @@ object Mapper {
         Person.dodsdato = GBOPerson.dodsdato?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=6)
 
         run {
-            val GBOPerson: String? = GBOPerson // custom.input.forEach (executionOrder=7)
-            val Person_utbetalingsadresse: String? = null // custom.output declaration (executionOrder=7)
+            val Person_utbetalingsadresse = Adresse() // custom.output declaration (executionOrder=7)
             // The specific type of variable Person_utbetalingsadresse is commonj.sdo.DataObject
-            if (GBOPerson != null && Person_utbetalingsadresse != null) {
-                val person: DataObject = Person_utbetalingsadresse as DataObject
+            // TODO: Bekreft at denne koden faktisk kjørte før. Koden sjekket om Person_utbetalingsadresse ikke var null
+            if (GBOPerson != null) {
+                val person = Person_utbetalingsadresse
 
-                if (GBOPerson.getDataObject("bostedsAdresse") != null) {
-                    val bostedsAdresse: DataObject = GBOPerson.getDataObject("bostedsAdresse") as DataObject
-                    val postnr: String = bostedsAdresse.getString("postnr")
+                if (GBOPerson.bostedsAdresse != null) {
+                    val bostedsAdresse = GBOPerson.bostedsAdresse
+                    val postnr = bostedsAdresse?.postnr
                     if (postnr != null && postnr != "") {
-                        person.setString("adresselinje1", bostedsAdresse.getString("boadresse1"))
-                        person.setString("adresselinje2", bostedsAdresse.getString("boadresse2"))
-                        person.setString("postnr", bostedsAdresse.getString("postnr"))
-                        person.setString("poststed", bostedsAdresse.getString("poststed"))
+                        person.adresselinje1 = bostedsAdresse.boadresse1
+                        person.adresselinje2 = bostedsAdresse.boadresse2
+                        person.postnr = bostedsAdresse.postnr
+                        person.poststed = bostedsAdresse.poststed
                     }
                 }
 
-                var annenAdresse: DataObject? = null
-                if (GBOPerson.getDataObject("postAdresse") != null) {
-                    val postAdresse: DataObject = GBOPerson.getDataObject("postAdresse")
-                    val postnr: String = postAdresse.getString("postnr")
-                    val adresselinje1: String = postAdresse.getString("adresselinje1")
-                    val land: String = postAdresse.getString("land")
-                    if ((postnr != null && postnr != "")
-                        || (adresselinje1 != null && adresselinje1 != "" && land != null && land != "")
-                    ) {
+                var annenAdresse: GBOAnnenAdresse? = null
+                if (GBOPerson.postAdresse != null) {
+                    val postAdresse = GBOPerson.postAdresse
+                    val postnr = postAdresse?.postnr
+                    val adresselinje1 = postAdresse?.adresselinje1
+                    val land = postAdresse?.land
+
+                    if ((postnr != null && postnr != "") || (adresselinje1 != null && adresselinje1 != "" && land != null && land != "")) {
                         annenAdresse = postAdresse
                     }
                 }
-                if (GBOPerson.getDataObject("tilleggsAdresse") != null) {
-                    val tilleggsAdresse: DataObject = GBOPerson.getDataObject("tilleggsAdresse")
-                    val postnr: String = tilleggsAdresse.getString("postnr")
+
+                if (GBOPerson.getTilleggsAdresse() != null) {
+                    val tilleggsAdresse = GBOPerson.tilleggsAdresse
+                    val postnr: String? = tilleggsAdresse?.postnr
                     if (postnr != null && postnr != "") {
                         annenAdresse = tilleggsAdresse
                     }
                 }
-                if (GBOPerson.getDataObject("utenlandsAdresse") != null) {
-                    val utenlandsAdresse: DataObject = GBOPerson.getDataObject("utenlandsAdresse")
-                    val adresselinje1: String = utenlandsAdresse.getString("adresselinje1")
-                    val land: String = utenlandsAdresse.getString("land")
+                if (GBOPerson.utenlandsAdresse != null) {
+                    val utenlandsAdresse = GBOPerson.utenlandsAdresse
+                    val adresselinje1: String? = utenlandsAdresse?.adresselinje1
+                    val land: String? = utenlandsAdresse?.land
                     if (adresselinje1 != null && adresselinje1 != "" && land != null && land != "") {
                         annenAdresse = utenlandsAdresse
                     }
                 }
 
                 if (annenAdresse != null) {
-                    person.setString("adresselinje1", annenAdresse.getString("adresselinje1"))
-                    person.setString("adresselinje2", annenAdresse.getString("adresselinje2"))
-                    person.setString("adresselinje3", annenAdresse.getString("adresselinje3"))
-                    person.setString("postnr", annenAdresse.getString("postnr"))
-                    person.setString("poststed", annenAdresse.getString("poststed"))
-                    person.setString("land", annenAdresse.getString("land"))
+                    person.adresselinje1 = annenAdresse.adresselinje1
+                    person.adresselinje2 = annenAdresse.adresselinje2
+                    person.adresselinje3 = annenAdresse.adresselinje3
+                    person.postnr = annenAdresse.postnr
+                    person.poststed = annenAdresse.poststed
+                    person.land = annenAdresse.land
                 }
             }
 
-            Person.setUtbetalingsadresse(Person_utbetalingsadresse) // custom.output assignment (executionOrder=7)
+            Person.utbetalingsadresse = Person_utbetalingsadresse // custom.output assignment (executionOrder=7)
         }
     }
 
