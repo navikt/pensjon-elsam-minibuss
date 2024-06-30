@@ -5,10 +5,12 @@ import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdReq
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
+import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandlerListe
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnSamhandlerRequest
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
-import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.*
@@ -19,7 +21,7 @@ import javax.xml.datatype.DatatypeFactory
 @Component
 class NavConsElsamTptilbRegisrereTpForhold(
     private val registrereTPForholdInt: RegistrereTPForholdInt,
-    private val samhandler: Samhandler,
+    private val samhandler: PSAKSamhandler,
 ) {
     @Throws(
         ServiceBusinessException::class,
@@ -122,9 +124,9 @@ class NavConsElsamTptilbRegisrereTpForhold(
     private fun mapTPnrToTSSEksternId(tpNr: String): String {
         // Build request object for samhandler
 
-        val samhandlerResponse: GBOSamhandlerListe?
+        val samhandlerResponse: ASBOPenSamhandlerListe?
         try {
-            samhandlerResponse = samhandler.finnSamhandler(GBOFinnSamhandlerRequest().also {
+            samhandlerResponse = samhandler.finnSamhandler(ASBOPenFinnSamhandlerRequest().also {
                 it.offentligId = tpNr
                 it.idType = "TPNR"
                 it.samhandlerType = "TEPE"

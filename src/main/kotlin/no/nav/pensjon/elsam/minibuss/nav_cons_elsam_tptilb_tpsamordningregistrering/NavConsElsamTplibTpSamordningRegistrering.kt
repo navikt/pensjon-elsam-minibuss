@@ -1,9 +1,8 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnSamhandlerRequest
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOSamhandlerListe
-import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
+import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class NavConsElsamTplibTpSamordningRegistrering(
-    private val samhandlerPartner: Samhandler,
+    private val samhandlerPartner: PSAKSamhandler,
     private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringInt
 ) {
     @Throws(
@@ -100,8 +99,8 @@ class NavConsElsamTplibTpSamordningRegistrering(
     @Throws(ServiceBusinessException::class)
     private fun mapTPnrToTSSEksternId(tpNr: String): String {
         // Build request object for samhandler
-        val samhandlerResponse: GBOSamhandlerListe? = try {
-            samhandlerPartner.finnSamhandler(GBOFinnSamhandlerRequest().apply {
+        val samhandlerResponse = try {
+            samhandlerPartner.finnSamhandler(ASBOPenFinnSamhandlerRequest().apply {
                 offentligId = tpNr
                 idType = "TPNR"
                 samhandlerType = "TEPE"

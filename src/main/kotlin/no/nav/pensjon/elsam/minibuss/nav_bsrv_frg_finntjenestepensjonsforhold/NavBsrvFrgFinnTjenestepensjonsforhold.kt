@@ -1,8 +1,12 @@
 package no.nav.pensjon.elsam.minibuss.nav_bsrv_frg_finntjenestepensjonsforhold
 
+import nav_cons_pen_psak_samhandler.no.nav.inf.HentSamhandlerFaultPenSamhandlerIkkeFunnetMsg
+import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenAlternativId
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenAvdeling
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenHentSamhandlerRequest
+import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandler
 import nav_lib_frg.no.nav.lib.frg.gbo.*
-import nav_lib_frg.no.nav.lib.frg.inf.HentSamhandlerFaultSamhandlerIkkeFunnetMsg
-import nav_lib_frg.no.nav.lib.frg.inf.Samhandler
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.HentTjenestepensjonInfoFaultElementetFinnesIkkeMsg
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.HentTjenestepensjonInfoFaultTomDatoForanFomDatoMsg
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.Tjenestepensjon
@@ -10,7 +14,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class NavBsrvFrgFinnTjenestepensjonsforhold(
-    private val samhandlerPartner: Samhandler,
+    private val samhandlerPartner: PSAKSamhandler,
     private val tjenestepensjonPartner: Tjenestepensjon,
 ) {
     @Throws(
@@ -62,7 +66,7 @@ class NavBsrvFrgFinnTjenestepensjonsforhold(
                 //Create request-object for hentSamhandler-call
                 //Call hentSamhandler to get samhandlerInfo
                 try {
-                    val hentSamhandlerResponse: GBOSamhandler? = samhandlerPartner.hentSamhandler(GBOHentSamhandlerRequest().apply {
+                    val hentSamhandlerResponse: ASBOPenSamhandler? = samhandlerPartner.hentSamhandler(ASBOPenHentSamhandlerRequest().apply {
                         idTSSEkstern = tjenestepensjonForhold.tssEksternId
                         hentDetaljert = true
                     })
@@ -70,14 +74,14 @@ class NavBsrvFrgFinnTjenestepensjonsforhold(
                     if (hentSamhandlerResponse != null) {
                         //Get alternativId from the response's list alternativeIder where alternativeIdKode is "TPNR"
 
-                        var altId: GBOAlternativId?
-                        val altIdList: List<GBOAlternativId?>? = hentSamhandlerResponse.alternativeIder
+                        var altId: ASBOPenAlternativId?
+                        val altIdList: List<ASBOPenAlternativId?>? = hentSamhandlerResponse.alternativeIder
                         if (altIdList != null) {
                             var done = false
-                            val i: Iterator<GBOAlternativId?> = altIdList.iterator()
+                            val i: Iterator<ASBOPenAlternativId?> = altIdList.iterator()
                             while (i.hasNext() && !done) {
                                 altId = i.next()
-                                if (altId != null && altId.alternativKode != null && altId.alternativKode == "TPNR") {
+                                if (altId != null && altId.alternativIdKode != null && altId.alternativIdKode == "TPNR") {
                                     tjenestepensjonForhold.tpnr = altId.alternativId
                                     done = true
                                 }
@@ -85,16 +89,16 @@ class NavBsrvFrgFinnTjenestepensjonsforhold(
                         }
 
                         //Get avdeling from the response and read avdelingNavn from avdeling.
-                        val samhandlerAvdelingList: List<GBOAvdeling>? = hentSamhandlerResponse.avdelinger
+                        val samhandlerAvdelingList: List<ASBOPenAvdeling>? = hentSamhandlerResponse.avdelinger
 
                         if (samhandlerAvdelingList != null) {
                             //The number of entries in this list will always be 1 for the call used here
-                            val samhandlerAvdeling: GBOAvdeling = samhandlerAvdelingList[0]
+                            val samhandlerAvdeling: ASBOPenAvdeling = samhandlerAvdelingList[0]
                             tjenestepensjonForhold.navn = samhandlerAvdeling.avdelingNavn
                             tjenestepensjonForhold.avdelingType = samhandlerAvdeling.avdelingType
                         }
                     }
-                } catch (sbe: HentSamhandlerFaultSamhandlerIkkeFunnetMsg) {
+                } catch (sbe: HentSamhandlerFaultPenSamhandlerIkkeFunnetMsg) {
                     //hentSamhandler might return FaultSamhandlerIkkeFunnet. This fault
                     //is ignored and processing continuous with next item in the list.
                 }
