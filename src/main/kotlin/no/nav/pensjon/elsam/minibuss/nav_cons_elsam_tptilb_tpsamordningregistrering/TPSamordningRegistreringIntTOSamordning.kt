@@ -1,11 +1,22 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
-import nav_lib_sto.no.nav.lib.sto.gbo.*
 import nav_lib_sto.no.nav.lib.sto.inf.samordning.*
-import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultAlleredeMottattRefusjonskrav
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultGenerisk
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultRefusjonskravUtenforSamordningspliktigPeriode
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultSamordningsIdIkkeFunnet
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultTPForholdIkkeIverksatt
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultTPYtelseAlleredeRegistrert
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultTPYtelseIkkeFunnet
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOHentSamordningsdataRequest
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOOpprettRefusjonskravRequest
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOOpprettTPSamordningRequest
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOSlettTPSamordningRequest
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toHentSamordningsdataResp
+import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toLagreTPYtelseResp
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,105 +25,59 @@ class TPSamordningRegistreringIntTOSamordning(
 ) : TPSamordningRegistreringInt {
     override fun slettTPYtelseInt(slettTPYtelseReqInt: SlettTPYtelseReqInt) {
         try {
-            val gboSlettTPSamordningRequest = GBOSlettTPSamordningRequest()
-            Mapper.SlettTPYtelseReqIntTOGBOSlettTPSamordningRequest(slettTPYtelseReqInt, gboSlettTPSamordningRequest)
-
-            samordning.slettTPSamordning(gboSlettTPSamordningRequest)
+            samordning.slettTPSamordning(slettTPYtelseReqInt.toGBOSlettTPSamordningRequest())
         } catch (e: SlettTPSamordningFaultPersonIkkeFunnetMsg) {
-            val faultGenerisk = FaultGenerisk()
-
-            Mapper.FaultPersonIkkeFunnetTOFaultGenerisk(e.faultInfo, faultGenerisk)
-
-            throw SlettTPYtelseIntFaultGeneriskMsg(e.message, faultGenerisk)
+            throw SlettTPYtelseIntFaultGeneriskMsg(e.message, e.faultInfo?.toFaultGenerisk())
         } catch (e: SlettTPSamordningFaultKombinasjonInputMsg) {
-            val faultTPYtelseIkkeFunnet = FaultTPYtelseIkkeFunnet()
-
-            Mapper.FaultKombinasjonInputTOFaultTPYtelseIkkeFunnet(e.faultInfo, faultTPYtelseIkkeFunnet)
-
-            throw SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg(e.message, faultTPYtelseIkkeFunnet)
+            throw SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg(e.message, e.faultInfo?.toFaultTPYtelseIkkeFunnet())
         }
     }
 
-    override fun hentSamordningsdataInt(hentSamordningsdataReqInt: HentSamordningsdataReqInt?): HentSamordningsdataResp {
+    override fun hentSamordningsdataInt(hentSamordningsdataReqInt: HentSamordningsdataReqInt): HentSamordningsdataResp {
         try {
-            val gboHentSamordningsdataRequest = GBOHentSamordningsdataRequest()
-            Mapper.HentSamordningsdataReqIntTOGBOHentSamordningsdataRequest(
-                hentSamordningsdataReqInt,
-                gboHentSamordningsdataRequest
-            )
-
-            val hentSamordningsdata: GBOSamordningsdata = samordning.hentSamordningsdata(gboHentSamordningsdataRequest)
-
-            val hentSamordningsdataResp = HentSamordningsdataResp()
-            Mapper.GBOSamordningsdataTOHentSamordningsdataResp(hentSamordningsdata, hentSamordningsdataResp)
-            return hentSamordningsdataResp
+            return samordning.hentSamordningsdata(hentSamordningsdataReqInt.toGBOHentSamordningsdataRequest())
+                .toHentSamordningsdataResp()
         } catch (e: HentSamordningsdataFaultYtelseIkkeIverksattMsg) {
-            val faultTPForholdIkkeIverksatt = FaultTPForholdIkkeIverksatt()
-
-            Mapper.FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt(e.faultInfo, faultTPForholdIkkeIverksatt)
-
-            throw HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg(e.message, faultTPForholdIkkeIverksatt)
+            throw HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg(
+                e.message,
+                e.faultInfo?.toFaultTPForholdIkkeIverksatt()
+            )
         } catch (e: HentSamordningsdataFaultPersonIkkeFunnetMsg) {
-            val faultGenerisk = FaultGenerisk()
-
-            Mapper.FaultPersonIkkeFunnetTOFaultGenerisk(e.faultInfo, faultGenerisk)
-
-            throw HentSamordningsdataIntFaultGeneriskMsg(e.message, faultGenerisk)
+            throw HentSamordningsdataIntFaultGeneriskMsg(e.message, e.faultInfo?.toFaultGenerisk())
         }
     }
 
-    override fun opprettRefusjonskravInt(opprettRefusjonskravReqInt: OpprettRefusjonskravReqInt?) {
-        val gboOpprettRefusjonskravRequest = GBOOpprettRefusjonskravRequest()
-        Mapper.OpprettRefusjonskravReqIntTOGBOOpprettRefusjonskravRequest(opprettRefusjonskravReqInt, gboOpprettRefusjonskravRequest)
-
+    override fun opprettRefusjonskravInt(opprettRefusjonskravReqInt: OpprettRefusjonskravReqInt) {
         try {
-            samordning.opprettRefusjonskrav(gboOpprettRefusjonskravRequest)
+            samordning.opprettRefusjonskrav(opprettRefusjonskravReqInt.toGBOOpprettRefusjonskravRequest())
         } catch (e: OpprettRefusjonskravFaultSamIdIkkeGyldigMsg) {
-            val faultSamordningsIdIkkeFunnet = FaultSamordningsIdIkkeFunnet()
-
-            Mapper.FaultSamIdIkkeGyldigTOFaultSamordningsIdIkkeFunnet(e.faultInfo, faultSamordningsIdIkkeFunnet)
-
-            throw OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg(e.message, faultSamordningsIdIkkeFunnet)
-
+            throw OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg(
+                e.message,
+                e.faultInfo?.toFaultSamordningsIdIkkeFunnet()
+            )
         } catch (e: OpprettRefusjonskravFaultSvarUtenforPeriodeMsg) {
-            val faultRefusjonskravUtenforSamordningspliktigPeriode = FaultRefusjonskravUtenforSamordningspliktigPeriode()
-
-            Mapper.FaultSvarUtenforPeriodeTOFaultRefusjonskravUtenforSamordningspliktigPeriode(e.faultInfo, faultRefusjonskravUtenforSamordningspliktigPeriode)
-
-            throw OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(e.message, faultRefusjonskravUtenforSamordningspliktigPeriode)
-
+            throw OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(
+                e.message,
+                e.faultInfo?.toFaultRefusjonskravUtenforSamordningspliktigPeriode()
+            )
         } catch (e: OpprettRefusjonskravFaultRefKravAlleredeRegElUtenforFrist1Msg) {
-            val faultAlleredeMottattRefusjonskrav = FaultAlleredeMottattRefusjonskrav()
-
-            Mapper.FaultRefKravAlleredeRegElUtenforFristTOFaultAlleredeMottattRefusjonskrav(e.faultInfo, faultAlleredeMottattRefusjonskrav)
-
-            throw OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg(e.message, faultAlleredeMottattRefusjonskrav)
+            throw OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg(
+                e.message,
+                e.faultInfo?.toFaultAlleredeMottattRefusjonskrav()
+            )
         }
     }
 
-    override fun lagreTPYtelseInt(lagreTPYtelseReqInt: LagreTPYtelseReqInt?): LagreTPYtelseResp {
+    override fun lagreTPYtelseInt(lagreTPYtelseReqInt: LagreTPYtelseReqInt): LagreTPYtelseResp {
         try {
-            val gboOpprettTPSamordningRequest = GBOOpprettTPSamordningRequest()
-            Mapper.LagreTPYtelseReqIntTOGBOOpprettTPSamordningRequest(lagreTPYtelseReqInt, gboOpprettTPSamordningRequest)
-
-            val opprettTPSamordning: GBOSamordningsdata = samordning.opprettTPSamordning(gboOpprettTPSamordningRequest)
-
-            val lagreTPYtelseResp = LagreTPYtelseResp()
-            Mapper.GBOSamordningsdataTOLagreTPYtelseResp(opprettTPSamordning, lagreTPYtelseResp)
-
-            return lagreTPYtelseResp
+            return samordning.opprettTPSamordning(lagreTPYtelseReqInt.toGBOOpprettTPSamordningRequest())
+                .toLagreTPYtelseResp()
         } catch (e: OpprettTPSamordningFaultPersonIkkeFunnetMsg) {
-            val faultGenerisk = FaultGenerisk()
-
-            Mapper.FaultPersonIkkeFunnetTOFaultGenerisk(e.faultInfo, faultGenerisk)
-
-            throw LagreTPYtelseIntFaultGeneriskMsg(e.message, faultGenerisk)
+            throw LagreTPYtelseIntFaultGeneriskMsg(e.message, e.faultInfo?.toFaultGenerisk())
         } catch (e: OpprettTPSamordningFaultYtelseAlleredeRegistrertMsg) {
-            val faultTPYtelseAlleredeRegistrert = FaultTPYtelseAlleredeRegistrert()
-
-            Mapper.FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert(e.faultInfo, faultTPYtelseAlleredeRegistrert)
-
-            throw LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg(e.message, faultTPYtelseAlleredeRegistrert)
+            throw LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg(
+                e.message, e.faultInfo?.toFaultTPYtelseAlleredeRegistrert()
+            )
         }
     }
 }
