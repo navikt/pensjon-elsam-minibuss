@@ -1,5 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.security
 
+import no.nav.pensjon.elsam.minibuss.logging.LoggingClientHttpRequestInterceptor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.client.support.BasicAuthenticationInterceptor
 import org.springframework.stereotype.Component
@@ -11,6 +12,7 @@ class StsClient(
     @Value("\${SRVPENSJON_PASSWORD}") srvPensjonPassword: String,
 ) {
     private val restClient = RestClient.builder()
+        .requestInterceptor(LoggingClientHttpRequestInterceptor())
         .requestInterceptor(BasicAuthenticationInterceptor("srvpensjon", srvPensjonPassword))
         .baseUrl(stsUrl)
         .build()
