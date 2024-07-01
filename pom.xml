@@ -2,15 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.1</version>
         <relativePath/>
     </parent>
+
     <groupId>no.nav.pensjon.elsam</groupId>
     <artifactId>pensjon-elsam-minibuss</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <properties>
         <java.version>17</java.version>
         <kotlin.version>1.9.24</kotlin.version>
@@ -18,6 +21,7 @@
         <cxf-xjc-boolean.version>4.0.1</cxf-xjc-boolean.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.sun.xml.messaging.saaj</groupId>
@@ -40,6 +44,11 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
             <version>${cxf.version}</version>
         </dependency>
         <dependency>
