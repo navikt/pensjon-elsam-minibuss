@@ -21,7 +21,8 @@ import no.nav.elsam.tpsamordningregistrering.v0_8.Beregning2011
 import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.Vedtak
-import no.nav.pensjon.elsam.minibuss.DateUtil
+import no.nav.pensjon.elsam.minibuss.formatWIDString
+import no.nav.pensjon.elsam.minibuss.parseWIDString
 import java.util.*
 import javax.xml.datatype.DatatypeFactory
 import javax.xml.datatype.XMLGregorianCalendar
@@ -95,8 +96,8 @@ object Mapper {
         ArbeidOgAktivitetsvedtak().also {
             it.vedtakId = vedtakId // move (executionOrder=1)
             it.gjelderFnr = gjelderFnr // move (executionOrder=2)
-            it.virkningFom = virkningFom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
-            it.virkningTom = virkningTom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=4)
+            it.virkningFom = virkningFom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
+            it.virkningTom = virkningTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=4)
             it.vedtaksKode = vedtakstypeKode // move (executionOrder=5)
             it.vedtakstatusKode = vedtakstatusKode // move (executionOrder=6)
             it.saksKode = sakstypeKode // move (executionOrder=7)
@@ -164,8 +165,8 @@ object Mapper {
             it.sertilleggSats = sertillegg?.sertilleggsats?.toJAXBElement("sertilleggSats") // move (executionOrder=9)
             it.uforegrad = uforegrad?.toInt()?.toJAXBElement("uforegrad") // move (executionOrder=17)
             it.ventetilleggProsent = ventetillegg?.ventetilleggProsent?.toJAXBElement("ventetilleggProsent") // move (executionOrder=15)
-            it.virkningFom = virkDatoFom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
-            it.virkningTom = virkDatoTom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+            it.virkningFom = virkDatoFom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
+            it.virkningTom = virkDatoTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
             it.yrkesskadegrad = yrkesskadegrad?.toInt()?.toJAXBElement("yrkesskadegrad") // move (executionOrder=16)
             it.involvertePersonerNokkelinfoListe += beregningNokkelinfoListe.map { x -> x.toBeregningNokkelinfo() } // submap (executionOrder=35)
         }
@@ -210,8 +211,8 @@ object Mapper {
             it.tpRestpensjon = beregningInformasjonKapittel19.tpRestpensjon?.toDouble() // move (executionOrder=12)
             it.uforegrad = pensjonUnderUtbetaling.skjermingstillegg.uforegrad?.toInt() // move (executionOrder=46)
             it.uttaksgrad = uttaksgrad?.toInt() // move (executionOrder=3)
-            it.virkningFom = virkFom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
-            it.virkningTom = virkTom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+            it.virkningFom = virkFom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=1)
+            it.virkningTom = virkTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
             it.yrkesskadegrad = beregningInformasjonKapittel19.yrkesskadegrad?.toDouble() // move (executionOrder=23)
             it.yrkesskadegradAvdod = beregningsinformasjonAvdod.yrkesskadegrad?.toDouble() // move (executionOrder=42)
 
@@ -236,7 +237,7 @@ object Mapper {
             it.bruttoBarnetilleggSerkullsbarn = bruttoBarnetilleggSerkullsbarn // move (executionOrder=7)
             it.bruttoGjenlevendetillegg = bruttoGjenlevendetillegg // move (executionOrder=11)
             it.bruttoUforetrygdOrdinar = bruttoUforetrygdOrdinar // move (executionOrder=3)
-            it.fom = virkFom?.let { virkFom -> DateUtil.parseWIDString(virkFom) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=14)
+            it.fom = virkFom?.let { virkFom -> parseWIDString(virkFom) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=14)
             it.inntektBruktIInntektsavkorting = inntektBruktIInntektsavkorting // move (executionOrder=25)
             it.inntektEtterUforhet = inntektEtterUforhet // move (executionOrder=16)
             it.inntektForUforhet = inntektForUforhet // move (executionOrder=1)
@@ -246,7 +247,7 @@ object Mapper {
             it.nettoGjenlevendetillegg = nettoGjenlevendetillegg // move (executionOrder=10)
             it.nettoUforetrygdOrdinar = nettoUforetrygdOrdinar // move (executionOrder=2)
             it.resultatKode = resultatKode // move (executionOrder=13)
-            it.tom = virkTom?.let { virkTom -> DateUtil.parseWIDString(virkTom) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=15)
+            it.tom = virkTom?.let { virkTom -> parseWIDString(virkTom) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=15)
             it.uforegrad = uforegrad // move (executionOrder=4)
             it.yrkesskadegrad = yrkesskadegrad // move (executionOrder=5)
             it.yrkesskadegradAvdod = yrkesskadegradAvdod // move (executionOrder=24)
@@ -260,7 +261,7 @@ object Mapper {
             it.mellomnavn = mellomnavn // move (executionOrder=3)
             it.etternavn = etternavn // move (executionOrder=4)
             it.sivilstand = sivilstand // move (executionOrder=5)
-            it.dodsdato = dodsdato?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=6)
+            it.dodsdato = dodsdato?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=6)
 
             run {
                 val adresse = Adresse() // custom.output declaration (executionOrder=7)
@@ -340,10 +341,10 @@ object Mapper {
                         tpYtelse.tpnr = tpForhold.tpnr
                         tpYtelse.tpArt = gboTpYtelse.ytelseKode
                         if (gboTpYtelse.iverksattFom != null) {
-                            tpYtelse.datoFom = DateUtil.parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
+                            tpYtelse.datoFom = parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
                         }
                         if (gboTpYtelse.iverksattTom != null) {
-                            tpYtelse.datoTom = DateUtil.parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
+                            tpYtelse.datoTom = parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
                         }
                         HentSamordningsdataResp_tjenestepensjonYtelseListe.add(tpYtelse)
                     }
@@ -375,10 +376,10 @@ object Mapper {
                             tpYtelse.tpnr = tpForhold.tpnr
                             tpYtelse.tpArt = gboTpYtelse.ytelseKode
                             if (gboTpYtelse.iverksattFom != null) {
-                                tpYtelse.datoFom = DateUtil.parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
+                                tpYtelse.datoFom = parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
                             }
                             if (gboTpYtelse.iverksattTom != null) {
-                                tpYtelse.datoTom = DateUtil.parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
+                                tpYtelse.datoTom = parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
                             }
                             LagreTPYtelseResp_tjenestepensjonYtelseListe.add(tpYtelse)
                         }
@@ -411,8 +412,8 @@ object Mapper {
             it.vedtakId = vedtakId // move (executionOrder=2)
             it.vedtaksKode = vedtaksKode // move (executionOrder=3)
             it.regelverkKode = kravHode.regelverkKode // move (executionOrder=4)
-            it.virkningFom = virkningFom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=9)
-            it.virkningTom = virkningTom?.let { DateUtil.parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=10)
+            it.virkningFom = virkningFom?.let { parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=9)
+            it.virkningTom = virkningTom?.let { parseWIDString(it) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=10)
             it.typeKrigspensjon = kravHode.kravVelgKode?.takeIf { gyldigeKrigspensjonKoder.contains(it) } // custom.output assignment (executionOrder=11)
             it.beregningListe += beregningListe.map { it.toBeregning() } // submap (executionOrder=5)
             it.beregning2011Liste += beregningsResultatListe.map { x -> x.toBeregning2011() } // submap (executionOrder=6)
@@ -424,8 +425,8 @@ object Mapper {
     fun GBOVilkarsvedtak.toVilkarsvedtak() =
         Vilkarsvedtak().also {
             it.gjelderFnr = gjelderFnr // move (executionOrder=1)
-            it.tom = virkningTom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
-            it.fom = virkningFom?.let { x -> DateUtil.parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
+            it.tom = virkningTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
+            it.fom = virkningFom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
         }
 
     // HentSamordningsdataReqIntTOGBOHentSamordningsdataRequest
@@ -434,7 +435,7 @@ object Mapper {
             it.svarBrev = false // set (executionOrder=1)
             it.tpnr = extRequest.tpnr // move (executionOrder=2)
             it.fnr = extRequest.fnr // move (executionOrder=3)
-            it.fom = extRequest.datoFom?.let { datoFom -> DateUtil.formatWIDString(datoFom.toDate()) } // custom.output assignment (executionOrder=4)
+            it.fom = extRequest.datoFom?.let { datoFom -> formatWIDString(datoFom.toDate()) } // custom.output assignment (executionOrder=4)
             it.tssEksternId = tssEksternId // move (executionOrder=5)
         }
     }
@@ -445,10 +446,10 @@ object Mapper {
             it.svarBrev = false // set (executionOrder=1)
             it.tpnr = extRequest?.tpnr // move (executionOrder=2)
             it.fnr = extRequest?.fnr // move (executionOrder=3)
-            it.iverksattFom = extRequest?.datoFom?.let { x -> DateUtil.formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=4)
+            it.iverksattFom = extRequest?.datoFom?.let { x -> formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=4)
             it.tssEksternId = tssEksternId // move (executionOrder=5)
             it.ytelseKode = extRequest?.tpArt // move (executionOrder=6)
-            it.innmeldtFom = DateUtil.formatWIDString(extRequest?.datoFomMedlemskap?.toDate()) // custom.output assignment (executionOrder=7)
+            it.innmeldtFom = formatWIDString(extRequest?.datoFomMedlemskap?.toDate()) // custom.output assignment (executionOrder=7)
         }
 
     // OpprettRefusjonskravReqIntTOGBOOpprettRefusjonskravRequest
@@ -467,8 +468,8 @@ object Mapper {
         GBOPeriodisertBelop().also {
             it.belop = belop.toString() // move (executionOrder=1)
             it.kravstillersRef = kravstillersReferanse // move (executionOrder=2)
-            it.datoFom = datoFom?.let { x -> DateUtil.formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=3)
-            it.datoTom = datoTom?.let { x -> DateUtil.formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=4)
+            it.datoFom = datoFom?.let { x -> formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=3)
+            it.datoTom = datoTom?.let { x -> formatWIDString(x.toDate()) } // custom.output assignment (executionOrder=4)
         }
 
     // SlettTPYtelseReqIntTOGBOSlettTPSamordningRequest
@@ -477,8 +478,8 @@ object Mapper {
             it.tpnr = extRequest.tpnr // move (executionOrder=1)
             it.fnr = extRequest.fnr // move (executionOrder=2)
             it.meldingKode = extRequest.henvendelseType // move (executionOrder=3)
-            it.iverksattFom = extRequest.datoFom?.toDate()?.let { x -> DateUtil.formatWIDString(x) } // custom.output assignment (executionOrder=4)
-            it.iverksattTom = extRequest.datoTom?.toDate()?.let { x -> DateUtil.formatWIDString(x) } // custom.output assignment (executionOrder=5)
+            it.iverksattFom = extRequest.datoFom?.toDate()?.let { x -> formatWIDString(x) } // custom.output assignment (executionOrder=4)
+            it.iverksattTom = extRequest.datoTom?.toDate()?.let { x -> formatWIDString(x) } // custom.output assignment (executionOrder=5)
             it.tssEksternId = tssEksternId // move (executionOrder=6)
             it.ytelseKode = extRequest.tpArt // move (executionOrder=7)
         }
