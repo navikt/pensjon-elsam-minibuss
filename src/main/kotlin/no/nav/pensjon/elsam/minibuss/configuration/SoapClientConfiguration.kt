@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss
+package no.nav.pensjon.elsam.minibuss.configuration
 
 import jakarta.xml.ws.handler.Handler
 import jakarta.xml.ws.handler.soap.SOAPMessageContext

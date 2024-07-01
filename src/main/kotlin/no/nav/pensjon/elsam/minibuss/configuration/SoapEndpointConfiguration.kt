@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss
+package no.nav.pensjon.elsam.minibuss.configuration
 
 import jakarta.jws.WebService
 import jakarta.xml.ws.Endpoint
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class CxfConfiguration(
+class SoapEndpointConfiguration(
     private val bus: Bus,
 ) {
     @Bean
