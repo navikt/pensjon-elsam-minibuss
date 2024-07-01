@@ -1,41 +1,37 @@
 package no.nav.pensjon.elsam.minibuss.security
 
-import no.nav.pensjon.elsam.minibuss.security.SAMLUtils.samlAssertionToSubject
 import org.apache.cxf.binding.soap.SoapMessage
 import org.apache.cxf.interceptor.Fault
 import org.apache.cxf.security.SecurityContext
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor
-import org.apache.wss4j.common.ConfigurationConstants
 import org.apache.wss4j.common.ConfigurationConstants.ACTION
 import org.apache.wss4j.common.ConfigurationConstants.SAML_TOKEN_SIGNED
 import org.apache.wss4j.common.crypto.Crypto
 import org.apache.wss4j.common.crypto.CryptoFactory
 import org.apache.wss4j.common.ext.WSSecurityException
+import org.apache.wss4j.common.ext.WSSecurityException.ErrorCode.INVALID_SECURITY
 import org.apache.wss4j.common.ext.WSSecurityException.ErrorCode.INVALID_SECURITY_TOKEN
 import org.apache.wss4j.common.principal.SAMLTokenPrincipal
 import org.apache.wss4j.dom.handler.RequestData
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import org.slf4j.LoggerFactory.*
+import java.lang.System.getProperty
 import java.util.*
 
-/**
- * CXF Soap interceptor som validerer SAML-token og logger inn caller
- */
-class SAMLInInterceptor(properties: Map<String, Any>?) : WSS4JInInterceptor(HashMap(properties)) {
+class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUsers: Set<String>) : WSS4JInInterceptor(HashMap(properties)) {
+    private val logger: Logger = getLogger(javaClass)
+
     init {
         setProperty(ACTION, SAML_TOKEN_SIGNED)
     }
 
     override fun loadSignatureCrypto(requestData: RequestData): Crypto {
-        val signatureProperties = Properties()
-        signatureProperties.setProperty(
-            "org.apache.wss4j.crypto.merlin.truststore.file", System.getProperty("javax.net.ssl.trustStore")
+        return CryptoFactory.getInstance(
+            mapOf(
+                "org.apache.wss4j.crypto.merlin.truststore.file" to getProperty("javax.net.ssl.trustStore"),
+                "org.apache.wss4j.crypto.merlin.truststore.password" to getProperty("javax.net.ssl.trustStorePassword")
+            ).toProperties()
         )
-        signatureProperties.setProperty(
-            "org.apache.wss4j.crypto.merlin.truststore.password", System.getProperty("javax.net.ssl.trustStorePassword")
-        )
-
-        return CryptoFactory.getInstance(signatureProperties)
     }
 
     override fun handleMessage(msg: SoapMessage) {
@@ -47,21 +43,18 @@ class SAMLInInterceptor(properties: Map<String, Any>?) : WSS4JInInterceptor(Hash
             ?: throw RuntimeException("Cannot get SAMLTokenPrincipal from SecurityContext")
         val assertion = samlTokenPrincipal.token.saml2
 
-        if (logger.isDebugEnabled) {
-            logger.debug("SAML Issuer: {}", assertion.issuer.value)
-            logger.debug("SAML Subject: {}", assertion.subject.nameID.value)
-        }
+        val nameID = assertion.subject.nameID.value
 
-        try {
-            samlAssertionToSubject(assertion)
-        } catch (e: Exception) {
-            logger.info("Login failed", e)
-            val wsSecurityException = WSSecurityException(INVALID_SECURITY_TOKEN, e)
+        if (nameID == null) {
+            logger.warn("SAML Token mangler nameID")
+            val wsSecurityException = WSSecurityException(INVALID_SECURITY_TOKEN)
             throw Fault(wsSecurityException, wsSecurityException.faultCode)
         }
-    }
 
-    companion object {
-        private val logger: Logger = LoggerFactory.getLogger(SAMLInInterceptor::class.java)
+        if (!authorizedUsers.contains(nameID)) {
+            logger.warn("Bruker '{}' har ikke tilgang", nameID)
+            val wsSecurityException = WSSecurityException(INVALID_SECURITY)
+            throw Fault(wsSecurityException, wsSecurityException.faultCode)
+        }
     }
 }

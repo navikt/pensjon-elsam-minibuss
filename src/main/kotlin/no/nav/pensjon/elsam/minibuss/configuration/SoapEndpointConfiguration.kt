@@ -18,21 +18,25 @@ import org.springframework.context.annotation.Configuration
 class SoapEndpointConfiguration(
     private val bus: Bus,
     @Value("\${webservice.sigSubjectCertConstraints}") private val sigSubjectCertConstraints: String,
+    @Value("\${npTjenestepensjon.authorizedUsers}") private val npTjenestepensjonAuthorizedUsers: Set<String>,
+    @Value("\${registrereTPForhold.authorizedUsers}") private val registrereTPForholdAuthorizedUsers: Set<String>,
+    @Value("\${tpSamordningRegistrering.authorizedUsers}") private val tpSamordningRegistreringAuthorizedUsers: Set<String>,
 ) {
     @Bean
     fun npTjenestepensjonWSEndpointExport(npTjenestepensjon: NPTjenestepensjon): Endpoint =
-        createEndpoint(npTjenestepensjon)
+        createEndpoint(npTjenestepensjon, npTjenestepensjonAuthorizedUsers)
 
     @Bean
     fun registrereTPForholdWSEndpointExport(registrereTPForhold: RegistrereTPForhold): Endpoint =
-        createEndpoint(registrereTPForhold)
+        createEndpoint(registrereTPForhold, registrereTPForholdAuthorizedUsers)
 
     @Bean
     fun tpSamordningRegistreringWSEndpointExport(tpSamordningRegistrering: TPSamordningRegistrering): Endpoint =
-        createEndpoint(tpSamordningRegistrering)
+        createEndpoint(tpSamordningRegistrering, tpSamordningRegistreringAuthorizedUsers)
 
     private fun createEndpoint(
         wsEndpoint: Any,
+        authorizedUsers: Set<String>,
     ): EndpointImpl {
         val serviceName = wsEndpoint.javaClass.getAnnotation(WebService::class.java)?.serviceName
             ?: throw IllegalArgumentException("No @WebService found on given implementation [" + wsEndpoint.javaClass.simpleName + "], check configuration!")
@@ -44,7 +48,10 @@ class SoapEndpointConfiguration(
         }
 
         endpoint.inInterceptors = listOf(
-            SAMLInInterceptor(mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints))
+            SAMLInInterceptor(
+                mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints),
+                authorizedUsers.map { it.toLowerCase() }.toSet(),
+            )
         )
 
         endpoint.handlers = listOf(StelvioContextHandlerInbound())
