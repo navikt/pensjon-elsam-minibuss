@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss
+package no.nav.pensjon.elsam.minibuss.logging
 
 import jakarta.xml.soap.SOAPException
 import jakarta.xml.ws.handler.MessageContext

@@ -16,6 +16,7 @@
         <kotlin.version>1.9.24</kotlin.version>
         <cxf.version>4.0.4</cxf.version>
         <cxf-xjc-boolean.version>4.0.1</cxf-xjc-boolean.version>
+        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     </properties>
     <dependencies>
         <dependency>
@@ -30,6 +31,11 @@
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>

@@ -10,6 +10,8 @@ import no.nav.pensjon.elsam.minibuss.context.PenCallerIdHandler
 import no.nav.pensjon.elsam.minibuss.security.SAMLSoapHandler
 import no.nav.pensjon.elsam.minibuss.security.StsClient
 import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerOutbound
+import no.nav.pensjon.elsam.minibuss.logging.SoapLoggingHandler
+import no.nav.pensjon.elsam.minibuss.logging.SoapResponseTimeLoggingHandler
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -24,6 +26,7 @@ class SoapClientConfiguration {
         StelvioContextHandlerOutbound(),
         SoapLoggingHandler(),  // Don't include security token in log output
         SAMLSoapHandler(stsClient),
+        SoapResponseTimeLoggingHandler()
     )
 
     @Bean
