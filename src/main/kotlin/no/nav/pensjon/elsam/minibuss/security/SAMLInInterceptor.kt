@@ -1,5 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.security
 
+import org.apache.catalina.connector.RequestFacade
 import org.apache.cxf.binding.soap.SoapMessage
 import org.apache.cxf.interceptor.Fault
 import org.apache.cxf.security.SecurityContext
@@ -15,6 +16,8 @@ import org.apache.wss4j.common.principal.SAMLTokenPrincipal
 import org.apache.wss4j.dom.handler.RequestData
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.*
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import java.lang.System.getProperty
 import java.util.*
 
@@ -56,5 +59,9 @@ class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUser
             val wsSecurityException = WSSecurityException(INVALID_SECURITY)
             throw Fault(wsSecurityException, wsSecurityException.faultCode)
         }
+
+        val currentRequestAttributes = RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes
+        val request = currentRequestAttributes.request
+        request.login(nameID, ServiceUserRealm.serviceUserPassword)
     }
 }
