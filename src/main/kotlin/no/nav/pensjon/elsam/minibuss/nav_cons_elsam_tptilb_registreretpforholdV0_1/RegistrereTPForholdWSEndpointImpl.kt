@@ -10,7 +10,6 @@ import jakarta.xml.ws.ResponseWrapper
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.elsam.registreretpforhold.v0_1.ObjectFactory
-import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
 import org.springframework.stereotype.Component
 
 @Component

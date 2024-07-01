@@ -10,7 +10,6 @@ import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjene
 import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetErUgyldig
 import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetFinnesIkke
 import nav_lib_frg.no.nav.lib.frg.fault.FaultTomDatoForanFomDato
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
 import no.nav.elsam.registreretpforhold.v0_1.FaultGenerisk
 import no.nav.elsam.registreretpforhold.v0_1.FaultTjenestepensjonForholdIkkeFunnet
@@ -65,10 +64,10 @@ fun HentTPForholdListeRequestInt.toGBOFinnTjenestepensjonsforholdRequest() =
 
 // OpprettTPForholdRequestIntTOGBOTjenestepensjon
 fun OpprettTPForholdRequestInt.toGBOTjenestepensjon() =
-    ASBOStoTjenestepensjon().also { it ->
-    it.fnr = extRequest?.fnr // move (executionOrder=1)
-    it.tjenestepensjonsforholdListe.add(this.toGBOTjenestepensjonForhold()) // submap (executionOrder=2)
-}
+    ASBOStoTjenestepensjon().also {
+        it.fnr = extRequest?.fnr // move (executionOrder=1)
+        it.tjenestepensjonsforholdListe.add(this.toGBOTjenestepensjonForhold()) // submap (executionOrder=2)
+    }
 
 // OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold
 fun OpprettTPForholdRequestInt.toGBOTjenestepensjonForhold() =
@@ -89,6 +88,6 @@ fun SlettTPForholdFinnTjenestepensjonsforholdRequestInt.toGBOFinnTjenestepensjon
 
 // SlettTPForholdRequestIntTOGBOTjenestepensjonForhold
 fun SlettTPForholdTjenestepensjonRequestInt.toGBOTjenestepensjonForhold() =
-    GBOTjenestepensjonForhold().also { GBOTjenestepensjonForhold ->
-        GBOTjenestepensjonForhold.forholdId = forholdId // move (executionOrder=1)
+    GBOTjenestepensjonForhold().also {
+        it.forholdId = forholdId // move (executionOrder=1)
     }

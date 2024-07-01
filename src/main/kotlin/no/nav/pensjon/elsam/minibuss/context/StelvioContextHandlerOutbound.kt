@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory
 import javax.xml.namespace.QName
 import javax.xml.transform.dom.DOMResult
 
+@Suppress("HttpUrlsUsage")
 class StelvioContextHandlerOutbound : SOAPHandler<SOAPMessageContext> {
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 

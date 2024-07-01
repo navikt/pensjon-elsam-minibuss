@@ -34,9 +34,9 @@ class SoapLoggingHandler : SOAPHandler<SOAPMessageContext> {
 
             if (outboundProperty != null && message != null) {
                 try {
-                    ByteArrayOutputStream().use { baos ->
-                        message.writeTo(baos)
-                        logger.debug("{} message:\n{}", if (outboundProperty) "Outbound" else "Inbound", baos)
+                    ByteArrayOutputStream().use {
+                        message.writeTo(it)
+                        logger.debug("{} message:\n{}", if (outboundProperty) "Outbound" else "Inbound", it)
                     }
                 } catch (e: SOAPException) {
                     logger.error("Exception in handler", e)

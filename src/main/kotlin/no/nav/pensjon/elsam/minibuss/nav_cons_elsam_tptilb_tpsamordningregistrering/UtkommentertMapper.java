@@ -1,11 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering;
 
-import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp;
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp;
-
-import java.util.List;
-
-public class UtkommentertMapper {
 /*
     public static void Beregning2011V0_6TOBeregning2011V0_5(Beregning2011 Beregning2011, Beregning2011 Beregning2011_1) {
         Beregning2011_1.setVirkningFom(Beregning2011.getVirkningFom()); // move (executionOrder=1)
@@ -372,4 +366,3 @@ public class UtkommentertMapper {
         BeregningUforetrygdV1_0TOBeregningUforetrygdV0_9(Vedtak.getBeregningUforetrygdListe(),Vedtak_1.getBeregningUforetrygdListe()); // submap (executionOrder=12)
     }
 */
-}
