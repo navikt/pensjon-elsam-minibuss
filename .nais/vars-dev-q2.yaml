@@ -1,5 +1,5 @@
 app:
-  name: 'pensjon-elsam-minibuss'
+  name: 'pensjon-elsam-minibuss-q2'
   namespace: 'pensjonsamhandling'
   team: 'pensjonsamhandling'
   ingress: 'https://pensjon-elsam-minibuss-q2.intern.dev.nav.no'
@@ -8,3 +8,6 @@ app:
 
 otel:
   logs: otlp
+
+vault:
+  srvpensjon: 'serviceuser/data/dev/srvpensjon'

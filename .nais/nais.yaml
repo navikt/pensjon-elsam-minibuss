@@ -44,3 +44,8 @@ spec:
       value: "otlp"
     - name: SPRING_PROFILES_ACTIVE
       value: {{ app.profile }}
+  vault:
+    enabled: true
+    paths:
+      - kvPath: "{{vault.srvpensjon}}"
+        mountPath: "/secrets/srvpensjon"
