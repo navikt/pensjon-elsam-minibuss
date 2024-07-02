@@ -6,7 +6,7 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
-import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.getMostSpecificCause
 import org.springframework.stereotype.Component
 

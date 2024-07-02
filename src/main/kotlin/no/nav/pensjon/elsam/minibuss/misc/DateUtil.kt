@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss
+package no.nav.pensjon.elsam.minibuss.misc
 
 import org.springframework.util.StringUtils
 import java.sql.Date

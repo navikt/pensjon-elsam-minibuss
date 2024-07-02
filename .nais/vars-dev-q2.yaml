@@ -1,0 +1,10 @@
+app:
+  name: 'pensjon-elsam-minibuss'
+  namespace: 'pensjonsamhandling'
+  team: 'pensjonsamhandling'
+  ingress: 'https://pensjon-elsam-minibuss-q2.intern.dev.nav.no'
+  env: q2
+  profile: q2
+
+otel:
+  logs: otlp

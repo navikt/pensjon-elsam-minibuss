@@ -13,6 +13,7 @@ import org.apache.wss4j.common.ConfigurationConstants.SIG_SUBJECT_CERT_CONSTRAIN
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.util.Locale.*
 
 @Configuration
 class SoapEndpointConfiguration(
@@ -50,7 +51,7 @@ class SoapEndpointConfiguration(
         endpoint.inInterceptors = listOf(
             SAMLInInterceptor(
                 mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints),
-                authorizedUsers.map { it.toLowerCase() }.toSet(),
+                authorizedUsers.map { it.lowercase(getDefault()) }.toSet(),
             )
         )
 

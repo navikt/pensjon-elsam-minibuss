@@ -21,8 +21,8 @@ import no.nav.elsam.tpsamordningregistrering.v0_8.Beregning2011
 import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.Vedtak
-import no.nav.pensjon.elsam.minibuss.formatWIDString
-import no.nav.pensjon.elsam.minibuss.parseWIDString
+import no.nav.pensjon.elsam.minibuss.misc.formatWIDString
+import no.nav.pensjon.elsam.minibuss.misc.parseWIDString
 import java.util.*
 import javax.xml.datatype.DatatypeFactory
 import javax.xml.datatype.XMLGregorianCalendar

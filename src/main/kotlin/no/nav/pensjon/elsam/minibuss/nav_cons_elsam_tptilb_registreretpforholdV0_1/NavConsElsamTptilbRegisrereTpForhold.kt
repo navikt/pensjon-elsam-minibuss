@@ -10,7 +10,7 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandlerListe
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
-import no.nav.pensjon.elsam.minibuss.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
 import org.springframework.core.NestedExceptionUtils.*
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime

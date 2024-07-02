@@ -6,10 +6,6 @@ import nav_lib_cons_elsam_np.no.nav.lib.elsam.np.fault.FaultNpPersonIkkeFunnet
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoFinnTjenestepensjonsforholdRequest
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.fault.tjenestepensjon.FaultStoElementetFinnesIkke
-import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetFinnesIkke
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOFinnTjenestepensjonsforholdRequest
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjon
-import javax.xml.datatype.DatatypeFactory
 
 // ASBONpHarTjenestepensjonsRequestTOGBOFinnTjenestepensjonsforholdRequest
 fun ASBONpHarTjenestepensjonsforholdRequest.toGBOFinnTjenestepensjonsforholdRequest() =

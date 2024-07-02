@@ -1,6 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.security
 
-import org.apache.catalina.connector.RequestFacade
 import org.apache.cxf.binding.soap.SoapMessage
 import org.apache.cxf.interceptor.Fault
 import org.apache.cxf.security.SecurityContext
@@ -54,7 +53,7 @@ class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUser
             throw Fault(wsSecurityException, wsSecurityException.faultCode)
         }
 
-        if (!authorizedUsers.contains(nameID)) {
+        if (!authorizedUsers.contains(nameID.lowercase())) {
             logger.warn("Bruker '{}' har ikke tilgang", nameID)
             val wsSecurityException = WSSecurityException(INVALID_SECURITY)
             throw Fault(wsSecurityException, wsSecurityException.faultCode)

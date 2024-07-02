@@ -9,11 +9,12 @@ import org.springframework.web.client.RestClient
 @Component
 class StsClient(
     @Value("\${sts.url}") stsUrl: String,
-    @Value("\${SRVPENSJON_PASSWORD}") srvPensjonPassword: String,
+    @Value("\${SERVICEUSER_USERNAME}") username: String,
+    @Value("\${SERVICEUSER_PASSWORD}") password: String,
 ) {
     private val restClient = RestClient.builder()
         .requestInterceptor(LoggingClientHttpRequestInterceptor())
-        .requestInterceptor(BasicAuthenticationInterceptor("srvpensjon", srvPensjonPassword))
+        .requestInterceptor(BasicAuthenticationInterceptor(username, password))
         .baseUrl(stsUrl)
         .build()
 
