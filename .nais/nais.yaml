@@ -39,7 +39,7 @@ spec:
     - name: "OTEL_LOGS_EXPORTER"
       value: "{{otel.logs}}"
     - name: "OTEL_RESOURCE_ATTRIBUTES"
-      value: "service.name=pensjon-elsam-minibuss,deployment.environment={{app.env}}"
+      value: "service.name=pensjon-elsam-minibuss,service.version={{version}},deployment.environment={{app.env}}"
     - name: "OTEL_TRACES_EXPORTER"
       value: "otlp"
     - name: SPRING_PROFILES_ACTIVE

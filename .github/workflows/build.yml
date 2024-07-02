@@ -110,4 +110,5 @@ jobs:
           IMAGE: "${{ needs.build.outputs.image }}"
           RESOURCE: .nais/nais.yaml
           CLUSTER: '${{ matrix.cluster }}'
+          VAR: "version=${{ needs.build.outputs.version }}"
           VARS: ${{matrix.vars}}
