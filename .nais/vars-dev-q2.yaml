@@ -1,5 +1,5 @@
 app:
-  name: 'pensjon-elsam-minibuss-q2'
+  name: 'pensjon-elsam-minibuss'
   namespace: 'pensjonsamhandling'
   team: 'pensjonsamhandling'
   ingress: 'https://pensjon-elsam-minibuss-q2.intern.dev.nav.no'
