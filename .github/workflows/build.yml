@@ -94,7 +94,7 @@ jobs:
       matrix:
         include:
           - vars: .nais/vars-dev-q2.yaml
-            cluster: dev-gcp
+            cluster: dev-fss
 
     steps:
       - uses: actions/checkout@v4
