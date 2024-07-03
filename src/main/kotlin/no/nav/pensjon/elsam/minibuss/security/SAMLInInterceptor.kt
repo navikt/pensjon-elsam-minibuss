@@ -55,8 +55,6 @@ class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUser
 
         if (!authorizedUsers.contains(nameID.lowercase())) {
             logger.warn("Bruker '{}' har ikke tilgang", nameID)
-        } else if (!authorizedUsers.contains(nameID.lowercase())) {
-            logger.warn("Bruker '{}' har ikke tilgang", nameID)
             val wsSecurityException = WSSecurityException(INVALID_SECURITY)
             throw Fault(wsSecurityException, wsSecurityException.faultCode)
         }
