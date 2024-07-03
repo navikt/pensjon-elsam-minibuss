@@ -1,0 +1,13 @@
+app:
+  name: 'pensjon-elsam-minibuss'
+  namespace: 'pensjonsamhandling'
+  team: 'pensjonsamhandling'
+  ingress: 'https://pensjon-elsam-minibuss.intern.nav.no'
+  env: p
+  profile: p
+
+otel:
+  logs: none
+
+vault:
+  srvpensjon: 'serviceuser/data/prod/srvpensjon'

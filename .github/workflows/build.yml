@@ -100,6 +100,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - vars: .nais/vars-prod.yaml
+            cluster: prod-fss
+
           - vars: .nais/vars-dev-q1.yaml
             cluster: dev-fss
 
