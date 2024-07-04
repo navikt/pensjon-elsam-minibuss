@@ -23,6 +23,8 @@ class SoapEndpointConfiguration(
     @Value("\${npTjenestepensjon.authorizedUsers}") private val npTjenestepensjonAuthorizedUsers: Set<String>,
     @Value("\${registrereTPForhold.authorizedUsers}") private val registrereTPForholdAuthorizedUsers: Set<String>,
     @Value("\${tpSamordningRegistrering.authorizedUsers}") private val tpSamordningRegistreringAuthorizedUsers: Set<String>,
+    @Value("\${NAV_TRUSTSTORE_PATH}") private val truststorePath: String,
+    @Value("\${NAV_TRUSTSTORE_PASSWORD}") private val truststorePassword: String,
 ) {
     @Bean
     fun npTjenestepensjonWSEndpointExport(npTjenestepensjon: NPTjenestepensjon): Endpoint =
@@ -53,6 +55,8 @@ class SoapEndpointConfiguration(
             SAMLInInterceptor(
                 mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints),
                 authorizedUsers.map { it.lowercase(getDefault()) }.toSet(),
+                truststorePath,
+                truststorePassword,
             )
         )
 
