@@ -96,18 +96,29 @@ jobs:
       id-token: write
     needs: [build]
     runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
+        env:
+          IMAGE: "${{ needs.build.outputs.image }}"
+          RESOURCE: .nais/nais.yaml
+          CLUSTER: 'prod-fss'
+          VAR: "version=${{ needs.build.outputs.version }}"
+          VARS: '.nais/vars-prod.yaml'
+
+  deploySandbox:
+    if: github.ref == 'refs/heads/sandbox'
+    permissions:
+      contents: read
+      id-token: write
+    needs: [build]
+    runs-on: 'ubuntu-latest'
 
     strategy:
       matrix:
         include:
-          - vars: .nais/vars-prod.yaml
-            cluster: prod-fss
-
-          - vars: .nais/vars-dev-q1.yaml
-            cluster: dev-fss
-
-          - vars: .nais/vars-dev-q2.yaml
-            cluster: dev-fss
+          - env: q1
+          - env: q2
 
     steps:
       - uses: actions/checkout@v4
@@ -115,6 +126,6 @@ jobs:
         env:
           IMAGE: "${{ needs.build.outputs.image }}"
           RESOURCE: .nais/nais.yaml
-          CLUSTER: '${{ matrix.cluster }}'
+          CLUSTER: 'dev-fss'
           VAR: "version=${{ needs.build.outputs.version }}"
-          VARS: ${{matrix.vars}}
+          VARS: '.nais/vars-dev-${{matrix.env}}.yaml'
