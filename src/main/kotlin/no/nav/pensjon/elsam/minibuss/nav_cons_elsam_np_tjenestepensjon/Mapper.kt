@@ -7,13 +7,13 @@ import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoFinnT
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.fault.tjenestepensjon.FaultStoElementetFinnesIkke
 
-// ASBONpHarTjenestepensjonsRequestTOGBOFinnTjenestepensjonsforholdRequest
+// ASBONpHarTjenestepensjonsRequestTOGBOFinnTjenestepensjonsforholdRequest.map
 fun ASBONpHarTjenestepensjonsforholdRequest.toGBOFinnTjenestepensjonsforholdRequest() =
     ASBOStoFinnTjenestepensjonsforholdRequest().also {
         it.fnr = fnr // move (executionOrder=1)
     }
 
-// FaultElementetFinnesIkkeTOFaultNpPersonIkkeFunnet
+// FaultElementetFinnesIkkeTOFaultNpPersonIkkeFunnet.map
 fun FaultStoElementetFinnesIkke.toFaultNpPersonIkkeFunnet(): FaultNpPersonIkkeFunnet =
     FaultNpPersonIkkeFunnet().also {
         it.errorMessage = errorMessage // move (executionOrder=1)
@@ -23,7 +23,7 @@ fun FaultStoElementetFinnesIkke.toFaultNpPersonIkkeFunnet(): FaultNpPersonIkkeFu
         it.rootCause = rootCause // move (executionOrder=5)
     }
 
-// GBOTjenestepensjonTOASBONpHarTjenestepensjonsforholdResponse
+// GBOTjenestepensjonTOASBONpHarTjenestepensjonsforholdResponse.map
 fun ASBOStoTjenestepensjon.toASBONpHarTjenestepensjonsforholdResponse(): ASBONpHarTjenestepensjonsforholdResponse =
     ASBONpHarTjenestepensjonsforholdResponse().also {
         it.harTjenestepensjonsforhold = tjenestepensjonsforholdListe.isNotEmpty() // custom.output assignment (executionOrder=1)

@@ -17,7 +17,7 @@ import no.nav.elsam.registreretpforhold.v0_1.HentTPForholdListeResp
 import no.nav.elsam.registreretpforhold.v0_1.TPForhold
 import javax.xml.datatype.DatatypeFactory
 
-// FaultElementetErUgyldigTOFaultTjenestepensjonForholdIkkeFunnet
+// FaultElementetErUgyldigTOFaultTjenestepensjonForholdIkkeFunnet.map
 fun FaultElementetErUgyldig.toFaultTjenestepensjonForholdIkkeFunnet() =
     FaultTjenestepensjonForholdIkkeFunnet().also {
         it.errorMessage = errorMessage // move (executionOrder=1)
@@ -26,7 +26,7 @@ fun FaultElementetErUgyldig.toFaultTjenestepensjonForholdIkkeFunnet() =
         it.dateTimeStamp = dateTimeStamp?.let { dts -> DatatypeFactory.newInstance().newXMLGregorianCalendar(dts) } // move (executionOrder=4)
     }
 
-// FaultElementetFinnesIkkeTOFaultTjenestepensjonForholdIkkeFunnet
+// FaultElementetFinnesIkkeTOFaultTjenestepensjonForholdIkkeFunnet.map
 fun FaultElementetFinnesIkke.toFaultTjenestepensjonForholdIkkeFunnet() =
     FaultTjenestepensjonForholdIkkeFunnet().also {
         it.errorMessage = errorMessage // move (executionOrder=1)
@@ -35,41 +35,41 @@ fun FaultElementetFinnesIkke.toFaultTjenestepensjonForholdIkkeFunnet() =
         it.dateTimeStamp = dateTimeStamp?.let { dts -> DatatypeFactory.newInstance().newXMLGregorianCalendar(dts) } // move (executionOrder=4)
     }
 
-// FaultTomDatoForanFomDatoTOFaultGenerisk
+// FaultTomDatoForanFomDatoTOFaultGenerisk.map
 fun FaultTomDatoForanFomDato.toFaultGenerisk() =
     FaultGenerisk().also {
         it.errorDescription = errorMessage // move (executionOrder=1)
         it.errorCode = "InternalError" // set (executionOrder=2)
     }
 
-// GBOTjenestepensjonForholdTOTPForhold
+// GBOTjenestepensjonForholdTOTPForhold.map
 fun ASBOStoTjenestepensjonforhold.toTPForhold() =
     TPForhold().also {
         it.tpnr = tpnr // move (executionOrder=1)
         it.tpnavn = navn // move (executionOrder=2)
     }
 
-// GBOTjenestepensjonTOHentTPForholdListeResp
+// GBOTjenestepensjonTOHentTPForholdListeResp.map
 fun ASBOStoTjenestepensjon.toHentTPForholdListeResp() =
     HentTPForholdListeResp().also {
         it.tjenestepensjonForholdene.addAll(tjenestepensjonsforholdListe.map(ASBOStoTjenestepensjonforhold::toTPForhold)) // submap (executionOrder=1)
     }
 
-// HentTPForholdListeRequestIntTOGBOFinnTjenestepensjonsforholdRequest
+// HentTPForholdListeRequestIntTOGBOFinnTjenestepensjonsforholdRequest.map
 fun HentTPForholdListeRequestInt.toGBOFinnTjenestepensjonsforholdRequest() =
     ASBOStoFinnTjenestepensjonsforholdRequest().also {
         it.fnr = extRequest?.fnr // move (executionOrder=1)
         it.hentSamhandlerInfo = true // set (executionOrder=2)
     }
 
-// OpprettTPForholdRequestIntTOGBOTjenestepensjon
+// OpprettTPForholdRequestIntTOGBOTjenestepensjon.map
 fun OpprettTPForholdRequestInt.toGBOTjenestepensjon() =
     ASBOStoTjenestepensjon().also {
         it.fnr = extRequest?.fnr // move (executionOrder=1)
         it.tjenestepensjonsforholdListe.add(this.toGBOTjenestepensjonForhold()) // submap (executionOrder=2)
     }
 
-// OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold
+// OpprettTPForholdRequestIntTOGBOTjenestepensjonForhold.map
 fun OpprettTPForholdRequestInt.toGBOTjenestepensjonForhold() =
     ASBOStoTjenestepensjonforhold().also {
         it.tssEksternId = eksternTSSId // move (executionOrder=1)
@@ -78,7 +78,7 @@ fun OpprettTPForholdRequestInt.toGBOTjenestepensjonForhold() =
         it.harSimulering = false // set (executionOrder=4)
     }
 
-// SlettTPForholdRequestIntTOGBOFinnTjenestepensjonsforholdRequest
+// SlettTPForholdRequestIntTOGBOFinnTjenestepensjonsforholdRequest.map
 fun SlettTPForholdFinnTjenestepensjonsforholdRequestInt.toGBOFinnTjenestepensjonsforholdRequest() =
     ASBOStoFinnTjenestepensjonsforholdRequest().also {
         it.tssEksternId = eksternTSSId // move (executionOrder=1)
@@ -86,7 +86,7 @@ fun SlettTPForholdFinnTjenestepensjonsforholdRequestInt.toGBOFinnTjenestepensjon
         it.hentSamhandlerInfo = false // set (executionOrder=3)
     }
 
-// SlettTPForholdRequestIntTOGBOTjenestepensjonForhold
+// SlettTPForholdRequestIntTOGBOTjenestepensjonForhold.map
 fun SlettTPForholdTjenestepensjonRequestInt.toGBOTjenestepensjonForhold() =
     GBOTjenestepensjonForhold().also {
         it.forholdId = forholdId // move (executionOrder=1)
