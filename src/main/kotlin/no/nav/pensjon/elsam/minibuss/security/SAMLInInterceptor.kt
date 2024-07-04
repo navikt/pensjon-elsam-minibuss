@@ -13,12 +13,14 @@ import org.apache.wss4j.common.ext.WSSecurityException.ErrorCode.INVALID_SECURIT
 import org.apache.wss4j.common.ext.WSSecurityException.ErrorCode.INVALID_SECURITY_TOKEN
 import org.apache.wss4j.common.principal.SAMLTokenPrincipal
 import org.apache.wss4j.dom.handler.RequestData
+import org.opensaml.saml.saml2.core.impl.AssertionMarshaller
 import org.slf4j.Logger
-import org.slf4j.LoggerFactory.*
+import org.slf4j.LoggerFactory.getLogger
+import org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.lang.System.getProperty
-import java.util.*
+
 
 class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUsers: Set<String>) : WSS4JInInterceptor(HashMap(properties)) {
     private val logger: Logger = getLogger(javaClass)
@@ -62,5 +64,10 @@ class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUser
         val currentRequestAttributes = RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes
         val request = currentRequestAttributes.request
         request.login(nameID, ServiceUserRealm.serviceUserPassword)
+
+        val assertionMarshaller = AssertionMarshaller()
+        val marshall = assertionMarshaller.marshall(assertion)
+
+        currentRequestAttributes.setAttribute("minibuss-incoming-assertion", marshall, SCOPE_REQUEST)
     }
 }

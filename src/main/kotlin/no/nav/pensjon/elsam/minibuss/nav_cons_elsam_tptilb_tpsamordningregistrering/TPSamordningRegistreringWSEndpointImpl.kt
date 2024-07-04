@@ -33,7 +33,8 @@ import org.springframework.stereotype.Component
 )
 @Suppress("HttpUrlsUsage")
 class TPSamordningRegistreringWSEndpointImpl(
-    val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering
+    val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
+    val busTPSamordningRegistrering: TPSamordningRegistrering,
 ) : TPSamordningRegistrering {
     @WebMethod
     @RequestWrapper(
@@ -53,6 +54,10 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
+        if (true) {
+            return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
+        }
+
         try {
             navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
         } catch (e: Exception) {
@@ -83,6 +88,10 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
     ): HentSamordningsdataResp? {
+        if (true) {
+            return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        }
+
         try {
             return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
         } catch (e: Exception) {
@@ -119,6 +128,10 @@ class TPSamordningRegistreringWSEndpointImpl(
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
+        if (true) {
+            return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
+        }
+
         try {
             return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
         } catch (e: Exception) {
@@ -153,6 +166,10 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun lagreTPYtelse(
         @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq
     ): LagreTPYtelseResp? {
+        if (true) {
+            return busTPSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
+        }
+
         try {
             return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
         } catch (e: Exception) {

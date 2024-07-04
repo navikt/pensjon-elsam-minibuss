@@ -10,6 +10,7 @@ import no.nav.pensjon.elsam.minibuss.security.SAMLInInterceptor
 import org.apache.cxf.Bus
 import org.apache.cxf.jaxws.EndpointImpl
 import org.apache.wss4j.common.ConfigurationConstants.SIG_SUBJECT_CERT_CONSTRAINTS
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,11 +29,11 @@ class SoapEndpointConfiguration(
         createEndpoint(npTjenestepensjon, npTjenestepensjonAuthorizedUsers)
 
     @Bean
-    fun registrereTPForholdWSEndpointExport(registrereTPForhold: RegistrereTPForhold): Endpoint =
+    fun registrereTPForholdWSEndpointExport(@Qualifier("registrereTPForholdWSEndpointImpl") registrereTPForhold: RegistrereTPForhold): Endpoint =
         createEndpoint(registrereTPForhold, registrereTPForholdAuthorizedUsers)
 
     @Bean
-    fun tpSamordningRegistreringWSEndpointExport(tpSamordningRegistrering: TPSamordningRegistrering): Endpoint =
+    fun tpSamordningRegistreringWSEndpointExport(@Qualifier("TPSamordningRegistreringWSEndpointImpl") tpSamordningRegistrering: TPSamordningRegistrering): Endpoint =
         createEndpoint(tpSamordningRegistrering, tpSamordningRegistreringAuthorizedUsers)
 
     private fun createEndpoint(

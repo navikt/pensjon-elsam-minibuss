@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component
 @Suppress("HttpUrlsUsage")
 class RegistrereTPForholdWSEndpointImpl(
     private val navConsElsamTptilbRegisrereTpForhold: NavConsElsamTptilbRegisrereTpForhold,
+    private val busRegistrereTPForhold: RegistrereTPForhold,
 ) : RegistrereTPForhold {
     @WebMethod
     @RequestWrapper(
@@ -43,6 +44,10 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun opprettTPForhold(
         @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
+        if (true) {
+            return busRegistrereTPForhold.opprettTPForhold(opprettTPForholdReq)
+        }
+
         return navConsElsamTptilbRegisrereTpForhold.opprettTPForhold(opprettTPForholdReq)
     }
 
@@ -65,6 +70,10 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun hentTPForholdListe(
         @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq
     ): HentTPForholdListeResp? {
+        if (true) {
+            return busRegistrereTPForhold.hentTPForholdListe(hentTPForholdListeReq)
+        }
+
         try {
             return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
         } catch (e: HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg) {
@@ -93,6 +102,10 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun slettTPForhold(
         @WebParam(name = "slettTPForholdReq", targetNamespace = "") slettTPForholdReq: SlettTPForholdReq
     ) {
+        if (true) {
+            return busRegistrereTPForhold.slettTPForhold(slettTPForholdReq)
+        }
+
         try {
             navConsElsamTptilbRegisrereTpForhold.slettTPForhold(slettTPForholdReq)
         } catch (e: SlettTPForholdFinnTjenestepensjonsforholdIntFaultTjenestepensjonForholdIkkeFunnetIntMsg) {
