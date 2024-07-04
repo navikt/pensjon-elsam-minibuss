@@ -47,6 +47,8 @@ spec:
       value: "otlp"
     - name: SPRING_PROFILES_ACTIVE
       value: {{ app.profile }}
+  envFrom:
+    - secret: {{ app.name }}-unleash-api-token
   vault:
     enabled: true
     paths:

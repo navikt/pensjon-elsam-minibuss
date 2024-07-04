@@ -9,5 +9,8 @@ app:
 otel:
   logs: otlp
 
+unleash:
+  environment: 'development'
+
 vault:
   srvpensjon: 'serviceuser/data/dev/srvpensjon'
