@@ -27,10 +27,13 @@ spec:
     limits:
       memory: 1024Mi
     requests:
-      cpu: 100m
+      cpu: 40m
       memory: 384Mi
   ingresses:
     - {{app.ingress}}
+  azure:
+    application:
+      enabled: true
   env:
     - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
       value: "https://elastic-apm.adeo.no"
