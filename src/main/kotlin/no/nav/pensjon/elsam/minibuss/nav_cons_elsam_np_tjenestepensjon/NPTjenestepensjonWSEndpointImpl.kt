@@ -8,7 +8,6 @@ import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.ws.BindingType
 import jakarta.xml.ws.RequestWrapper
 import jakarta.xml.ws.ResponseWrapper
-import jakarta.xml.ws.soap.Addressing
 import nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.HarTjenestepensjonsforholdFaultPersonIkkeFunnetMsg
 import nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.NPTjenestepensjon
 import nav_lib_cons_elsam_np.no.nav.lib.elsam.np.asbo.tjenestepensjon.ASBONpHarTjenestepensjonsforholdRequest
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Component
     nav_lib_cons_elsam_np.no.nav.lib.elsam.np.asbo.tjenestepensjon.ObjectFactory::class,
     nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.ObjectFactory::class
 )
-@Addressing
 @BindingType
 class NPTjenestepensjonWSEndpointImpl(
     private val npTjenestepensjonToFinnTjenestepensjonsforhold: NPTjenestepensjonToFinnTjenestepensjonsforhold,
