@@ -1,5 +1,6 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
+import no.nav.pensjon.elsam.minibuss.security.ServiceUserRealm
 import org.apache.cxf.binding.soap.SoapMessage
 import org.apache.cxf.interceptor.Fault
 import org.apache.cxf.security.SecurityContext
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory.getLogger
 import org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
-import java.lang.System.getProperty
 
 
 class SAMLInInterceptor(

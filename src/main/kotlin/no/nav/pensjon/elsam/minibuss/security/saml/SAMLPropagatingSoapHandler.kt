@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
 import jakarta.xml.soap.SOAPElement
 import jakarta.xml.soap.SOAPException
@@ -9,7 +9,6 @@ import jakarta.xml.ws.handler.soap.SOAPMessageContext
 import jakarta.xml.ws.handler.soap.SOAPMessageContext.MESSAGE_OUTBOUND_PROPERTY
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.*
-import org.springframework.web.context.request.RequestAttributes
 import org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
