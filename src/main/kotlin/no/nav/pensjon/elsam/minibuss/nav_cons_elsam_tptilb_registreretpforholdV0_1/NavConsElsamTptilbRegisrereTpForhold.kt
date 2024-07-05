@@ -12,6 +12,7 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.misc.entries
 import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.NestedExceptionUtils.*
@@ -21,6 +22,7 @@ import javax.xml.datatype.DatatypeFactory
 
 @Component
 class NavConsElsamTptilbRegisrereTpForhold(
+    private val busRegistrereTPForhold: RegistrereTPForhold,
     private val registrereTPForholdInt: RegistrereTPForholdIntTOTjenestepensjon,
     private val samhandler: PSAKSamhandler,
     private val tjenestepensjonService: TjenestepensjonService,
@@ -28,18 +30,44 @@ class NavConsElsamTptilbRegisrereTpForhold(
 ) {
     private val logger = getLogger(javaClass)
 
+    fun hentTPForholdListeDirekte(request: HentTPForholdListeReq): HentTPForholdListeResp {
+        val response = busRegistrereTPForhold.hentTPForholdListe(request)
+
+        try {
+            val responseTp = if (unleash.isEnabled("pensjon-elsam-minibuss.hentTPForholdListe.sjekk-tp")) {
+                tjenestepensjonService.hentTjenestepensjon(request.fnr)
+            } else {
+                null
+            }
+
+            if (responseTp != null) {
+                val busTpNr = response.tjenestepensjonForholdene.map { it.tpnr }.toSortedSet()
+
+                val tpTpNr = responseTp.map { it.ordning }.toSortedSet()
+
+                if (busTpNr == tpTpNr) {
+                    logger.info("Svar fra buss og tp er likt")
+                } else {
+                    logger.info(
+                        "Avvik mellom buss og tp, {}", entries(
+                            "bus" to busTpNr,
+                            "tp" to tpTpNr,
+                        )
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            logger.error("Feil ved sammenligning av buss og tp", e)
+        }
+        return response
+    }
+
     @Throws(
         ServiceBusinessException::class,
         HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg::class,
         HentTPForholdListeIntFaultGeneriskMsg::class
     )
     fun hentTPForholdListe(request: HentTPForholdListeReq): HentTPForholdListeResp {
-        val responseTp: Boolean? = if (unleash.isEnabled("pensjon-elsam-minibuss.hentTPForholdListe.sjekk-tp")) {
-            hentStatusTp(request.fnr)
-        } else {
-            null
-        }
-
         val response: HentTPForholdListeResp
         try {
             response = registrereTPForholdInt.hentTPForholdListeInt(
@@ -218,15 +246,4 @@ class NavConsElsamTptilbRegisrereTpForhold(
             return faultBo
         }
     }
-
-
-    private fun hentStatusTp(
-        fnr: String,
-    ) =
-        try {
-            tjenestepensjonService.harTjenestepensjon(fnr)
-        } catch (e: Exception) {
-            logger.error("Feil ved henting av tjenestepensjon", e)
-            null
-        }
 }

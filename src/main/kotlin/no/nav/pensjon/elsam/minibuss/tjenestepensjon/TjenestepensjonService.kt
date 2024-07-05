@@ -10,6 +10,17 @@ import java.time.LocalDate
 class TjenestepensjonService(
     private val tpRestClient: RestClient,
 ) {
+    fun hentTjenestepensjon(fnr: String): List<ForholdModel> {
+        val tjenestepensjon: TjenestepensjonModel = tpRestClient.get()
+            .uri("/api/tjenestepensjon/")
+            .header("fnr", fnr)
+            .retrieve()
+            .body()
+            ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
+
+        return tjenestepensjon.forhold
+    }
+
     fun harTjenestepensjon(fnr: String): Boolean {
         val tjenestepensjon: TjenestepensjonModel = tpRestClient.get()
             .uri("/api/tjenestepensjon/")
