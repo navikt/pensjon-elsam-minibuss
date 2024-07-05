@@ -1,5 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
+import io.getunleash.Unleash
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.HentTPForholdListeRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
@@ -11,6 +12,8 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
+import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.NestedExceptionUtils.*
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
@@ -20,18 +23,28 @@ import javax.xml.datatype.DatatypeFactory
 class NavConsElsamTptilbRegisrereTpForhold(
     private val registrereTPForholdInt: RegistrereTPForholdIntTOTjenestepensjon,
     private val samhandler: PSAKSamhandler,
+    private val tjenestepensjonService: TjenestepensjonService,
+    private val unleash: Unleash,
 ) {
+    private val logger = getLogger(javaClass)
+
     @Throws(
         ServiceBusinessException::class,
         HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg::class,
         HentTPForholdListeIntFaultGeneriskMsg::class
     )
-    fun hentTPForholdListe(hentTPForholdListeRequest: HentTPForholdListeReq): HentTPForholdListeResp {
+    fun hentTPForholdListe(request: HentTPForholdListeReq): HentTPForholdListeResp {
+        val responseTp: Boolean? = if (unleash.isEnabled("pensjon-elsam-minibuss.hentTPForholdListe.sjekk-tp")) {
+            hentStatusTp(request.fnr)
+        } else {
+            null
+        }
+
         val response: HentTPForholdListeResp
         try {
             response = registrereTPForholdInt.hentTPForholdListeInt(
                 HentTPForholdListeRequestInt().apply {
-                    extRequest = hentTPForholdListeRequest
+                    extRequest = request
                 })
         } catch (e: RuntimeException) {
             throw createTechnicalFault(
@@ -40,7 +53,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
 
         // Ensure that the caller has a TP-forhold to the subject
-        if (!response.tjenestepensjonForholdene.any { it?.tpnr == hentTPForholdListeRequest.tpnr }) {
+        if (!response.tjenestepensjonForholdene.any { it?.tpnr == request.tpnr }) {
             throw ServiceBusinessException(
                 getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold")
             )
@@ -205,4 +218,15 @@ class NavConsElsamTptilbRegisrereTpForhold(
             return faultBo
         }
     }
+
+
+    private fun hentStatusTp(
+        fnr: String,
+    ) =
+        try {
+            tjenestepensjonService.harTjenestepensjon(fnr)
+        } catch (e: Exception) {
+            logger.error("Feil ved henting av tjenestepensjon", e)
+            null
+        }
 }
