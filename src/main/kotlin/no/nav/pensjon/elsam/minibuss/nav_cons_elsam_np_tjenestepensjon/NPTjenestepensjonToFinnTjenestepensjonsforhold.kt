@@ -38,6 +38,13 @@ class NPTjenestepensjonToFinnTjenestepensjonsforhold(
                         "tp" to responseTp,
                     )
                 )
+            } else {
+                logger.info(
+                    "Likt svar fra buss og tp, {}", entries(
+                        "bus" to responseBus?.harTjenestepensjonsforhold,
+                        "tp" to responseTp,
+                    )
+                )
             }
 
             return responseBus
