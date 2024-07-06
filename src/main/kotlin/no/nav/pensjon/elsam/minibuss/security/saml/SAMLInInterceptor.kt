@@ -1,5 +1,6 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
+import no.nav.pensjon.elsam.minibuss.security.ServiceUserRealm
 import org.apache.cxf.binding.soap.SoapMessage
 import org.apache.cxf.interceptor.Fault
 import org.apache.cxf.security.SecurityContext
@@ -19,10 +20,14 @@ import org.slf4j.LoggerFactory.getLogger
 import org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
-import java.lang.System.getProperty
 
 
-class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUsers: Set<String>) : WSS4JInInterceptor(HashMap(properties)) {
+class SAMLInInterceptor(
+    properties: Map<String, Any>,
+    private val authorizedUsers: Set<String>,
+    private val truststorePath: String,
+    private val truststorePassword: String,
+) : WSS4JInInterceptor(HashMap(properties)) {
     private val logger: Logger = getLogger(javaClass)
 
     init {
@@ -32,8 +37,8 @@ class SAMLInInterceptor(properties: Map<String, Any>, private val authorizedUser
     override fun loadSignatureCrypto(requestData: RequestData): Crypto {
         return CryptoFactory.getInstance(
             mapOf(
-                "org.apache.wss4j.crypto.merlin.truststore.file" to getProperty("javax.net.ssl.trustStore"),
-                "org.apache.wss4j.crypto.merlin.truststore.password" to getProperty("javax.net.ssl.trustStorePassword")
+                "org.apache.wss4j.crypto.merlin.truststore.file" to truststorePath,
+                "org.apache.wss4j.crypto.merlin.truststore.password" to truststorePassword,
             ).toProperties()
         )
     }

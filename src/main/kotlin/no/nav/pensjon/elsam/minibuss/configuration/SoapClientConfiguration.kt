@@ -9,12 +9,12 @@ import nav_lib_sto.no.nav.lib.sto.inf.samordning.Samordning
 import no.nav.elsam.registreretpforhold.v0_1.RegistrereTPForhold
 import no.nav.elsam.tpsamordningregistrering.v1_0.TPSamordningRegistrering
 import no.nav.pensjon.elsam.minibuss.context.PenCallerIdHandler
-import no.nav.pensjon.elsam.minibuss.security.StsClient
+import no.nav.pensjon.elsam.minibuss.security.saml.StsClient
 import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerOutbound
 import no.nav.pensjon.elsam.minibuss.logging.SoapLoggingHandler
 import no.nav.pensjon.elsam.minibuss.logging.SoapResponseTimeLoggingHandler
-import no.nav.pensjon.elsam.minibuss.security.SAMLPropagatingSoapHandler
-import no.nav.pensjon.elsam.minibuss.security.SAMLSoapHandler
+import no.nav.pensjon.elsam.minibuss.security.saml.SAMLPropagatingSoapHandler
+import no.nav.pensjon.elsam.minibuss.security.saml.SAMLSoapHandler
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

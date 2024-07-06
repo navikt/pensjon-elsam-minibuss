@@ -27,11 +27,17 @@ spec:
     limits:
       memory: 1024Mi
     requests:
-      cpu: 100m
+      cpu: 40m
       memory: 384Mi
   ingresses:
     - {{app.ingress}}
+  azure:
+    application:
+      enabled: true
+  webproxy: true
   env:
+    - name: "ENVIRONMENT_NAME"
+      value: {{ app.env }}
     - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
       value: "https://elastic-apm.adeo.no"
     - name: "OTEL_METRICS_EXPORTER"
@@ -44,6 +50,8 @@ spec:
       value: "otlp"
     - name: SPRING_PROFILES_ACTIVE
       value: {{ app.profile }}
+  envFrom:
+    - secret: {{ app.name }}-unleash-api-token
   vault:
     enabled: true
     paths:

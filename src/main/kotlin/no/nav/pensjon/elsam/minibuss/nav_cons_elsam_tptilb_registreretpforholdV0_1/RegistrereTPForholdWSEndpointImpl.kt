@@ -71,7 +71,7 @@ class RegistrereTPForholdWSEndpointImpl(
         @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq
     ): HentTPForholdListeResp? {
         if (true) {
-            return busRegistrereTPForhold.hentTPForholdListe(hentTPForholdListeReq)
+            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListeDirekte(hentTPForholdListeReq)
         }
 
         try {

@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty

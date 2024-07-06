@@ -6,7 +6,7 @@ import nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.NPTjeneste
 import no.nav.elsam.registreretpforhold.v0_1.RegistrereTPForhold
 import no.nav.elsam.tpsamordningregistrering.v1_0.TPSamordningRegistrering
 import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerInbound
-import no.nav.pensjon.elsam.minibuss.security.SAMLInInterceptor
+import no.nav.pensjon.elsam.minibuss.security.saml.SAMLInInterceptor
 import org.apache.cxf.Bus
 import org.apache.cxf.jaxws.EndpointImpl
 import org.apache.wss4j.common.ConfigurationConstants.SIG_SUBJECT_CERT_CONSTRAINTS
@@ -23,6 +23,8 @@ class SoapEndpointConfiguration(
     @Value("\${npTjenestepensjon.authorizedUsers}") private val npTjenestepensjonAuthorizedUsers: Set<String>,
     @Value("\${registrereTPForhold.authorizedUsers}") private val registrereTPForholdAuthorizedUsers: Set<String>,
     @Value("\${tpSamordningRegistrering.authorizedUsers}") private val tpSamordningRegistreringAuthorizedUsers: Set<String>,
+    @Value("\${NAV_TRUSTSTORE_PATH}") private val truststorePath: String,
+    @Value("\${NAV_TRUSTSTORE_PASSWORD}") private val truststorePassword: String,
 ) {
     @Bean
     fun npTjenestepensjonWSEndpointExport(npTjenestepensjon: NPTjenestepensjon): Endpoint =
@@ -53,6 +55,8 @@ class SoapEndpointConfiguration(
             SAMLInInterceptor(
                 mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints),
                 authorizedUsers.map { it.lowercase(getDefault()) }.toSet(),
+                truststorePath,
+                truststorePassword,
             )
         )
 

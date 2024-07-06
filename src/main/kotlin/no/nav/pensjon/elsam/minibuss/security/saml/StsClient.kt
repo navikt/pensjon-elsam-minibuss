@@ -1,10 +1,11 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
 import no.nav.pensjon.elsam.minibuss.logging.LoggingClientHttpRequestInterceptor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.client.support.BasicAuthenticationInterceptor
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
+import org.springframework.web.client.body
 
 @Component
 class StsClient(
@@ -22,6 +23,6 @@ class StsClient(
         restClient.get()
             .uri("/rest/v1/sts/samltoken")
             .retrieve()
-            .body(SAMLResponse::class.java)
+            .body()
             ?: throw RuntimeException("Failed to get STS response")
 }

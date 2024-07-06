@@ -1,4 +1,4 @@
-package no.nav.pensjon.elsam.minibuss.security
+package no.nav.pensjon.elsam.minibuss.security.saml
 
 import jakarta.xml.soap.SOAPElement
 import jakarta.xml.soap.SOAPException
