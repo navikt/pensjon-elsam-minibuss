@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.NestedExceptionUtils.*
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
+import java.util.*
 import javax.xml.datatype.DatatypeFactory
 
 @Component
@@ -35,23 +36,26 @@ class NavConsElsamTptilbRegisrereTpForhold(
 
         try {
             val responseTp = if (unleash.isEnabled("pensjon-elsam-minibuss.hentTPForholdListe.sjekk-tp")) {
-                tjenestepensjonService.hentTjenestepensjon(request.fnr)
+                tjenestepensjonService.hentTjenestepensjon(request.fnr).map {
+                    TPForhold().apply {
+                        tpnr = it.ordning
+                        tpnavn = tjenestepensjonService.hentOrdning(it.ordning)
+                    }
+                }.toSortedSet { o1, o2 -> o1.tpnavn.compareTo(o2.tpnavn) }
             } else {
                 null
             }
 
             if (responseTp != null) {
-                val busTpNr = response.tjenestepensjonForholdene.map { it.tpnr }.toSortedSet()
+                val busTpNr = response.tjenestepensjonForholdene.toSortedSet { o1, o2 -> o1.tpnavn.compareTo(o2.tpnavn) }
 
-                val tpTpNr = responseTp.map { it.ordning }.toSortedSet()
-
-                if (busTpNr == tpTpNr) {
+                if (erLike(busTpNr, responseTp)) {
                     logger.info("Svar fra buss og tp er likt")
                 } else {
                     logger.info(
                         "Avvik mellom buss og tp, {}", entries(
-                            "bus" to busTpNr,
-                            "tp" to tpTpNr,
+                            "bus" to busTpNr.map { it.tpnr to it.tpnavn },
+                            "tp" to responseTp.map { it.tpnr to it.tpnavn },
                         )
                     )
                 }
@@ -61,6 +65,9 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
         return response
     }
+
+    private fun erLike(lhs: SortedSet<TPForhold>, rhs: SortedSet<TPForhold>): Boolean =
+        lhs.size == rhs.size && lhs.zip(rhs).all { (f1, f2) -> f1.tpnr == f2.tpnr && f1.tpnavn == f2.tpnavn }
 
     @Throws(
         ServiceBusinessException::class,

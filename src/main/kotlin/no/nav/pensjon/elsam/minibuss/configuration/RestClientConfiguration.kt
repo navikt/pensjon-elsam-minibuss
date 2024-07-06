@@ -10,6 +10,12 @@ import org.springframework.web.client.RestClient
 @Configuration
 class RestClientConfiguration {
     @Bean
+    fun azureRestClient(
+    ): RestClient = RestClient.builder()
+        .requestInterceptor(LoggingClientHttpRequestInterceptor())
+        .build()
+
+    @Bean
     fun tpRestClient(
         @Value("\${tp.base.url}") baseUrl: String,
         @Value("\${tp.scope}") scope: Set<String>,

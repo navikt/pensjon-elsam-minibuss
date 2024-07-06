@@ -13,30 +13,28 @@ import java.util.concurrent.ConcurrentHashMap
 
 @Component
 class AzureAdClientCredentialsService(
+    private val azureRestClient: RestClient,
     @Value("\${AZURE_APP_CLIENT_ID}") private val clientId: String,
     @Value("\${AZURE_APP_CLIENT_SECRET}") private val clientSecret: String,
     @Value("\${AZURE_OPENID_CONFIG_TOKEN_ENDPOINT}") private val tokenEndpoint: String,
 ) {
     private val logger: Logger = getLogger(AzureAdClientCredentialsService::class.java)
-    private val restClient: RestClient = RestClient.builder().build()
 
     private val tokenCache = ConcurrentHashMap<Set<String>, ClientCredentialsTokenResponse>()
 
     fun accessToken(scope: Set<String>) = fetch(scope).accessToken
 
-    fun fetch(scope: Set<String>): ClientCredentialsTokenResponse {
-        val cachedToken = tokenCache[scope]
-        if (cachedToken != null && cachedToken.isValid) {
-            return cachedToken
-        } else {
-            val newToken = doFetch(scope)
-            tokenCache[scope] = newToken
-            return newToken
-        }
-    }
+    fun fetch(scope: Set<String>): ClientCredentialsTokenResponse =
+        tokenCache[scope]
+            ?.takeIf { it.isValid }
+            ?: run {
+                doFetch(scope).also {
+                    tokenCache[scope] = it
+                }
+            }
 
     fun doFetch(scope: Set<String>): ClientCredentialsTokenResponse = try {
-        restClient.post()
+        azureRestClient.post()
             .uri(tokenEndpoint)
             .contentType(APPLICATION_FORM_URLENCODED)
             .body(
