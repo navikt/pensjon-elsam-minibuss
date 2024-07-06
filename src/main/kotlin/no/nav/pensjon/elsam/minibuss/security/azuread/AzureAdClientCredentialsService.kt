@@ -9,6 +9,7 @@ import org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED
 import org.springframework.stereotype.Component
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.client.*
+import java.util.concurrent.ConcurrentHashMap
 
 @Component
 class AzureAdClientCredentialsService(
@@ -19,9 +20,22 @@ class AzureAdClientCredentialsService(
     private val logger: Logger = getLogger(AzureAdClientCredentialsService::class.java)
     private val restClient: RestClient = RestClient.builder().build()
 
-    fun accessToken(scope: List<String>) = fetch(scope).accessToken
+    private val tokenCache = ConcurrentHashMap<Set<String>, ClientCredentialsTokenResponse>()
 
-    fun fetch(scope: List<String>): ClientCredentialsTokenResponse = try {
+    fun accessToken(scope: Set<String>) = fetch(scope).accessToken
+
+    fun fetch(scope: Set<String>): ClientCredentialsTokenResponse {
+        val cachedToken = tokenCache[scope]
+        if (cachedToken != null && cachedToken.isValid) {
+            return cachedToken
+        } else {
+            val newToken = doFetch(scope)
+            tokenCache[scope] = newToken
+            return newToken
+        }
+    }
+
+    fun doFetch(scope: Set<String>): ClientCredentialsTokenResponse = try {
         restClient.post()
             .uri(tokenEndpoint)
             .contentType(APPLICATION_FORM_URLENCODED)

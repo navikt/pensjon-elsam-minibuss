@@ -3,7 +3,7 @@ package no.nav.pensjon.elsam.minibuss.security.azuread
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
-import java.time.temporal.TemporalAmount
+import kotlin.math.min
 
 data class ClientCredentialsTokenResponse(
     @JsonProperty("token_type") val tokenType: String,
@@ -11,15 +11,16 @@ data class ClientCredentialsTokenResponse(
     @JsonProperty("access_token") val accessToken: String,
 ) {
     @JsonIgnore
-    val issued = LocalDateTime.now()
+    private val fetchTime = LocalDateTime.now()
 
     @JsonIgnore
-    fun expires(expireRestriction: TemporalAmount): LocalDateTime {
-        return issued.plusSeconds(expiresIn).minus(expireRestriction)
-    }
+    val expireTime: LocalDateTime = expiresIn.let { fetchTime.plusSeconds(it - expiryLeeway) }
 
-    @JsonIgnore
-    fun isExpired(atTime: LocalDateTime, expireRestriction: TemporalAmount): Boolean {
-        return atTime.isAfter(expires(expireRestriction))
+    val isValid: Boolean
+        @JsonIgnore
+        get() = expireTime.isAfter(LocalDateTime.now())
+
+    companion object {
+        const val expiryLeeway = 30L
     }
 }
