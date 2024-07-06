@@ -34,6 +34,7 @@ spec:
   azure:
     application:
       enabled: true
+  webproxy: true
   env:
     - name: "ENVIRONMENT_NAME"
       value: {{ app.env }}
