@@ -6,6 +6,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.xml.datatype.DatatypeFactory
 
 private const val WID_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 private const val WID_DATE_FORMAT_NO_MILLIS = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -95,3 +96,5 @@ fun createDateFormat(dateFormat: String): DateFormat {
 
     return format
 }
+
+fun java.util.Date.toXMLGregorianCalendar() = DatatypeFactory.newInstance().newXMLGregorianCalendar(GregorianCalendar().also { it.time = this })
