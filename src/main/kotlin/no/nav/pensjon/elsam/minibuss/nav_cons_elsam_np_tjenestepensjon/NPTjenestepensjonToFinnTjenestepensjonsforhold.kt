@@ -1,65 +1,34 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_np_tjenestepensjon
 
-import io.getunleash.Unleash
 import nav_cons_elsam_np_tjenestepensjon.no.nav.inf.nptjenestepensjon.HarTjenestepensjonsforholdFaultPersonIkkeFunnetMsg
-import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.FinnTjenestepensjonsforholdFaultStoElementetFinnesIkkeMsg
-import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.SAMTjenestepensjon
 import nav_lib_cons_elsam_np.no.nav.lib.elsam.np.asbo.tjenestepensjon.ASBONpHarTjenestepensjonsforholdRequest
 import nav_lib_cons_elsam_np.no.nav.lib.elsam.np.asbo.tjenestepensjon.ASBONpHarTjenestepensjonsforholdResponse
-import no.nav.pensjon.elsam.minibuss.misc.entries
+import nav_lib_cons_elsam_np.no.nav.lib.elsam.np.fault.FaultNpPersonIkkeFunnet
+import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
 import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException.NotFound
+import java.util.Date
 
 @Component
 class NPTjenestepensjonToFinnTjenestepensjonsforhold(
-    private val finnTjenestepensjonsforhold: SAMTjenestepensjon,
     private val tjenestepensjonService: TjenestepensjonService,
-    private val unleash: Unleash,
 ) {
-    private val logger: Logger = getLogger(javaClass)
-
-    fun harTjenestepensjonsforhold(request: ASBONpHarTjenestepensjonsforholdRequest): ASBONpHarTjenestepensjonsforholdResponse? {
+    fun harTjenestepensjonsforhold(request: ASBONpHarTjenestepensjonsforholdRequest) =
         try {
-            val responseTp: Boolean? = if (unleash.isEnabled("pensjon-elsam-minibuss.harTjenestepensjonsforhold.sjekk-tp")) {
-                hentStatusTp(request.fnr)
-            } else {
-                null
+            ASBONpHarTjenestepensjonsforholdResponse().apply {
+                harTjenestepensjonsforhold = tjenestepensjonService.harTjenestepensjon(request.fnr)
             }
-
-            val responseBus = finnTjenestepensjonsforhold.finnTjenestepensjonsforhold(request.toGBOFinnTjenestepensjonsforholdRequest())
-                    ?.toASBONpHarTjenestepensjonsforholdResponse()
-
-            if (responseBus?.harTjenestepensjonsforhold != responseTp) {
-                logger.info(
-                    "Avvik mellom buss og tp, {}", entries(
-                        "bus" to responseBus?.harTjenestepensjonsforhold,
-                        "tp" to responseTp,
-                    )
-                )
-            } else {
-                logger.info(
-                    "Likt svar fra buss og tp, {}", entries(
-                        "bus" to responseBus?.harTjenestepensjonsforhold,
-                        "tp" to responseTp,
-                    )
-                )
-            }
-
-            return responseBus
-        } catch (e: FinnTjenestepensjonsforholdFaultStoElementetFinnesIkkeMsg) {
-            throw HarTjenestepensjonsforholdFaultPersonIkkeFunnetMsg(e.message, e.faultInfo?.toFaultNpPersonIkkeFunnet())
-        }
-    }
-
-    private fun hentStatusTp(
-        fnr: String,
-    ) =
-        try {
-            tjenestepensjonService.harTjenestepensjon(fnr)
-        } catch (e: Exception) {
-            logger.error("Feil ved henting av tjenestepensjon", e)
-            null
+        } catch (e: NotFound) {
+            val message = "Error Id: 0, Error Message: Cannot process the element bacause the ID = ${request.fnr} do not refer to a valid element."
+            throw HarTjenestepensjonsforholdFaultPersonIkkeFunnetMsg(
+                message,
+                FaultNpPersonIkkeFunnet().apply {
+                    errorMessage = message
+                    errorSource = "MODULE: nav-prod-frg-tp / COMPONENT: TjenestepensjonTOTjenestepensjonService / IF(OP): Tjenestepensjon(hentTjenestepensjonForholdYtelse) / REF: TjenestepensjonServicePartner IF(OP): TjenestepensjonService(hentTjenestepensjonInfo)"
+                    errorType = "Business"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
+            )
         }
 }
