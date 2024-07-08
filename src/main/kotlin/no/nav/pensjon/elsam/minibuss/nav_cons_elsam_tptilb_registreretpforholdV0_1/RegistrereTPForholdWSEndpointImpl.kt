@@ -1,5 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
+import io.getunleash.DefaultUnleash
 import jakarta.jws.WebMethod
 import jakarta.jws.WebParam
 import jakarta.jws.WebResult
@@ -10,6 +11,7 @@ import jakarta.xml.ws.ResponseWrapper
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.elsam.registreretpforhold.v0_1.ObjectFactory
+import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.springframework.stereotype.Component
 
 @Component
@@ -25,6 +27,8 @@ import org.springframework.stereotype.Component
 class RegistrereTPForholdWSEndpointImpl(
     private val navConsElsamTptilbRegisrereTpForhold: NavConsElsamTptilbRegisrereTpForhold,
     private val busRegistrereTPForhold: RegistrereTPForhold,
+    private val tjenestepensjonService: TjenestepensjonService,
+    private val unleash: DefaultUnleash,
 ) : RegistrereTPForhold {
     @WebMethod
     @RequestWrapper(
@@ -44,6 +48,11 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun opprettTPForhold(
         @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
+        if (unleash.isEnabled("pensjon-elsam-minibuss.opprettTPForhold")) {
+            tjenestepensjonService.opprettTPForhold(opprettTPForholdReq.fnr, opprettTPForholdReq.tpnr)
+            return
+        }
+
         if (true) {
             return busRegistrereTPForhold.opprettTPForhold(opprettTPForholdReq)
         }
