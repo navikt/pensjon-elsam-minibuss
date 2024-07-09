@@ -60,13 +60,21 @@ class TjenestepensjonService(
         return tjenestepensjon.forhold.isNotEmpty()
     }
 
-    fun opprettTPForhold(fnr: String, ordning: String)= tpRestClient.put()
+    fun opprettTPForhold(fnr: String, ordning: String) = tpRestClient.put()
             .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
             .body(SamhandlerForholdDto(kilde = "TPLEV", tpNr = ordning))
             .header("fnr", fnr)
             .retrieve()
             .body<SamhandlerForholdDto>()
             ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
+
+    fun slettTPForhold(fnr: String, ordning: String) = tpRestClient.delete()
+            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
+            .header("fnr", fnr)
+            .retrieve()
+            .body<Unit>()
+            ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
+
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
@@ -148,4 +156,5 @@ class TjenestepensjonService(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val ytelseId: Long? = null
     )
+
 }
