@@ -58,8 +58,15 @@ class NavConsElsamTptilbRegisrereTpForhold(
 
         // Ensure that the caller has a TP-forhold to the subject
         if (!response.tjenestepensjonForholdene.any { it?.tpnr == request.tpnr }) {
-            throw ServiceBusinessException(
-                getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold")
+            val melding = "Eget TP-nummer finnes ikke blant registrerte TP-forhold"
+
+            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(
+                melding,
+                FaultTjenestepensjonForholdIkkeFunnet().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-cons-elsam-tptilb-registreretpforhold / COMPONENT: authorizeAndOrchestrate / IF(OP): RegistrereTPForhold(hentTPForholdListe) / REF: SamhandlerPartner IF(OP): Samhandler(hentSamhandler)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
             )
         }
 
