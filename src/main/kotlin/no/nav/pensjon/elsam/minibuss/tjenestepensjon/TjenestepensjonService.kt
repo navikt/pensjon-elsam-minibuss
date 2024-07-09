@@ -3,7 +3,10 @@ package no.nav.pensjon.elsam.minibuss.tjenestepensjon
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultGeneriskMsg
+import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg
 import org.ehcache.impl.internal.concurrent.ConcurrentHashMap
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException.NotFound
 import org.springframework.web.client.RestClient
@@ -71,10 +74,15 @@ class TjenestepensjonService(
     fun slettTPForhold(fnr: String, ordning: String) = tpRestClient.delete()
             .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
             .header("fnr", fnr)
-            .retrieve()
-            .body<Unit>()
-            ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
-
+            .exchange { _, clientResponse ->
+                when (clientResponse.statusCode) {
+                    HttpStatus.NO_CONTENT ->  Unit
+                    HttpStatus.NOT_FOUND -> throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(clientResponse.bodyTo(String::class.java))
+                    else -> {
+                        throw SlettTPForholdFaultGeneriskMsg(clientResponse.bodyTo(String::class.java))
+                    }
+                }
+            }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
