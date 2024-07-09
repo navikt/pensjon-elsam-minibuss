@@ -49,8 +49,7 @@ class RegistrereTPForholdWSEndpointImpl(
         @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
         if (unleash.isEnabled("pensjon-elsam-minibuss.opprettTPForhold")) {
-            tjenestepensjonService.opprettTPForhold(opprettTPForholdReq.fnr, opprettTPForholdReq.tpnr)
-            return
+            return tjenestepensjonService.opprettTPForhold(opprettTPForholdReq.fnr, opprettTPForholdReq.tpnr)
         }
 
         if (true) {

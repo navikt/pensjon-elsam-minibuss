@@ -3,7 +3,10 @@ package no.nav.pensjon.elsam.minibuss.tjenestepensjon
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultGeneriskMsg
+import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultPersonIkkeFunnetMsg
 import org.ehcache.impl.internal.concurrent.ConcurrentHashMap
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException.NotFound
 import org.springframework.web.client.RestClient
@@ -61,12 +64,19 @@ class TjenestepensjonService(
     }
 
     fun opprettTPForhold(fnr: String, ordning: String)= tpRestClient.put()
-            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
-            .body(SamhandlerForholdDto(kilde = "TPLEV", tpNr = ordning))
-            .header("fnr", fnr)
-            .retrieve()
-            .body<SamhandlerForholdDto>()
-            ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
+        .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
+        .body(SamhandlerForholdDto(kilde = "TPLEV", tpNr = ordning))
+        .header("fnr", fnr)
+        .exchange { _, clientResponse ->
+            when (clientResponse.statusCode) {
+                HttpStatus.OK -> Unit
+                HttpStatus.CONFLICT -> Unit
+                HttpStatus.NOT_FOUND -> throw OpprettTPForholdFaultPersonIkkeFunnetMsg(clientResponse.bodyTo(String::class.java))
+                else -> {
+                    throw OpprettTPForholdFaultGeneriskMsg(clientResponse.bodyTo(String::class.java))
+                }
+            }
+        }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
