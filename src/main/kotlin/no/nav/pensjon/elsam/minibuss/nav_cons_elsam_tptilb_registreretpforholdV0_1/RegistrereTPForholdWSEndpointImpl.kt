@@ -70,17 +70,7 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun hentTPForholdListe(
         @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq
     ): HentTPForholdListeResp? {
-        if (true) {
-            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListeDirekte(hentTPForholdListeReq)
-        }
-
-        try {
-            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
-        } catch (e: HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg) {
-            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo)
-        } catch (e: HentTPForholdListeIntFaultGeneriskMsg) {
-            throw HentTPForholdListeFaultGeneriskMsg(e.message, e.faultInfo)
-        }
+        return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
     }
 
     @WebMethod
