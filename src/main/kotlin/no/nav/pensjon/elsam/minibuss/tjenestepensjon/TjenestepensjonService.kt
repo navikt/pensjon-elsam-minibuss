@@ -17,23 +17,19 @@ class TjenestepensjonService(
     private val ordningCache = ConcurrentHashMap<String, CachedValue<String?>>()
 
     fun hentOrdning(tpNr: String): String =
-        if (tpNr.startsWith("2")) {
-            ""
-        } else {
-            ordningCache[tpNr]
-                ?.takeIf { it.fetchTime.plusHours(1).isAfter(LocalDateTime.now()) }
-                ?.value
-                ?: run {
-                    try {
-                        tpRestClient.get()
-                            .uri("/api/ordning/{tpNr}", mapOf("tpNr" to tpNr))
-                            .retrieve()
-                            .body<OrdningDto>()?.navn ?: ""
-                    } catch (e: NotFound) {
-                        ""
-                    }.also {
-                        ordningCache[tpNr] = CachedValue(it)
-                    }
+        ordningCache[tpNr]
+            ?.takeIf { it.fetchTime.plusHours(1).isAfter(LocalDateTime.now()) }
+            ?.value
+            ?: run {
+                try {
+                    tpRestClient.get()
+                        .uri("/api/ordning/{tpNr}", mapOf("tpNr" to tpNr))
+                        .retrieve()
+                        .body<OrdningDto>()?.navn ?: ""
+                } catch (e: NotFound) {
+                    ""
+                }.also {
+                    ordningCache[tpNr] = CachedValue(it)
                 }
         }
 
