@@ -15,7 +15,6 @@ import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_8.ObjectFactory
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
-import no.nav.pensjon.elsam.minibuss.misc.entries
 import no.nav.pensjon.elsam.minibuss.sam.SamService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
@@ -175,37 +174,18 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun lagreTPYtelse(
         @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq
     ): LagreTPYtelseResp? {
-        var samServiceResponse: LagreTPYtelseResp? = null
-        var responseBus: LagreTPYtelseResp? = null
 
         if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
-            samServiceResponse = samService.lagreTPYtelse(lagreTPYtelseReq)
+            return samService.lagreTPYtelse(lagreTPYtelseReq).also {
+                logger.debug("lagreTPYtelse, kall til SAM: {}", it)
+            }
         }
 
         if (true) {
-            responseBus = busTPSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
+            return busTPSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
         }
 
-        if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
-            if (responseBus != samServiceResponse) {
-                logger.debug(
-                    "Avvik mellom buss og sam, {}", entries(
-                        "bus" to responseBus,
-                        "sam" to samServiceResponse,
-                    )
-                )
-            } else {
-                logger.debug(
-                    "Likt svar fra buss og tp, {}", entries(
-                        "bus" to responseBus,
-                        "tp" to samServiceResponse,
-                    )
-                )
-            }
-        }
-        return responseBus
-
-       /* try {
+        try {
             return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
         } catch (e: Exception) {
             throw when (e) {
@@ -213,6 +193,6 @@ class TPSamordningRegistreringWSEndpointImpl(
                 is LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg -> LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg(e.message, e.faultInfo)
                 else -> e
             }
-        }*/
+        }
     }
 }
