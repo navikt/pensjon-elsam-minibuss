@@ -27,4 +27,18 @@ class RestClientConfiguration {
             execution.execute(request, body)
         }
         .build()
+
+    @Bean
+    fun samRestClient(
+        @Value("\${sam.base.url}") baseUrl: String,
+        @Value("\${sam.scope}") scope: Set<String>,
+        azureAdClientCredentialsService: AzureAdClientCredentialsService,
+    ): RestClient = RestClient.builder()
+        .baseUrl(baseUrl)
+        .requestInterceptor(LoggingClientHttpRequestInterceptor())
+        .requestInterceptor { request, body, execution ->
+            request.headers.setBearerAuth(azureAdClientCredentialsService.accessToken(scope))
+            execution.execute(request, body)
+        }
+        .build()
 }
