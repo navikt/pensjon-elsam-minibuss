@@ -15,7 +15,7 @@ class SamService(
     fun lagreTPYtelse(request: LagreTPYtelseReq): LagreTPYtelseResp {
 
         val respWrapper = samRestClient.post()
-            .uri("/api/v1/ytelse")
+            .uri("/api/tp/ytelse/lagre")
             .body(request)
             .retrieve()
             .body(LagreTPYtelseResponseWrapper::class.java) ?: throw RuntimeException("Fikk tomt svar fra tjenesten")
