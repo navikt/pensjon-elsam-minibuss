@@ -1,6 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.HentTPForholdListeRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
@@ -13,8 +12,6 @@ import nav_lib_frg.no.nav.lib.frg.fault.FaultTomDatoForanFomDato
 import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
 import no.nav.elsam.registreretpforhold.v0_1.FaultGenerisk
 import no.nav.elsam.registreretpforhold.v0_1.FaultTjenestepensjonForholdIkkeFunnet
-import no.nav.elsam.registreretpforhold.v0_1.HentTPForholdListeResp
-import no.nav.elsam.registreretpforhold.v0_1.TPForhold
 import javax.xml.datatype.DatatypeFactory
 
 // FaultElementetErUgyldigTOFaultTjenestepensjonForholdIkkeFunnet.map
@@ -40,26 +37,6 @@ fun FaultTomDatoForanFomDato.toFaultGenerisk() =
     FaultGenerisk().also {
         it.errorDescription = errorMessage // move (executionOrder=1)
         it.errorCode = "InternalError" // set (executionOrder=2)
-    }
-
-// GBOTjenestepensjonForholdTOTPForhold.map
-fun ASBOStoTjenestepensjonforhold.toTPForhold() =
-    TPForhold().also {
-        it.tpnr = tpnr // move (executionOrder=1)
-        it.tpnavn = navn // move (executionOrder=2)
-    }
-
-// GBOTjenestepensjonTOHentTPForholdListeResp.map
-fun ASBOStoTjenestepensjon.toHentTPForholdListeResp() =
-    HentTPForholdListeResp().also {
-        it.tjenestepensjonForholdene.addAll(tjenestepensjonsforholdListe.map(ASBOStoTjenestepensjonforhold::toTPForhold)) // submap (executionOrder=1)
-    }
-
-// HentTPForholdListeRequestIntTOGBOFinnTjenestepensjonsforholdRequest.map
-fun HentTPForholdListeRequestInt.toGBOFinnTjenestepensjonsforholdRequest() =
-    ASBOStoFinnTjenestepensjonsforholdRequest().also {
-        it.fnr = extRequest?.fnr // move (executionOrder=1)
-        it.hentSamhandlerInfo = true // set (executionOrder=2)
     }
 
 // OpprettTPForholdRequestIntTOGBOTjenestepensjon.map

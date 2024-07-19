@@ -1,7 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
-import io.getunleash.Unleash
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.HentTPForholdListeRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
@@ -12,63 +10,21 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
-import no.nav.pensjon.elsam.minibuss.misc.entries
+import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
 import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
-import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.NestedExceptionUtils.*
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException.NotFound
 import java.time.LocalDateTime
 import java.util.*
 import javax.xml.datatype.DatatypeFactory
 
 @Component
 class NavConsElsamTptilbRegisrereTpForhold(
-    private val busRegistrereTPForhold: RegistrereTPForhold,
     private val registrereTPForholdInt: RegistrereTPForholdIntTOTjenestepensjon,
     private val samhandler: PSAKSamhandler,
     private val tjenestepensjonService: TjenestepensjonService,
-    private val unleash: Unleash,
 ) {
-    private val logger = getLogger(javaClass)
-
-    fun hentTPForholdListeDirekte(request: HentTPForholdListeReq): HentTPForholdListeResp {
-        val response = busRegistrereTPForhold.hentTPForholdListe(request)
-
-        try {
-            val responseTp = if (unleash.isEnabled("pensjon-elsam-minibuss.hentTPForholdListe.sjekk-tp")) {
-                tjenestepensjonService.hentTjenestepensjon(request.fnr).map {
-                    TPForhold().apply {
-                        tpnr = it.ordning
-                        tpnavn = tjenestepensjonService.hentOrdning(it.ordning)
-                    }
-                }.toSortedSet { o1, o2 -> o1.tpnavn.compareTo(o2.tpnavn) }
-            } else {
-                null
-            }
-
-            if (responseTp != null) {
-                val busTpNr = response.tjenestepensjonForholdene.toSortedSet { o1, o2 -> o1.tpnavn.compareTo(o2.tpnavn) }
-
-                if (erLike(busTpNr, responseTp)) {
-                    logger.info("Svar fra buss og tp er likt")
-                } else {
-                    logger.info(
-                        "Avvik mellom buss og tp, {}", entries(
-                            "bus" to busTpNr.map { it.tpnr to it.tpnavn },
-                            "tp" to responseTp.map { it.tpnr to it.tpnavn },
-                        )
-                    )
-                }
-            }
-        } catch (e: Exception) {
-            logger.error("Feil ved sammenligning av buss og tp", e)
-        }
-        return response
-    }
-
-    private fun erLike(lhs: SortedSet<TPForhold>, rhs: SortedSet<TPForhold>): Boolean =
-        lhs.size == rhs.size && lhs.zip(rhs).all { (f1, f2) -> f1.tpnr == f2.tpnr && f1.tpnavn == f2.tpnavn }
-
     @Throws(
         ServiceBusinessException::class,
         HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg::class,
@@ -77,20 +33,40 @@ class NavConsElsamTptilbRegisrereTpForhold(
     fun hentTPForholdListe(request: HentTPForholdListeReq): HentTPForholdListeResp {
         val response: HentTPForholdListeResp
         try {
-            response = registrereTPForholdInt.hentTPForholdListeInt(
-                HentTPForholdListeRequestInt().apply {
-                    extRequest = request
-                })
-        } catch (e: RuntimeException) {
-            throw createTechnicalFault(
-                e.message, getMostSpecificCause(e).toString()
+            response = HentTPForholdListeResp().apply {
+                tjenestepensjonForholdene.addAll(
+                    tjenestepensjonService.hentTjenestepensjon(request.fnr)
+                        .map {
+                            TPForhold().apply {
+                                tpnr = it.ordning
+                                tpnavn = tjenestepensjonService.hentOrdning(it.ordning)
+                            }
+                        }
+                )
+            }
+        } catch (e: NotFound) {
+            val melding = "Error Id: 0, Error Message: Cannot process the element bacause the ID = ${request.fnr} do not refer to a valid element."
+            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(
+                melding,
+                FaultTjenestepensjonForholdIkkeFunnet().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-prod-frg-tp / COMPONENT: TjenestepensjonTOTjenestepensjonService / IF(OP): Tjenestepensjon(hentTjenestepensjonForholdYtelse) / REF: TjenestepensjonServicePartner IF(OP): TjenestepensjonService(hentTjenestepensjonInfo)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
             )
         }
 
         // Ensure that the caller has a TP-forhold to the subject
         if (!response.tjenestepensjonForholdene.any { it?.tpnr == request.tpnr }) {
-            throw ServiceBusinessException(
-                getFaultTjenestepensjonForholdIkkeFunnet("Eget TP-nummer finnes ikke blant registrerte TP-forhold")
+            val melding = "Eget TP-nummer finnes ikke blant registrerte TP-forhold"
+
+            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(
+                melding,
+                FaultTjenestepensjonForholdIkkeFunnet().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-cons-elsam-tptilb-registreretpforhold / COMPONENT: authorizeAndOrchestrate / IF(OP): RegistrereTPForhold(hentTPForholdListe) / REF: SamhandlerPartner IF(OP): Samhandler(hentSamhandler)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
             )
         }
 
