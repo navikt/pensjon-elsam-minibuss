@@ -109,7 +109,9 @@ class TPSamordningRegistreringWSEndpointImpl(
             busResponse = busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
         }
 
-        samService.validerHentSamordningsdata(samResponse, busResponse)
+        if (unleash.isEnabled("pensjon-elsam-minibuss.hentSamordningsdata")) {
+            samService.validerHentSamordningsdata(samResponse, busResponse)
+        }
 
         return busResponse
 
