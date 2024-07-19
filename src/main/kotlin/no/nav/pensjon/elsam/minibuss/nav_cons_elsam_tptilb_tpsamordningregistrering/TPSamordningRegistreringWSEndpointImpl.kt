@@ -96,11 +96,24 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
     ): HentSamordningsdataResp? {
-        if (true) {
-            return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        var samResponse: HentSamordningsdataResp? = null
+        var busResponse: HentSamordningsdataResp? = null
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.hentSamordningsdata")) {
+            samResponse = samService.hentSamordningsdata(hentSamordningsdataReq).also {
+                logger.debug("hentSamordningsdata, kall til SAM: {}", it)
+            }
         }
 
-        try {
+        if (true) {
+            busResponse = busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        }
+
+        samService.validerHentSamordningsdata(samResponse, busResponse)
+
+        return busResponse
+
+       /* try {
             return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
         } catch (e: Exception) {
             throw when (e) {
@@ -108,7 +121,7 @@ class TPSamordningRegistreringWSEndpointImpl(
                 is HentSamordningsdataIntFaultGeneriskMsg -> HentSamordningsdataFaultGeneriskMsg(e.message, e.faultInfo)
                 else -> throw e
             }
-        }
+        }*/
     }
 
     @WebMethod
