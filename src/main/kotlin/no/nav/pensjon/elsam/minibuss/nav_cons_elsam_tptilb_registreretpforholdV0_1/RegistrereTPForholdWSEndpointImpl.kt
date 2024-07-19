@@ -100,6 +100,12 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun slettTPForhold(
         @WebParam(name = "slettTPForholdReq", targetNamespace = "") slettTPForholdReq: SlettTPForholdReq
     ) {
+        if (unleash.isEnabled("pensjon-elsam-minibuss.slettTPForhold")) {
+            tjenestepensjonService.slettTPForhold(slettTPForholdReq.fnr, slettTPForholdReq.tpnr)
+            return
+        }
+
+
         if (true) {
             return busRegistrereTPForhold.slettTPForhold(slettTPForholdReq)
         }

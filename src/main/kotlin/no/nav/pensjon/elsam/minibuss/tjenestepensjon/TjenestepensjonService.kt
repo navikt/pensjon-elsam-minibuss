@@ -3,6 +3,8 @@ package no.nav.pensjon.elsam.minibuss.tjenestepensjon
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultGeneriskMsg
+import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg
 import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultGeneriskMsg
 import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultPersonIkkeFunnetMsg
 import org.ehcache.impl.internal.concurrent.ConcurrentHashMap
@@ -58,6 +60,19 @@ class TjenestepensjonService(
 
         return tjenestepensjon.forhold.isNotEmpty()
     }
+
+    fun slettTPForhold(fnr: String, ordning: String) = tpRestClient.delete()
+            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
+            .header("fnr", fnr)
+            .exchange { _, clientResponse ->
+                when (clientResponse.statusCode) {
+                    HttpStatus.NO_CONTENT ->  Unit
+                    HttpStatus.NOT_FOUND -> throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(clientResponse.bodyTo(String::class.java))
+                    else -> {
+                        throw SlettTPForholdFaultGeneriskMsg(clientResponse.bodyTo(String::class.java))
+                    }
+                }
+            }
 
     fun opprettTPForhold(fnr: String, ordning: String)= tpRestClient.put()
         .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
@@ -154,4 +169,5 @@ class TjenestepensjonService(
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val ytelseId: Long? = null
     )
+
 }
