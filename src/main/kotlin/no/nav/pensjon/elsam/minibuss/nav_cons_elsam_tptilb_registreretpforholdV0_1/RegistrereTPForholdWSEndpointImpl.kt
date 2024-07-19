@@ -49,8 +49,7 @@ class RegistrereTPForholdWSEndpointImpl(
         @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
         if (unleash.isEnabled("pensjon-elsam-minibuss.opprettTPForhold")) {
-            tjenestepensjonService.opprettTPForhold(opprettTPForholdReq.fnr, opprettTPForholdReq.tpnr)
-            return
+            return tjenestepensjonService.opprettTPForhold(opprettTPForholdReq.fnr, opprettTPForholdReq.tpnr)
         }
 
         if (true) {
@@ -79,17 +78,7 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun hentTPForholdListe(
         @WebParam(name = "hentTPForholdListeReq", targetNamespace = "") hentTPForholdListeReq: HentTPForholdListeReq
     ): HentTPForholdListeResp? {
-        if (true) {
-            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListeDirekte(hentTPForholdListeReq)
-        }
-
-        try {
-            return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
-        } catch (e: HentTPForholdListeIntFaultTjenestepensjonForholdIkkeFunnetMsg) {
-            throw HentTPForholdListeFaultTjenestepensjonForholdIkkeFunnetMsg(e.message, e.faultInfo)
-        } catch (e: HentTPForholdListeIntFaultGeneriskMsg) {
-            throw HentTPForholdListeFaultGeneriskMsg(e.message, e.faultInfo)
-        }
+        return navConsElsamTptilbRegisrereTpForhold.hentTPForholdListe(hentTPForholdListeReq)
     }
 
     @WebMethod

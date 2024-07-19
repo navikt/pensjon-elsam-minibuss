@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.3.2</version>
         <relativePath/>
     </parent>
 
@@ -19,7 +19,7 @@
         <kotlin.version>2.0.0</kotlin.version>
         <revision>1.0.0-SNAPSHOT</revision>
 
-        <cxf.version>4.0.4</cxf.version>
+        <cxf.version>4.0.5</cxf.version>
         <cxf-xjc-boolean.version>4.0.1</cxf-xjc-boolean.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     </properties>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>ch.qos.logback.access</groupId>
             <artifactId>tomcat</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.tomcat</groupId>

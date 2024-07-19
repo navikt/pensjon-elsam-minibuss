@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultGeneriskMsg
 import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg
+import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultGeneriskMsg
+import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultPersonIkkeFunnetMsg
 import org.ehcache.impl.internal.concurrent.ConcurrentHashMap
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -21,23 +23,19 @@ class TjenestepensjonService(
     private val ordningCache = ConcurrentHashMap<String, CachedValue<String?>>()
 
     fun hentOrdning(tpNr: String): String =
-        if (tpNr.startsWith("2")) {
-            ""
-        } else {
-            ordningCache[tpNr]
-                ?.takeIf { it.fetchTime.plusHours(1).isAfter(LocalDateTime.now()) }
-                ?.value
-                ?: run {
-                    try {
-                        tpRestClient.get()
-                            .uri("/api/ordning/{tpNr}", mapOf("tpNr" to tpNr))
-                            .retrieve()
-                            .body<OrdningDto>()?.navn ?: ""
-                    } catch (e: NotFound) {
-                        ""
-                    }.also {
-                        ordningCache[tpNr] = CachedValue(it)
-                    }
+        ordningCache[tpNr]
+            ?.takeIf { it.fetchTime.plusHours(1).isAfter(LocalDateTime.now()) }
+            ?.value
+            ?: run {
+                try {
+                    tpRestClient.get()
+                        .uri("/api/ordning/{tpNr}", mapOf("tpNr" to tpNr))
+                        .retrieve()
+                        .body<OrdningDto>()?.navn ?: ""
+                } catch (e: NotFound) {
+                    ""
+                }.also {
+                    ordningCache[tpNr] = CachedValue(it)
                 }
         }
 
@@ -63,14 +61,6 @@ class TjenestepensjonService(
         return tjenestepensjon.forhold.isNotEmpty()
     }
 
-    fun opprettTPForhold(fnr: String, ordning: String) = tpRestClient.put()
-            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
-            .body(SamhandlerForholdDto(kilde = "TPLEV", tpNr = ordning))
-            .header("fnr", fnr)
-            .retrieve()
-            .body<SamhandlerForholdDto>()
-            ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
-
     fun slettTPForhold(fnr: String, ordning: String) = tpRestClient.delete()
             .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
             .header("fnr", fnr)
@@ -83,6 +73,21 @@ class TjenestepensjonService(
                     }
                 }
             }
+
+    fun opprettTPForhold(fnr: String, ordning: String)= tpRestClient.put()
+        .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
+        .body(SamhandlerForholdDto(kilde = "TPLEV", tpNr = ordning))
+        .header("fnr", fnr)
+        .exchange { _, clientResponse ->
+            when (clientResponse.statusCode) {
+                HttpStatus.OK -> Unit
+                HttpStatus.CONFLICT -> Unit
+                HttpStatus.NOT_FOUND -> throw OpprettTPForholdFaultPersonIkkeFunnetMsg(clientResponse.bodyTo(String::class.java))
+                else -> {
+                    throw OpprettTPForholdFaultGeneriskMsg(clientResponse.bodyTo(String::class.java))
+                }
+            }
+        }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
