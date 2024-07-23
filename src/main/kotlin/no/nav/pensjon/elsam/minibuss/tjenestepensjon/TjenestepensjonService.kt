@@ -3,12 +3,15 @@ package no.nav.pensjon.elsam.minibuss.tjenestepensjon
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseIntFaultGeneriskMsg
+import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg
 import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultGeneriskMsg
 import no.nav.elsam.registreretpforhold.v0_1.SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg
 import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultGeneriskMsg
 import no.nav.elsam.registreretpforhold.v0_1.OpprettTPForholdFaultPersonIkkeFunnetMsg
 import org.ehcache.impl.internal.concurrent.ConcurrentHashMap
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException.NotFound
 import org.springframework.web.client.RestClient
@@ -88,6 +91,32 @@ class TjenestepensjonService(
                 }
             }
         }
+
+    fun slettTPYtelse(fnr: String, ordning: String, ytelseType: String, datoFom: LocalDate) {
+        val ytelseId = hentTPForhold(fnr, ordning).ytelser
+            .firstOrNull { it.ytelseType == ytelseType && it.datoYtelseIverksattFom == datoFom }
+            ?.ytelseId ?: throw SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg("tpArt $ytelseType ikke funnet for $fnr i $ordning med datoFom $datoFom.")
+
+        tpRestClient.delete()
+            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning/ytelse/$ytelseId")
+            .header("fnr", fnr)
+            .retrieve()
+            .onStatus(HttpStatusCode::is4xxClientError) { _, response ->
+                throw SlettTPYtelseIntFaultGeneriskMsg("Bad request $response.statusCode")
+            }
+            .onStatus(HttpStatusCode::is5xxServerError) { _, response ->
+                throw RuntimeException("Ukjent feil oppsto i tjenesten, $response.statusCode")
+            }
+    }
+
+    private fun hentTPForhold(fnr: String, ordning: String): SamhandlerForholdDto {
+        return tpRestClient.get()
+            .uri("/api/samhandler/tjenestepensjon/forhold/$ordning")
+            .header("fnr", fnr)
+            .retrieve()
+            .body() ?: throw RuntimeException("Fikk tomt svar fra tp-registeret")
+
+    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
