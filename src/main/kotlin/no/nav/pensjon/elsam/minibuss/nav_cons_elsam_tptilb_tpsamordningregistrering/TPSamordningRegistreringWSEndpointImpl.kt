@@ -16,9 +16,11 @@ import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_8.ObjectFactory
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
 import no.nav.pensjon.elsam.minibuss.sam.SamService
+import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 @WebService(
@@ -40,6 +42,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
     val busTPSamordningRegistrering: TPSamordningRegistrering,
     val samService: SamService,
+    val tjenestepensjonService: TjenestepensjonService,
     private val unleash: DefaultUnleash
 ) : TPSamordningRegistrering {
     private val logger: Logger = getLogger(javaClass)
@@ -62,6 +65,17 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.slettTPYtelse")) {
+            return tjenestepensjonService.slettTPYtelse(
+                slettTPYtelseReq.fnr,
+                slettTPYtelseReq.tpnr,
+                slettTPYtelseReq.tpArt,
+                LocalDate.of(slettTPYtelseReq.datoFom.year, slettTPYtelseReq.datoFom.month, slettTPYtelseReq.datoFom.day)).also {
+                logger.debug("slettTPYtelse, kall til TP")
+            }
+        }
+
         if (true) {
             return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
         }
