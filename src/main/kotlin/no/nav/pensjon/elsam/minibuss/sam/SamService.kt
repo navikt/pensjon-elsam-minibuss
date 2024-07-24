@@ -1,13 +1,19 @@
 package no.nav.pensjon.elsam.minibuss.sam
 
+import no.nav.domain.stotte.sam.tjenestepensjon.exception.SamElementFinnesIkkeException
+import no.nav.domain.stotte.sam.trekk.exception.SamUlovligTrekkException
 import no.nav.elsam.tpsamordningregistrering.v0_5.HentSamordningsdataReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
+import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
 import no.nav.pensjon.elsam.minibuss.misc.entries
+import no.nav.service.stotte.sam.SamAlreadyAnsweredOrTimeLimitExceededException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
+import org.springframework.web.util.UriComponentsBuilder.fromUriString
+
 
 @Service
 class SamService(
@@ -75,6 +81,32 @@ class SamService(
             )
         }
     }
+
+    fun opprettRefusjonskrav(request: OpprettRefusjonskravReq) {
+
+        val builder = fromUriString("/api/refusjonskrav")
+            .queryParam("tpNr", request.tpnr)
+            .queryParam("samId", request.samordningsmeldingId)
+            .queryParam("refusjonskrav", request.refusjonskrav)
+            .queryParam("periodisertBelopListe", request.periodisertBelopListe)
+
+        val respWrapper = samRestClient.post()
+            .uri(builder.toUriString())
+            .header("pid", request.fnr)
+            .retrieve()
+            .body(OpprettRefusjonskravResponse::class.java) ?: throw RuntimeException("Fikk tomt svar fra tjenesten")
+
+        if (respWrapper.exception != null) {
+            log.info("opprettRefusjonskrav feilet. ${request.tpnr}, ${request.samordningsmeldingId}. ${respWrapper.exception.message}")
+            throw when (respWrapper.exception) {
+                is SamAlreadyAnsweredOrTimeLimitExceededException -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
+                is SamUlovligTrekkException -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
+                is SamElementFinnesIkkeException -> OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(respWrapper.exception.message, respWrapper.exception)
+                else -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
+            }
+        }
+        log.info("opprettRefusjonskrav ok. ${request.tpnr}, ${request.samordningsmeldingId}")
+    }
 }
 
 data class LagreTPYtelseResponseWrapper(
@@ -89,4 +121,9 @@ data class HentSamordningsdataResponseWrapper(
     val samordningsdata: HentSamordningsdataResp = HentSamordningsdataResp(),
     val e: Exception? = null,
     val exceptionName: String = ""
+)
+
+data class OpprettRefusjonskravResponse(
+    val refusjonskravAlleredeRegistrertEllerUtenforFrist: Boolean,
+    val exception: Exception? = null
 )
