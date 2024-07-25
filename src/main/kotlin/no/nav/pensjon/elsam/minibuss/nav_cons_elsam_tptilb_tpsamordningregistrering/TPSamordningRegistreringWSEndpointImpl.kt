@@ -165,6 +165,11 @@ class TPSamordningRegistreringWSEndpointImpl(
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.opprettRefusjonskrav")) {
+            return samService.opprettRefusjonskrav(opprettRefusjonskravReq)
+        }
+
         if (true) {
             return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
         }
