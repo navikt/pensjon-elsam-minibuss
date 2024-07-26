@@ -1,13 +1,10 @@
 package no.nav.pensjon.elsam.minibuss.sam
 
-import no.nav.domain.stotte.sam.tjenestepensjon.exception.SamElementFinnesIkkeException
-import no.nav.domain.stotte.sam.trekk.exception.SamUlovligTrekkException
 import no.nav.elsam.tpsamordningregistrering.v0_5.HentSamordningsdataReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
 import no.nav.pensjon.elsam.minibuss.misc.entries
-import no.nav.service.stotte.sam.SamAlreadyAnsweredOrTimeLimitExceededException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
@@ -98,10 +95,10 @@ class SamService(
 
         if (respWrapper.exception != null) {
             log.info("opprettRefusjonskrav feilet. ${request.tpnr}, ${request.samordningsmeldingId}. ${respWrapper.exception.message}")
-            throw when (respWrapper.exception) {
-                is SamAlreadyAnsweredOrTimeLimitExceededException -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
-                is SamUlovligTrekkException -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
-                is SamElementFinnesIkkeException -> OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(respWrapper.exception.message, respWrapper.exception)
+            throw when (respWrapper.exceptionName) {
+                "SamAlreadyAnsweredOrTimeLimitExceededException" -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
+                "SamUlovligTrekkException" -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
+                "SamElementFinnesIkkeException" -> OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(respWrapper.exception.message, respWrapper.exception)
                 else -> OpprettRefusjonskravFaultGeneriskMsg(respWrapper.exception.message, respWrapper.exception)
             }
         }
@@ -125,5 +122,6 @@ data class HentSamordningsdataResponseWrapper(
 
 data class OpprettRefusjonskravResponse(
     val refusjonskravAlleredeRegistrertEllerUtenforFrist: Boolean,
-    val exception: Exception? = null
+    val exception: Exception? = null,
+    val exceptionName: String? = null
 )
