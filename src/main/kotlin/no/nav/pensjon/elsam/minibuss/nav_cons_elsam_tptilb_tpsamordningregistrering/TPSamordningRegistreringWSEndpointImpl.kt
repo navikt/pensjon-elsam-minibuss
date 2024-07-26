@@ -72,7 +72,7 @@ class TPSamordningRegistreringWSEndpointImpl(
                 slettTPYtelseReq.tpnr,
                 slettTPYtelseReq.tpArt,
                 LocalDate.of(slettTPYtelseReq.datoFom.year, slettTPYtelseReq.datoFom.month, slettTPYtelseReq.datoFom.day)).also {
-                logger.debug("slettTPYtelse, kall til TP")
+                logger.info("slettTPYtelse, kall til TP")
             }
         }
 
@@ -115,7 +115,7 @@ class TPSamordningRegistreringWSEndpointImpl(
 
         if (unleash.isEnabled("pensjon-elsam-minibuss.hentSamordningsdata")) {
             samResponse = samService.hentSamordningsdata(hentSamordningsdataReq).also {
-                logger.debug("hentSamordningsdata, kall til SAM: {}", it)
+                logger.info("hentSamordningsdata, kall til SAM: {}", it)
             }
         }
 
@@ -211,7 +211,7 @@ class TPSamordningRegistreringWSEndpointImpl(
 
         if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
             return samService.lagreTPYtelse(lagreTPYtelseReq).also {
-                logger.debug("lagreTPYtelse, kall til SAM: {}", it)
+                logger.info("lagreTPYtelse, kall til SAM: {}", it)
             }
         }
 
