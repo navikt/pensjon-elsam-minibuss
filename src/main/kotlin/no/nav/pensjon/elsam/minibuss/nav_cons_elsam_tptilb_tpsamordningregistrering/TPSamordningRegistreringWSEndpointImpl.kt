@@ -16,9 +16,11 @@ import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_8.ObjectFactory
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
 import no.nav.pensjon.elsam.minibuss.sam.SamService
+import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 @WebService(
@@ -40,6 +42,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
     val busTPSamordningRegistrering: TPSamordningRegistrering,
     val samService: SamService,
+    val tjenestepensjonService: TjenestepensjonService,
     private val unleash: DefaultUnleash
 ) : TPSamordningRegistrering {
     private val logger: Logger = getLogger(javaClass)
@@ -62,6 +65,17 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.slettTPYtelse")) {
+            return tjenestepensjonService.slettTPYtelse(
+                slettTPYtelseReq.fnr,
+                slettTPYtelseReq.tpnr,
+                slettTPYtelseReq.tpArt,
+                LocalDate.of(slettTPYtelseReq.datoFom.year, slettTPYtelseReq.datoFom.month, slettTPYtelseReq.datoFom.day)).also {
+                logger.info("slettTPYtelse, kall til TP")
+            }
+        }
+
         if (true) {
             return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
         }
@@ -96,11 +110,26 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
     ): HentSamordningsdataResp? {
-        if (true) {
-            return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        var samResponse: HentSamordningsdataResp? = null
+        var busResponse: HentSamordningsdataResp? = null
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.hentSamordningsdata")) {
+            samResponse = samService.hentSamordningsdata(hentSamordningsdataReq).also {
+                logger.info("hentSamordningsdata, kall til SAM: {}", it)
+            }
         }
 
-        try {
+        if (true) {
+            busResponse = busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
+        }
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.hentSamordningsdata")) {
+            samService.validerHentSamordningsdata(samResponse, busResponse)
+        }
+
+        return busResponse
+
+       /* try {
             return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
         } catch (e: Exception) {
             throw when (e) {
@@ -108,7 +137,7 @@ class TPSamordningRegistreringWSEndpointImpl(
                 is HentSamordningsdataIntFaultGeneriskMsg -> HentSamordningsdataFaultGeneriskMsg(e.message, e.faultInfo)
                 else -> throw e
             }
-        }
+        }*/
     }
 
     @WebMethod
@@ -136,6 +165,11 @@ class TPSamordningRegistreringWSEndpointImpl(
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
+
+        if (unleash.isEnabled("pensjon-elsam-minibuss.opprettRefusjonskrav")) {
+            return samService.opprettRefusjonskrav(opprettRefusjonskravReq)
+        }
+
         if (true) {
             return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
         }
@@ -177,7 +211,7 @@ class TPSamordningRegistreringWSEndpointImpl(
 
         if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
             return samService.lagreTPYtelse(lagreTPYtelseReq).also {
-                logger.debug("lagreTPYtelse, kall til SAM: {}", it)
+                logger.info("lagreTPYtelse, kall til SAM: {}", it)
             }
         }
 
