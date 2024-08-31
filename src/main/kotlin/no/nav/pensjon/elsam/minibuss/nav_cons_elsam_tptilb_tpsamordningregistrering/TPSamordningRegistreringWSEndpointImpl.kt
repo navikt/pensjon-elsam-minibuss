@@ -96,19 +96,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
     ): HentSamordningsdataResp? {
-        if (true) {
-            return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
-        }
-
-        try {
-            return navConsElsamTplibTpSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
-        } catch (e: Exception) {
-            throw when (e) {
-                is HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg -> HentSamordningsdataFaultTPForholdIkkeIverksattMsg(e.message, e.faultInfo)
-                is HentSamordningsdataIntFaultGeneriskMsg -> HentSamordningsdataFaultGeneriskMsg(e.message, e.faultInfo)
-                else -> throw e
-            }
-        }
+        return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
     }
 
     @WebMethod
