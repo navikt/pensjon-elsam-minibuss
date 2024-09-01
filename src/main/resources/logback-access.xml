@@ -34,7 +34,7 @@
                 <pattern>
                     <pattern>
                         {
-                        "applicationVersion": "@project.version@",
+                        "applicationVersion": "@project.version@"
                         }
                     </pattern>
                 </pattern>
