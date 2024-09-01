@@ -34,7 +34,10 @@
                 <pattern>
                     <pattern>
                         {
-                        "applicationVersion": "@project.version@"
+                            "applicationVersion": "@project.version@",
+                            "handler_type": "%requestAttribute{handler_type}",
+                            "handler_class": "%requestAttribute{handler_class}",
+                            "handler_method": "%requestAttribute{handler_method}"
                         }
                     </pattern>
                 </pattern>
