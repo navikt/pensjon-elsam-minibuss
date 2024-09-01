@@ -10,8 +10,40 @@
             <OnMismatch>NEUTRAL</OnMismatch>
             <OnMatch>DENY</OnMatch>
         </filter>
-        <encoder>
-            <pattern>%h %l %u %user %date "%r" %s %b</pattern>
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+            <providers>
+                <!--
+                  Configuring the default Logstash providers in the same order as LogstashAccessEncoder.
+                  Messages are added after the custom fields
+                -->
+                <timestamp/>
+                <version/>
+                <method/>
+                <protocol/>
+                <statusCode/>
+                <requestedUrl/>
+                <requestedUri/>
+                <remoteHost/>
+                <contentLength/>
+                <elapsedTime/>
+
+                <!--
+                  Adding custom fields
+                -->
+                <threadName/>
+                <pattern>
+                    <pattern>
+                        {
+                        "applicationVersion": "@project.version@",
+                        }
+                    </pattern>
+                </pattern>
+
+                <!--
+                  Adding message at end. Makes it easier to find for people not using JQ or similar
+                -->
+                <message/>
+            </providers>
         </encoder>
     </appender>
 
