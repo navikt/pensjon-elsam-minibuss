@@ -1,7 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
 import jakarta.xml.bind.JAXBElement
-import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.HentSamordningsdataReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.LagreTPYtelseReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.OpprettRefusjonskravReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseReqInt
@@ -18,7 +17,6 @@ import nav_lib_sto.no.nav.lib.sto.gbo.*
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v0_7.Beregning
 import no.nav.elsam.tpsamordningregistrering.v0_8.Beregning2011
-import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.Vedtak
 import no.nav.pensjon.elsam.minibuss.misc.formatWIDString
@@ -76,15 +74,6 @@ object Mapper {
     // FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert.map
     fun FaultYtelseAlleredeRegistrert.toFaultTPYtelseAlleredeRegistrert() =
         FaultTPYtelseAlleredeRegistrert().also {
-            it.errorMessage = errorMessage // move (executionOrder=1)
-            it.errorSource = errorSource // move (executionOrder=2)
-            it.rootCause = rootCause // move (executionOrder=3)
-            it.dateTimeStamp = dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
-        }
-
-    // FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt.map
-    fun FaultYtelseIkkeIverksatt.toFaultTPForholdIkkeIverksatt() =
-        FaultTPForholdIkkeIverksatt().also {
             it.errorMessage = errorMessage // move (executionOrder=1)
             it.errorSource = errorSource // move (executionOrder=2)
             it.rootCause = rootCause // move (executionOrder=3)
@@ -318,41 +307,6 @@ object Mapper {
             }
         }
 
-    // GBOSamordningsdataTOHentSamordningsdataResp.map
-    fun GBOSamordningsdata.toHentSamordningsdataResp() =
-        HentSamordningsdataResp().also {
-            it.tpnr = tpnr // move (executionOrder=1)
-            it.person = person?.toPerson() // submap (executionOrder=2)
-            it.pensjonVedtakListe += vedtakListe.vedtakListe.map { x -> x.toVedtak() } // submap (executionOrder=3)
-            it.arbeidVedtakListe += arbeidOgAktivitetsvedtakListe.map { x -> x.toArbeidOgAktivitetsvedtak() } // submap (executionOrder=4)
-            it.ufullstendigeData = ufullstendigeData // move (executionOrder=5)
-
-            run {
-                val GBOSamordningsdata_tjenestepensjonForholdListe: List<GBOTjenestepensjonForhold> = this.tjenestepensjonForholdListe // custom.input.forEach (executionOrder=6)
-                val HentSamordningsdataResp_tjenestepensjonYtelseListe: MutableList<TPYtelse> = ArrayList() // custom.output declaration (executionOrder=6)
-
-                val iter: Iterator<GBOTjenestepensjonForhold> = GBOSamordningsdata_tjenestepensjonForholdListe.iterator()
-                while (iter.hasNext()) {
-                    val tpForhold: GBOTjenestepensjonForhold = iter.next()
-                    val iterator: Iterator<GBOTjenestepensjonYtelse> = tpForhold.getTjenestepensjonYtelseListe().iterator()
-                    while (iterator.hasNext()) {
-                        val gboTpYtelse = iterator.next()
-                        val tpYtelse = TPYtelse()
-                        tpYtelse.tpnr = tpForhold.tpnr
-                        tpYtelse.tpArt = gboTpYtelse.ytelseKode
-                        if (gboTpYtelse.iverksattFom != null) {
-                            tpYtelse.datoFom = parseWIDString(gboTpYtelse.iverksattFom)?.toXMLGregorianCalendar()
-                        }
-                        if (gboTpYtelse.iverksattTom != null) {
-                            tpYtelse.datoTom = parseWIDString(gboTpYtelse.iverksattTom)?.toXMLGregorianCalendar()
-                        }
-                        HentSamordningsdataResp_tjenestepensjonYtelseListe.add(tpYtelse)
-                    }
-                }
-                it.tjenestepensjonYtelseListe += HentSamordningsdataResp_tjenestepensjonYtelseListe // custom.output assignment (executionOrder=6)
-            }
-        }
-
     // GBOSamordningsdataTOLagreTPYtelseResp.map
     fun GBOSamordningsdata.toLagreTPYtelseResp() =
         LagreTPYtelseResp().also {
@@ -391,7 +345,7 @@ object Mapper {
         }
 
     // GBOSluttpoengtallTOSluttpoengtall.map
-    fun GBOSluttpoengtall.toSluttpoengtall() =
+    private fun GBOSluttpoengtall.toSluttpoengtall() =
         Sluttpoengtall().also {
             it.poengtall = poengtall?.toDouble()?.toJAXBElement("poengtall") // move (executionOrder=1)
 
@@ -406,7 +360,7 @@ object Mapper {
         }
 
     // GBOVedtakTOVedtak.map
-    fun GBOVedtak.toVedtak() =
+    private fun GBOVedtak.toVedtak() =
         Vedtak().also {
             it.saksKode = saksKode // move (executionOrder=1)
             it.vedtakId = vedtakId // move (executionOrder=2)
@@ -422,23 +376,12 @@ object Mapper {
         }
 
     // GBOVilkarsvedtakTOVilkarsvedtak.map
-    fun GBOVilkarsvedtak.toVilkarsvedtak() =
+    private fun GBOVilkarsvedtak.toVilkarsvedtak() =
         Vilkarsvedtak().also {
             it.gjelderFnr = gjelderFnr // move (executionOrder=1)
             it.tom = virkningTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
             it.fom = virkningFom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=3)
         }
-
-    // HentSamordningsdataReqIntTOGBOHentSamordningsdataRequest.map
-    fun HentSamordningsdataReqInt.toGBOHentSamordningsdataRequest(): GBOHentSamordningsdataRequest {
-        return GBOHentSamordningsdataRequest().also {
-            it.svarBrev = false // set (executionOrder=1)
-            it.tpnr = extRequest.tpnr // move (executionOrder=2)
-            it.fnr = extRequest.fnr // move (executionOrder=3)
-            it.fom = extRequest.datoFom?.let { datoFom -> formatWIDString(datoFom.toDate()) } // custom.output assignment (executionOrder=4)
-            it.tssEksternId = tssEksternId // move (executionOrder=5)
-        }
-    }
 
     // LagreTPYtelseReqIntTOGBOOpprettTPSamordningRequest.map
     fun LagreTPYtelseReqInt.toGBOOpprettTPSamordningRequest() =
@@ -464,7 +407,7 @@ object Mapper {
         }
 
     // PeriodisertBelopTOGBOPeriodisertBelop.map
-    fun PeriodisertBelop.toGBOPeriodisertBelop() =
+    private fun PeriodisertBelop.toGBOPeriodisertBelop() =
         GBOPeriodisertBelop().also {
             it.belop = belop.toString() // move (executionOrder=1)
             it.kravstillersRef = kravstillersReferanse // move (executionOrder=2)

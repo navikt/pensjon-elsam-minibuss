@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 @Component
 class NavConsElsamTplibTpSamordningRegistrering(
     private val samhandlerPartner: PSAKSamhandler,
-    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringInt
+    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringIntTOSamordning
 ) {
     @Throws(
         LagreTPYtelseIntFaultGeneriskMsg::class,
@@ -43,23 +43,6 @@ class NavConsElsamTplibTpSamordningRegistrering(
                 SlettTPYtelseReqInt().apply {
                     extRequest = slettTPYtelseReq
                     tssEksternId = mapTPnrToTSSEksternId(slettTPYtelseReq.tpnr)
-                }
-            )
-        } catch (e: RuntimeException) {
-            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
-        }
-
-    @Throws(
-        HentSamordningsdataIntFaultTPForholdIkkeIverksattMsg::class,
-        HentSamordningsdataIntFaultGeneriskMsg::class,
-        ServiceBusinessException::class
-    )
-    fun hentSamordningsdata(hentSamordningsdataReq: HentSamordningsdataReq): HentSamordningsdataResp =
-        try {
-            tpSamordningRegistreringIntPartner.hentSamordningsdataInt(
-                HentSamordningsdataReqInt().apply {
-                    extRequest = hentSamordningsdataReq
-                    tssEksternId = mapTPnrToTSSEksternId(hentSamordningsdataReq.tpnr)
                 }
             )
         } catch (e: RuntimeException) {
