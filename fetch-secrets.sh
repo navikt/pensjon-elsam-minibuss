@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 
-OPTSTRING=":v"
-
-verbose=false
-
-while getopts ${OPTSTRING} opt; do
-  case ${opt} in
-    v)
-      verbose=true
-      ;;
-    ?)
-      echo "Ukjent valg: -${OPTARG}"
-      exit 1
-      ;;
-  esac
-done
-
-shift $((OPTIND-1))
-
-
 if [[ $# -eq 0 ]]; then
     env="q2"
 
@@ -33,24 +14,12 @@ else
     exit 1
 fi
 
+envfile=${env}.env
 
 bold=$(tput bold)
 normal=$(tput sgr0)
 white="[97;1m"
-yellow="[33;1m"
 endcolor="[0m"
-
-
-if [ "${BASH_VERSINFO:-0}" -lt 4 ]; then
-    echo "Du har for gammel versjon av bash. Vennligst installer versjon 4 eller høyere"
-
-    if [[ $OSTYPE == 'darwin'* ]]; then
-        echo
-        echo "På Mac kan du kjøre: ${white}brew install bash${endcolor}"
-    fi
-
-    exit 1
-fi
 
 if command -v nais >& /dev/null; then
   DISCONNECT_STATUS=$(nais device status | grep -c Disconnected)
@@ -67,30 +36,30 @@ if command -v nais >& /dev/null; then
   fi
 fi
 
-vault --version >& /dev/null || (
+command -v vault >& /dev/null || (
   echo "ERROR: You need to install the Vault CLI on your machine: https://www.vaultproject.io/downloads.html" && exit 1
 ) || exit 1
-jq --version >& /dev/null || (
+command -v jq >& /dev/null || (
   echo "ERROR: You need to install the jq CLI tool on your machine: https://stedolan.github.io/jq/" && exit 1
 ) || exit 1
-base64 --help >& /dev/null || (
+command -v base64 >& /dev/null || (
   echo "ERROR: You need to install the base64 tool on your machine. (brew install base64 on macOS)" && exit 1
 ) || exit 1
-which kubectl >& /dev/null || (
+command -v kubectl >& /dev/null || (
   echo "ERROR: You need to install and configure kubectl (see: https://confluence.adeo.no/x/UzjYF)" && exit 1
 ) || exit 1
 
 export VAULT_ADDR=https://vault.adeo.no
 
 while true; do
-	NAME="$(vault token lookup -format=json | jq '.data.display_name' -r; exit ${PIPESTATUS[0]})"
+  NAME="$(vault token lookup -format=json | jq '.data.display_name' -r; exit ${PIPESTATUS[0]})"
   ret=${PIPESTATUS[0]}
   if [ "$ret" -ne 0 ]; then
     echo "Looks like you are not logged in to Vault."
 
     read -p "Do you want to log in? (y/n) " -n 1 -r
     echo    # (optional) move to a new line
-    if [[ $REPLY =~ ^[Yy]$ ]]
+    if [[ $REPLY =~ ^[YyJj]$ ]]
     then
       vault login -method=oidc -no-print
     else
@@ -105,95 +74,53 @@ done
 set -e
 set -o pipefail
 
-spin[0]="⠻"
-spin[1]="⠽"
-spin[2]="⠾"
-spin[3]="⠷"
-spin[4]="⠯"
-spin[5]="⠟"
-
-spinIndex=0
-spinStarted=false
-spinElements=6
-
-declare -A kubernetes_context_namespace_secrets
-declare -A kubernetes_secret_array
-
-function doSpin {
-    if "$spinStarted"; then
-        echo -ne "\b${spin[spinIndex]}"
-    else
-        echo -ne "${spin[spinIndex]}"
-    fi
-    spinStarted=true
-    spinIndex=$(((spinIndex+1) % $spinElements))
-}
-
-function fetch_kubernetes_secret {
-    local context=$1
-    local namespace=$2
-    local secret=$3
-    local name=$4
-    local context_namespace_secrets_key
-    local context_namespace_secrets_value
-    local secret_name
-    local secret_response
-
-    context_namespace_secrets_key="$context:$namespace"
-
-    if [ -v kubernetes_context_namespace_secrets["$context_namespace_secrets_key"] ]; then
-        context_namespace_secrets_value=${kubernetes_context_namespace_secrets["$context_namespace_secrets_key"]}
-    else
-        context_namespace_secrets_value=$(kubectl --context="$context" -n "$namespace" get secrets)
-        kubernetes_context_namespace_secrets["$context_namespace_secrets_key"]=$context_namespace_secrets_value
-    fi
-
-    secret_name=$(echo "$context_namespace_secrets_value" | grep "$secret" | tail -1 | awk '{print $1}')
-
-    if [ -v kubernetes_secret_array["$secret_name"] ]; then
-        secret_response=${kubernetes_secret_array["$secret_name"]}
-    else
-        secret_response=$(kubectl --context="$context" -n "$namespace" get secret "$secret_name" -o json)
-        kubernetes_secret_array["$secret_name"]=$secret_response
-    fi
-
-    {
-      echo -n "$name="
-      echo "$secret_response" | jq -j ".data[\"$name\"]" | base64 --decode
-      echo
-    } >> ${env}.env
-}
-
-function fetch_kubernetes_secret_array {
+function fetch_kubernetes_secrets {
     local type=$1
     local context=$2
     local namespace=$3
     local secret=$4
+    local mode=$5
     local A=("$@")
 
     echo -n -e "\t- $type "
 
-    mkdir -p "secrets/$env/$path"
+    local context_namespace_secrets_value=$(kubectl --context="$context" -n "$namespace" get secrets)
 
-    for i in "${A[@]:4}"
+    if [[ "mode" == "strict" ]]; then
+        local secret_name=$(echo "$context_namespace_secrets_value" | awk "/$secret/ {print \$1}")
+    else
+        local secret_name=$(echo "$context_namespace_secrets_value" | grep "$secret" | tail -1 | awk '{print $1}')
+    fi
+
+    if [[ $secret_name == *$'\n'* ]]; then
+       echo
+       echo "Fant følgende hemmeligheter som samsvarte med søkestrengen \"$secret\". Støtter kun en hemmelighet"
+       echo $secret_name
+       exit 1
+    fi
+
+    local secret_response=$(kubectl --context="$context" -n "$namespace" get secret "$secret_name" -o json)
+
+    for name in "${A[@]:5}"
     do
-        doSpin
-        fetch_kubernetes_secret "$context" "$namespace" "$secret" "$i"
+        {
+          echo -n "$name='"
+          echo "$secret_response" | jq -j ".data[\"$name\"]" | base64 --decode |  tr -d '\n'
+          echo "'"
+        } >> ${envfile}
     done
 
-    spinIndex=0
-    spinStarted=false
-    echo -e "\b${bold}${white}✔${endcolor}${normal}"
+    echo -e "${bold}${white}✔${endcolor}${normal}"
 }
 
 
-rm -f ${env}.env
-touch ${env}.env
+rm -f "${envfile}"
+touch "${envfile}"
 
 
 echo -e "${bold}Henter secrets fra Kubernetes${normal}"
 
-fetch_kubernetes_secret_array "AzureAD" "dev-fss" "pensjonsamhandling" "azure-pensjon-elsam-minibuss-$env" \
+fetch_kubernetes_secrets "AzureAD" "dev-fss" "pensjonsamhandling" "azure-pensjon-elsam-minibuss-$env" "strict" \
     "AZURE_APP_CLIENT_ID" \
     "AZURE_OPENID_CONFIG_ISSUER" \
     "AZURE_APP_CLIENT_SECRET" \
@@ -202,7 +129,7 @@ fetch_kubernetes_secret_array "AzureAD" "dev-fss" "pensjonsamhandling" "azure-pe
     "AZURE_APP_TENANT_ID" \
     "AZURE_OPENID_CONFIG_JWKS_URI"
 
-fetch_kubernetes_secret_array "Unleash" "dev-fss" "pensjonsamhandling" "pensjon-elsam-minibuss-${env}-unleash-api-token" \
+fetch_kubernetes_secrets "Unleash" "dev-fss" "pensjonsamhandling" "pensjon-elsam-minibuss-${env}-unleash-api-token" "strict" \
     "UNLEASH_SERVER_API_TOKEN" \
     "UNLEASH_SERVER_API_URL"
 
@@ -211,22 +138,24 @@ echo
 echo "${bold}Henter secrets fra Vault${normal}"
 
 echo -n -e "\t- Servicebruker "
-echo "SERVICEUSER_USERNAME=$(vault kv get -field 'username' 'serviceuser/dev/srvpensjon')" >> ${env}.env
-echo "SERVICEUSER_PASSWORD=$(vault kv get -field 'password' 'serviceuser/dev/srvpensjon')" >> ${env}.env
+
+echo "SERVICEUSER_USERNAME='$(vault kv get -field username -mount=serviceuser dev/srvpensjon)'" >> "${envfile}"
+echo "SERVICEUSER_PASSWORD='$(vault kv get -field password -mount=serviceuser dev/srvpensjon)'" >> "${envfile}"
 
 echo -e "${bold}${white}✔${endcolor}${normal}"
 
 echo -n -e "\t- Truststore "
 
 mkdir -p "secrets/$env/truststore"
-vault kv get -field keystore certificate/dev/nav-truststore | base64 --decode > ".truststore.jts"
-echo "NAV_TRUSTSTORE_PATH=$(pwd)/.truststore.jts" >> ${env}.env
-echo "NAV_TRUSTSTORE_PASSWORD=$(vault kv get -field keystorepassword certificate/dev/nav-truststore)" >> ${env}.env
+vault kv get -field keystore -mount certificate dev/nav-truststore | base64 --decode > ".truststore.jts"
+echo "NAV_TRUSTSTORE_PATH='$(pwd)/.truststore.jts'" >> "${envfile}"
+echo "NAV_TRUSTSTORE_PASSWORD='$(vault kv get -field keystorepassword -mount certificate dev/nav-truststore)'" >> "${envfile}"
 
-echo "ENVIRONMENT_NAME=${env}" >> ${env}.env
+echo "ENVIRONMENT_NAME='${env}'" >> "${envfile}"
+echo "SPRING_PROFILES_ACTIVE='${env}'" >> "${envfile}"
 
 echo -e "${bold}${white}✔${endcolor}${normal}"
 
 echo
 
-echo "${bold}Hentet hemmeligheter og oppdatert ${env}.env fil ${normal}"
+echo "Hentet hemmeligheter og oppdatert filen ${bold}$(realpath ${envfile})${normal}"

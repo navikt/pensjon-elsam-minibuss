@@ -95,9 +95,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     )
     override fun hentSamordningsdata(
         @WebParam(name = "hentSamordningsdataReq", targetNamespace = "") hentSamordningsdataReq: HentSamordningsdataReq
-    ): HentSamordningsdataResp? {
-        return busTPSamordningRegistrering.hentSamordningsdata(hentSamordningsdataReq)
-    }
+    ) = throw HentSamordningsdataFaultGeneriskMsg("Henting av samordningsdata er ikke tillatt via Elsam")
 
     @WebMethod
     @RequestWrapper(

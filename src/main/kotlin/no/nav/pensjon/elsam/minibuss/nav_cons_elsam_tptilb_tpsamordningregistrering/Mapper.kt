@@ -1,7 +1,6 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
 import jakarta.xml.bind.JAXBElement
-import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.HentSamordningsdataReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.LagreTPYtelseReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.OpprettRefusjonskravReqInt
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.SlettTPYtelseReqInt
@@ -18,7 +17,6 @@ import nav_lib_sto.no.nav.lib.sto.gbo.*
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v0_7.Beregning
 import no.nav.elsam.tpsamordningregistrering.v0_8.Beregning2011
-import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.Vedtak
 import no.nav.pensjon.elsam.minibuss.misc.formatWIDString
@@ -76,15 +74,6 @@ object Mapper {
     // FaultYtelseAlleredeRegistrertTOFaultTPYtelseAlleredeRegistrert.map
     fun FaultYtelseAlleredeRegistrert.toFaultTPYtelseAlleredeRegistrert() =
         FaultTPYtelseAlleredeRegistrert().also {
-            it.errorMessage = errorMessage // move (executionOrder=1)
-            it.errorSource = errorSource // move (executionOrder=2)
-            it.rootCause = rootCause // move (executionOrder=3)
-            it.dateTimeStamp = dateTimeStamp?.toXMLGregorianCalendar() // move (executionOrder=4)
-        }
-
-    // FaultYtelseIkkeIverksattTOFaultTPForholdIkkeIverksatt.map
-    fun FaultYtelseIkkeIverksatt.toFaultTPForholdIkkeIverksatt() =
-        FaultTPForholdIkkeIverksatt().also {
             it.errorMessage = errorMessage // move (executionOrder=1)
             it.errorSource = errorSource // move (executionOrder=2)
             it.rootCause = rootCause // move (executionOrder=3)
@@ -356,7 +345,7 @@ object Mapper {
         }
 
     // GBOSluttpoengtallTOSluttpoengtall.map
-    fun GBOSluttpoengtall.toSluttpoengtall() =
+    private fun GBOSluttpoengtall.toSluttpoengtall() =
         Sluttpoengtall().also {
             it.poengtall = poengtall?.toDouble()?.toJAXBElement("poengtall") // move (executionOrder=1)
 
@@ -371,7 +360,7 @@ object Mapper {
         }
 
     // GBOVedtakTOVedtak.map
-    fun GBOVedtak.toVedtak() =
+    private fun GBOVedtak.toVedtak() =
         Vedtak().also {
             it.saksKode = saksKode // move (executionOrder=1)
             it.vedtakId = vedtakId // move (executionOrder=2)
@@ -387,7 +376,7 @@ object Mapper {
         }
 
     // GBOVilkarsvedtakTOVilkarsvedtak.map
-    fun GBOVilkarsvedtak.toVilkarsvedtak() =
+    private fun GBOVilkarsvedtak.toVilkarsvedtak() =
         Vilkarsvedtak().also {
             it.gjelderFnr = gjelderFnr // move (executionOrder=1)
             it.tom = virkningTom?.let { x -> parseWIDString(x) }?.toXMLGregorianCalendar() // custom.output assignment (executionOrder=2)
@@ -418,7 +407,7 @@ object Mapper {
         }
 
     // PeriodisertBelopTOGBOPeriodisertBelop.map
-    fun PeriodisertBelop.toGBOPeriodisertBelop() =
+    private fun PeriodisertBelop.toGBOPeriodisertBelop() =
         GBOPeriodisertBelop().also {
             it.belop = belop.toString() // move (executionOrder=1)
             it.kravstillersRef = kravstillersReferanse // move (executionOrder=2)

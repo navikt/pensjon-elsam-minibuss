@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.3.4</version>
         <relativePath/>
     </parent>
 
@@ -16,12 +16,12 @@
 
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>2.0.10</kotlin.version>
+        <kotlin.version>2.0.20</kotlin.version>
         <revision>1.0.0-SNAPSHOT</revision>
 
-        <cxf.version>4.0.4</cxf.version>
-        <cxf-xjc-boolean.version>4.0.1</cxf-xjc-boolean.version>
-        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
+        <cxf.version>4.0.5</cxf.version>
+        <cxf-xjc-boolean.version>4.0.2</cxf-xjc-boolean.version>
+        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
     </properties>
 
     <dependencies>
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>ch.qos.logback.access</groupId>
             <artifactId>tomcat</artifactId>
-            <version>2.0.2</version>
+            <version>2.0.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.tomcat</groupId>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>io.getunleash</groupId>
             <artifactId>unleash-client-java</artifactId>
-            <version>9.2.2</version>
+            <version>9.2.4</version>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
