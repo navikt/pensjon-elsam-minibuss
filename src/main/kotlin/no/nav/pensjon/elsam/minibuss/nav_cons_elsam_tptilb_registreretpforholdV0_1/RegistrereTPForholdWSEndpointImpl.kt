@@ -92,10 +92,6 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun slettTPForhold(
         @WebParam(name = "slettTPForholdReq", targetNamespace = "") slettTPForholdReq: SlettTPForholdReq
     ) {
-        if (true) {
-            return busRegistrereTPForhold.slettTPForhold(slettTPForholdReq)
-        }
-
         try {
             navConsElsamTptilbRegisrereTpForhold.slettTPForhold(slettTPForholdReq)
         } catch (e: SlettTPForholdFinnTjenestepensjonsforholdIntFaultTjenestepensjonForholdIkkeFunnetIntMsg) {
