@@ -2,14 +2,12 @@ package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV
 
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoFinnTjenestepensjonsforholdRequest
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjonforhold
 import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetErUgyldig
 import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetFinnesIkke
 import nav_lib_frg.no.nav.lib.frg.fault.FaultTomDatoForanFomDato
-import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
 import no.nav.elsam.registreretpforhold.v0_1.FaultGenerisk
 import no.nav.elsam.registreretpforhold.v0_1.FaultTjenestepensjonForholdIkkeFunnet
 import javax.xml.datatype.DatatypeFactory
@@ -61,10 +59,4 @@ fun SlettTPForholdFinnTjenestepensjonsforholdRequestInt.toGBOFinnTjenestepensjon
         it.tssEksternId = eksternTSSId // move (executionOrder=1)
         it.fnr = extRequest?.fnr // move (executionOrder=2)
         it.hentSamhandlerInfo = false // set (executionOrder=3)
-    }
-
-// SlettTPForholdRequestIntTOGBOTjenestepensjonForhold.map
-fun SlettTPForholdTjenestepensjonRequestInt.toGBOTjenestepensjonForhold() =
-    GBOTjenestepensjonForhold().also {
-        it.forholdId = forholdId // move (executionOrder=1)
     }

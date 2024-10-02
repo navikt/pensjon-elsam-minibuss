@@ -124,10 +124,7 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
 
         try {
-            registrereTPForholdInt.slettTPForholdTjenestepensjonInt(
-                SlettTPForholdTjenestepensjonRequestInt().apply {
-                    forholdId = tpForholdet.forholdId
-                })
+            registrereTPForholdInt.slettTPForholdTjenestepensjonInt(tpForholdet.forholdId, slettTPForholdRequest.fnr, slettTPForholdRequest.tpnr)
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }

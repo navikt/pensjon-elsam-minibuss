@@ -8,7 +8,9 @@ import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.OpprettTjenestepensjonsforhol
 import nav_cons_sto_sam_tjenestepensjon.no.nav.inf.SAMTjenestepensjon
 import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import nav_lib_frg.no.nav.lib.frg.fault.FaultElementetErDuplikat
+import nav_lib_frg.no.nav.lib.frg.gbo.GBOTjenestepensjonForhold
 import nav_lib_frg.no.nav.lib.frg.inf.tjenestepensjon.*
+import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.springframework.stereotype.Component
 
 @Component
@@ -16,6 +18,7 @@ class RegistrereTPForholdIntTOTjenestepensjon(
     private val finnTjenestepensjonsforhold: SAMTjenestepensjon,
     private val samTjenstepensjon: SAMTjenestepensjon,
     private val tjenestepensjon: Tjenestepensjon,
+    private val tjenestepensjonService: TjenestepensjonService,
 ) {
     // RegistrereTPForholdIntTOTjenestepensjon
     fun opprettTPForholdInt(opprettTPForholdRequestInt: OpprettTPForholdRequestInt) {
@@ -46,9 +49,13 @@ class RegistrereTPForholdIntTOTjenestepensjon(
     }
 
     // RegistrereTPForholdIntTOTjenestepensjon
-    fun slettTPForholdTjenestepensjonInt(slettTPForholdRequestInt: SlettTPForholdTjenestepensjonRequestInt) {
+    fun slettTPForholdTjenestepensjonInt(forholdId: String, fnr: String, tpNr: String) {
         try {
-            tjenestepensjon.slettTjenestepensjonsforhold(slettTPForholdRequestInt.toGBOTjenestepensjonForhold())
+            // TODO: Bytt til tjenestepensjonService.slettTjenestepensjonsforhold
+            tjenestepensjon.slettTjenestepensjonsforhold(GBOTjenestepensjonForhold().also {
+                it.forholdId = forholdId // move (executionOrder=1)
+            })
+//            tjenestepensjonService.slettTjenestepensjonsforhold(fnr, tpNr)
         } catch (e: SlettTjenestepensjonsforholdFaultElementetErUgyldigMsg) {
             throw SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg(e.message, e.faultInfo?.toFaultTjenestepensjonForholdIkkeFunnet())
         }
