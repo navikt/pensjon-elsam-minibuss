@@ -1,13 +1,10 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdFinnTjenestepensjonsforholdRequestInt
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.SlettTPForholdTjenestepensjonRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandlerListe
-import nav_lib_cons_sto_sam.no.nav.lib.sto.sam.asbo.tjenestepensjon.ASBOStoTjenestepensjon
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
 import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
@@ -94,40 +91,63 @@ class NavConsElsamTptilbRegisrereTpForhold(
         SlettTPForholdTjenestepensjonIntFaultTjenestepensjonForholdIkkeFunnetIntMsg::class
     )
     fun slettTPForhold(slettTPForholdRequest: SlettTPForholdReq) {
-        val response: ASBOStoTjenestepensjon
-        try {
-            response =
-                registrereTPForholdInt.slettTPForholdFinnTjenestepensjonsforholdInt(
-                    SlettTPForholdFinnTjenestepensjonsforholdRequestInt().apply {
-                        extRequest = slettTPForholdRequest
-                        eksternTSSId = mapTPnrToTSSEksternId(slettTPForholdRequest.tpnr)
-                    })
+        val forholdList = try {
+            tjenestepensjonService.hentTjenestepensjon(slettTPForholdRequest.fnr)
+                .filter { it.ordning == slettTPForholdRequest.tpnr }
+                .map {
+                    Forhold(
+                        it.ytelser?.map { Ytelse() } ?: emptyList()
+                    )
+                }
+        } catch (e: NotFound) {
+            val melding = "Error Id: 0, Error Message: Cannot process the element bacause the ID = ${slettTPForholdRequest.fnr} do not refer to a valid element."
+            throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(
+                melding,
+                FaultTjenestepensjonForholdIkkeFunnet().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-prod-frg-tp / COMPONENT: TjenestepensjonTOTjenestepensjonService / IF(OP): Tjenestepensjon(hentTjenestepensjonForholdYtelse) / REF: TjenestepensjonServicePartner IF(OP): TjenestepensjonService(hentTjenestepensjonInfo)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
+            )
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }
-        val tpForholdene = response.tjenestepensjonsforholdListe
-        if (tpForholdene.isEmpty()) {
-            throw ServiceBusinessException(
-                getFaultTjenestepensjonForholdIkkeFunnet("TP-forholdet finnes ikke i registeret")
+        if (forholdList.isEmpty()) {
+            val melding = "TP-forholdet finnes ikke i registeret"
+            throw SlettTPForholdFaultTjenestepensjonForholdIkkeFunnetMsg(
+                melding,
+                FaultTjenestepensjonForholdIkkeFunnet().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-cons-elsam-tptilb-registreretpforhold / COMPONENT: authorizeAndOrchestrate / IF(OP): RegistrereTPForhold(hentTPForholdListe) / REF: SamhandlerPartner IF(OP): Samhandler(hentSamhandler)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
             )
         }
 
-        if (tpForholdene.size > 1) {
+        if (forholdList.size > 1) {
             throw createTechnicalFault("Dublett funnet, inkonsistens i registeret", "Teknisk feil")
         }
 
-        val tpForholdet = tpForholdene[0]
+        val tpForholdet = forholdList[0]
 
         // Disallow cascade delete
-        if (tpForholdet.tjenestepensjonYtelseListe.isNotEmpty()) {
-            throw ServiceBusinessException(getFaultKanIkkeSlettes("TP-forholdet kan ikke slettes fordi det er registrert en eller flere TP-ytelser på forholdet."))
+        if (tpForholdet.ytelseList.isNotEmpty()) {
+            val melding = "TP-forholdet kan ikke slettes fordi det er registrert en eller flere TP-ytelser på forholdet."
+            throw SlettTPForholdFaultKanIkkeSlettesMsg(
+                melding,
+                FaultKanIkkeSlettes().apply {
+                    errorMessage = melding
+                    errorSource = "MODULE: nav-cons-elsam-tptilb-registreretpforhold / COMPONENT: authorizeAndOrchestrate / IF(OP): RegistrereTPForhold(hentTPForholdListe) / REF: SamhandlerPartner IF(OP): Samhandler(hentSamhandler)"
+                    dateTimeStamp = Date().toXMLGregorianCalendar()
+                }
+            )
         }
 
         try {
-            registrereTPForholdInt.slettTPForholdTjenestepensjonInt(
-                SlettTPForholdTjenestepensjonRequestInt().apply {
-                    forholdId = tpForholdet.forholdId
-                })
+            tjenestepensjonService.slettTjenestepensjonsforhold(
+                slettTPForholdRequest.fnr,
+                slettTPForholdRequest.tpnr
+            )
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
         }
@@ -199,6 +219,10 @@ class NavConsElsamTptilbRegisrereTpForhold(
         }
     }
 
+    data class Forhold(val ytelseList: List<Ytelse>)
+
+    class Ytelse
+
     companion object {
         private fun createTechnicalFault(errorDescription: String?, errorDetail: String) =
             createTechnicalFault(errorDescription, listOf(errorDetail))
@@ -209,24 +233,5 @@ class NavConsElsamTptilbRegisrereTpForhold(
                 this.errorDescription = errorDescription
                 this.errorDetails.addAll(errorDetails)
             })
-
-        private fun getFaultTjenestepensjonForholdIkkeFunnet(errorMessage: String): FaultTjenestepensjonForholdIkkeFunnet {
-            val faultBo = FaultTjenestepensjonForholdIkkeFunnet()
-            faultBo.errorMessage = errorMessage
-            faultBo.errorSource = "nav-cons-elsam-tptilb-registreretpforhold"
-            faultBo.dateTimeStamp =
-                DatatypeFactory.newInstance().newXMLGregorianCalendar(LocalDateTime.now().toString())
-
-            return faultBo
-        }
-
-        private fun getFaultKanIkkeSlettes(errorMessage: String): FaultKanIkkeSlettes {
-            val faultBo = FaultKanIkkeSlettes()
-            faultBo.errorMessage = errorMessage
-            faultBo.errorSource = "nav-cons-elsam-tptilb-registreretpforhold"
-            faultBo.dateTimeStamp =
-                DatatypeFactory.newInstance().newXMLGregorianCalendar(LocalDateTime.now().toString())
-            return faultBo
-        }
     }
 }
