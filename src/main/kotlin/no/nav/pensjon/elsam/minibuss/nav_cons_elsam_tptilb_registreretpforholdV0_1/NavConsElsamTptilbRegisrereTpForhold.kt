@@ -1,25 +1,18 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_registreretpforholdV0_1
 
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.asbo.OpprettTPForholdRequestInt
 import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
-import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
-import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
-import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenSamhandlerListe
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
 import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
 import no.nav.pensjon.elsam.minibuss.tjenestepensjon.TjenestepensjonService
 import org.springframework.core.NestedExceptionUtils.*
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException.Conflict
 import org.springframework.web.client.HttpClientErrorException.NotFound
-import java.time.LocalDateTime
 import java.util.*
-import javax.xml.datatype.DatatypeFactory
 
 @Component
 class NavConsElsamTptilbRegisrereTpForhold(
-    private val registrereTPForholdInt: RegistrereTPForholdIntTOTjenestepensjon,
-    private val samhandler: PSAKSamhandler,
     private val tjenestepensjonService: TjenestepensjonService,
 ) {
     @Throws(
@@ -73,14 +66,21 @@ class NavConsElsamTptilbRegisrereTpForhold(
     @Throws(ServiceBusinessException::class)
     fun opprettTPForhold(opprettTPForholdRequest: OpprettTPForholdReq) {
         try {
-            registrereTPForholdInt.opprettTPForholdInt(OpprettTPForholdRequestInt().apply {
-                extRequest = opprettTPForholdRequest
-                eksternTSSId = mapTPnrToTSSEksternId(opprettTPForholdRequest.tpnr)
-            })
+            tjenestepensjonService.opprettForhold(opprettTPForholdRequest.fnr, opprettTPForholdRequest.tpnr)
+        } catch (e: Conflict) {
+            // Do nothing - duplicate creates are not reported as a fault to external consumers
+        } catch (e: NotFound) {
+            val melding = "Fant ikke person eller ordning"
+            throw OpprettTPForholdFaultGeneriskMsg(
+                melding,
+                FaultGenerisk().apply {
+                    errorCode = "InternalError"
+                    errorDescription = melding
+                    errorDetails.add("Teknisk feil ved oppslag")
+                }
+            )
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
-        } catch (e: OpprettTPForholdIntFaultElementetErDuplikatMsg) {
-            // Do nothing - duplicate creates are not reported as a fault to external consumers
         }
     }
 
@@ -150,72 +150,6 @@ class NavConsElsamTptilbRegisrereTpForhold(
             )
         } catch (e: RuntimeException) {
             throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
-        }
-    }
-
-    /**
-     * Map from TP-nummer to tssEksternId by searching TSS for samhandler
-     * with samhandlerType TEPE, idType TPNR and the specified TP-nummer
-     * Should only return one tssEksternId
-     *
-     * @param tpNr TP-number (4 digits)
-     *
-     * @return eksternTSSId (key to Samhandler)
-     */
-    @Throws(ServiceBusinessException::class)
-    private fun mapTPnrToTSSEksternId(tpNr: String): String {
-        // Build request object for samhandler
-
-        val samhandlerResponse: ASBOPenSamhandlerListe?
-        try {
-            samhandlerResponse = samhandler.finnSamhandler(ASBOPenFinnSamhandlerRequest().also {
-                it.offentligId = tpNr
-                it.idType = "TPNR"
-                it.samhandlerType = "TEPE"
-            })
-        } catch (e: RuntimeException) {
-            throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
-                "Feil ved oppslag av samhandler"
-            )
-        }
-
-        if (samhandlerResponse == null) {
-            throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
-                "Tomt svar ved oppslag av samhandler"
-            )
-        }
-
-        val samhandlere = samhandlerResponse.samhandlere
-        if (samhandlere.size > 1) {
-            //Got more than 1 samhandler in the response. Should receive only 1.
-            throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID", "Ikke entydig treff på TP-nr"
-            )
-        } else if (samhandlere.size == 1) {
-            val samhandler = samhandlere[0]
-
-            //Store idTSSEkstern in class variable for later use in other methods
-            val avdelinger = samhandler.avdelinger ?: throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID", "Fant ingen avdelinger på samhandleren"
-            )
-            for (avdeling in avdelinger) {
-                if (avdeling != null) {
-                    if (avdeling.avdelingsnr == "01") {
-                        return avdeling.idTSSEkstern
-                    }
-                }
-            }
-            throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID",
-                "Ikke registrert en avdeling 01 på samhandleren"
-            )
-        } else {
-            // Samhandler list is null-object.
-            throw createTechnicalFault(
-                "Det oppstod en feil under mapping fra TP-nummer til intern ID", "TP-nummeret er ikke registrert"
-            )
         }
     }
 

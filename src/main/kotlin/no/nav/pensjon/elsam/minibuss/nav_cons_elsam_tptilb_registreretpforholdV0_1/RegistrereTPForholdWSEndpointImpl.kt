@@ -7,7 +7,6 @@ import jakarta.jws.WebService
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.ws.RequestWrapper
 import jakarta.xml.ws.ResponseWrapper
-import nav_cons_elsam_tptilb_registreretpforhold.no.nav.inf.*
 import no.nav.elsam.registreretpforhold.v0_1.*
 import no.nav.elsam.registreretpforhold.v0_1.ObjectFactory
 import org.springframework.stereotype.Component
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Component
 @Suppress("HttpUrlsUsage")
 class RegistrereTPForholdWSEndpointImpl(
     private val navConsElsamTptilbRegisrereTpForhold: NavConsElsamTptilbRegisrereTpForhold,
-    private val busRegistrereTPForhold: RegistrereTPForhold,
 ) : RegistrereTPForhold {
     @WebMethod
     @RequestWrapper(
@@ -44,10 +42,6 @@ class RegistrereTPForholdWSEndpointImpl(
     override fun opprettTPForhold(
         @WebParam(name = "opprettTPForholdReq", targetNamespace = "") opprettTPForholdReq: OpprettTPForholdReq
     ) {
-        if (true) {
-            return busRegistrereTPForhold.opprettTPForhold(opprettTPForholdReq)
-        }
-
         return navConsElsamTptilbRegisrereTpForhold.opprettTPForhold(opprettTPForholdReq)
     }
 

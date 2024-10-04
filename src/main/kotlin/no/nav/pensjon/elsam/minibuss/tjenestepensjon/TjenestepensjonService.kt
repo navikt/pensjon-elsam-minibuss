@@ -55,6 +55,18 @@ class TjenestepensjonService(
         return tjenestepensjon.forhold.isNotEmpty()
     }
 
+    fun opprettForhold(fnr: String, tpnr: String) {
+        tpRestClient.put()
+            .uri("/api/samhandler/tjenestepensjon/forhold/{tpnr}", mapOf("tpnr" to tpnr))
+            .header("fnr", fnr)
+            .body(OpprettForholdRequest(
+                kilde = "TPLEV",
+                tpNr = tpnr,
+            ))
+            .retrieve()
+            .body<String>()
+    }
+
     fun slettTjenestepensjonsforhold(fnr: String, tpNr: String) {
         tpRestClient.delete()
             .uri("/api/samhandler/tjenestepensjon/forhold/{tpNr}", mapOf("tpNr" to tpNr))
@@ -85,6 +97,12 @@ class TjenestepensjonService(
         val updatedBy: String?,
         val kilde: String?,
         val datoSistOpptjening: LocalDate?
+    )
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    data class OpprettForholdRequest(
+        val kilde: String,
+        val tpNr: String,
     )
 
     @JsonIgnoreProperties(ignoreUnknown = true)
