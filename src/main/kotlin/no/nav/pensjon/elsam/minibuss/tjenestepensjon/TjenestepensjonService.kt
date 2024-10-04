@@ -55,6 +55,14 @@ class TjenestepensjonService(
         return tjenestepensjon.forhold.isNotEmpty()
     }
 
+    fun slettTjenestepensjonsforhold(fnr: String, tpNr: String) {
+        tpRestClient.delete()
+            .uri("/api/samhandler/tjenestepensjon/forhold/$tpNr")
+            .header("fnr", fnr)
+            .retrieve()
+            .body<String>()
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     data class OrdningDto(
         val navn: String,
