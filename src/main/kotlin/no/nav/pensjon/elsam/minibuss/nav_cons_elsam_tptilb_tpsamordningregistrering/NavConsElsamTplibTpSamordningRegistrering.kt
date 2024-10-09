@@ -4,17 +4,30 @@ import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
-import no.nav.elsam.tpsamordningregistrering.v1_0.HentSamordningsdataResp
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.sam.SamService
 import org.springframework.core.NestedExceptionUtils.getMostSpecificCause
 import org.springframework.stereotype.Component
 
 @Component
 class NavConsElsamTplibTpSamordningRegistrering(
     private val samhandlerPartner: PSAKSamhandler,
-    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringIntTOSamordning
+    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringIntTOSamordning,
+    private val samService: SamService,
 ) {
+    @Throws(
+        LagreTPYtelseIntFaultGeneriskMsg::class,
+        LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg::class,
+        ServiceBusinessException::class
+    )
+    fun lagreTPYtelseRest(lagreTPYtelseReq: LagreTPYtelseReq): LagreTPYtelseResp =
+        try {
+            samService.lagreTPYtelse(lagreTPYtelseReq)
+        } catch (e: RuntimeException) {
+            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
+        }
+
     @Throws(
         LagreTPYtelseIntFaultGeneriskMsg::class,
         LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg::class,

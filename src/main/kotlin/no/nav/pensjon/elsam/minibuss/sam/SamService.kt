@@ -1,12 +1,16 @@
 package no.nav.pensjon.elsam.minibuss.sam
 
+import no.nav.elsam.tpsamordningregistrering.v0_5.FaultGenerisk
+import no.nav.elsam.tpsamordningregistrering.v0_5.FaultTPYtelseAlleredeRegistrert
 import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseFaultGeneriskMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
+import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
+import java.util.Date
 
 @Service
 class SamService(
@@ -22,11 +26,28 @@ class SamService(
 
         when (respWrapper.status) {
             HttpStatus.OK -> return respWrapper.lagreTPYtelse
-            HttpStatus.NOT_FOUND -> throw respWrapper.e as LagreTPYtelseFaultGeneriskMsg
-            HttpStatus.BAD_REQUEST -> throw respWrapper.e as LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg
-            HttpStatus.INTERNAL_SERVER_ERROR -> throw respWrapper.e as LagreTPYtelseFaultGeneriskMsg
-            else -> throw RuntimeException("Ukjent feil")
-
+            HttpStatus.CONFLICT -> {
+                val melding = respWrapper.e?.message
+                throw LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg(
+                    melding,
+                    FaultTPYtelseAlleredeRegistrert().apply {
+                        errorMessage = melding
+                        errorSource = "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                        dateTimeStamp = Date().toXMLGregorianCalendar()
+                    }
+                )
+            }
+            else -> {
+                val melding = respWrapper.e?.message
+                throw LagreTPYtelseFaultGeneriskMsg(
+                    melding,
+                    FaultGenerisk().apply {
+                        errorCode = "InternalError"
+                        errorDescription = melding
+                        errorDetails.add("Teknisk feil ved oppslag")
+                    }
+                )
+            }
         }
     }
 }

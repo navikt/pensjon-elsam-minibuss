@@ -39,7 +39,6 @@ import org.springframework.stereotype.Component
 class TPSamordningRegistreringWSEndpointImpl(
     val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
     val busTPSamordningRegistrering: TPSamordningRegistrering,
-    val samService: SamService,
     private val unleash: DefaultUnleash
 ) : TPSamordningRegistrering {
     private val logger: Logger = getLogger(javaClass)
@@ -162,7 +161,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     ): LagreTPYtelseResp? {
 
         if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
-            return samService.lagreTPYtelse(lagreTPYtelseReq).also {
+            return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelseRest(lagreTPYtelseReq).also {
                 logger.debug("lagreTPYtelse, kall til SAM: {}", it)
             }
         }
