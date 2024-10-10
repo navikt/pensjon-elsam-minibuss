@@ -55,6 +55,10 @@ class TPSamordningRegistreringWSEndpointImpl(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
         if (true) {
+            return navConsElsamTplibTpSamordningRegistrering.slettTPYtelseRest(slettTPYtelseReq)
+        }
+
+        if (true) {
             return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
         }
 
