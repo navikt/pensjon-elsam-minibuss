@@ -2,17 +2,13 @@ package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistre
 
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import nav_lib_sto.no.nav.lib.sto.inf.samordning.*
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultAlleredeMottattRefusjonskrav
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultGenerisk
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultRefusjonskravUtenforSamordningspliktigPeriode
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultSamordningsIdIkkeFunnet
-import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultTPYtelseAlleredeRegistrert
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toFaultTPYtelseIkkeFunnet
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOOpprettRefusjonskravRequest
-import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOOpprettTPSamordningRequest
 import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toGBOSlettTPSamordningRequest
-import no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering.Mapper.toLagreTPYtelseResp
 import org.springframework.stereotype.Component
 
 @Component
@@ -46,19 +42,6 @@ class TPSamordningRegistreringIntTOSamordning(
             throw OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg(
                 e.message,
                 e.faultInfo?.toFaultAlleredeMottattRefusjonskrav()
-            )
-        }
-    }
-
-    fun lagreTPYtelseInt(lagreTPYtelseReqInt: LagreTPYtelseReqInt): LagreTPYtelseResp {
-        try {
-            return samordning.opprettTPSamordning(lagreTPYtelseReqInt.toGBOOpprettTPSamordningRequest())
-                .toLagreTPYtelseResp()
-        } catch (e: OpprettTPSamordningFaultPersonIkkeFunnetMsg) {
-            throw LagreTPYtelseIntFaultGeneriskMsg(e.message, e.faultInfo?.toFaultGenerisk())
-        } catch (e: OpprettTPSamordningFaultYtelseAlleredeRegistrertMsg) {
-            throw LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg(
-                e.message, e.faultInfo?.toFaultTPYtelseAlleredeRegistrert()
             )
         }
     }
