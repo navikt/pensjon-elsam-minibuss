@@ -25,7 +25,7 @@ class NavConsElsamTplibTpSamordningRegistrering(
         SlettTPYtelseFaultGeneriskMsg::class,
         SlettTPYtelseFaultTPYtelseIkkeFunnetMsg::class
     )
-    fun slettTPYtelseRest(slettTPYtelseReq: SlettTPYtelseReq) =
+    fun slettTPYtelse(slettTPYtelseReq: SlettTPYtelseReq) =
         try {
             samService.slettTPYtelse(slettTPYtelseReq)
         } catch (e: BadRequest) {
@@ -68,24 +68,6 @@ class NavConsElsamTplibTpSamordningRegistrering(
             }
         )
     }
-
-
-    @Throws(
-        SlettTPYtelseIntFaultGeneriskMsg::class,
-        SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg::class,
-        ServiceBusinessException::class
-    )
-    fun slettTPYtelse(slettTPYtelseReq: SlettTPYtelseReq) =
-        try {
-            tpSamordningRegistreringIntPartner.slettTPYtelseInt(
-                SlettTPYtelseReqInt().apply {
-                    extRequest = slettTPYtelseReq
-                    tssEksternId = mapTPnrToTSSEksternId(slettTPYtelseReq.tpnr)
-                }
-            )
-        } catch (e: RuntimeException) {
-            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
-        }
 
     @Throws(
         ServiceBusinessException::class,
