@@ -4,31 +4,70 @@ import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
+import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultGeneriskMsg
+import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultTPYtelseIkkeFunnetMsg
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
+import no.nav.pensjon.elsam.minibuss.sam.SamService
 import org.springframework.core.NestedExceptionUtils.getMostSpecificCause
 import org.springframework.stereotype.Component
+import org.springframework.web.client.HttpClientErrorException.BadRequest
+import org.springframework.web.client.HttpClientErrorException.NotFound
+import java.util.Date
 
 @Component
 class NavConsElsamTplibTpSamordningRegistrering(
     private val samhandlerPartner: PSAKSamhandler,
-    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringIntTOSamordning
+    private val tpSamordningRegistreringIntPartner: TPSamordningRegistreringIntTOSamordning,
+    private val samService: SamService,
 ) {
     @Throws(
-        SlettTPYtelseIntFaultGeneriskMsg::class,
-        SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg::class,
-        ServiceBusinessException::class
+        SlettTPYtelseFaultGeneriskMsg::class,
+        SlettTPYtelseFaultTPYtelseIkkeFunnetMsg::class
     )
     fun slettTPYtelse(slettTPYtelseReq: SlettTPYtelseReq) =
         try {
-            tpSamordningRegistreringIntPartner.slettTPYtelseInt(
-                SlettTPYtelseReqInt().apply {
-                    extRequest = slettTPYtelseReq
-                    tssEksternId = mapTPnrToTSSEksternId(slettTPYtelseReq.tpnr)
+            samService.slettTPYtelse(slettTPYtelseReq)
+        } catch (e: BadRequest) {
+            val melding = e.message
+            throw SlettTPYtelseFaultGeneriskMsg(
+                melding,
+                FaultGenerisk().apply {
+                    errorCode = "InternalError"
+                    errorDescription = melding
+                    errorDetails.add("Feil i input-data")
                 }
             )
-        } catch (e: RuntimeException) {
-            throw createTechnicalFault(e.message, getMostSpecificCause(e).toString())
+        } catch (e: NotFound) {
+            if (e.message?.contains("No matching ytelse found for tssEksternId") == true) {
+                val melding = "Error Id: 0, Error Message: " +
+                        e.message!!.substring(e.message!!.lastIndexOf("No matching ytelse found for tssEksternId"), e.message!!.length -1)
+                throw SlettTPYtelseFaultTPYtelseIkkeFunnetMsg(
+                    melding,
+                    FaultTPYtelseIkkeFunnet().apply {
+                        errorMessage = melding
+                        errorSource = "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                        dateTimeStamp = Date().toXMLGregorianCalendar()
+                    }
+                )
+            } else {
+                throwSlettTPYtelseFaultGeneriskMsg(e)
+            }
+        } catch (e: Exception) {
+            throwSlettTPYtelseFaultGeneriskMsg(e)
         }
+
+    private fun throwSlettTPYtelseFaultGeneriskMsg(e: Exception)  {
+        val melding = e.message
+        throw SlettTPYtelseFaultGeneriskMsg(
+            melding,
+            FaultGenerisk().also {
+                it.errorCode = "InternalError"
+                it.errorDescription = melding
+                it.errorDetails.add(getMostSpecificCause(e).toString())
+            }
+        )
+    }
 
     @Throws(
         ServiceBusinessException::class,

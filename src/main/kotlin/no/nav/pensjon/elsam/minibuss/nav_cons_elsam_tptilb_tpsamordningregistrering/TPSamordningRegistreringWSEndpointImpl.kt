@@ -54,19 +54,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
-        if (true) {
-            return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
-        }
-
-        try {
-            navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
-        } catch (e: Exception) {
-            throw when (e) {
-                is SlettTPYtelseIntFaultGeneriskMsg -> SlettTPYtelseFaultGeneriskMsg(e.message, e.faultInfo)
-                is SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg -> SlettTPYtelseFaultTPYtelseIkkeFunnetMsg(e.message, e.faultInfo)
-                else -> e
-            }
-        }
+        return navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
     }
 
     @WebMethod
