@@ -2,9 +2,12 @@ package no.nav.pensjon.elsam.minibuss.sam
 
 import no.nav.elsam.tpsamordningregistrering.v0_5.PeriodisertBelop
 import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
+import org.springframework.http.client.ClientHttpResponse
 import org.springframework.stereotype.Service
+import org.springframework.web.client.ResponseErrorHandler
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.body
+import java.io.IOException
 import java.util.Date
 
 @Service
@@ -24,6 +27,7 @@ class SamService(
             .uri("/api/refusjonskrav")
             .body(Refusjonskrav(pid, tpNr, samId, refusjonskrav, periodisertBelopListe.map { it.toRefusjonstrekk() }))
             .retrieve()
+            .onStatus(NoOpResponseErrorHandler())
             .body<OpprettRefusjonskravResponse>()!!
 
     private fun PeriodisertBelop.toRefusjonstrekk() =
@@ -49,9 +53,28 @@ class SamService(
         val datoTom: Date?,
     )
 
+    enum class OpprettRefusjonskravExceptions {
+        ALLEREDE_REGISTRERT_ELLER_UTENFOR_FRIST,
+        ELEMENT_FINNES_IKKE,
+        ULOVLIG_TREKK,
+        FUNKSJONELL,
+        GENERELL,
+    }
+
     data class OpprettRefusjonskravResponse(
-        val refusjonskravAlleredeRegistrertEllerUtenforFrist: Boolean,
-        val exception: Exception? = null,
-        val exceptionName: String? = null
+        val message: String? = null,
+        val exceptionType: OpprettRefusjonskravExceptions? = null
     )
+
+    class NoOpResponseErrorHandler: ResponseErrorHandler {
+        @Throws(IOException::class)
+        override fun hasError(response: ClientHttpResponse): Boolean {
+            return response.statusCode.isError
+        }
+
+        @Throws(IOException::class)
+        override fun handleError(response: ClientHttpResponse) {
+            // do nothing
+        }
+    }
 }

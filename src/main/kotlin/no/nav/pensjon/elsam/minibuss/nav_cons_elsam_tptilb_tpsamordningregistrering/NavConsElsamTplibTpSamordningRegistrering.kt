@@ -6,6 +6,7 @@ import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOP
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultGeneriskMsg
+import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultGeneriskMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultTPYtelseIkkeFunnetMsg
@@ -90,32 +91,54 @@ class NavConsElsamTplibTpSamordningRegistrering(
                 request.refusjonskrav,
                 request.periodisertBelopListe
             )
-            if (response.refusjonskravAlleredeRegistrertEllerUtenforFrist) {
-                val melding = "Error Id: 0, Error Message: " + response.exception!!.message
-                throw OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg(
-                    melding,
-                    FaultAlleredeMottattRefusjonskrav().apply {
-                        errorMessage = melding
-                        errorSource =
-                            "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
-                        dateTimeStamp = Date().toXMLGregorianCalendar()
-                    }
-                )
-            }
-            else if (response.exceptionName == "SamElementFinnesIkkeException") {
-                val melding = "Error Id: 0, Error Message: " + response.exception!!.message
-                throw OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(
-                    melding,
-                    FaultSamordningsIdIkkeFunnet().apply {
-                        errorMessage = melding
-                        errorSource =
-                            "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
-                        dateTimeStamp = Date().toXMLGregorianCalendar()
-                    }
-                )
-            }
-            else {
-                throwOpprettRefusjonskravFaultGeneriskMsg(response.exception!!)
+            when (response.exceptionType) {
+                SamService.OpprettRefusjonskravExceptions.ALLEREDE_REGISTRERT_ELLER_UTENFOR_FRIST -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg(
+                        melding,
+                        FaultAlleredeMottattRefusjonskrav().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                SamService.OpprettRefusjonskravExceptions.ELEMENT_FINNES_IKKE -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(
+                        melding,
+                        FaultSamordningsIdIkkeFunnet().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                SamService.OpprettRefusjonskravExceptions.ULOVLIG_TREKK -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(
+                        melding,
+                        FaultRefusjonskravUtenforSamordningspliktigPeriode().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                else -> {
+                    val melding = response.message
+                    throw OpprettRefusjonskravFaultGeneriskMsg(
+                        melding,
+                        FaultGenerisk().also {
+                            it.errorCode = "InternalError"
+                            it.errorDescription = melding
+                            it.errorDetails.add(melding)
+                        }
+                    )
+                }
             }
         } catch (e: RuntimeException) {
             throwOpprettRefusjonskravFaultGeneriskMsg(e)
