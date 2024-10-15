@@ -1,39 +1,57 @@
 package no.nav.pensjon.elsam.minibuss.sam
 
-import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseFaultGeneriskMsg
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg
-import no.nav.elsam.tpsamordningregistrering.v1_0.LagreTPYtelseResp
-import org.springframework.http.HttpStatus
+import no.nav.elsam.tpsamordningregistrering.v0_5.PeriodisertBelop
+import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
+import org.springframework.web.client.body
+import java.util.Date
 
 @Service
 class SamService(
     private val samRestClient: RestClient
 ) {
-    fun lagreTPYtelse(request: LagreTPYtelseReq): LagreTPYtelseResp {
-
-        val respWrapper = samRestClient.post()
-            .uri("/api/tp/ytelse/lagre")
+    fun slettTPYtelse(request: SlettTPYtelseReq) {
+        samRestClient.post()
+            .uri("/api/tp/ytelse/slett")
             .body(request)
             .retrieve()
-            .body(LagreTPYtelseResponseWrapper::class.java) ?: throw RuntimeException("Fikk tomt svar fra tjenesten")
-
-        when (respWrapper.status) {
-            HttpStatus.OK -> return respWrapper.lagreTPYtelse
-            HttpStatus.NOT_FOUND -> throw respWrapper.e as LagreTPYtelseFaultGeneriskMsg
-            HttpStatus.BAD_REQUEST -> throw respWrapper.e as LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg
-            HttpStatus.INTERNAL_SERVER_ERROR -> throw respWrapper.e as LagreTPYtelseFaultGeneriskMsg
-            else -> throw RuntimeException("Ukjent feil")
-
-        }
+            .body<String>()
     }
-}
 
-data class LagreTPYtelseResponseWrapper(
-    val status: HttpStatus,
-    val lagreTPYtelse: LagreTPYtelseResp = LagreTPYtelseResp(),
-    val e: Exception? = null,
-    val exceptionName: String = ""
-)
+    fun opprettRefusjonskrav(pid: String, tpNr: String, samId: Long, refusjonskrav: Boolean, periodisertBelopListe: List<PeriodisertBelop>) =
+        samRestClient.post()
+            .uri("/api/refusjonskrav")
+            .body(Refusjonskrav(pid, tpNr, samId, refusjonskrav, periodisertBelopListe.map { it.toRefusjonstrekk() }))
+            .retrieve()
+            .body<OpprettRefusjonskravResponse>()!!
+
+    private fun PeriodisertBelop.toRefusjonstrekk() =
+        Refusjonstrekk(
+            belop = belop,
+            kravstillersRef = kravstillersReferanse,
+            datoFom = datoFom?.toGregorianCalendar()?.time,
+            datoTom = datoTom?.toGregorianCalendar()?.time,
+        )
+
+    data class Refusjonskrav(
+        val pid: String,
+        val tpNr: String,
+        val samId: Long,
+        val refusjonskrav: Boolean,
+        val periodisertBelopListe: List<Refusjonstrekk>
+    )
+
+    data class Refusjonstrekk(
+        val belop: Double?,
+        val kravstillersRef: String?,
+        val datoFom: Date?,
+        val datoTom: Date?,
+    )
+
+    data class OpprettRefusjonskravResponse(
+        val refusjonskravAlleredeRegistrertEllerUtenforFrist: Boolean,
+        val exception: Exception? = null,
+        val exceptionName: String? = null
+    )
+}

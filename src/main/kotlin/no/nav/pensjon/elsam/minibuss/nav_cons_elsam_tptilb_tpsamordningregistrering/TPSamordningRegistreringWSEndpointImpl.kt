@@ -15,9 +15,6 @@ import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.SlettTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_8.ObjectFactory
 import no.nav.elsam.tpsamordningregistrering.v1_0.*
-import no.nav.pensjon.elsam.minibuss.sam.SamService
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Component
 
 @Component
@@ -39,11 +36,8 @@ import org.springframework.stereotype.Component
 class TPSamordningRegistreringWSEndpointImpl(
     val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
     val busTPSamordningRegistrering: TPSamordningRegistrering,
-    val samService: SamService,
     private val unleash: DefaultUnleash
 ) : TPSamordningRegistrering {
-    private val logger: Logger = getLogger(javaClass)
-
     @WebMethod
     @RequestWrapper(
         localName = "slettTPYtelse",
@@ -62,19 +56,7 @@ class TPSamordningRegistreringWSEndpointImpl(
     override fun slettTPYtelse(
         @WebParam(name = "slettTPYtelseReq", targetNamespace = "") slettTPYtelseReq: SlettTPYtelseReq
     ) {
-        if (true) {
-            return busTPSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
-        }
-
-        try {
-            navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
-        } catch (e: Exception) {
-            throw when (e) {
-                is SlettTPYtelseIntFaultGeneriskMsg -> SlettTPYtelseFaultGeneriskMsg(e.message, e.faultInfo)
-                is SlettTPYtelseIntFaultTPYtelseIkkeFunnetMsg -> SlettTPYtelseFaultTPYtelseIkkeFunnetMsg(e.message, e.faultInfo)
-                else -> e
-            }
-        }
+        return navConsElsamTplibTpSamordningRegistrering.slettTPYtelse(slettTPYtelseReq)
     }
 
     @WebMethod
@@ -122,6 +104,10 @@ class TPSamordningRegistreringWSEndpointImpl(
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
+        if (unleash.isEnabled("pensjon-elsam-minibuss.opprettRefusjonskrav")) {
+            return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskravRest(opprettRefusjonskravReq)
+        }
+
         if (true) {
             return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
         }
@@ -159,26 +145,5 @@ class TPSamordningRegistreringWSEndpointImpl(
     )
     override fun lagreTPYtelse(
         @WebParam(name = "lagreTPYtelseReq", targetNamespace = "") lagreTPYtelseReq: LagreTPYtelseReq
-    ): LagreTPYtelseResp? {
-
-        if (unleash.isEnabled("pensjon-elsam-minibuss.lagreTPYtelse")) {
-            return samService.lagreTPYtelse(lagreTPYtelseReq).also {
-                logger.debug("lagreTPYtelse, kall til SAM: {}", it)
-            }
-        }
-
-        if (true) {
-            return busTPSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
-        }
-
-        try {
-            return navConsElsamTplibTpSamordningRegistrering.lagreTPYtelse(lagreTPYtelseReq)
-        } catch (e: Exception) {
-            throw when (e) {
-                is LagreTPYtelseIntFaultGeneriskMsg -> LagreTPYtelseFaultGeneriskMsg(e.message, e.faultInfo)
-                is LagreTPYtelseIntFaultTPYtelseAlleredeRegistrertMsg -> LagreTPYtelseFaultTPYtelseAlleredeRegistrertMsg(e.message, e.faultInfo)
-                else -> e
-            }
-        }
-    }
+    ): LagreTPYtelseResp? = throw HentSamordningsdataFaultGeneriskMsg("Lagring av tjenestepensjonsytelser er ikke tillatt via Elsam")
 }
