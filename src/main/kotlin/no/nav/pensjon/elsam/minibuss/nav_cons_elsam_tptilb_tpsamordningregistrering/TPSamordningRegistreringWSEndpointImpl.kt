@@ -103,6 +103,10 @@ class TPSamordningRegistreringWSEndpointImpl(
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
         if (true) {
+            return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskravRest(opprettRefusjonskravReq)
+        }
+
+        if (true) {
             return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
         }
 
