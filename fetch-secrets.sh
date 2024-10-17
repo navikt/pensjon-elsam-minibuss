@@ -126,7 +126,7 @@ fi
 function absolute_path {
     local name=$1
     if $use_cygpath; then
-      $(cygpath -a -w $name)
+      cygpath -a -w $name
     else
       echo "$PWD/$name"
     fi
