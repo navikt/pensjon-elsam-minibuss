@@ -117,6 +117,20 @@ function fetch_kubernetes_secrets {
 rm -f "${envfile}"
 touch "${envfile}"
 
+if command -v cygpath 2>&1 >/dev/null; then
+  use_cygpath=true
+else
+  use_cygpath=false
+fi
+
+function absolute_path {
+    local name=$1
+    if $use_cygpath; then
+      $(cygpath -a -w $name)
+    else
+      echo "$PWD/$name"
+    fi
+}
 
 echo -e "${bold}Henter secrets fra Kubernetes${normal}"
 
@@ -148,12 +162,7 @@ echo -n -e "\t- Truststore "
 
 mkdir -p "secrets/$env/truststore"
 vault kv get -field keystore -mount certificate dev/nav-truststore | base64 --decode > ".truststore.jts"
-if command -v cygpath 2>&1 >/dev/null;
-then
-  echo "NAV_TRUSTSTORE_PATH='$(cygpath -a -w .truststore.jts)'" >> "${envfile}"
-else
-  echo "NAV_TRUSTSTORE_PATH='$(pwd)/.truststore.jts'" >> "${envfile}"
-fi
+echo "NAV_TRUSTSTORE_PATH='$(absolute_path .truststore.jts)'" >> "${envfile}"
 echo "NAV_TRUSTSTORE_PASSWORD='$(vault kv get -field keystorepassword -mount certificate dev/nav-truststore)'" >> "${envfile}"
 
 echo "ENVIRONMENT_NAME='${env}'" >> "${envfile}"
