@@ -8,7 +8,6 @@ import jakarta.jws.WebService
 import jakarta.xml.bind.annotation.XmlSeeAlso
 import jakarta.xml.ws.RequestWrapper
 import jakarta.xml.ws.ResponseWrapper
-import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import no.nav.elsam.tpsamordningregistrering.v0_5.HentSamordningsdataReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.LagreTPYtelseReq
 import no.nav.elsam.tpsamordningregistrering.v0_5.OpprettRefusjonskravReq
@@ -104,27 +103,7 @@ class TPSamordningRegistreringWSEndpointImpl(
             targetNamespace = ""
         ) opprettRefusjonskravReq: OpprettRefusjonskravReq
     ) {
-        if (unleash.isEnabled("pensjon-elsam-minibuss.opprettRefusjonskrav")) {
-            return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskravRest(opprettRefusjonskravReq)
-        }
-
-        if (true) {
-            return busTPSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
-        }
-
-        try {
-            return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
-        } catch (e: Exception) {
-            throw when (e) {
-                is OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg -> OpprettRefusjonskravFaultSamordningsIdOgPersonKorrelererIkkeMsg(e.message, e.faultInfo)
-                is OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg -> OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg(e.message, e.faultInfo)
-                is OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg -> OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(e.message, e.faultInfo)
-                is OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg -> OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(e.message, e.faultInfo)
-                is OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg -> OpprettRefusjonskravFaultRefusjonskravUtenforTidsfristMsg(e.message, e.faultInfo)
-                is OpprettRefusjonskravIntFaultGeneriskMsg -> OpprettRefusjonskravFaultGeneriskMsg(e.message, e.faultInfo)
-                else -> e
-            }
-        }
+        return navConsElsamTplibTpSamordningRegistrering.opprettRefusjonskrav(opprettRefusjonskravReq)
     }
 
     @WebMethod
