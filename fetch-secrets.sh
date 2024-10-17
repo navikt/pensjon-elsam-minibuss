@@ -148,7 +148,12 @@ echo -n -e "\t- Truststore "
 
 mkdir -p "secrets/$env/truststore"
 vault kv get -field keystore -mount certificate dev/nav-truststore | base64 --decode > ".truststore.jts"
-echo "NAV_TRUSTSTORE_PATH='$(pwd)/.truststore.jts'" >> "${envfile}"
+if command -v cygpath 2>&1 >/dev/null;
+then
+  echo "NAV_TRUSTSTORE_PATH='$(cygpath -a -w .truststore.jts)'" >> "${envfile}"
+else
+  echo "NAV_TRUSTSTORE_PATH='$(pwd)/.truststore.jts'" >> "${envfile}"
+fi
 echo "NAV_TRUSTSTORE_PASSWORD='$(vault kv get -field keystorepassword -mount certificate dev/nav-truststore)'" >> "${envfile}"
 
 echo "ENVIRONMENT_NAME='${env}'" >> "${envfile}"
