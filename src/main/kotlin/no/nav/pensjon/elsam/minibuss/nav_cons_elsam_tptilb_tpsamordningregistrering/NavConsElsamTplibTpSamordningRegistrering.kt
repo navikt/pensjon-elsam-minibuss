@@ -1,6 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
-import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultGeneriskMsg
@@ -71,12 +70,6 @@ class NavConsElsamTplibTpSamordningRegistrering(
 
     @Throws(
         ServiceBusinessException::class,
-        OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg::class,
-        OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg::class,
-        OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg::class,
-        OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg::class,
-        OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg::class,
-        OpprettRefusjonskravIntFaultGeneriskMsg::class
     )
     fun opprettRefusjonskrav(request: OpprettRefusjonskravReq) {
         try {
