@@ -20,6 +20,3 @@ fi
 
 # inject proxy settings set by the nais platform
 export JAVA_OPTS="${JAVA_OPTS} ${JAVA_PROXY_OPTIONS}"
-
-export SERVICEUSER_USERNAME=$(cat /secrets/srvpensjon/username)
-export SERVICEUSER_PASSWORD=$(cat /secrets/srvpensjon/password)
