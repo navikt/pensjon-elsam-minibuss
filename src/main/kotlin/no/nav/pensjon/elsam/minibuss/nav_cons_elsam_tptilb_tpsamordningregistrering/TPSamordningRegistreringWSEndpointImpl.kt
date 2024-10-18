@@ -1,6 +1,5 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
-import io.getunleash.DefaultUnleash
 import jakarta.jws.WebMethod
 import jakarta.jws.WebParam
 import jakarta.jws.WebResult
@@ -34,8 +33,6 @@ import org.springframework.stereotype.Component
 @Suppress("HttpUrlsUsage")
 class TPSamordningRegistreringWSEndpointImpl(
     val navConsElsamTplibTpSamordningRegistrering: NavConsElsamTplibTpSamordningRegistrering,
-    val busTPSamordningRegistrering: TPSamordningRegistrering,
-    private val unleash: DefaultUnleash
 ) : TPSamordningRegistrering {
     @WebMethod
     @RequestWrapper(
