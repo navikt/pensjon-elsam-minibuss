@@ -52,8 +52,3 @@ spec:
       value: {{ app.profile }}
   envFrom:
     - secret: {{ app.name }}-unleash-api-token
-  vault:
-    enabled: true
-    paths:
-      - kvPath: "{{vault.srvpensjon}}"
-        mountPath: "/secrets/srvpensjon"

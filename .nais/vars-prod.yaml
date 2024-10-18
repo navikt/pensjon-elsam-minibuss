@@ -11,6 +11,3 @@ otel:
 
 unleash:
   environment: 'production'
-
-vault:
-  srvpensjon: 'serviceuser/data/prod/srvpensjon'

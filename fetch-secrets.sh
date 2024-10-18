@@ -151,13 +151,6 @@ echo
 
 echo "${bold}Henter secrets fra Vault${normal}"
 
-echo -n -e "\t- Servicebruker "
-
-echo "SERVICEUSER_USERNAME='$(vault kv get -field username -mount=serviceuser dev/srvpensjon)'" >> "${envfile}"
-echo "SERVICEUSER_PASSWORD='$(vault kv get -field password -mount=serviceuser dev/srvpensjon)'" >> "${envfile}"
-
-echo -e "${bold}${white}✔${endcolor}${normal}"
-
 echo -n -e "\t- Truststore "
 
 mkdir -p "secrets/$env/truststore"
