@@ -4,6 +4,10 @@ import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
 import nav_cons_pen_psak_samhandler.no.nav.inf.PSAKSamhandler
 import nav_lib_cons_pen_psakpselv.no.nav.lib.pen.psakpselv.asbo.samhandler.ASBOPenFinnSamhandlerRequest
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
+import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg
+import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultGeneriskMsg
+import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg
+import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultGeneriskMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultTPYtelseIkkeFunnetMsg
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
@@ -60,6 +64,90 @@ class NavConsElsamTplibTpSamordningRegistrering(
     private fun throwSlettTPYtelseFaultGeneriskMsg(e: Exception)  {
         val melding = e.message
         throw SlettTPYtelseFaultGeneriskMsg(
+            melding,
+            FaultGenerisk().also {
+                it.errorCode = "InternalError"
+                it.errorDescription = melding
+                it.errorDetails.add(getMostSpecificCause(e).toString())
+            }
+        )
+    }
+
+    @Throws(
+        ServiceBusinessException::class,
+        OpprettRefusjonskravIntFaultSamordningsIdOgPersonKorrelererIkkeMsg::class,
+        OpprettRefusjonskravIntFaultAlleredeMottattRefusjonskravMsg::class,
+        OpprettRefusjonskravIntFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg::class,
+        OpprettRefusjonskravIntFaultSamordningsIdIkkeFunnetMsg::class,
+        OpprettRefusjonskravIntFaultRefusjonskravUtenforTidsfristMsg::class,
+        OpprettRefusjonskravIntFaultGeneriskMsg::class
+    )
+    fun opprettRefusjonskravRest(request: OpprettRefusjonskravReq) {
+        try {
+            val response = samService.opprettRefusjonskrav(
+                request.fnr,
+                request.tpnr,
+                request.samordningsmeldingId.toLong(),
+                request.refusjonskrav,
+                request.periodisertBelopListe
+            )
+            when (response.exceptionType) {
+                SamService.OpprettRefusjonskravExceptions.ALLEREDE_REGISTRERT_ELLER_UTENFOR_FRIST -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg(
+                        melding,
+                        FaultAlleredeMottattRefusjonskrav().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                SamService.OpprettRefusjonskravExceptions.ELEMENT_FINNES_IKKE -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultSamordningsIdIkkeFunnetMsg(
+                        melding,
+                        FaultSamordningsIdIkkeFunnet().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                SamService.OpprettRefusjonskravExceptions.ULOVLIG_TREKK -> {
+                    val melding = "Error Id: 0, Error Message: " + response.message
+                    throw OpprettRefusjonskravFaultRefusjonskravUtenforSamordningspliktigPeriodeMsg(
+                        melding,
+                        FaultRefusjonskravUtenforSamordningspliktigPeriode().apply {
+                            errorMessage = melding
+                            errorSource =
+                                "MODULE: nav-ent-sto-sam / COMPONENT: SamordningTOSamordningProcessProviderRemote / IF(OP): Samordning(opprettTPSamordning) / REF: SamordningProcessProviderRemotePartner IF(OP): SamordningProcessProviderRemote(samordneVedtak)"
+                            dateTimeStamp = Date().toXMLGregorianCalendar()
+                        }
+                    )
+                }
+                else -> {
+                    val melding = response.message
+                    throw OpprettRefusjonskravFaultGeneriskMsg(
+                        melding,
+                        FaultGenerisk().also {
+                            it.errorCode = "InternalError"
+                            it.errorDescription = melding
+                            it.errorDetails.add(melding)
+                        }
+                    )
+                }
+            }
+        } catch (e: RuntimeException) {
+            throwOpprettRefusjonskravFaultGeneriskMsg(e)
+        }
+    }
+
+    private fun throwOpprettRefusjonskravFaultGeneriskMsg(e: Exception)  {
+        val melding = e.message
+        throw OpprettRefusjonskravFaultGeneriskMsg(
             melding,
             FaultGenerisk().also {
                 it.errorCode = "InternalError"
