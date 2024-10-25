@@ -1,6 +1,7 @@
 package no.nav.pensjon.elsam.minibuss.nav_cons_elsam_tptilb_tpsamordningregistrering
 
 import nav_cons_elsam_tptilb_tpsamordningregistrering.no.nav.asbo.*
+import net.logstash.logback.argument.StructuredArguments
 import no.nav.elsam.tpsamordningregistrering.v0_5.*
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultAlleredeMottattRefusjonskravMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultGeneriskMsg
@@ -9,8 +10,11 @@ import no.nav.elsam.tpsamordningregistrering.v1_0.OpprettRefusjonskravFaultSamor
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultGeneriskMsg
 import no.nav.elsam.tpsamordningregistrering.v1_0.SlettTPYtelseFaultTPYtelseIkkeFunnetMsg
 import no.nav.pensjon.elsam.minibuss.misc.ServiceBusinessException
+import no.nav.pensjon.elsam.minibuss.misc.entries
 import no.nav.pensjon.elsam.minibuss.misc.toXMLGregorianCalendar
 import no.nav.pensjon.elsam.minibuss.sam.SamService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory.getLogger
 import org.springframework.core.NestedExceptionUtils.getMostSpecificCause
 import org.springframework.stereotype.Component
 import org.springframework.web.client.HttpClientErrorException.BadRequest
@@ -21,6 +25,8 @@ import java.util.Date
 class NavConsElsamTplibTpSamordningRegistrering(
     private val samService: SamService,
 ) {
+    private val logger: Logger = getLogger(javaClass)
+
     @Throws(
         SlettTPYtelseFaultGeneriskMsg::class,
         SlettTPYtelseFaultTPYtelseIkkeFunnetMsg::class
@@ -87,6 +93,13 @@ class NavConsElsamTplibTpSamordningRegistrering(
                 request.refusjonskrav,
                 request.periodisertBelopListe
             )
+
+            if (response.exceptionType == null) {
+                return
+            }
+
+            logger.warn("Feil ved opprettelse av refusjonskrav, {}", entries("message" to response.message, "exceptionType" to response.exceptionType))
+
             when (response.exceptionType) {
                 SamService.OpprettRefusjonskravExceptions.ALLEREDE_REGISTRERT_ELLER_UTENFOR_FRIST -> {
                     val melding = "Error Id: 0, Error Message: " + response.message
