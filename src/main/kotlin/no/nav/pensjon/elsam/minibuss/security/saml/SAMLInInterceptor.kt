@@ -52,7 +52,7 @@ class SAMLInInterceptor(
             ?: throw RuntimeException("Cannot get SAMLTokenPrincipal from SecurityContext")
         val assertion = samlTokenPrincipal.token.saml2
 
-        val nameID = assertion.subject.nameID.value
+        val nameID = assertion.subject?.nameID?.value
 
         if (nameID == null) {
             logger.warn("SAML Token mangler nameID")
