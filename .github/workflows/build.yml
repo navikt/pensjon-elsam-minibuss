@@ -144,7 +144,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - env: q1
           - env: q2
 
     steps:
