@@ -40,7 +40,10 @@
                             "handler_class": "%requestAttribute{handler_class}",
                             "handler_method": "%requestAttribute{handler_method}",
                             "request_token_issuer": "%requestAttribute{pensjon_elsam_minibuss_request_token_issuer}",
-                            "request_token_subject": "%requestAttribute{pensjon_elsam_minibuss_request_token_subject}"
+                            "request_token_subject": "%requestAttribute{pensjon_elsam_minibuss_request_token_subject}",
+                            "span_id": "%requestAttribute{pensjon_elsam_minibuss_span_id}",
+                            "trace_flags": "%requestAttribute{pensjon_elsam_minibuss_trace_flags}",
+                            "trace_id": "%requestAttribute{pensjon_elsam_minibuss_trace_id}"
                         }
                     </pattern>
                 </pattern>

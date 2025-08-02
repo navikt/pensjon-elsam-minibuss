@@ -7,6 +7,7 @@ import no.nav.elsam.registreretpforhold.v0_1.RegistrereTPForhold
 import no.nav.elsam.tpsamordningregistrering.v1_0.TPSamordningRegistrering
 import no.nav.pensjon.elsam.minibuss.logging.handler_metadata.JaxwsMetadataCapturingServerFactoryBean
 import no.nav.pensjon.elsam.minibuss.context.StelvioContextHandlerInbound
+import no.nav.pensjon.elsam.minibuss.logging.TelemetrySoapInterceptor
 import no.nav.pensjon.elsam.minibuss.security.saml.SAMLInInterceptor
 import org.apache.cxf.Bus
 import org.apache.cxf.jaxws.EndpointImpl
@@ -53,6 +54,7 @@ class SoapEndpointConfiguration(
         }
 
         endpoint.inInterceptors = listOf(
+            TelemetrySoapInterceptor(),
             SAMLInInterceptor(
                 mapOf(SIG_SUBJECT_CERT_CONSTRAINTS to sigSubjectCertConstraints),
                 authorizedUsers.map { it.lowercase(getDefault()) }.toSet(),
