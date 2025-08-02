@@ -20,7 +20,7 @@
         <revision>1.0.0-SNAPSHOT</revision>
 
         <cxf.version>4.1.1</cxf.version>
-        <cxf-xjc-boolean.version>4.0.2</cxf-xjc-boolean.version>
+        <cxf-xjc-boolean.version>4.1.0</cxf-xjc-boolean.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
     </properties>
 
