@@ -37,7 +37,9 @@
                             "applicationVersion": "@project.version@",
                             "handler_type": "%requestAttribute{handler_type}",
                             "handler_class": "%requestAttribute{handler_class}",
-                            "handler_method": "%requestAttribute{handler_method}"
+                            "handler_method": "%requestAttribute{handler_method}",
+                            "request_token_issuer": "%requestAttribute{pensjon_elsam_minibuss_request_token_issuer}",
+                            "request_token_subject": "%requestAttribute{pensjon_elsam_minibuss_request_token_subject}"
                         }
                     </pattern>
                 </pattern>

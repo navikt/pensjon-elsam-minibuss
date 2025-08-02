@@ -52,6 +52,11 @@ class SAMLInInterceptor(
             ?: throw RuntimeException("Cannot get SAMLTokenPrincipal from SecurityContext")
         val assertion = samlTokenPrincipal.token.saml2
 
+        RequestContextHolder.getRequestAttributes()?.let { requestAttributes ->
+            assertion.issuer?.value?.let { requestAttributes.setAttribute("pensjon_elsam_minibuss_request_token_issuer", it, SCOPE_REQUEST) }
+            assertion.subject?.nameID?.value?.let { requestAttributes.setAttribute("pensjon_elsam_minibuss_request_token_subject", it, SCOPE_REQUEST) }
+        }
+
         val nameID = assertion.subject?.nameID?.value
 
         if (nameID == null) {
