@@ -12,6 +12,7 @@
         </filter>
         <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
             <providers>
+                <provider class="no.nav.pensjon.elsam.minibuss.logging.AccessEventLogLevelProvider" />
                 <!--
                   Configuring the default Logstash providers in the same order as LogstashAccessEncoder.
                   Messages are added after the custom fields
