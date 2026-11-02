@@ -132,7 +132,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: nais/deploy/actions/deploy@v2
+      - uses: nais/deploy/actions/deploy@v3
         env:
           IMAGE: "${{ needs.build.outputs.image }}"
           RESOURCE: .nais/unleash-apitoken.yml,.nais/nais.yaml
