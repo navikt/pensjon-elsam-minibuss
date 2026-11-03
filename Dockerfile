@@ -1,20 +1,10 @@
-FROM eclipse-temurin:21-jre
-
-RUN apt-get update && apt-get install -y \
-  dumb-init \
-  && rm -rf /var/lib/apt/lists/*
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/jre:openjdk-21
 
 WORKDIR /app
 
 ENV LOGGING_CONFIG=classpath:logback-nais.xml
-ENV MAIN_CLASS=no.nav.pensjon.elsam.minibuss.Application
 ENV TZ="Europe/Oslo"
 
-COPY java-opts.sh .
+COPY --chown=1069:1069 target/pensjon-elsam-minibuss*jar app.jar
 
-RUN chmod +x java-opts.sh
-
-COPY target/pensjon-elsam-minibuss*jar app.jar
-
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["bash", "-c", "source ./java-opts.sh && exec java ${DEFAULT_JVM_OPTS} ${JAVA_OPTS} -jar app.jar ${RUNTIME_OPTS} $@"]
+CMD ["-jar", "/app/app.jar"]
