@@ -1,7 +1,6 @@
 FROM eclipse-temurin:21-jre
 
 RUN apt-get update && apt-get install -y \
-  curl \
   dumb-init \
   && rm -rf /var/lib/apt/lists/*
 
