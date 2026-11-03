@@ -23,7 +23,7 @@ jobs:
       image-digest: "${{ steps.login.outputs.registry }}/${{ github.repository }}/pensjon-elsam-minibuss@${{ steps.build_push.outputs.digest }}"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set version
         id: version
@@ -93,7 +93,7 @@ jobs:
     needs: [build]
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: NAIS login
         uses: nais/login@v0
@@ -126,7 +126,7 @@ jobs:
     needs: [build, attest-sign]
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: nais/deploy/actions/deploy@v2
         env:
           IMAGE: "${{ needs.build.outputs.image }}"
@@ -149,7 +149,7 @@ jobs:
           - env: q2
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: nais/deploy/actions/deploy@v2
         env:
           IMAGE: "${{ needs.build.outputs.image }}"
