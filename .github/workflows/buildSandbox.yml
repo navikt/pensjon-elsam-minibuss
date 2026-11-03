@@ -122,7 +122,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    needs: [build]
+    needs: [build, attest-sign]
     runs-on: 'ubuntu-latest'
 
     strategy:
