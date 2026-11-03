@@ -1,0 +1,8 @@
+.git
+.github
+.mvn
+src
+*.md
+.env*
+target/*
+!target/pensjon-elsam-minibuss*.jar
